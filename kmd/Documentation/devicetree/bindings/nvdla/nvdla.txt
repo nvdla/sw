@@ -1,0 +1,9 @@
+NVIDIA Deep Learning Accelerator bindings
+
+The NVIDIA Deep Learning Accelerator (NVDLA) is a free and open architecture
+that promotes a standard way to design deep learning inference accelerators.
+
+Required properties:
+    - compatible = "nvidia,nvdla-1";
+    - reg = Should contain NVDLA registers location and length
+    - interrupts = Should contain NVDLA interrupt
