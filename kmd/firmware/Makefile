@@ -1,11 +1,5 @@
 # Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
 #
-# This program is free software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License version 2
-# as published by the Free Software Foundation; or, when distributed
-# separately from the Linux kernel or incorporated into other
-# software packages, subject to the following license:
-#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
 # are met:
@@ -30,13 +24,19 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-obj-m += opendla.o
+ccflags-y += -I$(src)/../../firmware/include
+ccflags-y += -I$(src)/../../firmware
 
-ccflags-y += -I$(src)/include
-ccflags-y += -I$(src)/../../include
-ccflags-y += -Werror
-
-include $(src)/../../firmware/Makefile
-
-opendla-y += nvdla_core_callbacks.o
-opendla-y += nvdla_gem.o
+opendla-y += ../../firmware/scheduler.o
+opendla-y += ../../firmware/engine.o
+opendla-y += ../../firmware/bdma.o
+opendla-y += ../../firmware/conv.o
+opendla-y += ../../firmware/sdp.o
+opendla-y += ../../firmware/cdp.o
+opendla-y += ../../firmware/pdp.o
+opendla-y += ../../firmware/rubik.o
+opendla-y += ../../firmware/cache.o
+opendla-y += ../../firmware/common.o
+opendla-y += ../../firmware/engine_data.o
+opendla-y += ../../firmware/engine_isr.o
+opendla-y += ../../firmware/engine_debug.o

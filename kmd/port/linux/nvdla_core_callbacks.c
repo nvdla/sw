@@ -127,10 +127,16 @@ uint32_t dla_reg_read(void *driver_context, uint32_t addr)
 
 static irqreturn_t nvdla_engine_isr(int32_t irq, void *data)
 {
+	unsigned long flags;
 	struct nvdla_device *nvdla_dev = (struct nvdla_device *)data;
 
 	if (!nvdla_dev)
 		return IRQ_NONE;
+
+	spin_lock_irqsave(&nvdla_dev->nvdla_lock, flags);
+	dla_isr_handler(nvdla_dev->engine_context);
+	complete(&nvdla_dev->event_notifier);
+	spin_unlock_irqrestore(&nvdla_dev->nvdla_lock, flags);
 
 	return IRQ_HANDLED;
 }
@@ -278,7 +284,38 @@ put_dma_buf:
 
 int32_t nvdla_task_submit(struct nvdla_device *nvdla_dev, struct nvdla_task *task)
 {
-	return 0;
+	int32_t err = 0;
+	uint32_t task_complete = 0;
+
+	nvdla_dev->task = task;
+
+	err = dla_execute_task(nvdla_dev->engine_context, (void *)task);
+	if (err) {
+		pr_err("Task execution failed\n");
+		return err;
+	}
+
+	pr_debug("Wait for task complete\n");
+
+	while (1) {
+		unsigned long flags;
+
+		wait_for_completion(&nvdla_dev->event_notifier);
+
+		spin_lock_irqsave(&nvdla_dev->nvdla_lock, flags);
+
+		err = dla_process_events(nvdla_dev->engine_context, &task_complete);
+
+		spin_unlock_irqrestore(&nvdla_dev->nvdla_lock, flags);
+
+		if (err || task_complete)
+			break;
+	}
+
+	pr_debug("Task complete\n");
+	dla_clear_task(nvdla_dev->engine_context);
+
+	return err;
 }
 
 /* driver probe and init */
@@ -320,6 +357,9 @@ static int32_t nvdla_probe(struct platform_device *pdev)
 				dev_name(&pdev->dev), nvdla_dev);
 	if (err)
 		return err;
+
+	dla_register_driver(&nvdla_dev->engine_context, (void *)nvdla_dev);
+	dla_clear_task(nvdla_dev->engine_context);
 
 	err = nvdla_drm_probe(nvdla_dev);
 	if (err)
