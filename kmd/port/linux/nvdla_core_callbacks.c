@@ -138,15 +138,26 @@ static irqreturn_t nvdla_engine_isr(int32_t irq, void *data)
 static int32_t dla_read_dma_address(void *driver_context, void *task_data,
 						int16_t index, void *dst)
 {
+	int32_t ret = 0;
+	struct nvdla_mem_handle *handles;
+	dma_addr_t *phys_addr = (dma_addr_t *)(dst);
+	struct nvdla_device *nvdla_dev =
+			(struct nvdla_device *)driver_context;
 	struct nvdla_task *task = (struct nvdla_task *)task_data;
 
 	if (index == -1 || index > task->num_addresses)
 		return -EINVAL;
 
-	return 0;
+	handles = (struct nvdla_mem_handle *)task->address_list;
+	ret = nvdla_gem_dma_addr(nvdla_dev->drm, task->file,
+					handles[index].handle,
+					phys_addr);
+
+	return ret;
 }
 
-static int32_t dla_read_cpu_address(void *task_data, int16_t index, void *dst)
+static int32_t dla_read_cpu_address(void *driver_context, void *task_data,
+						int16_t index, void *dst)
 {
 	uint64_t *temp = (uint64_t *)dst;
 	struct nvdla_task *task = (struct nvdla_task *)task_data;
@@ -155,7 +166,6 @@ static int32_t dla_read_cpu_address(void *task_data, int16_t index, void *dst)
 		return -EINVAL;
 
 	*temp = (uint64_t)index;
-
 	return 0;
 }
 
@@ -166,7 +176,8 @@ int32_t dla_get_dma_address(void *driver_context, void *task_data,
 	int32_t ret = 0;
 
 	if (destination == DESTINATION_PROCESSOR) {
-		ret = dla_read_cpu_address(task_data, index, dst_ptr);
+		ret = dla_read_cpu_address(driver_context, task_data,
+						index, dst_ptr);
 	} else if (destination == DESTINATION_DMA) {
 		ret = dla_read_dma_address(driver_context, task_data,
 						index, dst_ptr);
@@ -310,11 +321,19 @@ static int32_t nvdla_probe(struct platform_device *pdev)
 	if (err)
 		return err;
 
+	err = nvdla_drm_probe(nvdla_dev);
+	if (err)
+		dev_err(&pdev->dev, "failed to register drm device\n");
+
 	return err;
 }
 
 static int32_t __exit nvdla_remove(struct platform_device *pdev)
 {
+	struct nvdla_device *nvdla_dev = dev_get_drvdata(&pdev->dev);
+
+	nvdla_drm_remove(nvdla_dev);
+
 	return 0;
 }
 

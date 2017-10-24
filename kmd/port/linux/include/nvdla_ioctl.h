@@ -90,4 +90,49 @@ struct nvdla_submit_args {
 	__u32 version;
 };
 
+/**
+ * struct nvdla_gem_create_args for allocating DMA buffer through GEM
+ *
+ * @handle		handle updated by kernel after allocation
+ * @flags		implementation specific flags
+ * @size		size of buffer to allocate
+ */
+struct nvdla_gem_create_args {
+	__u32 handle;
+	__u32 flags;
+	__u64 size;
+};
+
+/**
+ * struct nvdla_gem_map_offset_args for mapping DMA buffer
+ *
+ * @handle		handle of the buffer
+ * @reserved		reserved for padding
+ * @offset		offset updated by kernel after mapping
+ */
+struct nvdla_gem_map_offset_args {
+	__u32 handle;
+	__u32 reserved;
+	__u64 offset;
+};
+
+/**
+ * struct nvdla_gem_destroy_args for destroying DMA buffer
+ *
+ * @handle		handle of the buffer
+ */
+struct nvdla_gem_destroy_args {
+	__u32 handle;
+};
+
+#define DRM_NVDLA_SUBMIT		0x00
+#define DRM_NVDLA_GEM_CREATE		0x01
+#define DRM_NVDLA_GEM_MMAP		0x02
+#define DRM_NVDLA_GEM_DESTROY		0x03
+
+#define DRM_IOCTL_NVDLA_SUBMIT DRM_IOWR(DRM_COMMAND_BASE + DRM_NVDLA_SUBMIT, struct nvdla_submit_args)
+#define DRM_IOCTL_NVDLA_GEM_CREATE DRM_IOWR(DRM_COMMAND_BASE + DRM_NVDLA_GEM_CREATE, struct nvdla_gem_create_args)
+#define DRM_IOCTL_NVDLA_GEM_MMAP DRM_IOWR(DRM_COMMAND_BASE + DRM_NVDLA_GEM_MMAP, struct nvdla_gem_map_offset_args)
+#define DRM_IOCTL_NVDLA_GEM_DESTROY DRM_IOWR(DRM_COMMAND_BASE + DRM_NVDLA_GEM_DESTROY, struct nvdla_gem_destroy_args)
+
 #endif

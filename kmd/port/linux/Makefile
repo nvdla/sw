@@ -37,3 +37,4 @@ ccflags-y += -I$(src)/../../include
 ccflags-y += -Werror
 
 opendla-y += nvdla_core_callbacks.o
+opendla-y += nvdla_gem.o
