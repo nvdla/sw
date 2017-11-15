@@ -29,8 +29,8 @@
 #ifndef __ARNVDLA_H_
 #define __ARNVDLA_H_
 
-/* Register GLB_S_NVDLA_HW_VERSION_0 */
-#define GLB_S_NVDLA_HW_VERSION_0                        (_MK_ADDR_CONST(0x3000))
+// Register GLB_S_NVDLA_HW_VERSION_0
+#define GLB_S_NVDLA_HW_VERSION_0                           (_MK_ADDR_CONST(0x0))
 #define GLB_S_NVDLA_HW_VERSION_0_SECURE                                    (0x0)
 #define GLB_S_NVDLA_HW_VERSION_0_DUAL                                      (0x0)
 #define GLB_S_NVDLA_HW_VERSION_0_SCR                                         (0)
@@ -70,8 +70,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register GLB_S_INTR_MASK_0 */
-#define GLB_S_INTR_MASK_0                               (_MK_ADDR_CONST(0x3004))
+// Register GLB_S_INTR_MASK_0
+#define GLB_S_INTR_MASK_0                                  (_MK_ADDR_CONST(0x4))
 #define GLB_S_INTR_MASK_0_SECURE                                           (0x0)
 #define GLB_S_INTR_MASK_0_DUAL                                             (0x0)
 #define GLB_S_INTR_MASK_0_SCR                                                (0)
@@ -329,8 +329,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register GLB_S_INTR_SET_0 */
-#define GLB_S_INTR_SET_0                                (_MK_ADDR_CONST(0x3008))
+// Register GLB_S_INTR_SET_0
+#define GLB_S_INTR_SET_0                                   (_MK_ADDR_CONST(0x8))
 #define GLB_S_INTR_SET_0_SECURE                                            (0x0)
 #define GLB_S_INTR_SET_0_DUAL                                              (0x0)
 #define GLB_S_INTR_SET_0_SCR                                                 (0)
@@ -574,8 +574,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register GLB_S_INTR_STATUS_0 */
-#define GLB_S_INTR_STATUS_0                             (_MK_ADDR_CONST(0x300c))
+// Register GLB_S_INTR_STATUS_0
+#define GLB_S_INTR_STATUS_0                                (_MK_ADDR_CONST(0xc))
 #define GLB_S_INTR_STATUS_0_SECURE                                         (0x0)
 #define GLB_S_INTR_STATUS_0_DUAL                                           (0x0)
 #define GLB_S_INTR_STATUS_0_SCR                                              (0)
@@ -861,8 +861,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register MCIF_CFG_RD_WEIGHT_0_0 */
-#define MCIF_CFG_RD_WEIGHT_0_0                          (_MK_ADDR_CONST(0x5000))
+// Register MCIF_CFG_RD_WEIGHT_0_0
+#define MCIF_CFG_RD_WEIGHT_0_0                          (_MK_ADDR_CONST(0x2000))
 #define MCIF_CFG_RD_WEIGHT_0_0_SECURE                                      (0x0)
 #define MCIF_CFG_RD_WEIGHT_0_0_DUAL                                        (0x0)
 #define MCIF_CFG_RD_WEIGHT_0_0_SCR                                           (0)
@@ -939,8 +939,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register MCIF_CFG_RD_WEIGHT_1_0 */
-#define MCIF_CFG_RD_WEIGHT_1_0                          (_MK_ADDR_CONST(0x5004))
+// Register MCIF_CFG_RD_WEIGHT_1_0
+#define MCIF_CFG_RD_WEIGHT_1_0                          (_MK_ADDR_CONST(0x2004))
 #define MCIF_CFG_RD_WEIGHT_1_0_SECURE                                      (0x0)
 #define MCIF_CFG_RD_WEIGHT_1_0_DUAL                                        (0x0)
 #define MCIF_CFG_RD_WEIGHT_1_0_SCR                                           (0)
@@ -1022,8 +1022,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register MCIF_CFG_RD_WEIGHT_2_0 */
-#define MCIF_CFG_RD_WEIGHT_2_0                          (_MK_ADDR_CONST(0x5008))
+// Register MCIF_CFG_RD_WEIGHT_2_0
+#define MCIF_CFG_RD_WEIGHT_2_0                          (_MK_ADDR_CONST(0x2008))
 #define MCIF_CFG_RD_WEIGHT_2_0_SECURE                                      (0x0)
 #define MCIF_CFG_RD_WEIGHT_2_0_DUAL                                        (0x0)
 #define MCIF_CFG_RD_WEIGHT_2_0_SCR                                           (0)
@@ -1104,8 +1104,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register MCIF_CFG_WR_WEIGHT_0_0 */
-#define MCIF_CFG_WR_WEIGHT_0_0                          (_MK_ADDR_CONST(0x500c))
+// Register MCIF_CFG_WR_WEIGHT_0_0
+#define MCIF_CFG_WR_WEIGHT_0_0                          (_MK_ADDR_CONST(0x200c))
 #define MCIF_CFG_WR_WEIGHT_0_0_SECURE                                      (0x0)
 #define MCIF_CFG_WR_WEIGHT_0_0_DUAL                                        (0x0)
 #define MCIF_CFG_WR_WEIGHT_0_0_SCR                                           (0)
@@ -1182,8 +1182,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register MCIF_CFG_WR_WEIGHT_1_0 */
-#define MCIF_CFG_WR_WEIGHT_1_0                          (_MK_ADDR_CONST(0x5010))
+// Register MCIF_CFG_WR_WEIGHT_1_0
+#define MCIF_CFG_WR_WEIGHT_1_0                          (_MK_ADDR_CONST(0x2010))
 #define MCIF_CFG_WR_WEIGHT_1_0_SECURE                                      (0x0)
 #define MCIF_CFG_WR_WEIGHT_1_0_DUAL                                        (0x0)
 #define MCIF_CFG_WR_WEIGHT_1_0_SCR                                           (0)
@@ -1262,8 +1262,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register MCIF_CFG_OUTSTANDING_CNT_0 */
-#define MCIF_CFG_OUTSTANDING_CNT_0                      (_MK_ADDR_CONST(0x5014))
+// Register MCIF_CFG_OUTSTANDING_CNT_0
+#define MCIF_CFG_OUTSTANDING_CNT_0                      (_MK_ADDR_CONST(0x2014))
 #define MCIF_CFG_OUTSTANDING_CNT_0_SECURE                                  (0x0)
 #define MCIF_CFG_OUTSTANDING_CNT_0_DUAL                                    (0x0)
 #define MCIF_CFG_OUTSTANDING_CNT_0_SCR                                       (0)
@@ -1307,8 +1307,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register MCIF_STATUS_0 */
-#define MCIF_STATUS_0                                   (_MK_ADDR_CONST(0x5018))
+// Register MCIF_STATUS_0
+#define MCIF_STATUS_0                                   (_MK_ADDR_CONST(0x2018))
 #define MCIF_STATUS_0_SECURE                                               (0x0)
 #define MCIF_STATUS_0_DUAL                                                 (0x0)
 #define MCIF_STATUS_0_SCR                                                    (0)
@@ -1335,8 +1335,8 @@
 #define MCIF_STATUS_0_IDLE_YES                               (_MK_ENUM_CONST(1))
 
 
-/* Register CVIF_CFG_RD_WEIGHT_0_0 */
-#define CVIF_CFG_RD_WEIGHT_0_0                          (_MK_ADDR_CONST(0x6000))
+// Register CVIF_CFG_RD_WEIGHT_0_0
+#define CVIF_CFG_RD_WEIGHT_0_0                          (_MK_ADDR_CONST(0x3000))
 #define CVIF_CFG_RD_WEIGHT_0_0_SECURE                                      (0x0)
 #define CVIF_CFG_RD_WEIGHT_0_0_DUAL                                        (0x0)
 #define CVIF_CFG_RD_WEIGHT_0_0_SCR                                           (0)
@@ -1413,8 +1413,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CVIF_CFG_RD_WEIGHT_1_0 */
-#define CVIF_CFG_RD_WEIGHT_1_0                          (_MK_ADDR_CONST(0x6004))
+// Register CVIF_CFG_RD_WEIGHT_1_0
+#define CVIF_CFG_RD_WEIGHT_1_0                          (_MK_ADDR_CONST(0x3004))
 #define CVIF_CFG_RD_WEIGHT_1_0_SECURE                                      (0x0)
 #define CVIF_CFG_RD_WEIGHT_1_0_DUAL                                        (0x0)
 #define CVIF_CFG_RD_WEIGHT_1_0_SCR                                           (0)
@@ -1496,8 +1496,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CVIF_CFG_RD_WEIGHT_2_0 */
-#define CVIF_CFG_RD_WEIGHT_2_0                          (_MK_ADDR_CONST(0x6008))
+// Register CVIF_CFG_RD_WEIGHT_2_0
+#define CVIF_CFG_RD_WEIGHT_2_0                          (_MK_ADDR_CONST(0x3008))
 #define CVIF_CFG_RD_WEIGHT_2_0_SECURE                                      (0x0)
 #define CVIF_CFG_RD_WEIGHT_2_0_DUAL                                        (0x0)
 #define CVIF_CFG_RD_WEIGHT_2_0_SCR                                           (0)
@@ -1578,8 +1578,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CVIF_CFG_WR_WEIGHT_0_0 */
-#define CVIF_CFG_WR_WEIGHT_0_0                          (_MK_ADDR_CONST(0x600c))
+// Register CVIF_CFG_WR_WEIGHT_0_0
+#define CVIF_CFG_WR_WEIGHT_0_0                          (_MK_ADDR_CONST(0x300c))
 #define CVIF_CFG_WR_WEIGHT_0_0_SECURE                                      (0x0)
 #define CVIF_CFG_WR_WEIGHT_0_0_DUAL                                        (0x0)
 #define CVIF_CFG_WR_WEIGHT_0_0_SCR                                           (0)
@@ -1656,8 +1656,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CVIF_CFG_WR_WEIGHT_1_0 */
-#define CVIF_CFG_WR_WEIGHT_1_0                          (_MK_ADDR_CONST(0x6010))
+// Register CVIF_CFG_WR_WEIGHT_1_0
+#define CVIF_CFG_WR_WEIGHT_1_0                          (_MK_ADDR_CONST(0x3010))
 #define CVIF_CFG_WR_WEIGHT_1_0_SECURE                                      (0x0)
 #define CVIF_CFG_WR_WEIGHT_1_0_DUAL                                        (0x0)
 #define CVIF_CFG_WR_WEIGHT_1_0_SCR                                           (0)
@@ -1736,8 +1736,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CVIF_CFG_OUTSTANDING_CNT_0 */
-#define CVIF_CFG_OUTSTANDING_CNT_0                      (_MK_ADDR_CONST(0x6014))
+// Register CVIF_CFG_OUTSTANDING_CNT_0
+#define CVIF_CFG_OUTSTANDING_CNT_0                      (_MK_ADDR_CONST(0x3014))
 #define CVIF_CFG_OUTSTANDING_CNT_0_SECURE                                  (0x0)
 #define CVIF_CFG_OUTSTANDING_CNT_0_DUAL                                    (0x0)
 #define CVIF_CFG_OUTSTANDING_CNT_0_SCR                                       (0)
@@ -1781,8 +1781,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CVIF_STATUS_0 */
-#define CVIF_STATUS_0                                   (_MK_ADDR_CONST(0x6018))
+// Register CVIF_STATUS_0
+#define CVIF_STATUS_0                                   (_MK_ADDR_CONST(0x3018))
 #define CVIF_STATUS_0_SECURE                                               (0x0)
 #define CVIF_STATUS_0_DUAL                                                 (0x0)
 #define CVIF_STATUS_0_SCR                                                    (0)
@@ -1809,8 +1809,8 @@
 #define CVIF_STATUS_0_IDLE_YES                               (_MK_ENUM_CONST(1))
 
 
-/* Register BDMA_CFG_SRC_ADDR_LOW_0 */
-#define BDMA_CFG_SRC_ADDR_LOW_0                         (_MK_ADDR_CONST(0x7000))
+// Register BDMA_CFG_SRC_ADDR_LOW_0
+#define BDMA_CFG_SRC_ADDR_LOW_0                         (_MK_ADDR_CONST(0x4000))
 #define BDMA_CFG_SRC_ADDR_LOW_0_SECURE                                     (0x0)
 #define BDMA_CFG_SRC_ADDR_LOW_0_DUAL                                       (0x0)
 #define BDMA_CFG_SRC_ADDR_LOW_0_SCR                                          (0)
@@ -1834,33 +1834,33 @@
 #define BDMA_CFG_SRC_ADDR_LOW_0_V32_PLATFORM_DEPENDENT     (_MK_MASK_CONST(0x1))
 
 
-/* Register BDMA_CFG_SRC_ADDR_HIGH_0 */
-#define BDMA_CFG_SRC_ADDR_HIGH_0                        (_MK_ADDR_CONST(0x7004))
+// Register BDMA_CFG_SRC_ADDR_HIGH_0
+#define BDMA_CFG_SRC_ADDR_HIGH_0                        (_MK_ADDR_CONST(0x4004))
 #define BDMA_CFG_SRC_ADDR_HIGH_0_SECURE                                    (0x0)
 #define BDMA_CFG_SRC_ADDR_HIGH_0_DUAL                                      (0x0)
 #define BDMA_CFG_SRC_ADDR_HIGH_0_SCR                                         (0)
 #define BDMA_CFG_SRC_ADDR_HIGH_0_WORD_COUNT                                (0x1)
 #define BDMA_CFG_SRC_ADDR_HIGH_0_RESET_VAL                 (_MK_MASK_CONST(0x0))
-#define BDMA_CFG_SRC_ADDR_HIGH_0_RESET_MASK               (_MK_MASK_CONST(0xff))
+#define BDMA_CFG_SRC_ADDR_HIGH_0_RESET_MASK         (_MK_MASK_CONST(0xffffffff))
 #define BDMA_CFG_SRC_ADDR_HIGH_0_SW_DEFAULT_VAL            (_MK_MASK_CONST(0x0))
 #define BDMA_CFG_SRC_ADDR_HIGH_0_SW_DEFAULT_MASK           (_MK_MASK_CONST(0x0))
-#define BDMA_CFG_SRC_ADDR_HIGH_0_READ_MASK                (_MK_MASK_CONST(0xff))
-#define BDMA_CFG_SRC_ADDR_HIGH_0_WRITE_MASK               (_MK_MASK_CONST(0xff))
+#define BDMA_CFG_SRC_ADDR_HIGH_0_READ_MASK          (_MK_MASK_CONST(0xffffffff))
+#define BDMA_CFG_SRC_ADDR_HIGH_0_WRITE_MASK         (_MK_MASK_CONST(0xffffffff))
 #define BDMA_CFG_SRC_ADDR_HIGH_0_V8_SHIFT                   (_MK_SHIFT_CONST(0))
 #define BDMA_CFG_SRC_ADDR_HIGH_0_V8_FIELD \
-	(_MK_FIELD_CONST(0xff, BDMA_CFG_SRC_ADDR_HIGH_0_V8_SHIFT))
-#define BDMA_CFG_SRC_ADDR_HIGH_0_V8_RANGE                                  (7:0)
+	(_MK_FIELD_CONST(0xffffffff, BDMA_CFG_SRC_ADDR_HIGH_0_V8_SHIFT))
+#define BDMA_CFG_SRC_ADDR_HIGH_0_V8_RANGE                                 (31:0)
 #define BDMA_CFG_SRC_ADDR_HIGH_0_V8_WOFFSET                                (0x0)
 #define BDMA_CFG_SRC_ADDR_HIGH_0_V8_DEFAULT                (_MK_MASK_CONST(0x0))
-#define BDMA_CFG_SRC_ADDR_HIGH_0_V8_DEFAULT_MASK          (_MK_MASK_CONST(0xff))
+#define BDMA_CFG_SRC_ADDR_HIGH_0_V8_DEFAULT_MASK    (_MK_MASK_CONST(0xffffffff))
 #define BDMA_CFG_SRC_ADDR_HIGH_0_V8_SW_DEFAULT             (_MK_MASK_CONST(0x0))
 #define BDMA_CFG_SRC_ADDR_HIGH_0_V8_SW_DEFAULT_MASK        (_MK_MASK_CONST(0x0))
 #define BDMA_CFG_SRC_ADDR_HIGH_0_V8_PARITY_PROTECTION      (_MK_MASK_CONST(0x0))
 #define BDMA_CFG_SRC_ADDR_HIGH_0_V8_PLATFORM_DEPENDENT     (_MK_MASK_CONST(0x1))
 
 
-/* Register BDMA_CFG_DST_ADDR_LOW_0 */
-#define BDMA_CFG_DST_ADDR_LOW_0                         (_MK_ADDR_CONST(0x7008))
+// Register BDMA_CFG_DST_ADDR_LOW_0
+#define BDMA_CFG_DST_ADDR_LOW_0                         (_MK_ADDR_CONST(0x4008))
 #define BDMA_CFG_DST_ADDR_LOW_0_SECURE                                     (0x0)
 #define BDMA_CFG_DST_ADDR_LOW_0_DUAL                                       (0x0)
 #define BDMA_CFG_DST_ADDR_LOW_0_SCR                                          (0)
@@ -1884,33 +1884,33 @@
 #define BDMA_CFG_DST_ADDR_LOW_0_V32_PLATFORM_DEPENDENT     (_MK_MASK_CONST(0x1))
 
 
-/* Register BDMA_CFG_DST_ADDR_HIGH_0 */
-#define BDMA_CFG_DST_ADDR_HIGH_0                        (_MK_ADDR_CONST(0x700c))
+// Register BDMA_CFG_DST_ADDR_HIGH_0
+#define BDMA_CFG_DST_ADDR_HIGH_0                        (_MK_ADDR_CONST(0x400c))
 #define BDMA_CFG_DST_ADDR_HIGH_0_SECURE                                    (0x0)
 #define BDMA_CFG_DST_ADDR_HIGH_0_DUAL                                      (0x0)
 #define BDMA_CFG_DST_ADDR_HIGH_0_SCR                                         (0)
 #define BDMA_CFG_DST_ADDR_HIGH_0_WORD_COUNT                                (0x1)
 #define BDMA_CFG_DST_ADDR_HIGH_0_RESET_VAL                 (_MK_MASK_CONST(0x0))
-#define BDMA_CFG_DST_ADDR_HIGH_0_RESET_MASK               (_MK_MASK_CONST(0xff))
+#define BDMA_CFG_DST_ADDR_HIGH_0_RESET_MASK         (_MK_MASK_CONST(0xffffffff))
 #define BDMA_CFG_DST_ADDR_HIGH_0_SW_DEFAULT_VAL            (_MK_MASK_CONST(0x0))
 #define BDMA_CFG_DST_ADDR_HIGH_0_SW_DEFAULT_MASK           (_MK_MASK_CONST(0x0))
-#define BDMA_CFG_DST_ADDR_HIGH_0_READ_MASK                (_MK_MASK_CONST(0xff))
-#define BDMA_CFG_DST_ADDR_HIGH_0_WRITE_MASK               (_MK_MASK_CONST(0xff))
+#define BDMA_CFG_DST_ADDR_HIGH_0_READ_MASK          (_MK_MASK_CONST(0xffffffff))
+#define BDMA_CFG_DST_ADDR_HIGH_0_WRITE_MASK         (_MK_MASK_CONST(0xffffffff))
 #define BDMA_CFG_DST_ADDR_HIGH_0_V8_SHIFT                   (_MK_SHIFT_CONST(0))
 #define BDMA_CFG_DST_ADDR_HIGH_0_V8_FIELD \
-	(_MK_FIELD_CONST(0xff, BDMA_CFG_DST_ADDR_HIGH_0_V8_SHIFT))
-#define BDMA_CFG_DST_ADDR_HIGH_0_V8_RANGE                                  (7:0)
+	(_MK_FIELD_CONST(0xffffffff, BDMA_CFG_DST_ADDR_HIGH_0_V8_SHIFT))
+#define BDMA_CFG_DST_ADDR_HIGH_0_V8_RANGE                                 (31:0)
 #define BDMA_CFG_DST_ADDR_HIGH_0_V8_WOFFSET                                (0x0)
 #define BDMA_CFG_DST_ADDR_HIGH_0_V8_DEFAULT                (_MK_MASK_CONST(0x0))
-#define BDMA_CFG_DST_ADDR_HIGH_0_V8_DEFAULT_MASK          (_MK_MASK_CONST(0xff))
+#define BDMA_CFG_DST_ADDR_HIGH_0_V8_DEFAULT_MASK    (_MK_MASK_CONST(0xffffffff))
 #define BDMA_CFG_DST_ADDR_HIGH_0_V8_SW_DEFAULT             (_MK_MASK_CONST(0x0))
 #define BDMA_CFG_DST_ADDR_HIGH_0_V8_SW_DEFAULT_MASK        (_MK_MASK_CONST(0x0))
 #define BDMA_CFG_DST_ADDR_HIGH_0_V8_PARITY_PROTECTION      (_MK_MASK_CONST(0x0))
 #define BDMA_CFG_DST_ADDR_HIGH_0_V8_PLATFORM_DEPENDENT     (_MK_MASK_CONST(0x1))
 
 
-/* Register BDMA_CFG_LINE_0 */
-#define BDMA_CFG_LINE_0                                 (_MK_ADDR_CONST(0x7010))
+// Register BDMA_CFG_LINE_0
+#define BDMA_CFG_LINE_0                                 (_MK_ADDR_CONST(0x4010))
 #define BDMA_CFG_LINE_0_SECURE                                             (0x0)
 #define BDMA_CFG_LINE_0_DUAL                                               (0x0)
 #define BDMA_CFG_LINE_0_SCR                                                  (0)
@@ -1934,8 +1934,8 @@
 #define BDMA_CFG_LINE_0_SIZE_PLATFORM_DEPENDENT            (_MK_MASK_CONST(0x1))
 
 
-/* Register BDMA_CFG_CMD_0 */
-#define BDMA_CFG_CMD_0                                  (_MK_ADDR_CONST(0x7014))
+// Register BDMA_CFG_CMD_0
+#define BDMA_CFG_CMD_0                                  (_MK_ADDR_CONST(0x4014))
 #define BDMA_CFG_CMD_0_SECURE                                              (0x0)
 #define BDMA_CFG_CMD_0_DUAL                                                (0x0)
 #define BDMA_CFG_CMD_0_SCR                                                   (0)
@@ -1975,8 +1975,8 @@
 #define BDMA_CFG_CMD_0_DST_RAM_TYPE_MC                       (_MK_ENUM_CONST(1))
 
 
-/* Register BDMA_CFG_LINE_REPEAT_0 */
-#define BDMA_CFG_LINE_REPEAT_0                          (_MK_ADDR_CONST(0x7018))
+// Register BDMA_CFG_LINE_REPEAT_0
+#define BDMA_CFG_LINE_REPEAT_0                          (_MK_ADDR_CONST(0x4018))
 #define BDMA_CFG_LINE_REPEAT_0_SECURE                                      (0x0)
 #define BDMA_CFG_LINE_REPEAT_0_DUAL                                        (0x0)
 #define BDMA_CFG_LINE_REPEAT_0_SCR                                           (0)
@@ -2001,8 +2001,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register BDMA_CFG_SRC_LINE_0 */
-#define BDMA_CFG_SRC_LINE_0                             (_MK_ADDR_CONST(0x701c))
+// Register BDMA_CFG_SRC_LINE_0
+#define BDMA_CFG_SRC_LINE_0                             (_MK_ADDR_CONST(0x401c))
 #define BDMA_CFG_SRC_LINE_0_SECURE                                         (0x0)
 #define BDMA_CFG_SRC_LINE_0_DUAL                                           (0x0)
 #define BDMA_CFG_SRC_LINE_0_SCR                                              (0)
@@ -2026,8 +2026,8 @@
 #define BDMA_CFG_SRC_LINE_0_STRIDE_PLATFORM_DEPENDENT      (_MK_MASK_CONST(0x1))
 
 
-/* Register BDMA_CFG_DST_LINE_0 */
-#define BDMA_CFG_DST_LINE_0                             (_MK_ADDR_CONST(0x7020))
+// Register BDMA_CFG_DST_LINE_0
+#define BDMA_CFG_DST_LINE_0                             (_MK_ADDR_CONST(0x4020))
 #define BDMA_CFG_DST_LINE_0_SECURE                                         (0x0)
 #define BDMA_CFG_DST_LINE_0_DUAL                                           (0x0)
 #define BDMA_CFG_DST_LINE_0_SCR                                              (0)
@@ -2051,8 +2051,8 @@
 #define BDMA_CFG_DST_LINE_0_STRIDE_PLATFORM_DEPENDENT      (_MK_MASK_CONST(0x1))
 
 
-/* Register BDMA_CFG_SURF_REPEAT_0 */
-#define BDMA_CFG_SURF_REPEAT_0                          (_MK_ADDR_CONST(0x7024))
+// Register BDMA_CFG_SURF_REPEAT_0
+#define BDMA_CFG_SURF_REPEAT_0                          (_MK_ADDR_CONST(0x4024))
 #define BDMA_CFG_SURF_REPEAT_0_SECURE                                      (0x0)
 #define BDMA_CFG_SURF_REPEAT_0_DUAL                                        (0x0)
 #define BDMA_CFG_SURF_REPEAT_0_SCR                                           (0)
@@ -2077,8 +2077,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register BDMA_CFG_SRC_SURF_0 */
-#define BDMA_CFG_SRC_SURF_0                             (_MK_ADDR_CONST(0x7028))
+// Register BDMA_CFG_SRC_SURF_0
+#define BDMA_CFG_SRC_SURF_0                             (_MK_ADDR_CONST(0x4028))
 #define BDMA_CFG_SRC_SURF_0_SECURE                                         (0x0)
 #define BDMA_CFG_SRC_SURF_0_DUAL                                           (0x0)
 #define BDMA_CFG_SRC_SURF_0_SCR                                              (0)
@@ -2102,8 +2102,8 @@
 #define BDMA_CFG_SRC_SURF_0_STRIDE_PLATFORM_DEPENDENT      (_MK_MASK_CONST(0x1))
 
 
-/* Register BDMA_CFG_DST_SURF_0 */
-#define BDMA_CFG_DST_SURF_0                             (_MK_ADDR_CONST(0x702c))
+// Register BDMA_CFG_DST_SURF_0
+#define BDMA_CFG_DST_SURF_0                             (_MK_ADDR_CONST(0x402c))
 #define BDMA_CFG_DST_SURF_0_SECURE                                         (0x0)
 #define BDMA_CFG_DST_SURF_0_DUAL                                           (0x0)
 #define BDMA_CFG_DST_SURF_0_SCR                                              (0)
@@ -2127,8 +2127,8 @@
 #define BDMA_CFG_DST_SURF_0_STRIDE_PLATFORM_DEPENDENT      (_MK_MASK_CONST(0x1))
 
 
-/* Register BDMA_CFG_OP_0 */
-#define BDMA_CFG_OP_0                                   (_MK_ADDR_CONST(0x7030))
+// Register BDMA_CFG_OP_0
+#define BDMA_CFG_OP_0                                   (_MK_ADDR_CONST(0x4030))
 #define BDMA_CFG_OP_0_SECURE                                               (0x0)
 #define BDMA_CFG_OP_0_DUAL                                                 (0x0)
 #define BDMA_CFG_OP_0_SCR                                                    (0)
@@ -2153,8 +2153,8 @@
 #define BDMA_CFG_OP_0_EN_ENABLE                              (_MK_ENUM_CONST(1))
 
 
-/* Register BDMA_CFG_LAUNCH0_0 */
-#define BDMA_CFG_LAUNCH0_0                              (_MK_ADDR_CONST(0x7034))
+// Register BDMA_CFG_LAUNCH0_0
+#define BDMA_CFG_LAUNCH0_0                              (_MK_ADDR_CONST(0x4034))
 #define BDMA_CFG_LAUNCH0_0_SECURE                                          (0x0)
 #define BDMA_CFG_LAUNCH0_0_DUAL                                            (0x0)
 #define BDMA_CFG_LAUNCH0_0_SCR                                               (0)
@@ -2182,8 +2182,8 @@
 #define BDMA_CFG_LAUNCH0_0_GRP0_LAUNCH_YES                   (_MK_ENUM_CONST(1))
 
 
-/* Register BDMA_CFG_LAUNCH1_0 */
-#define BDMA_CFG_LAUNCH1_0                              (_MK_ADDR_CONST(0x7038))
+// Register BDMA_CFG_LAUNCH1_0
+#define BDMA_CFG_LAUNCH1_0                              (_MK_ADDR_CONST(0x4038))
 #define BDMA_CFG_LAUNCH1_0_SECURE                                          (0x0)
 #define BDMA_CFG_LAUNCH1_0_DUAL                                            (0x0)
 #define BDMA_CFG_LAUNCH1_0_SCR                                               (0)
@@ -2211,8 +2211,8 @@
 #define BDMA_CFG_LAUNCH1_0_GRP1_LAUNCH_YES                   (_MK_ENUM_CONST(1))
 
 
-/* Register BDMA_CFG_STATUS_0 */
-#define BDMA_CFG_STATUS_0                               (_MK_ADDR_CONST(0x703c))
+// Register BDMA_CFG_STATUS_0
+#define BDMA_CFG_STATUS_0                               (_MK_ADDR_CONST(0x403c))
 #define BDMA_CFG_STATUS_0_SECURE                                           (0x0)
 #define BDMA_CFG_STATUS_0_DUAL                                             (0x0)
 #define BDMA_CFG_STATUS_0_SCR                                                (0)
@@ -2242,8 +2242,8 @@
 #define BDMA_CFG_STATUS_0_STALL_COUNT_EN_YES                 (_MK_ENUM_CONST(1))
 
 
-/* Register BDMA_STATUS_0 */
-#define BDMA_STATUS_0                                   (_MK_ADDR_CONST(0x7040))
+// Register BDMA_STATUS_0
+#define BDMA_STATUS_0                                   (_MK_ADDR_CONST(0x4040))
 #define BDMA_STATUS_0_SECURE                                               (0x0)
 #define BDMA_STATUS_0_DUAL                                                 (0x0)
 #define BDMA_STATUS_0_SCR                                                    (0)
@@ -2312,8 +2312,8 @@
 #define BDMA_STATUS_0_GRP1_BUSY_YES                          (_MK_ENUM_CONST(1))
 
 
-/* Register BDMA_STATUS_GRP0_READ_STALL_0 */
-#define BDMA_STATUS_GRP0_READ_STALL_0                   (_MK_ADDR_CONST(0x7044))
+// Register BDMA_STATUS_GRP0_READ_STALL_0
+#define BDMA_STATUS_GRP0_READ_STALL_0                   (_MK_ADDR_CONST(0x4044))
 #define BDMA_STATUS_GRP0_READ_STALL_0_SECURE                               (0x0)
 #define BDMA_STATUS_GRP0_READ_STALL_0_DUAL                                 (0x0)
 #define BDMA_STATUS_GRP0_READ_STALL_0_SCR                                    (0)
@@ -2342,8 +2342,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register BDMA_STATUS_GRP0_WRITE_STALL_0 */
-#define BDMA_STATUS_GRP0_WRITE_STALL_0                  (_MK_ADDR_CONST(0x7048))
+// Register BDMA_STATUS_GRP0_WRITE_STALL_0
+#define BDMA_STATUS_GRP0_WRITE_STALL_0                  (_MK_ADDR_CONST(0x4048))
 #define BDMA_STATUS_GRP0_WRITE_STALL_0_SECURE                              (0x0)
 #define BDMA_STATUS_GRP0_WRITE_STALL_0_DUAL                                (0x0)
 #define BDMA_STATUS_GRP0_WRITE_STALL_0_SCR                                   (0)
@@ -2373,8 +2373,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register BDMA_STATUS_GRP1_READ_STALL_0 */
-#define BDMA_STATUS_GRP1_READ_STALL_0                   (_MK_ADDR_CONST(0x704c))
+// Register BDMA_STATUS_GRP1_READ_STALL_0
+#define BDMA_STATUS_GRP1_READ_STALL_0                   (_MK_ADDR_CONST(0x404c))
 #define BDMA_STATUS_GRP1_READ_STALL_0_SECURE                               (0x0)
 #define BDMA_STATUS_GRP1_READ_STALL_0_DUAL                                 (0x0)
 #define BDMA_STATUS_GRP1_READ_STALL_0_SCR                                    (0)
@@ -2403,8 +2403,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register BDMA_STATUS_GRP1_WRITE_STALL_0 */
-#define BDMA_STATUS_GRP1_WRITE_STALL_0                  (_MK_ADDR_CONST(0x7050))
+// Register BDMA_STATUS_GRP1_WRITE_STALL_0
+#define BDMA_STATUS_GRP1_WRITE_STALL_0                  (_MK_ADDR_CONST(0x4050))
 #define BDMA_STATUS_GRP1_WRITE_STALL_0_SECURE                              (0x0)
 #define BDMA_STATUS_GRP1_WRITE_STALL_0_DUAL                                (0x0)
 #define BDMA_STATUS_GRP1_WRITE_STALL_0_SCR                                   (0)
@@ -2434,8 +2434,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_S_STATUS_0 */
-#define CDMA_S_STATUS_0                                 (_MK_ADDR_CONST(0x8000))
+// Register CDMA_S_STATUS_0
+#define CDMA_S_STATUS_0                                 (_MK_ADDR_CONST(0x5000))
 #define CDMA_S_STATUS_0_SECURE                                             (0x0)
 #define CDMA_S_STATUS_0_DUAL                                               (0x0)
 #define CDMA_S_STATUS_0_SCR                                                  (0)
@@ -2479,8 +2479,8 @@
 #define CDMA_S_STATUS_0_STATUS_1_PENDING                     (_MK_ENUM_CONST(2))
 
 
-/* Register CDMA_S_POINTER_0 */
-#define CDMA_S_POINTER_0                                (_MK_ADDR_CONST(0x8004))
+// Register CDMA_S_POINTER_0
+#define CDMA_S_POINTER_0                                (_MK_ADDR_CONST(0x5004))
 #define CDMA_S_POINTER_0_SECURE                                            (0x0)
 #define CDMA_S_POINTER_0_DUAL                                              (0x0)
 #define CDMA_S_POINTER_0_SCR                                                 (0)
@@ -2522,8 +2522,8 @@
 #define CDMA_S_POINTER_0_CONSUMER_GROUP_1                    (_MK_ENUM_CONST(1))
 
 
-/* Register CDMA_S_ARBITER_0 */
-#define CDMA_S_ARBITER_0                                (_MK_ADDR_CONST(0x8008))
+// Register CDMA_S_ARBITER_0
+#define CDMA_S_ARBITER_0                                (_MK_ADDR_CONST(0x5008))
 #define CDMA_S_ARBITER_0_SECURE                                            (0x0)
 #define CDMA_S_ARBITER_0_DUAL                                              (0x0)
 #define CDMA_S_ARBITER_0_SCR                                                 (0)
@@ -2559,8 +2559,8 @@
 #define CDMA_S_ARBITER_0_ARB_WMB_PLATFORM_DEPENDENT        (_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_S_CBUF_FLUSH_STATUS_0 */
-#define CDMA_S_CBUF_FLUSH_STATUS_0                      (_MK_ADDR_CONST(0x800c))
+// Register CDMA_S_CBUF_FLUSH_STATUS_0
+#define CDMA_S_CBUF_FLUSH_STATUS_0                      (_MK_ADDR_CONST(0x500c))
 #define CDMA_S_CBUF_FLUSH_STATUS_0_SECURE                                  (0x0)
 #define CDMA_S_CBUF_FLUSH_STATUS_0_DUAL                                    (0x0)
 #define CDMA_S_CBUF_FLUSH_STATUS_0_SCR                                       (0)
@@ -2589,8 +2589,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_OP_ENABLE_0 */
-#define CDMA_D_OP_ENABLE_0                              (_MK_ADDR_CONST(0x8010))
+// Register CDMA_D_OP_ENABLE_0
+#define CDMA_D_OP_ENABLE_0                              (_MK_ADDR_CONST(0x5010))
 #define CDMA_D_OP_ENABLE_0_SECURE                                          (0x0)
 #define CDMA_D_OP_ENABLE_0_DUAL                                            (0x0)
 #define CDMA_D_OP_ENABLE_0_SCR                                               (0)
@@ -2617,8 +2617,8 @@
 #define CDMA_D_OP_ENABLE_0_OP_EN_ENABLE                      (_MK_ENUM_CONST(1))
 
 
-/* Register CDMA_D_MISC_CFG_0 */
-#define CDMA_D_MISC_CFG_0                               (_MK_ADDR_CONST(0x8014))
+// Register CDMA_D_MISC_CFG_0
+#define CDMA_D_MISC_CFG_0                               (_MK_ADDR_CONST(0x5014))
 #define CDMA_D_MISC_CFG_0_SECURE                                           (0x0)
 #define CDMA_D_MISC_CFG_0_DUAL                                             (0x0)
 #define CDMA_D_MISC_CFG_0_SCR                                                (0)
@@ -2749,8 +2749,8 @@
 #define CDMA_D_MISC_CFG_0_SKIP_WEIGHT_RLS_ENABLE             (_MK_ENUM_CONST(1))
 
 
-/* Register CDMA_D_DATAIN_FORMAT_0 */
-#define CDMA_D_DATAIN_FORMAT_0                          (_MK_ADDR_CONST(0x8018))
+// Register CDMA_D_DATAIN_FORMAT_0
+#define CDMA_D_DATAIN_FORMAT_0                          (_MK_ADDR_CONST(0x5018))
 #define CDMA_D_DATAIN_FORMAT_0_SECURE                                      (0x0)
 #define CDMA_D_DATAIN_FORMAT_0_DUAL                                        (0x0)
 #define CDMA_D_DATAIN_FORMAT_0_SCR                                           (0)
@@ -2870,6 +2870,8 @@
 	(_MK_MASK_CONST(0x1))
 #define CDMA_D_DATAIN_FORMAT_0_PIXEL_MAPPING_INIT_ENUM            (PITCH_LINEAR)
 #define CDMA_D_DATAIN_FORMAT_0_PIXEL_MAPPING_PITCH_LINEAR    (_MK_ENUM_CONST(0))
+#define CDMA_D_DATAIN_FORMAT_0_PIXEL_MAPPING_RESERVED_LINEAR \
+	(_MK_ENUM_CONST(1))
 
 #define CDMA_D_DATAIN_FORMAT_0_PIXEL_SIGN_OVERRIDE_SHIFT \
 	(_MK_SHIFT_CONST(20))
@@ -2897,8 +2899,8 @@
 	(_MK_ENUM_CONST(1))
 
 
-/* Register CDMA_D_DATAIN_SIZE_0_0 */
-#define CDMA_D_DATAIN_SIZE_0_0                          (_MK_ADDR_CONST(0x801c))
+// Register CDMA_D_DATAIN_SIZE_0_0
+#define CDMA_D_DATAIN_SIZE_0_0                          (_MK_ADDR_CONST(0x501c))
 #define CDMA_D_DATAIN_SIZE_0_0_SECURE                                      (0x0)
 #define CDMA_D_DATAIN_SIZE_0_0_DUAL                                        (0x0)
 #define CDMA_D_DATAIN_SIZE_0_0_SCR                                           (0)
@@ -2942,8 +2944,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_DATAIN_SIZE_1_0 */
-#define CDMA_D_DATAIN_SIZE_1_0                          (_MK_ADDR_CONST(0x8020))
+// Register CDMA_D_DATAIN_SIZE_1_0
+#define CDMA_D_DATAIN_SIZE_1_0                          (_MK_ADDR_CONST(0x5020))
 #define CDMA_D_DATAIN_SIZE_1_0_SECURE                                      (0x0)
 #define CDMA_D_DATAIN_SIZE_1_0_DUAL                                        (0x0)
 #define CDMA_D_DATAIN_SIZE_1_0_SCR                                           (0)
@@ -2973,8 +2975,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_DATAIN_SIZE_EXT_0_0 */
-#define CDMA_D_DATAIN_SIZE_EXT_0_0                      (_MK_ADDR_CONST(0x8024))
+// Register CDMA_D_DATAIN_SIZE_EXT_0_0
+#define CDMA_D_DATAIN_SIZE_EXT_0_0                      (_MK_ADDR_CONST(0x5024))
 #define CDMA_D_DATAIN_SIZE_EXT_0_0_SECURE                                  (0x0)
 #define CDMA_D_DATAIN_SIZE_EXT_0_0_DUAL                                    (0x0)
 #define CDMA_D_DATAIN_SIZE_EXT_0_0_SCR                                       (0)
@@ -3026,8 +3028,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_PIXEL_OFFSET_0 */
-#define CDMA_D_PIXEL_OFFSET_0                           (_MK_ADDR_CONST(0x8028))
+// Register CDMA_D_PIXEL_OFFSET_0
+#define CDMA_D_PIXEL_OFFSET_0                           (_MK_ADDR_CONST(0x5028))
 #define CDMA_D_PIXEL_OFFSET_0_SECURE                                       (0x0)
 #define CDMA_D_PIXEL_OFFSET_0_DUAL                                         (0x0)
 #define CDMA_D_PIXEL_OFFSET_0_SCR                                            (0)
@@ -3071,8 +3073,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_DAIN_RAM_TYPE_0 */
-#define CDMA_D_DAIN_RAM_TYPE_0                          (_MK_ADDR_CONST(0x802c))
+// Register CDMA_D_DAIN_RAM_TYPE_0
+#define CDMA_D_DAIN_RAM_TYPE_0                          (_MK_ADDR_CONST(0x502c))
 #define CDMA_D_DAIN_RAM_TYPE_0_SECURE                                      (0x0)
 #define CDMA_D_DAIN_RAM_TYPE_0_DUAL                                        (0x0)
 #define CDMA_D_DAIN_RAM_TYPE_0_SCR                                           (0)
@@ -3104,29 +3106,29 @@
 #define CDMA_D_DAIN_RAM_TYPE_0_DATAIN_RAM_TYPE_MCIF          (_MK_ENUM_CONST(1))
 
 
-/* Register CDMA_D_DAIN_ADDR_HIGH_0_0 */
-#define CDMA_D_DAIN_ADDR_HIGH_0_0                       (_MK_ADDR_CONST(0x8030))
+// Register CDMA_D_DAIN_ADDR_HIGH_0_0
+#define CDMA_D_DAIN_ADDR_HIGH_0_0                       (_MK_ADDR_CONST(0x5030))
 #define CDMA_D_DAIN_ADDR_HIGH_0_0_SECURE                                   (0x0)
 #define CDMA_D_DAIN_ADDR_HIGH_0_0_DUAL                                     (0x0)
 #define CDMA_D_DAIN_ADDR_HIGH_0_0_SCR                                        (0)
 #define CDMA_D_DAIN_ADDR_HIGH_0_0_WORD_COUNT                               (0x1)
 #define CDMA_D_DAIN_ADDR_HIGH_0_0_RESET_VAL                (_MK_MASK_CONST(0x0))
-#define CDMA_D_DAIN_ADDR_HIGH_0_0_RESET_MASK              (_MK_MASK_CONST(0xff))
+#define CDMA_D_DAIN_ADDR_HIGH_0_0_RESET_MASK        (_MK_MASK_CONST(0xffffffff))
 #define CDMA_D_DAIN_ADDR_HIGH_0_0_SW_DEFAULT_VAL           (_MK_MASK_CONST(0x0))
 #define CDMA_D_DAIN_ADDR_HIGH_0_0_SW_DEFAULT_MASK          (_MK_MASK_CONST(0x0))
-#define CDMA_D_DAIN_ADDR_HIGH_0_0_READ_MASK               (_MK_MASK_CONST(0xff))
-#define CDMA_D_DAIN_ADDR_HIGH_0_0_WRITE_MASK              (_MK_MASK_CONST(0xff))
+#define CDMA_D_DAIN_ADDR_HIGH_0_0_READ_MASK         (_MK_MASK_CONST(0xffffffff))
+#define CDMA_D_DAIN_ADDR_HIGH_0_0_WRITE_MASK        (_MK_MASK_CONST(0xffffffff))
 #define CDMA_D_DAIN_ADDR_HIGH_0_0_DATAIN_ADDR_HIGH_0_SHIFT \
 	(_MK_SHIFT_CONST(0))
 #define CDMA_D_DAIN_ADDR_HIGH_0_0_DATAIN_ADDR_HIGH_0_FIELD \
-	(_MK_FIELD_CONST(0xff, \
+	(_MK_FIELD_CONST(0xffffffff, \
 	CDMA_D_DAIN_ADDR_HIGH_0_0_DATAIN_ADDR_HIGH_0_SHIFT))
-#define CDMA_D_DAIN_ADDR_HIGH_0_0_DATAIN_ADDR_HIGH_0_RANGE                 (7:0)
+#define CDMA_D_DAIN_ADDR_HIGH_0_0_DATAIN_ADDR_HIGH_0_RANGE                (31:0)
 #define CDMA_D_DAIN_ADDR_HIGH_0_0_DATAIN_ADDR_HIGH_0_WOFFSET               (0x0)
 #define CDMA_D_DAIN_ADDR_HIGH_0_0_DATAIN_ADDR_HIGH_0_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define CDMA_D_DAIN_ADDR_HIGH_0_0_DATAIN_ADDR_HIGH_0_DEFAULT_MASK \
-	(_MK_MASK_CONST(0xff))
+	(_MK_MASK_CONST(0xffffffff))
 #define CDMA_D_DAIN_ADDR_HIGH_0_0_DATAIN_ADDR_HIGH_0_SW_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define CDMA_D_DAIN_ADDR_HIGH_0_0_DATAIN_ADDR_HIGH_0_SW_DEFAULT_MASK \
@@ -3137,8 +3139,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_DAIN_ADDR_LOW_0_0 */
-#define CDMA_D_DAIN_ADDR_LOW_0_0                        (_MK_ADDR_CONST(0x8034))
+// Register CDMA_D_DAIN_ADDR_LOW_0_0
+#define CDMA_D_DAIN_ADDR_LOW_0_0                        (_MK_ADDR_CONST(0x5034))
 #define CDMA_D_DAIN_ADDR_LOW_0_0_SECURE                                    (0x0)
 #define CDMA_D_DAIN_ADDR_LOW_0_0_DUAL                                      (0x0)
 #define CDMA_D_DAIN_ADDR_LOW_0_0_SCR                                         (0)
@@ -3169,29 +3171,29 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_DAIN_ADDR_HIGH_1_0 */
-#define CDMA_D_DAIN_ADDR_HIGH_1_0                       (_MK_ADDR_CONST(0x8038))
+// Register CDMA_D_DAIN_ADDR_HIGH_1_0
+#define CDMA_D_DAIN_ADDR_HIGH_1_0                       (_MK_ADDR_CONST(0x5038))
 #define CDMA_D_DAIN_ADDR_HIGH_1_0_SECURE                                   (0x0)
 #define CDMA_D_DAIN_ADDR_HIGH_1_0_DUAL                                     (0x0)
 #define CDMA_D_DAIN_ADDR_HIGH_1_0_SCR                                        (0)
 #define CDMA_D_DAIN_ADDR_HIGH_1_0_WORD_COUNT                               (0x1)
 #define CDMA_D_DAIN_ADDR_HIGH_1_0_RESET_VAL                (_MK_MASK_CONST(0x0))
-#define CDMA_D_DAIN_ADDR_HIGH_1_0_RESET_MASK              (_MK_MASK_CONST(0xff))
+#define CDMA_D_DAIN_ADDR_HIGH_1_0_RESET_MASK        (_MK_MASK_CONST(0xffffffff))
 #define CDMA_D_DAIN_ADDR_HIGH_1_0_SW_DEFAULT_VAL           (_MK_MASK_CONST(0x0))
 #define CDMA_D_DAIN_ADDR_HIGH_1_0_SW_DEFAULT_MASK          (_MK_MASK_CONST(0x0))
-#define CDMA_D_DAIN_ADDR_HIGH_1_0_READ_MASK               (_MK_MASK_CONST(0xff))
-#define CDMA_D_DAIN_ADDR_HIGH_1_0_WRITE_MASK              (_MK_MASK_CONST(0xff))
+#define CDMA_D_DAIN_ADDR_HIGH_1_0_READ_MASK         (_MK_MASK_CONST(0xffffffff))
+#define CDMA_D_DAIN_ADDR_HIGH_1_0_WRITE_MASK        (_MK_MASK_CONST(0xffffffff))
 #define CDMA_D_DAIN_ADDR_HIGH_1_0_DATAIN_ADDR_HIGH_1_SHIFT \
 	(_MK_SHIFT_CONST(0))
 #define CDMA_D_DAIN_ADDR_HIGH_1_0_DATAIN_ADDR_HIGH_1_FIELD \
-	(_MK_FIELD_CONST(0xff, \
+	(_MK_FIELD_CONST(0xffffffff, \
 	CDMA_D_DAIN_ADDR_HIGH_1_0_DATAIN_ADDR_HIGH_1_SHIFT))
-#define CDMA_D_DAIN_ADDR_HIGH_1_0_DATAIN_ADDR_HIGH_1_RANGE                 (7:0)
+#define CDMA_D_DAIN_ADDR_HIGH_1_0_DATAIN_ADDR_HIGH_1_RANGE                (31:0)
 #define CDMA_D_DAIN_ADDR_HIGH_1_0_DATAIN_ADDR_HIGH_1_WOFFSET               (0x0)
 #define CDMA_D_DAIN_ADDR_HIGH_1_0_DATAIN_ADDR_HIGH_1_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define CDMA_D_DAIN_ADDR_HIGH_1_0_DATAIN_ADDR_HIGH_1_DEFAULT_MASK \
-	(_MK_MASK_CONST(0xff))
+	(_MK_MASK_CONST(0xffffffff))
 #define CDMA_D_DAIN_ADDR_HIGH_1_0_DATAIN_ADDR_HIGH_1_SW_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define CDMA_D_DAIN_ADDR_HIGH_1_0_DATAIN_ADDR_HIGH_1_SW_DEFAULT_MASK \
@@ -3202,8 +3204,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_DAIN_ADDR_LOW_1_0 */
-#define CDMA_D_DAIN_ADDR_LOW_1_0                        (_MK_ADDR_CONST(0x803c))
+// Register CDMA_D_DAIN_ADDR_LOW_1_0
+#define CDMA_D_DAIN_ADDR_LOW_1_0                        (_MK_ADDR_CONST(0x503c))
 #define CDMA_D_DAIN_ADDR_LOW_1_0_SECURE                                    (0x0)
 #define CDMA_D_DAIN_ADDR_LOW_1_0_DUAL                                      (0x0)
 #define CDMA_D_DAIN_ADDR_LOW_1_0_SCR                                         (0)
@@ -3234,8 +3236,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_LINE_STRIDE_0 */
-#define CDMA_D_LINE_STRIDE_0                            (_MK_ADDR_CONST(0x8040))
+// Register CDMA_D_LINE_STRIDE_0
+#define CDMA_D_LINE_STRIDE_0                            (_MK_ADDR_CONST(0x5040))
 #define CDMA_D_LINE_STRIDE_0_SECURE                                        (0x0)
 #define CDMA_D_LINE_STRIDE_0_DUAL                                          (0x0)
 #define CDMA_D_LINE_STRIDE_0_SCR                                             (0)
@@ -3263,8 +3265,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_LINE_UV_STRIDE_0 */
-#define CDMA_D_LINE_UV_STRIDE_0                         (_MK_ADDR_CONST(0x8044))
+// Register CDMA_D_LINE_UV_STRIDE_0
+#define CDMA_D_LINE_UV_STRIDE_0                         (_MK_ADDR_CONST(0x5044))
 #define CDMA_D_LINE_UV_STRIDE_0_SECURE                                     (0x0)
 #define CDMA_D_LINE_UV_STRIDE_0_DUAL                                       (0x0)
 #define CDMA_D_LINE_UV_STRIDE_0_SCR                                          (0)
@@ -3294,8 +3296,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_SURF_STRIDE_0 */
-#define CDMA_D_SURF_STRIDE_0                            (_MK_ADDR_CONST(0x8048))
+// Register CDMA_D_SURF_STRIDE_0
+#define CDMA_D_SURF_STRIDE_0                            (_MK_ADDR_CONST(0x5048))
 #define CDMA_D_SURF_STRIDE_0_SECURE                                        (0x0)
 #define CDMA_D_SURF_STRIDE_0_DUAL                                          (0x0)
 #define CDMA_D_SURF_STRIDE_0_SCR                                             (0)
@@ -3323,8 +3325,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_DAIN_MAP_0 */
-#define CDMA_D_DAIN_MAP_0                               (_MK_ADDR_CONST(0x804c))
+// Register CDMA_D_DAIN_MAP_0
+#define CDMA_D_DAIN_MAP_0                               (_MK_ADDR_CONST(0x504c))
 #define CDMA_D_DAIN_MAP_0_SECURE                                           (0x0)
 #define CDMA_D_DAIN_MAP_0_DUAL                                             (0x0)
 #define CDMA_D_DAIN_MAP_0_SCR                                                (0)
@@ -3367,8 +3369,100 @@
 #define CDMA_D_DAIN_MAP_0_SURF_PACKED_FALSE                  (_MK_ENUM_CONST(0))
 #define CDMA_D_DAIN_MAP_0_SURF_PACKED_TRUE                   (_MK_ENUM_CONST(1))
 
-/* Register CDMA_D_BATCH_NUMBER_0 */
-#define CDMA_D_BATCH_NUMBER_0                           (_MK_ADDR_CONST(0x8058))
+
+// Register CDMA_D_RESERVED_X_CFG_0
+#define CDMA_D_RESERVED_X_CFG_0                         (_MK_ADDR_CONST(0x5050))
+#define CDMA_D_RESERVED_X_CFG_0_SECURE                                     (0x0)
+#define CDMA_D_RESERVED_X_CFG_0_DUAL                                       (0x0)
+#define CDMA_D_RESERVED_X_CFG_0_SCR                                          (0)
+#define CDMA_D_RESERVED_X_CFG_0_WORD_COUNT                                 (0x1)
+#define CDMA_D_RESERVED_X_CFG_0_RESET_VAL                  (_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_X_CFG_0_RESET_MASK           (_MK_MASK_CONST(0x3ff03ff))
+#define CDMA_D_RESERVED_X_CFG_0_SW_DEFAULT_VAL             (_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_X_CFG_0_SW_DEFAULT_MASK            (_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_X_CFG_0_READ_MASK            (_MK_MASK_CONST(0x3ff03ff))
+#define CDMA_D_RESERVED_X_CFG_0_WRITE_MASK           (_MK_MASK_CONST(0x3ff03ff))
+#define CDMA_D_RESERVED_X_CFG_0_RSV_PER_LINE_SHIFT          (_MK_SHIFT_CONST(0))
+#define CDMA_D_RESERVED_X_CFG_0_RSV_PER_LINE_FIELD \
+	(_MK_FIELD_CONST(0x3ff, CDMA_D_RESERVED_X_CFG_0_RSV_PER_LINE_SHIFT))
+#define CDMA_D_RESERVED_X_CFG_0_RSV_PER_LINE_RANGE                         (9:0)
+#define CDMA_D_RESERVED_X_CFG_0_RSV_PER_LINE_WOFFSET                       (0x0)
+#define CDMA_D_RESERVED_X_CFG_0_RSV_PER_LINE_DEFAULT       (_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_X_CFG_0_RSV_PER_LINE_DEFAULT_MASK \
+	(_MK_MASK_CONST(0x3ff))
+#define CDMA_D_RESERVED_X_CFG_0_RSV_PER_LINE_SW_DEFAULT    (_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_X_CFG_0_RSV_PER_LINE_SW_DEFAULT_MASK \
+	(_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_X_CFG_0_RSV_PER_LINE_PARITY_PROTECTION \
+	(_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_X_CFG_0_RSV_PER_LINE_PLATFORM_DEPENDENT \
+	(_MK_MASK_CONST(0x1))
+
+#define CDMA_D_RESERVED_X_CFG_0_RSV_PER_UV_LINE_SHIFT      (_MK_SHIFT_CONST(16))
+#define CDMA_D_RESERVED_X_CFG_0_RSV_PER_UV_LINE_FIELD \
+	(_MK_FIELD_CONST(0x3ff, \
+	CDMA_D_RESERVED_X_CFG_0_RSV_PER_UV_LINE_SHIFT))
+#define CDMA_D_RESERVED_X_CFG_0_RSV_PER_UV_LINE_RANGE                    (25:16)
+#define CDMA_D_RESERVED_X_CFG_0_RSV_PER_UV_LINE_WOFFSET                    (0x0)
+#define CDMA_D_RESERVED_X_CFG_0_RSV_PER_UV_LINE_DEFAULT    (_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_X_CFG_0_RSV_PER_UV_LINE_DEFAULT_MASK \
+	(_MK_MASK_CONST(0x3ff))
+#define CDMA_D_RESERVED_X_CFG_0_RSV_PER_UV_LINE_SW_DEFAULT \
+	(_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_X_CFG_0_RSV_PER_UV_LINE_SW_DEFAULT_MASK \
+	(_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_X_CFG_0_RSV_PER_UV_LINE_PARITY_PROTECTION \
+	(_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_X_CFG_0_RSV_PER_UV_LINE_PLATFORM_DEPENDENT \
+	(_MK_MASK_CONST(0x1))
+
+
+// Register CDMA_D_RESERVED_Y_CFG_0
+#define CDMA_D_RESERVED_Y_CFG_0                         (_MK_ADDR_CONST(0x5054))
+#define CDMA_D_RESERVED_Y_CFG_0_SECURE                                     (0x0)
+#define CDMA_D_RESERVED_Y_CFG_0_DUAL                                       (0x0)
+#define CDMA_D_RESERVED_Y_CFG_0_SCR                                          (0)
+#define CDMA_D_RESERVED_Y_CFG_0_WORD_COUNT                                 (0x1)
+#define CDMA_D_RESERVED_Y_CFG_0_RESET_VAL                  (_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_Y_CFG_0_RESET_MASK            (_MK_MASK_CONST(0x1f0007))
+#define CDMA_D_RESERVED_Y_CFG_0_SW_DEFAULT_VAL             (_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_Y_CFG_0_SW_DEFAULT_MASK            (_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_Y_CFG_0_READ_MASK             (_MK_MASK_CONST(0x1f0007))
+#define CDMA_D_RESERVED_Y_CFG_0_WRITE_MASK            (_MK_MASK_CONST(0x1f0007))
+#define CDMA_D_RESERVED_Y_CFG_0_RSV_HEIGHT_SHIFT            (_MK_SHIFT_CONST(0))
+#define CDMA_D_RESERVED_Y_CFG_0_RSV_HEIGHT_FIELD \
+	(_MK_FIELD_CONST(0x7, CDMA_D_RESERVED_Y_CFG_0_RSV_HEIGHT_SHIFT))
+#define CDMA_D_RESERVED_Y_CFG_0_RSV_HEIGHT_RANGE                           (2:0)
+#define CDMA_D_RESERVED_Y_CFG_0_RSV_HEIGHT_WOFFSET                         (0x0)
+#define CDMA_D_RESERVED_Y_CFG_0_RSV_HEIGHT_DEFAULT         (_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_Y_CFG_0_RSV_HEIGHT_DEFAULT_MASK    (_MK_MASK_CONST(0x7))
+#define CDMA_D_RESERVED_Y_CFG_0_RSV_HEIGHT_SW_DEFAULT      (_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_Y_CFG_0_RSV_HEIGHT_SW_DEFAULT_MASK \
+	(_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_Y_CFG_0_RSV_HEIGHT_PARITY_PROTECTION \
+	(_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_Y_CFG_0_RSV_HEIGHT_PLATFORM_DEPENDENT \
+	(_MK_MASK_CONST(0x1))
+
+#define CDMA_D_RESERVED_Y_CFG_0_RSV_Y_INDEX_SHIFT          (_MK_SHIFT_CONST(16))
+#define CDMA_D_RESERVED_Y_CFG_0_RSV_Y_INDEX_FIELD \
+	(_MK_FIELD_CONST(0x1f, CDMA_D_RESERVED_Y_CFG_0_RSV_Y_INDEX_SHIFT))
+#define CDMA_D_RESERVED_Y_CFG_0_RSV_Y_INDEX_RANGE                        (20:16)
+#define CDMA_D_RESERVED_Y_CFG_0_RSV_Y_INDEX_WOFFSET                        (0x0)
+#define CDMA_D_RESERVED_Y_CFG_0_RSV_Y_INDEX_DEFAULT        (_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_Y_CFG_0_RSV_Y_INDEX_DEFAULT_MASK \
+	(_MK_MASK_CONST(0x1f))
+#define CDMA_D_RESERVED_Y_CFG_0_RSV_Y_INDEX_SW_DEFAULT     (_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_Y_CFG_0_RSV_Y_INDEX_SW_DEFAULT_MASK \
+	(_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_Y_CFG_0_RSV_Y_INDEX_PARITY_PROTECTION \
+	(_MK_MASK_CONST(0x0))
+#define CDMA_D_RESERVED_Y_CFG_0_RSV_Y_INDEX_PLATFORM_DEPENDENT \
+	(_MK_MASK_CONST(0x1))
+
+
+// Register CDMA_D_BATCH_NUMBER_0
+#define CDMA_D_BATCH_NUMBER_0                           (_MK_ADDR_CONST(0x5058))
 #define CDMA_D_BATCH_NUMBER_0_SECURE                                       (0x0)
 #define CDMA_D_BATCH_NUMBER_0_DUAL                                         (0x0)
 #define CDMA_D_BATCH_NUMBER_0_SCR                                            (0)
@@ -3393,8 +3487,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_BATCH_STRIDE_0 */
-#define CDMA_D_BATCH_STRIDE_0                           (_MK_ADDR_CONST(0x805c))
+// Register CDMA_D_BATCH_STRIDE_0
+#define CDMA_D_BATCH_STRIDE_0                           (_MK_ADDR_CONST(0x505c))
 #define CDMA_D_BATCH_STRIDE_0_SECURE                                       (0x0)
 #define CDMA_D_BATCH_STRIDE_0_DUAL                                         (0x0)
 #define CDMA_D_BATCH_STRIDE_0_SCR                                            (0)
@@ -3423,8 +3517,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_ENTRY_PER_SLICE_0 */
-#define CDMA_D_ENTRY_PER_SLICE_0                        (_MK_ADDR_CONST(0x8060))
+// Register CDMA_D_ENTRY_PER_SLICE_0
+#define CDMA_D_ENTRY_PER_SLICE_0                        (_MK_ADDR_CONST(0x5060))
 #define CDMA_D_ENTRY_PER_SLICE_0_SECURE                                    (0x0)
 #define CDMA_D_ENTRY_PER_SLICE_0_DUAL                                      (0x0)
 #define CDMA_D_ENTRY_PER_SLICE_0_SCR                                         (0)
@@ -3451,8 +3545,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_FETCH_GRAIN_0 */
-#define CDMA_D_FETCH_GRAIN_0                            (_MK_ADDR_CONST(0x8064))
+// Register CDMA_D_FETCH_GRAIN_0
+#define CDMA_D_FETCH_GRAIN_0                            (_MK_ADDR_CONST(0x5064))
 #define CDMA_D_FETCH_GRAIN_0_SECURE                                        (0x0)
 #define CDMA_D_FETCH_GRAIN_0_DUAL                                          (0x0)
 #define CDMA_D_FETCH_GRAIN_0_SCR                                             (0)
@@ -3476,8 +3570,8 @@
 #define CDMA_D_FETCH_GRAIN_0_GRAINS_PLATFORM_DEPENDENT     (_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_WEIGHT_FORMAT_0 */
-#define CDMA_D_WEIGHT_FORMAT_0                          (_MK_ADDR_CONST(0x8068))
+// Register CDMA_D_WEIGHT_FORMAT_0
+#define CDMA_D_WEIGHT_FORMAT_0                          (_MK_ADDR_CONST(0x5068))
 #define CDMA_D_WEIGHT_FORMAT_0_SECURE                                      (0x0)
 #define CDMA_D_WEIGHT_FORMAT_0_DUAL                                        (0x0)
 #define CDMA_D_WEIGHT_FORMAT_0_SCR                                           (0)
@@ -3508,8 +3602,8 @@
 #define CDMA_D_WEIGHT_FORMAT_0_WEIGHT_FORMAT_COMPRESSED      (_MK_ENUM_CONST(1))
 
 
-/* Register CDMA_D_WEIGHT_SIZE_0_0 */
-#define CDMA_D_WEIGHT_SIZE_0_0                          (_MK_ADDR_CONST(0x806c))
+// Register CDMA_D_WEIGHT_SIZE_0_0
+#define CDMA_D_WEIGHT_SIZE_0_0                          (_MK_ADDR_CONST(0x506c))
 #define CDMA_D_WEIGHT_SIZE_0_0_SECURE                                      (0x0)
 #define CDMA_D_WEIGHT_SIZE_0_0_DUAL                                        (0x0)
 #define CDMA_D_WEIGHT_SIZE_0_0_SCR                                           (0)
@@ -3539,8 +3633,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_WEIGHT_SIZE_1_0 */
-#define CDMA_D_WEIGHT_SIZE_1_0                          (_MK_ADDR_CONST(0x8070))
+// Register CDMA_D_WEIGHT_SIZE_1_0
+#define CDMA_D_WEIGHT_SIZE_1_0                          (_MK_ADDR_CONST(0x5070))
 #define CDMA_D_WEIGHT_SIZE_1_0_SECURE                                      (0x0)
 #define CDMA_D_WEIGHT_SIZE_1_0_DUAL                                        (0x0)
 #define CDMA_D_WEIGHT_SIZE_1_0_SCR                                           (0)
@@ -3568,8 +3662,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_WEIGHT_RAM_TYPE_0 */
-#define CDMA_D_WEIGHT_RAM_TYPE_0                        (_MK_ADDR_CONST(0x8074))
+// Register CDMA_D_WEIGHT_RAM_TYPE_0
+#define CDMA_D_WEIGHT_RAM_TYPE_0                        (_MK_ADDR_CONST(0x5074))
 #define CDMA_D_WEIGHT_RAM_TYPE_0_SECURE                                    (0x0)
 #define CDMA_D_WEIGHT_RAM_TYPE_0_DUAL                                      (0x0)
 #define CDMA_D_WEIGHT_RAM_TYPE_0_SCR                                         (0)
@@ -3603,28 +3697,28 @@
 #define CDMA_D_WEIGHT_RAM_TYPE_0_WEIGHT_RAM_TYPE_MCIF        (_MK_ENUM_CONST(1))
 
 
-/* Register CDMA_D_WEIGHT_ADDR_HIGH_0 */
-#define CDMA_D_WEIGHT_ADDR_HIGH_0                       (_MK_ADDR_CONST(0x8078))
+// Register CDMA_D_WEIGHT_ADDR_HIGH_0
+#define CDMA_D_WEIGHT_ADDR_HIGH_0                       (_MK_ADDR_CONST(0x5078))
 #define CDMA_D_WEIGHT_ADDR_HIGH_0_SECURE                                   (0x0)
 #define CDMA_D_WEIGHT_ADDR_HIGH_0_DUAL                                     (0x0)
 #define CDMA_D_WEIGHT_ADDR_HIGH_0_SCR                                        (0)
 #define CDMA_D_WEIGHT_ADDR_HIGH_0_WORD_COUNT                               (0x1)
 #define CDMA_D_WEIGHT_ADDR_HIGH_0_RESET_VAL                (_MK_MASK_CONST(0x0))
-#define CDMA_D_WEIGHT_ADDR_HIGH_0_RESET_MASK              (_MK_MASK_CONST(0xff))
+#define CDMA_D_WEIGHT_ADDR_HIGH_0_RESET_MASK        (_MK_MASK_CONST(0xffffffff))
 #define CDMA_D_WEIGHT_ADDR_HIGH_0_SW_DEFAULT_VAL           (_MK_MASK_CONST(0x0))
 #define CDMA_D_WEIGHT_ADDR_HIGH_0_SW_DEFAULT_MASK          (_MK_MASK_CONST(0x0))
-#define CDMA_D_WEIGHT_ADDR_HIGH_0_READ_MASK               (_MK_MASK_CONST(0xff))
-#define CDMA_D_WEIGHT_ADDR_HIGH_0_WRITE_MASK              (_MK_MASK_CONST(0xff))
+#define CDMA_D_WEIGHT_ADDR_HIGH_0_READ_MASK         (_MK_MASK_CONST(0xffffffff))
+#define CDMA_D_WEIGHT_ADDR_HIGH_0_WRITE_MASK        (_MK_MASK_CONST(0xffffffff))
 #define CDMA_D_WEIGHT_ADDR_HIGH_0_WEIGHT_ADDR_HIGH_SHIFT    (_MK_SHIFT_CONST(0))
 #define CDMA_D_WEIGHT_ADDR_HIGH_0_WEIGHT_ADDR_HIGH_FIELD \
-	(_MK_FIELD_CONST(0xff, \
+	(_MK_FIELD_CONST(0xffffffff, \
 	CDMA_D_WEIGHT_ADDR_HIGH_0_WEIGHT_ADDR_HIGH_SHIFT))
-#define CDMA_D_WEIGHT_ADDR_HIGH_0_WEIGHT_ADDR_HIGH_RANGE                   (7:0)
+#define CDMA_D_WEIGHT_ADDR_HIGH_0_WEIGHT_ADDR_HIGH_RANGE                  (31:0)
 #define CDMA_D_WEIGHT_ADDR_HIGH_0_WEIGHT_ADDR_HIGH_WOFFSET                 (0x0)
 #define CDMA_D_WEIGHT_ADDR_HIGH_0_WEIGHT_ADDR_HIGH_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define CDMA_D_WEIGHT_ADDR_HIGH_0_WEIGHT_ADDR_HIGH_DEFAULT_MASK \
-	(_MK_MASK_CONST(0xff))
+	(_MK_MASK_CONST(0xffffffff))
 #define CDMA_D_WEIGHT_ADDR_HIGH_0_WEIGHT_ADDR_HIGH_SW_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define CDMA_D_WEIGHT_ADDR_HIGH_0_WEIGHT_ADDR_HIGH_SW_DEFAULT_MASK \
@@ -3635,8 +3729,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_WEIGHT_ADDR_LOW_0 */
-#define CDMA_D_WEIGHT_ADDR_LOW_0                        (_MK_ADDR_CONST(0x807c))
+// Register CDMA_D_WEIGHT_ADDR_LOW_0
+#define CDMA_D_WEIGHT_ADDR_LOW_0                        (_MK_ADDR_CONST(0x507c))
 #define CDMA_D_WEIGHT_ADDR_LOW_0_SECURE                                    (0x0)
 #define CDMA_D_WEIGHT_ADDR_LOW_0_DUAL                                      (0x0)
 #define CDMA_D_WEIGHT_ADDR_LOW_0_SCR                                         (0)
@@ -3667,8 +3761,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_WEIGHT_BYTES_0 */
-#define CDMA_D_WEIGHT_BYTES_0                           (_MK_ADDR_CONST(0x8080))
+// Register CDMA_D_WEIGHT_BYTES_0
+#define CDMA_D_WEIGHT_BYTES_0                           (_MK_ADDR_CONST(0x5080))
 #define CDMA_D_WEIGHT_BYTES_0_SECURE                                       (0x0)
 #define CDMA_D_WEIGHT_BYTES_0_DUAL                                         (0x0)
 #define CDMA_D_WEIGHT_BYTES_0_SCR                                            (0)
@@ -3697,26 +3791,27 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_WGS_ADDR_HIGH_0 */
-#define CDMA_D_WGS_ADDR_HIGH_0                          (_MK_ADDR_CONST(0x8084))
+// Register CDMA_D_WGS_ADDR_HIGH_0
+#define CDMA_D_WGS_ADDR_HIGH_0                          (_MK_ADDR_CONST(0x5084))
 #define CDMA_D_WGS_ADDR_HIGH_0_SECURE                                      (0x0)
 #define CDMA_D_WGS_ADDR_HIGH_0_DUAL                                        (0x0)
 #define CDMA_D_WGS_ADDR_HIGH_0_SCR                                           (0)
 #define CDMA_D_WGS_ADDR_HIGH_0_WORD_COUNT                                  (0x1)
 #define CDMA_D_WGS_ADDR_HIGH_0_RESET_VAL                   (_MK_MASK_CONST(0x0))
-#define CDMA_D_WGS_ADDR_HIGH_0_RESET_MASK                 (_MK_MASK_CONST(0xff))
+#define CDMA_D_WGS_ADDR_HIGH_0_RESET_MASK           (_MK_MASK_CONST(0xffffffff))
 #define CDMA_D_WGS_ADDR_HIGH_0_SW_DEFAULT_VAL              (_MK_MASK_CONST(0x0))
 #define CDMA_D_WGS_ADDR_HIGH_0_SW_DEFAULT_MASK             (_MK_MASK_CONST(0x0))
-#define CDMA_D_WGS_ADDR_HIGH_0_READ_MASK                  (_MK_MASK_CONST(0xff))
-#define CDMA_D_WGS_ADDR_HIGH_0_WRITE_MASK                 (_MK_MASK_CONST(0xff))
+#define CDMA_D_WGS_ADDR_HIGH_0_READ_MASK            (_MK_MASK_CONST(0xffffffff))
+#define CDMA_D_WGS_ADDR_HIGH_0_WRITE_MASK           (_MK_MASK_CONST(0xffffffff))
 #define CDMA_D_WGS_ADDR_HIGH_0_WGS_ADDR_HIGH_SHIFT          (_MK_SHIFT_CONST(0))
 #define CDMA_D_WGS_ADDR_HIGH_0_WGS_ADDR_HIGH_FIELD \
-	(_MK_FIELD_CONST(0xff, CDMA_D_WGS_ADDR_HIGH_0_WGS_ADDR_HIGH_SHIFT))
-#define CDMA_D_WGS_ADDR_HIGH_0_WGS_ADDR_HIGH_RANGE                         (7:0)
+	(_MK_FIELD_CONST(0xffffffff, \
+	CDMA_D_WGS_ADDR_HIGH_0_WGS_ADDR_HIGH_SHIFT))
+#define CDMA_D_WGS_ADDR_HIGH_0_WGS_ADDR_HIGH_RANGE                        (31:0)
 #define CDMA_D_WGS_ADDR_HIGH_0_WGS_ADDR_HIGH_WOFFSET                       (0x0)
 #define CDMA_D_WGS_ADDR_HIGH_0_WGS_ADDR_HIGH_DEFAULT       (_MK_MASK_CONST(0x0))
 #define CDMA_D_WGS_ADDR_HIGH_0_WGS_ADDR_HIGH_DEFAULT_MASK \
-	(_MK_MASK_CONST(0xff))
+	(_MK_MASK_CONST(0xffffffff))
 #define CDMA_D_WGS_ADDR_HIGH_0_WGS_ADDR_HIGH_SW_DEFAULT    (_MK_MASK_CONST(0x0))
 #define CDMA_D_WGS_ADDR_HIGH_0_WGS_ADDR_HIGH_SW_DEFAULT_MASK \
 	(_MK_MASK_CONST(0x0))
@@ -3726,8 +3821,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_WGS_ADDR_LOW_0 */
-#define CDMA_D_WGS_ADDR_LOW_0                           (_MK_ADDR_CONST(0x8088))
+// Register CDMA_D_WGS_ADDR_LOW_0
+#define CDMA_D_WGS_ADDR_LOW_0                           (_MK_ADDR_CONST(0x5088))
 #define CDMA_D_WGS_ADDR_LOW_0_SECURE                                       (0x0)
 #define CDMA_D_WGS_ADDR_LOW_0_DUAL                                         (0x0)
 #define CDMA_D_WGS_ADDR_LOW_0_SCR                                            (0)
@@ -3756,26 +3851,27 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_WMB_ADDR_HIGH_0 */
-#define CDMA_D_WMB_ADDR_HIGH_0                          (_MK_ADDR_CONST(0x808c))
+// Register CDMA_D_WMB_ADDR_HIGH_0
+#define CDMA_D_WMB_ADDR_HIGH_0                          (_MK_ADDR_CONST(0x508c))
 #define CDMA_D_WMB_ADDR_HIGH_0_SECURE                                      (0x0)
 #define CDMA_D_WMB_ADDR_HIGH_0_DUAL                                        (0x0)
 #define CDMA_D_WMB_ADDR_HIGH_0_SCR                                           (0)
 #define CDMA_D_WMB_ADDR_HIGH_0_WORD_COUNT                                  (0x1)
 #define CDMA_D_WMB_ADDR_HIGH_0_RESET_VAL                   (_MK_MASK_CONST(0x0))
-#define CDMA_D_WMB_ADDR_HIGH_0_RESET_MASK                 (_MK_MASK_CONST(0xff))
+#define CDMA_D_WMB_ADDR_HIGH_0_RESET_MASK           (_MK_MASK_CONST(0xffffffff))
 #define CDMA_D_WMB_ADDR_HIGH_0_SW_DEFAULT_VAL              (_MK_MASK_CONST(0x0))
 #define CDMA_D_WMB_ADDR_HIGH_0_SW_DEFAULT_MASK             (_MK_MASK_CONST(0x0))
-#define CDMA_D_WMB_ADDR_HIGH_0_READ_MASK                  (_MK_MASK_CONST(0xff))
-#define CDMA_D_WMB_ADDR_HIGH_0_WRITE_MASK                 (_MK_MASK_CONST(0xff))
+#define CDMA_D_WMB_ADDR_HIGH_0_READ_MASK            (_MK_MASK_CONST(0xffffffff))
+#define CDMA_D_WMB_ADDR_HIGH_0_WRITE_MASK           (_MK_MASK_CONST(0xffffffff))
 #define CDMA_D_WMB_ADDR_HIGH_0_WMB_ADDR_HIGH_SHIFT          (_MK_SHIFT_CONST(0))
 #define CDMA_D_WMB_ADDR_HIGH_0_WMB_ADDR_HIGH_FIELD \
-	(_MK_FIELD_CONST(0xff, CDMA_D_WMB_ADDR_HIGH_0_WMB_ADDR_HIGH_SHIFT))
-#define CDMA_D_WMB_ADDR_HIGH_0_WMB_ADDR_HIGH_RANGE                         (7:0)
+	(_MK_FIELD_CONST(0xffffffff, \
+	CDMA_D_WMB_ADDR_HIGH_0_WMB_ADDR_HIGH_SHIFT))
+#define CDMA_D_WMB_ADDR_HIGH_0_WMB_ADDR_HIGH_RANGE                        (31:0)
 #define CDMA_D_WMB_ADDR_HIGH_0_WMB_ADDR_HIGH_WOFFSET                       (0x0)
 #define CDMA_D_WMB_ADDR_HIGH_0_WMB_ADDR_HIGH_DEFAULT       (_MK_MASK_CONST(0x0))
 #define CDMA_D_WMB_ADDR_HIGH_0_WMB_ADDR_HIGH_DEFAULT_MASK \
-	(_MK_MASK_CONST(0xff))
+	(_MK_MASK_CONST(0xffffffff))
 #define CDMA_D_WMB_ADDR_HIGH_0_WMB_ADDR_HIGH_SW_DEFAULT    (_MK_MASK_CONST(0x0))
 #define CDMA_D_WMB_ADDR_HIGH_0_WMB_ADDR_HIGH_SW_DEFAULT_MASK \
 	(_MK_MASK_CONST(0x0))
@@ -3785,8 +3881,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_WMB_ADDR_LOW_0 */
-#define CDMA_D_WMB_ADDR_LOW_0                           (_MK_ADDR_CONST(0x8090))
+// Register CDMA_D_WMB_ADDR_LOW_0
+#define CDMA_D_WMB_ADDR_LOW_0                           (_MK_ADDR_CONST(0x5090))
 #define CDMA_D_WMB_ADDR_LOW_0_SECURE                                       (0x0)
 #define CDMA_D_WMB_ADDR_LOW_0_DUAL                                         (0x0)
 #define CDMA_D_WMB_ADDR_LOW_0_SCR                                            (0)
@@ -3815,8 +3911,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_WMB_BYTES_0 */
-#define CDMA_D_WMB_BYTES_0                              (_MK_ADDR_CONST(0x8094))
+// Register CDMA_D_WMB_BYTES_0
+#define CDMA_D_WMB_BYTES_0                              (_MK_ADDR_CONST(0x5094))
 #define CDMA_D_WMB_BYTES_0_SECURE                                          (0x0)
 #define CDMA_D_WMB_BYTES_0_DUAL                                            (0x0)
 #define CDMA_D_WMB_BYTES_0_SCR                                               (0)
@@ -3840,8 +3936,8 @@
 #define CDMA_D_WMB_BYTES_0_WMB_BYTES_PLATFORM_DEPENDENT    (_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_MEAN_FORMAT_0 */
-#define CDMA_D_MEAN_FORMAT_0                            (_MK_ADDR_CONST(0x8098))
+// Register CDMA_D_MEAN_FORMAT_0
+#define CDMA_D_MEAN_FORMAT_0                            (_MK_ADDR_CONST(0x5098))
 #define CDMA_D_MEAN_FORMAT_0_SECURE                                        (0x0)
 #define CDMA_D_MEAN_FORMAT_0_DUAL                                          (0x0)
 #define CDMA_D_MEAN_FORMAT_0_SCR                                             (0)
@@ -3871,8 +3967,8 @@
 #define CDMA_D_MEAN_FORMAT_0_MEAN_FORMAT_ENABLE              (_MK_ENUM_CONST(1))
 
 
-/* Register CDMA_D_MEAN_GLOBAL_0_0 */
-#define CDMA_D_MEAN_GLOBAL_0_0                          (_MK_ADDR_CONST(0x809c))
+// Register CDMA_D_MEAN_GLOBAL_0_0
+#define CDMA_D_MEAN_GLOBAL_0_0                          (_MK_ADDR_CONST(0x509c))
 #define CDMA_D_MEAN_GLOBAL_0_0_SECURE                                      (0x0)
 #define CDMA_D_MEAN_GLOBAL_0_0_DUAL                                        (0x0)
 #define CDMA_D_MEAN_GLOBAL_0_0_SCR                                           (0)
@@ -3912,8 +4008,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_MEAN_GLOBAL_1_0 */
-#define CDMA_D_MEAN_GLOBAL_1_0                          (_MK_ADDR_CONST(0x80a0))
+// Register CDMA_D_MEAN_GLOBAL_1_0
+#define CDMA_D_MEAN_GLOBAL_1_0                          (_MK_ADDR_CONST(0x50a0))
 #define CDMA_D_MEAN_GLOBAL_1_0_SECURE                                      (0x0)
 #define CDMA_D_MEAN_GLOBAL_1_0_DUAL                                        (0x0)
 #define CDMA_D_MEAN_GLOBAL_1_0_SCR                                           (0)
@@ -3953,8 +4049,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_CVT_CFG_0 */
-#define CDMA_D_CVT_CFG_0                                (_MK_ADDR_CONST(0x80a4))
+// Register CDMA_D_CVT_CFG_0
+#define CDMA_D_CVT_CFG_0                                (_MK_ADDR_CONST(0x50a4))
 #define CDMA_D_CVT_CFG_0_SECURE                                            (0x0)
 #define CDMA_D_CVT_CFG_0_DUAL                                              (0x0)
 #define CDMA_D_CVT_CFG_0_SCR                                                 (0)
@@ -3994,8 +4090,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_CVT_OFFSET_0 */
-#define CDMA_D_CVT_OFFSET_0                             (_MK_ADDR_CONST(0x80a8))
+// Register CDMA_D_CVT_OFFSET_0
+#define CDMA_D_CVT_OFFSET_0                             (_MK_ADDR_CONST(0x50a8))
 #define CDMA_D_CVT_OFFSET_0_SECURE                                         (0x0)
 #define CDMA_D_CVT_OFFSET_0_DUAL                                           (0x0)
 #define CDMA_D_CVT_OFFSET_0_SCR                                              (0)
@@ -4021,8 +4117,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_CVT_SCALE_0 */
-#define CDMA_D_CVT_SCALE_0                              (_MK_ADDR_CONST(0x80ac))
+// Register CDMA_D_CVT_SCALE_0
+#define CDMA_D_CVT_SCALE_0                              (_MK_ADDR_CONST(0x50ac))
 #define CDMA_D_CVT_SCALE_0_SECURE                                          (0x0)
 #define CDMA_D_CVT_SCALE_0_DUAL                                            (0x0)
 #define CDMA_D_CVT_SCALE_0_SCR                                               (0)
@@ -4046,8 +4142,8 @@
 #define CDMA_D_CVT_SCALE_0_CVT_SCALE_PLATFORM_DEPENDENT    (_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_CONV_STRIDE_0 */
-#define CDMA_D_CONV_STRIDE_0                            (_MK_ADDR_CONST(0x80b0))
+// Register CDMA_D_CONV_STRIDE_0
+#define CDMA_D_CONV_STRIDE_0                            (_MK_ADDR_CONST(0x50b0))
 #define CDMA_D_CONV_STRIDE_0_SECURE                                        (0x0)
 #define CDMA_D_CONV_STRIDE_0_DUAL                                          (0x0)
 #define CDMA_D_CONV_STRIDE_0_SCR                                             (0)
@@ -4089,8 +4185,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_ZERO_PADDING_0 */
-#define CDMA_D_ZERO_PADDING_0                           (_MK_ADDR_CONST(0x80b4))
+// Register CDMA_D_ZERO_PADDING_0
+#define CDMA_D_ZERO_PADDING_0                           (_MK_ADDR_CONST(0x50b4))
 #define CDMA_D_ZERO_PADDING_0_SECURE                                       (0x0)
 #define CDMA_D_ZERO_PADDING_0_DUAL                                         (0x0)
 #define CDMA_D_ZERO_PADDING_0_SCR                                            (0)
@@ -4158,8 +4254,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_ZERO_PADDING_VALUE_0 */
-#define CDMA_D_ZERO_PADDING_VALUE_0                     (_MK_ADDR_CONST(0x80b8))
+// Register CDMA_D_ZERO_PADDING_VALUE_0
+#define CDMA_D_ZERO_PADDING_VALUE_0                     (_MK_ADDR_CONST(0x50b8))
 #define CDMA_D_ZERO_PADDING_VALUE_0_SECURE                                 (0x0)
 #define CDMA_D_ZERO_PADDING_VALUE_0_DUAL                                   (0x0)
 #define CDMA_D_ZERO_PADDING_VALUE_0_SCR                                      (0)
@@ -4189,8 +4285,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_BANK_0 */
-#define CDMA_D_BANK_0                                   (_MK_ADDR_CONST(0x80bc))
+// Register CDMA_D_BANK_0
+#define CDMA_D_BANK_0                                   (_MK_ADDR_CONST(0x50bc))
 #define CDMA_D_BANK_0_SECURE                                               (0x0)
 #define CDMA_D_BANK_0_DUAL                                                 (0x0)
 #define CDMA_D_BANK_0_SCR                                                    (0)
@@ -4226,8 +4322,8 @@
 #define CDMA_D_BANK_0_WEIGHT_BANK_PLATFORM_DEPENDENT       (_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_NAN_FLUSH_TO_ZERO_0 */
-#define CDMA_D_NAN_FLUSH_TO_ZERO_0                      (_MK_ADDR_CONST(0x80c0))
+// Register CDMA_D_NAN_FLUSH_TO_ZERO_0
+#define CDMA_D_NAN_FLUSH_TO_ZERO_0                      (_MK_ADDR_CONST(0x50c0))
 #define CDMA_D_NAN_FLUSH_TO_ZERO_0_SECURE                                  (0x0)
 #define CDMA_D_NAN_FLUSH_TO_ZERO_0_DUAL                                    (0x0)
 #define CDMA_D_NAN_FLUSH_TO_ZERO_0_SCR                                       (0)
@@ -4259,8 +4355,8 @@
 #define CDMA_D_NAN_FLUSH_TO_ZERO_0_NAN_TO_ZERO_ENABLE        (_MK_ENUM_CONST(1))
 
 
-/* Register CDMA_D_NAN_INPUT_DATA_NUM_0 */
-#define CDMA_D_NAN_INPUT_DATA_NUM_0                     (_MK_ADDR_CONST(0x80c4))
+// Register CDMA_D_NAN_INPUT_DATA_NUM_0
+#define CDMA_D_NAN_INPUT_DATA_NUM_0                     (_MK_ADDR_CONST(0x50c4))
 #define CDMA_D_NAN_INPUT_DATA_NUM_0_SECURE                                 (0x0)
 #define CDMA_D_NAN_INPUT_DATA_NUM_0_DUAL                                   (0x0)
 #define CDMA_D_NAN_INPUT_DATA_NUM_0_SCR                                      (0)
@@ -4291,8 +4387,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_NAN_INPUT_WEIGHT_NUM_0 */
-#define CDMA_D_NAN_INPUT_WEIGHT_NUM_0                   (_MK_ADDR_CONST(0x80c8))
+// Register CDMA_D_NAN_INPUT_WEIGHT_NUM_0
+#define CDMA_D_NAN_INPUT_WEIGHT_NUM_0                   (_MK_ADDR_CONST(0x50c8))
 #define CDMA_D_NAN_INPUT_WEIGHT_NUM_0_SECURE                               (0x0)
 #define CDMA_D_NAN_INPUT_WEIGHT_NUM_0_DUAL                                 (0x0)
 #define CDMA_D_NAN_INPUT_WEIGHT_NUM_0_SCR                                    (0)
@@ -4324,8 +4420,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_INF_INPUT_DATA_NUM_0 */
-#define CDMA_D_INF_INPUT_DATA_NUM_0                     (_MK_ADDR_CONST(0x80cc))
+// Register CDMA_D_INF_INPUT_DATA_NUM_0
+#define CDMA_D_INF_INPUT_DATA_NUM_0                     (_MK_ADDR_CONST(0x50cc))
 #define CDMA_D_INF_INPUT_DATA_NUM_0_SECURE                                 (0x0)
 #define CDMA_D_INF_INPUT_DATA_NUM_0_DUAL                                   (0x0)
 #define CDMA_D_INF_INPUT_DATA_NUM_0_SCR                                      (0)
@@ -4356,8 +4452,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_INF_INPUT_WEIGHT_NUM_0 */
-#define CDMA_D_INF_INPUT_WEIGHT_NUM_0                   (_MK_ADDR_CONST(0x80d0))
+// Register CDMA_D_INF_INPUT_WEIGHT_NUM_0
+#define CDMA_D_INF_INPUT_WEIGHT_NUM_0                   (_MK_ADDR_CONST(0x50d0))
 #define CDMA_D_INF_INPUT_WEIGHT_NUM_0_SECURE                               (0x0)
 #define CDMA_D_INF_INPUT_WEIGHT_NUM_0_DUAL                                 (0x0)
 #define CDMA_D_INF_INPUT_WEIGHT_NUM_0_SCR                                    (0)
@@ -4389,8 +4485,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_PERF_ENABLE_0 */
-#define CDMA_D_PERF_ENABLE_0                            (_MK_ADDR_CONST(0x80d4))
+// Register CDMA_D_PERF_ENABLE_0
+#define CDMA_D_PERF_ENABLE_0                            (_MK_ADDR_CONST(0x50d4))
 #define CDMA_D_PERF_ENABLE_0_SECURE                                        (0x0)
 #define CDMA_D_PERF_ENABLE_0_DUAL                                          (0x0)
 #define CDMA_D_PERF_ENABLE_0_SCR                                             (0)
@@ -4414,8 +4510,8 @@
 #define CDMA_D_PERF_ENABLE_0_DMA_EN_PLATFORM_DEPENDENT     (_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_PERF_DAT_READ_STALL_0 */
-#define CDMA_D_PERF_DAT_READ_STALL_0                    (_MK_ADDR_CONST(0x80d8))
+// Register CDMA_D_PERF_DAT_READ_STALL_0
+#define CDMA_D_PERF_DAT_READ_STALL_0                    (_MK_ADDR_CONST(0x50d8))
 #define CDMA_D_PERF_DAT_READ_STALL_0_SECURE                                (0x0)
 #define CDMA_D_PERF_DAT_READ_STALL_0_DUAL                                  (0x0)
 #define CDMA_D_PERF_DAT_READ_STALL_0_SCR                                     (0)
@@ -4446,8 +4542,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_PERF_WT_READ_STALL_0 */
-#define CDMA_D_PERF_WT_READ_STALL_0                     (_MK_ADDR_CONST(0x80dc))
+// Register CDMA_D_PERF_WT_READ_STALL_0
+#define CDMA_D_PERF_WT_READ_STALL_0                     (_MK_ADDR_CONST(0x50dc))
 #define CDMA_D_PERF_WT_READ_STALL_0_SECURE                                 (0x0)
 #define CDMA_D_PERF_WT_READ_STALL_0_DUAL                                   (0x0)
 #define CDMA_D_PERF_WT_READ_STALL_0_SCR                                      (0)
@@ -4477,8 +4573,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_PERF_DAT_READ_LATENCY_0 */
-#define CDMA_D_PERF_DAT_READ_LATENCY_0                  (_MK_ADDR_CONST(0x80e0))
+// Register CDMA_D_PERF_DAT_READ_LATENCY_0
+#define CDMA_D_PERF_DAT_READ_LATENCY_0                  (_MK_ADDR_CONST(0x50e0))
 #define CDMA_D_PERF_DAT_READ_LATENCY_0_SECURE                              (0x0)
 #define CDMA_D_PERF_DAT_READ_LATENCY_0_DUAL                                (0x0)
 #define CDMA_D_PERF_DAT_READ_LATENCY_0_SCR                                   (0)
@@ -4511,8 +4607,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_PERF_WT_READ_LATENCY_0 */
-#define CDMA_D_PERF_WT_READ_LATENCY_0                   (_MK_ADDR_CONST(0x80e4))
+// Register CDMA_D_PERF_WT_READ_LATENCY_0
+#define CDMA_D_PERF_WT_READ_LATENCY_0                   (_MK_ADDR_CONST(0x50e4))
 #define CDMA_D_PERF_WT_READ_LATENCY_0_SECURE                               (0x0)
 #define CDMA_D_PERF_WT_READ_LATENCY_0_DUAL                                 (0x0)
 #define CDMA_D_PERF_WT_READ_LATENCY_0_SCR                                    (0)
@@ -4544,8 +4640,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDMA_D_CYA_0 */
-#define CDMA_D_CYA_0                                    (_MK_ADDR_CONST(0x80e8))
+// Register CDMA_D_CYA_0
+#define CDMA_D_CYA_0                                    (_MK_ADDR_CONST(0x50e8))
 #define CDMA_D_CYA_0_SECURE                                                (0x0)
 #define CDMA_D_CYA_0_DUAL                                                  (0x0)
 #define CDMA_D_CYA_0_SCR                                                     (0)
@@ -4569,8 +4665,8 @@
 #define CDMA_D_CYA_0_CYA_PLATFORM_DEPENDENT                (_MK_MASK_CONST(0x1))
 
 
-/* Register CSC_S_STATUS_0 */
-#define CSC_S_STATUS_0                                  (_MK_ADDR_CONST(0x9000))
+// Register CSC_S_STATUS_0
+#define CSC_S_STATUS_0                                  (_MK_ADDR_CONST(0x6000))
 #define CSC_S_STATUS_0_SECURE                                              (0x0)
 #define CSC_S_STATUS_0_DUAL                                                (0x0)
 #define CSC_S_STATUS_0_SCR                                                   (0)
@@ -4614,8 +4710,8 @@
 #define CSC_S_STATUS_0_STATUS_1_PENDING                      (_MK_ENUM_CONST(2))
 
 
-/* Register CSC_S_POINTER_0 */
-#define CSC_S_POINTER_0                                 (_MK_ADDR_CONST(0x9004))
+// Register CSC_S_POINTER_0
+#define CSC_S_POINTER_0                                 (_MK_ADDR_CONST(0x6004))
 #define CSC_S_POINTER_0_SECURE                                             (0x0)
 #define CSC_S_POINTER_0_DUAL                                               (0x0)
 #define CSC_S_POINTER_0_SCR                                                  (0)
@@ -4657,8 +4753,8 @@
 #define CSC_S_POINTER_0_CONSUMER_GROUP_1                     (_MK_ENUM_CONST(1))
 
 
-/* Register CSC_D_OP_ENABLE_0 */
-#define CSC_D_OP_ENABLE_0                               (_MK_ADDR_CONST(0x9008))
+// Register CSC_D_OP_ENABLE_0
+#define CSC_D_OP_ENABLE_0                               (_MK_ADDR_CONST(0x6008))
 #define CSC_D_OP_ENABLE_0_SECURE                                           (0x0)
 #define CSC_D_OP_ENABLE_0_DUAL                                             (0x0)
 #define CSC_D_OP_ENABLE_0_SCR                                                (0)
@@ -4685,8 +4781,8 @@
 #define CSC_D_OP_ENABLE_0_OP_EN_ENABLE                       (_MK_ENUM_CONST(1))
 
 
-/* Register CSC_D_MISC_CFG_0 */
-#define CSC_D_MISC_CFG_0                                (_MK_ADDR_CONST(0x900c))
+// Register CSC_D_MISC_CFG_0
+#define CSC_D_MISC_CFG_0                                (_MK_ADDR_CONST(0x600c))
 #define CSC_D_MISC_CFG_0_SECURE                                            (0x0)
 #define CSC_D_MISC_CFG_0_DUAL                                              (0x0)
 #define CSC_D_MISC_CFG_0_SCR                                                 (0)
@@ -4814,8 +4910,8 @@
 #define CSC_D_MISC_CFG_0_SKIP_WEIGHT_RLS_ENABLE              (_MK_ENUM_CONST(1))
 
 
-/* Register CSC_D_DATAIN_FORMAT_0 */
-#define CSC_D_DATAIN_FORMAT_0                           (_MK_ADDR_CONST(0x9010))
+// Register CSC_D_DATAIN_FORMAT_0
+#define CSC_D_DATAIN_FORMAT_0                           (_MK_ADDR_CONST(0x6010))
 #define CSC_D_DATAIN_FORMAT_0_SECURE                                       (0x0)
 #define CSC_D_DATAIN_FORMAT_0_DUAL                                         (0x0)
 #define CSC_D_DATAIN_FORMAT_0_SCR                                            (0)
@@ -4846,8 +4942,8 @@
 #define CSC_D_DATAIN_FORMAT_0_DATAIN_FORMAT_PIXEL            (_MK_ENUM_CONST(1))
 
 
-/* Register CSC_D_DATAIN_SIZE_EXT_0_0 */
-#define CSC_D_DATAIN_SIZE_EXT_0_0                       (_MK_ADDR_CONST(0x9014))
+// Register CSC_D_DATAIN_SIZE_EXT_0_0
+#define CSC_D_DATAIN_SIZE_EXT_0_0                       (_MK_ADDR_CONST(0x6014))
 #define CSC_D_DATAIN_SIZE_EXT_0_0_SECURE                                   (0x0)
 #define CSC_D_DATAIN_SIZE_EXT_0_0_DUAL                                     (0x0)
 #define CSC_D_DATAIN_SIZE_EXT_0_0_SCR                                        (0)
@@ -4898,8 +4994,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CSC_D_DATAIN_SIZE_EXT_1_0 */
-#define CSC_D_DATAIN_SIZE_EXT_1_0                       (_MK_ADDR_CONST(0x9018))
+// Register CSC_D_DATAIN_SIZE_EXT_1_0
+#define CSC_D_DATAIN_SIZE_EXT_1_0                       (_MK_ADDR_CONST(0x6018))
 #define CSC_D_DATAIN_SIZE_EXT_1_0_SECURE                                   (0x0)
 #define CSC_D_DATAIN_SIZE_EXT_1_0_DUAL                                     (0x0)
 #define CSC_D_DATAIN_SIZE_EXT_1_0_SCR                                        (0)
@@ -4931,8 +5027,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CSC_D_BATCH_NUMBER_0 */
-#define CSC_D_BATCH_NUMBER_0                            (_MK_ADDR_CONST(0x901c))
+// Register CSC_D_BATCH_NUMBER_0
+#define CSC_D_BATCH_NUMBER_0                            (_MK_ADDR_CONST(0x601c))
 #define CSC_D_BATCH_NUMBER_0_SECURE                                        (0x0)
 #define CSC_D_BATCH_NUMBER_0_DUAL                                          (0x0)
 #define CSC_D_BATCH_NUMBER_0_SCR                                             (0)
@@ -4956,8 +5052,8 @@
 #define CSC_D_BATCH_NUMBER_0_BATCHES_PLATFORM_DEPENDENT    (_MK_MASK_CONST(0x1))
 
 
-/* Register CSC_D_POST_Y_EXTENSION_0 */
-#define CSC_D_POST_Y_EXTENSION_0                        (_MK_ADDR_CONST(0x9020))
+// Register CSC_D_POST_Y_EXTENSION_0
+#define CSC_D_POST_Y_EXTENSION_0                        (_MK_ADDR_CONST(0x6020))
 #define CSC_D_POST_Y_EXTENSION_0_SECURE                                    (0x0)
 #define CSC_D_POST_Y_EXTENSION_0_DUAL                                      (0x0)
 #define CSC_D_POST_Y_EXTENSION_0_SCR                                         (0)
@@ -4985,8 +5081,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CSC_D_ENTRY_PER_SLICE_0 */
-#define CSC_D_ENTRY_PER_SLICE_0                         (_MK_ADDR_CONST(0x9024))
+// Register CSC_D_ENTRY_PER_SLICE_0
+#define CSC_D_ENTRY_PER_SLICE_0                         (_MK_ADDR_CONST(0x6024))
 #define CSC_D_ENTRY_PER_SLICE_0_SECURE                                     (0x0)
 #define CSC_D_ENTRY_PER_SLICE_0_DUAL                                       (0x0)
 #define CSC_D_ENTRY_PER_SLICE_0_SCR                                          (0)
@@ -5012,8 +5108,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CSC_D_WEIGHT_FORMAT_0 */
-#define CSC_D_WEIGHT_FORMAT_0                           (_MK_ADDR_CONST(0x9028))
+// Register CSC_D_WEIGHT_FORMAT_0
+#define CSC_D_WEIGHT_FORMAT_0                           (_MK_ADDR_CONST(0x6028))
 #define CSC_D_WEIGHT_FORMAT_0_SECURE                                       (0x0)
 #define CSC_D_WEIGHT_FORMAT_0_DUAL                                         (0x0)
 #define CSC_D_WEIGHT_FORMAT_0_SCR                                            (0)
@@ -5044,8 +5140,8 @@
 #define CSC_D_WEIGHT_FORMAT_0_WEIGHT_FORMAT_COMPRESSED       (_MK_ENUM_CONST(1))
 
 
-/* Register CSC_D_WEIGHT_SIZE_EXT_0_0 */
-#define CSC_D_WEIGHT_SIZE_EXT_0_0                       (_MK_ADDR_CONST(0x902c))
+// Register CSC_D_WEIGHT_SIZE_EXT_0_0
+#define CSC_D_WEIGHT_SIZE_EXT_0_0                       (_MK_ADDR_CONST(0x602c))
 #define CSC_D_WEIGHT_SIZE_EXT_0_0_SECURE                                   (0x0)
 #define CSC_D_WEIGHT_SIZE_EXT_0_0_DUAL                                     (0x0)
 #define CSC_D_WEIGHT_SIZE_EXT_0_0_SCR                                        (0)
@@ -5096,8 +5192,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CSC_D_WEIGHT_SIZE_EXT_1_0 */
-#define CSC_D_WEIGHT_SIZE_EXT_1_0                       (_MK_ADDR_CONST(0x9030))
+// Register CSC_D_WEIGHT_SIZE_EXT_1_0
+#define CSC_D_WEIGHT_SIZE_EXT_1_0                       (_MK_ADDR_CONST(0x6030))
 #define CSC_D_WEIGHT_SIZE_EXT_1_0_SECURE                                   (0x0)
 #define CSC_D_WEIGHT_SIZE_EXT_1_0_DUAL                                     (0x0)
 #define CSC_D_WEIGHT_SIZE_EXT_1_0_SCR                                        (0)
@@ -5147,8 +5243,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CSC_D_WEIGHT_BYTES_0 */
-#define CSC_D_WEIGHT_BYTES_0                            (_MK_ADDR_CONST(0x9034))
+// Register CSC_D_WEIGHT_BYTES_0
+#define CSC_D_WEIGHT_BYTES_0                            (_MK_ADDR_CONST(0x6034))
 #define CSC_D_WEIGHT_BYTES_0_SECURE                                        (0x0)
 #define CSC_D_WEIGHT_BYTES_0_DUAL                                          (0x0)
 #define CSC_D_WEIGHT_BYTES_0_SCR                                             (0)
@@ -5176,8 +5272,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CSC_D_WMB_BYTES_0 */
-#define CSC_D_WMB_BYTES_0                               (_MK_ADDR_CONST(0x9038))
+// Register CSC_D_WMB_BYTES_0
+#define CSC_D_WMB_BYTES_0                               (_MK_ADDR_CONST(0x6038))
 #define CSC_D_WMB_BYTES_0_SECURE                                           (0x0)
 #define CSC_D_WMB_BYTES_0_DUAL                                             (0x0)
 #define CSC_D_WMB_BYTES_0_SCR                                                (0)
@@ -5201,8 +5297,8 @@
 #define CSC_D_WMB_BYTES_0_WMB_BYTES_PLATFORM_DEPENDENT     (_MK_MASK_CONST(0x1))
 
 
-/* Register CSC_D_DATAOUT_SIZE_0_0 */
-#define CSC_D_DATAOUT_SIZE_0_0                          (_MK_ADDR_CONST(0x903c))
+// Register CSC_D_DATAOUT_SIZE_0_0
+#define CSC_D_DATAOUT_SIZE_0_0                          (_MK_ADDR_CONST(0x603c))
 #define CSC_D_DATAOUT_SIZE_0_0_SECURE                                      (0x0)
 #define CSC_D_DATAOUT_SIZE_0_0_DUAL                                        (0x0)
 #define CSC_D_DATAOUT_SIZE_0_0_SCR                                           (0)
@@ -5248,8 +5344,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CSC_D_DATAOUT_SIZE_1_0 */
-#define CSC_D_DATAOUT_SIZE_1_0                          (_MK_ADDR_CONST(0x9040))
+// Register CSC_D_DATAOUT_SIZE_1_0
+#define CSC_D_DATAOUT_SIZE_1_0                          (_MK_ADDR_CONST(0x6040))
 #define CSC_D_DATAOUT_SIZE_1_0_SECURE                                      (0x0)
 #define CSC_D_DATAOUT_SIZE_1_0_DUAL                                        (0x0)
 #define CSC_D_DATAOUT_SIZE_1_0_SCR                                           (0)
@@ -5279,8 +5375,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CSC_D_ATOMICS_0 */
-#define CSC_D_ATOMICS_0                                 (_MK_ADDR_CONST(0x9044))
+// Register CSC_D_ATOMICS_0
+#define CSC_D_ATOMICS_0                                 (_MK_ADDR_CONST(0x6044))
 #define CSC_D_ATOMICS_0_SECURE                                             (0x0)
 #define CSC_D_ATOMICS_0_DUAL                                               (0x0)
 #define CSC_D_ATOMICS_0_SCR                                                  (0)
@@ -5304,8 +5400,8 @@
 #define CSC_D_ATOMICS_0_ATOMICS_PLATFORM_DEPENDENT         (_MK_MASK_CONST(0x1))
 
 
-/* Register CSC_D_RELEASE_0 */
-#define CSC_D_RELEASE_0                                 (_MK_ADDR_CONST(0x9048))
+// Register CSC_D_RELEASE_0
+#define CSC_D_RELEASE_0                                 (_MK_ADDR_CONST(0x6048))
 #define CSC_D_RELEASE_0_SECURE                                             (0x0)
 #define CSC_D_RELEASE_0_DUAL                                               (0x0)
 #define CSC_D_RELEASE_0_SCR                                                  (0)
@@ -5329,8 +5425,8 @@
 #define CSC_D_RELEASE_0_RLS_SLICES_PLATFORM_DEPENDENT      (_MK_MASK_CONST(0x1))
 
 
-/* Register CSC_D_CONV_STRIDE_EXT_0 */
-#define CSC_D_CONV_STRIDE_EXT_0                         (_MK_ADDR_CONST(0x904c))
+// Register CSC_D_CONV_STRIDE_EXT_0
+#define CSC_D_CONV_STRIDE_EXT_0                         (_MK_ADDR_CONST(0x604c))
 #define CSC_D_CONV_STRIDE_EXT_0_SECURE                                     (0x0)
 #define CSC_D_CONV_STRIDE_EXT_0_DUAL                                       (0x0)
 #define CSC_D_CONV_STRIDE_EXT_0_SCR                                          (0)
@@ -5380,8 +5476,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CSC_D_DILATION_EXT_0 */
-#define CSC_D_DILATION_EXT_0                            (_MK_ADDR_CONST(0x9050))
+// Register CSC_D_DILATION_EXT_0
+#define CSC_D_DILATION_EXT_0                            (_MK_ADDR_CONST(0x6050))
 #define CSC_D_DILATION_EXT_0_SECURE                                        (0x0)
 #define CSC_D_DILATION_EXT_0_DUAL                                          (0x0)
 #define CSC_D_DILATION_EXT_0_SCR                                             (0)
@@ -5425,8 +5521,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CSC_D_ZERO_PADDING_0 */
-#define CSC_D_ZERO_PADDING_0                            (_MK_ADDR_CONST(0x9054))
+// Register CSC_D_ZERO_PADDING_0
+#define CSC_D_ZERO_PADDING_0                            (_MK_ADDR_CONST(0x6054))
 #define CSC_D_ZERO_PADDING_0_SECURE                                        (0x0)
 #define CSC_D_ZERO_PADDING_0_DUAL                                          (0x0)
 #define CSC_D_ZERO_PADDING_0_SCR                                             (0)
@@ -5463,8 +5559,8 @@
 #define CSC_D_ZERO_PADDING_0_PAD_TOP_PLATFORM_DEPENDENT    (_MK_MASK_CONST(0x1))
 
 
-/* Register CSC_D_ZERO_PADDING_VALUE_0 */
-#define CSC_D_ZERO_PADDING_VALUE_0                      (_MK_ADDR_CONST(0x9058))
+// Register CSC_D_ZERO_PADDING_VALUE_0
+#define CSC_D_ZERO_PADDING_VALUE_0                      (_MK_ADDR_CONST(0x6058))
 #define CSC_D_ZERO_PADDING_VALUE_0_SECURE                                  (0x0)
 #define CSC_D_ZERO_PADDING_VALUE_0_DUAL                                    (0x0)
 #define CSC_D_ZERO_PADDING_VALUE_0_SCR                                       (0)
@@ -5492,8 +5588,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CSC_D_BANK_0 */
-#define CSC_D_BANK_0                                    (_MK_ADDR_CONST(0x905c))
+// Register CSC_D_BANK_0
+#define CSC_D_BANK_0                                    (_MK_ADDR_CONST(0x605c))
 #define CSC_D_BANK_0_SECURE                                                (0x0)
 #define CSC_D_BANK_0_DUAL                                                  (0x0)
 #define CSC_D_BANK_0_SCR                                                     (0)
@@ -5529,8 +5625,8 @@
 #define CSC_D_BANK_0_WEIGHT_BANK_PLATFORM_DEPENDENT        (_MK_MASK_CONST(0x1))
 
 
-/* Register CSC_D_PRA_CFG_0 */
-#define CSC_D_PRA_CFG_0                                 (_MK_ADDR_CONST(0x9060))
+// Register CSC_D_PRA_CFG_0
+#define CSC_D_PRA_CFG_0                                 (_MK_ADDR_CONST(0x6060))
 #define CSC_D_PRA_CFG_0_SECURE                                             (0x0)
 #define CSC_D_PRA_CFG_0_DUAL                                               (0x0)
 #define CSC_D_PRA_CFG_0_SCR                                                  (0)
@@ -5554,8 +5650,8 @@
 #define CSC_D_PRA_CFG_0_PRA_TRUNCATE_PLATFORM_DEPENDENT    (_MK_MASK_CONST(0x1))
 
 
-/* Register CSC_D_CYA_0 */
-#define CSC_D_CYA_0                                     (_MK_ADDR_CONST(0x9064))
+// Register CSC_D_CYA_0
+#define CSC_D_CYA_0                                     (_MK_ADDR_CONST(0x6064))
 #define CSC_D_CYA_0_SECURE                                                 (0x0)
 #define CSC_D_CYA_0_DUAL                                                   (0x0)
 #define CSC_D_CYA_0_SCR                                                      (0)
@@ -5579,8 +5675,8 @@
 #define CSC_D_CYA_0_CYA_PLATFORM_DEPENDENT                 (_MK_MASK_CONST(0x1))
 
 
-/* Register CMAC_A_S_STATUS_0 */
-#define CMAC_A_S_STATUS_0                               (_MK_ADDR_CONST(0xa000))
+// Register CMAC_A_S_STATUS_0
+#define CMAC_A_S_STATUS_0                               (_MK_ADDR_CONST(0x7000))
 #define CMAC_A_S_STATUS_0_SECURE                                           (0x0)
 #define CMAC_A_S_STATUS_0_DUAL                                             (0x0)
 #define CMAC_A_S_STATUS_0_SCR                                                (0)
@@ -5624,8 +5720,8 @@
 #define CMAC_A_S_STATUS_0_STATUS_1_PENDING                   (_MK_ENUM_CONST(2))
 
 
-/* Register CMAC_A_S_POINTER_0 */
-#define CMAC_A_S_POINTER_0                              (_MK_ADDR_CONST(0xa004))
+// Register CMAC_A_S_POINTER_0
+#define CMAC_A_S_POINTER_0                              (_MK_ADDR_CONST(0x7004))
 #define CMAC_A_S_POINTER_0_SECURE                                          (0x0)
 #define CMAC_A_S_POINTER_0_DUAL                                            (0x0)
 #define CMAC_A_S_POINTER_0_SCR                                               (0)
@@ -5667,8 +5763,8 @@
 #define CMAC_A_S_POINTER_0_CONSUMER_GROUP_1                  (_MK_ENUM_CONST(1))
 
 
-/* Register CMAC_A_D_OP_ENABLE_0 */
-#define CMAC_A_D_OP_ENABLE_0                            (_MK_ADDR_CONST(0xa008))
+// Register CMAC_A_D_OP_ENABLE_0
+#define CMAC_A_D_OP_ENABLE_0                            (_MK_ADDR_CONST(0x7008))
 #define CMAC_A_D_OP_ENABLE_0_SECURE                                        (0x0)
 #define CMAC_A_D_OP_ENABLE_0_DUAL                                          (0x0)
 #define CMAC_A_D_OP_ENABLE_0_SCR                                             (0)
@@ -5695,8 +5791,8 @@
 #define CMAC_A_D_OP_ENABLE_0_OP_EN_ENABLE                    (_MK_ENUM_CONST(1))
 
 
-/* Register CMAC_A_D_MISC_CFG_0 */
-#define CMAC_A_D_MISC_CFG_0                             (_MK_ADDR_CONST(0xa00c))
+// Register CMAC_A_D_MISC_CFG_0
+#define CMAC_A_D_MISC_CFG_0                             (_MK_ADDR_CONST(0x700c))
 #define CMAC_A_D_MISC_CFG_0_SECURE                                         (0x0)
 #define CMAC_A_D_MISC_CFG_0_DUAL                                           (0x0)
 #define CMAC_A_D_MISC_CFG_0_SCR                                              (0)
@@ -5743,8 +5839,8 @@
 #define CMAC_A_D_MISC_CFG_0_PROC_PRECISION_FP16              (_MK_ENUM_CONST(2))
 
 
-/* Register CMAC_B_S_STATUS_0 */
-#define CMAC_B_S_STATUS_0                               (_MK_ADDR_CONST(0xb000))
+// Register CMAC_B_S_STATUS_0
+#define CMAC_B_S_STATUS_0                               (_MK_ADDR_CONST(0x8000))
 #define CMAC_B_S_STATUS_0_SECURE                                           (0x0)
 #define CMAC_B_S_STATUS_0_DUAL                                             (0x0)
 #define CMAC_B_S_STATUS_0_SCR                                                (0)
@@ -5788,8 +5884,8 @@
 #define CMAC_B_S_STATUS_0_STATUS_1_PENDING                   (_MK_ENUM_CONST(2))
 
 
-/* Register CMAC_B_S_POINTER_0 */
-#define CMAC_B_S_POINTER_0                              (_MK_ADDR_CONST(0xb004))
+// Register CMAC_B_S_POINTER_0
+#define CMAC_B_S_POINTER_0                              (_MK_ADDR_CONST(0x8004))
 #define CMAC_B_S_POINTER_0_SECURE                                          (0x0)
 #define CMAC_B_S_POINTER_0_DUAL                                            (0x0)
 #define CMAC_B_S_POINTER_0_SCR                                               (0)
@@ -5831,8 +5927,8 @@
 #define CMAC_B_S_POINTER_0_CONSUMER_GROUP_1                  (_MK_ENUM_CONST(1))
 
 
-/* Register CMAC_B_D_OP_ENABLE_0 */
-#define CMAC_B_D_OP_ENABLE_0                            (_MK_ADDR_CONST(0xb008))
+// Register CMAC_B_D_OP_ENABLE_0
+#define CMAC_B_D_OP_ENABLE_0                            (_MK_ADDR_CONST(0x8008))
 #define CMAC_B_D_OP_ENABLE_0_SECURE                                        (0x0)
 #define CMAC_B_D_OP_ENABLE_0_DUAL                                          (0x0)
 #define CMAC_B_D_OP_ENABLE_0_SCR                                             (0)
@@ -5859,8 +5955,8 @@
 #define CMAC_B_D_OP_ENABLE_0_OP_EN_ENABLE                    (_MK_ENUM_CONST(1))
 
 
-/* Register CMAC_B_D_MISC_CFG_0 */
-#define CMAC_B_D_MISC_CFG_0                             (_MK_ADDR_CONST(0xb00c))
+// Register CMAC_B_D_MISC_CFG_0
+#define CMAC_B_D_MISC_CFG_0                             (_MK_ADDR_CONST(0x800c))
 #define CMAC_B_D_MISC_CFG_0_SECURE                                         (0x0)
 #define CMAC_B_D_MISC_CFG_0_DUAL                                           (0x0)
 #define CMAC_B_D_MISC_CFG_0_SCR                                              (0)
@@ -5907,8 +6003,8 @@
 #define CMAC_B_D_MISC_CFG_0_PROC_PRECISION_FP16              (_MK_ENUM_CONST(2))
 
 
-/* Register CACC_S_STATUS_0 */
-#define CACC_S_STATUS_0                                 (_MK_ADDR_CONST(0xc000))
+// Register CACC_S_STATUS_0
+#define CACC_S_STATUS_0                                 (_MK_ADDR_CONST(0x9000))
 #define CACC_S_STATUS_0_SECURE                                             (0x0)
 #define CACC_S_STATUS_0_DUAL                                               (0x0)
 #define CACC_S_STATUS_0_SCR                                                  (0)
@@ -5952,8 +6048,8 @@
 #define CACC_S_STATUS_0_STATUS_1_PENDING                     (_MK_ENUM_CONST(2))
 
 
-/* Register CACC_S_POINTER_0 */
-#define CACC_S_POINTER_0                                (_MK_ADDR_CONST(0xc004))
+// Register CACC_S_POINTER_0
+#define CACC_S_POINTER_0                                (_MK_ADDR_CONST(0x9004))
 #define CACC_S_POINTER_0_SECURE                                            (0x0)
 #define CACC_S_POINTER_0_DUAL                                              (0x0)
 #define CACC_S_POINTER_0_SCR                                                 (0)
@@ -5995,8 +6091,8 @@
 #define CACC_S_POINTER_0_CONSUMER_GROUP_1                    (_MK_ENUM_CONST(1))
 
 
-/* Register CACC_D_OP_ENABLE_0 */
-#define CACC_D_OP_ENABLE_0                              (_MK_ADDR_CONST(0xc008))
+// Register CACC_D_OP_ENABLE_0
+#define CACC_D_OP_ENABLE_0                              (_MK_ADDR_CONST(0x9008))
 #define CACC_D_OP_ENABLE_0_SECURE                                          (0x0)
 #define CACC_D_OP_ENABLE_0_DUAL                                            (0x0)
 #define CACC_D_OP_ENABLE_0_SCR                                               (0)
@@ -6023,8 +6119,8 @@
 #define CACC_D_OP_ENABLE_0_OP_EN_ENABLE                      (_MK_ENUM_CONST(1))
 
 
-/* Register CACC_D_MISC_CFG_0 */
-#define CACC_D_MISC_CFG_0                               (_MK_ADDR_CONST(0xc00c))
+// Register CACC_D_MISC_CFG_0
+#define CACC_D_MISC_CFG_0                               (_MK_ADDR_CONST(0x900c))
 #define CACC_D_MISC_CFG_0_SECURE                                           (0x0)
 #define CACC_D_MISC_CFG_0_DUAL                                             (0x0)
 #define CACC_D_MISC_CFG_0_SCR                                                (0)
@@ -6070,8 +6166,8 @@
 #define CACC_D_MISC_CFG_0_PROC_PRECISION_FP16                (_MK_ENUM_CONST(2))
 
 
-/* Register CACC_D_DATAOUT_SIZE_0_0 */
-#define CACC_D_DATAOUT_SIZE_0_0                         (_MK_ADDR_CONST(0xc010))
+// Register CACC_D_DATAOUT_SIZE_0_0
+#define CACC_D_DATAOUT_SIZE_0_0                         (_MK_ADDR_CONST(0x9010))
 #define CACC_D_DATAOUT_SIZE_0_0_SECURE                                     (0x0)
 #define CACC_D_DATAOUT_SIZE_0_0_DUAL                                       (0x0)
 #define CACC_D_DATAOUT_SIZE_0_0_SCR                                          (0)
@@ -6119,8 +6215,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CACC_D_DATAOUT_SIZE_1_0 */
-#define CACC_D_DATAOUT_SIZE_1_0                         (_MK_ADDR_CONST(0xc014))
+// Register CACC_D_DATAOUT_SIZE_1_0
+#define CACC_D_DATAOUT_SIZE_1_0                         (_MK_ADDR_CONST(0x9014))
 #define CACC_D_DATAOUT_SIZE_1_0_SECURE                                     (0x0)
 #define CACC_D_DATAOUT_SIZE_1_0_DUAL                                       (0x0)
 #define CACC_D_DATAOUT_SIZE_1_0_SCR                                          (0)
@@ -6150,8 +6246,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CACC_D_DATAOUT_ADDR_0 */
-#define CACC_D_DATAOUT_ADDR_0                           (_MK_ADDR_CONST(0xc018))
+// Register CACC_D_DATAOUT_ADDR_0
+#define CACC_D_DATAOUT_ADDR_0                           (_MK_ADDR_CONST(0x9018))
 #define CACC_D_DATAOUT_ADDR_0_SECURE                                       (0x0)
 #define CACC_D_DATAOUT_ADDR_0_DUAL                                         (0x0)
 #define CACC_D_DATAOUT_ADDR_0_SCR                                            (0)
@@ -6180,8 +6276,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CACC_D_BATCH_NUMBER_0 */
-#define CACC_D_BATCH_NUMBER_0                           (_MK_ADDR_CONST(0xc01c))
+// Register CACC_D_BATCH_NUMBER_0
+#define CACC_D_BATCH_NUMBER_0                           (_MK_ADDR_CONST(0x901c))
 #define CACC_D_BATCH_NUMBER_0_SECURE                                       (0x0)
 #define CACC_D_BATCH_NUMBER_0_DUAL                                         (0x0)
 #define CACC_D_BATCH_NUMBER_0_SCR                                            (0)
@@ -6206,8 +6302,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CACC_D_LINE_STRIDE_0 */
-#define CACC_D_LINE_STRIDE_0                            (_MK_ADDR_CONST(0xc020))
+// Register CACC_D_LINE_STRIDE_0
+#define CACC_D_LINE_STRIDE_0                            (_MK_ADDR_CONST(0x9020))
 #define CACC_D_LINE_STRIDE_0_SECURE                                        (0x0)
 #define CACC_D_LINE_STRIDE_0_DUAL                                          (0x0)
 #define CACC_D_LINE_STRIDE_0_SCR                                             (0)
@@ -6235,8 +6331,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CACC_D_SURF_STRIDE_0 */
-#define CACC_D_SURF_STRIDE_0                            (_MK_ADDR_CONST(0xc024))
+// Register CACC_D_SURF_STRIDE_0
+#define CACC_D_SURF_STRIDE_0                            (_MK_ADDR_CONST(0x9024))
 #define CACC_D_SURF_STRIDE_0_SECURE                                        (0x0)
 #define CACC_D_SURF_STRIDE_0_DUAL                                          (0x0)
 #define CACC_D_SURF_STRIDE_0_SCR                                             (0)
@@ -6264,8 +6360,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CACC_D_DATAOUT_MAP_0 */
-#define CACC_D_DATAOUT_MAP_0                            (_MK_ADDR_CONST(0xc028))
+// Register CACC_D_DATAOUT_MAP_0
+#define CACC_D_DATAOUT_MAP_0                            (_MK_ADDR_CONST(0x9028))
 #define CACC_D_DATAOUT_MAP_0_SECURE                                        (0x0)
 #define CACC_D_DATAOUT_MAP_0_DUAL                                          (0x0)
 #define CACC_D_DATAOUT_MAP_0_SCR                                             (0)
@@ -6313,8 +6409,8 @@
 #define CACC_D_DATAOUT_MAP_0_SURF_PACKED_TRUE                (_MK_ENUM_CONST(1))
 
 
-/* Register CACC_D_CLIP_CFG_0 */
-#define CACC_D_CLIP_CFG_0                               (_MK_ADDR_CONST(0xc02c))
+// Register CACC_D_CLIP_CFG_0
+#define CACC_D_CLIP_CFG_0                               (_MK_ADDR_CONST(0x902c))
 #define CACC_D_CLIP_CFG_0_SECURE                                           (0x0)
 #define CACC_D_CLIP_CFG_0_DUAL                                             (0x0)
 #define CACC_D_CLIP_CFG_0_SCR                                                (0)
@@ -6340,8 +6436,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CACC_D_OUT_SATURATION_0 */
-#define CACC_D_OUT_SATURATION_0                         (_MK_ADDR_CONST(0xc030))
+// Register CACC_D_OUT_SATURATION_0
+#define CACC_D_OUT_SATURATION_0                         (_MK_ADDR_CONST(0x9030))
 #define CACC_D_OUT_SATURATION_0_SECURE                                     (0x0)
 #define CACC_D_OUT_SATURATION_0_DUAL                                       (0x0)
 #define CACC_D_OUT_SATURATION_0_SCR                                          (0)
@@ -6370,8 +6466,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CACC_D_CYA_0 */
-#define CACC_D_CYA_0                                    (_MK_ADDR_CONST(0xc034))
+// Register CACC_D_CYA_0
+#define CACC_D_CYA_0                                    (_MK_ADDR_CONST(0x9034))
 #define CACC_D_CYA_0_SECURE                                                (0x0)
 #define CACC_D_CYA_0_DUAL                                                  (0x0)
 #define CACC_D_CYA_0_SCR                                                     (0)
@@ -6395,8 +6491,8 @@
 #define CACC_D_CYA_0_CYA_PLATFORM_DEPENDENT                (_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_S_STATUS_0 */
-#define SDP_RDMA_S_STATUS_0                             (_MK_ADDR_CONST(0xd000))
+// Register SDP_RDMA_S_STATUS_0
+#define SDP_RDMA_S_STATUS_0                             (_MK_ADDR_CONST(0xa000))
 #define SDP_RDMA_S_STATUS_0_SECURE                                         (0x0)
 #define SDP_RDMA_S_STATUS_0_DUAL                                           (0x0)
 #define SDP_RDMA_S_STATUS_0_SCR                                              (0)
@@ -6440,8 +6536,8 @@
 #define SDP_RDMA_S_STATUS_0_STATUS_1_PENDING                 (_MK_ENUM_CONST(2))
 
 
-/* Register SDP_RDMA_S_POINTER_0 */
-#define SDP_RDMA_S_POINTER_0                            (_MK_ADDR_CONST(0xd004))
+// Register SDP_RDMA_S_POINTER_0
+#define SDP_RDMA_S_POINTER_0                            (_MK_ADDR_CONST(0xa004))
 #define SDP_RDMA_S_POINTER_0_SECURE                                        (0x0)
 #define SDP_RDMA_S_POINTER_0_DUAL                                          (0x0)
 #define SDP_RDMA_S_POINTER_0_SCR                                             (0)
@@ -6485,8 +6581,8 @@
 #define SDP_RDMA_S_POINTER_0_CONSUMER_GROUP_1                (_MK_ENUM_CONST(1))
 
 
-/* Register SDP_RDMA_D_OP_ENABLE_0 */
-#define SDP_RDMA_D_OP_ENABLE_0                          (_MK_ADDR_CONST(0xd008))
+// Register SDP_RDMA_D_OP_ENABLE_0
+#define SDP_RDMA_D_OP_ENABLE_0                          (_MK_ADDR_CONST(0xa008))
 #define SDP_RDMA_D_OP_ENABLE_0_SECURE                                      (0x0)
 #define SDP_RDMA_D_OP_ENABLE_0_DUAL                                        (0x0)
 #define SDP_RDMA_D_OP_ENABLE_0_SCR                                           (0)
@@ -6513,8 +6609,8 @@
 #define SDP_RDMA_D_OP_ENABLE_0_OP_EN_ENABLE                  (_MK_ENUM_CONST(1))
 
 
-/* Register SDP_RDMA_D_DATA_CUBE_WIDTH_0 */
-#define SDP_RDMA_D_DATA_CUBE_WIDTH_0                    (_MK_ADDR_CONST(0xd00c))
+// Register SDP_RDMA_D_DATA_CUBE_WIDTH_0
+#define SDP_RDMA_D_DATA_CUBE_WIDTH_0                    (_MK_ADDR_CONST(0xa00c))
 #define SDP_RDMA_D_DATA_CUBE_WIDTH_0_SECURE                                (0x0)
 #define SDP_RDMA_D_DATA_CUBE_WIDTH_0_DUAL                                  (0x0)
 #define SDP_RDMA_D_DATA_CUBE_WIDTH_0_SCR                                     (0)
@@ -6542,8 +6638,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_DATA_CUBE_HEIGHT_0 */
-#define SDP_RDMA_D_DATA_CUBE_HEIGHT_0                   (_MK_ADDR_CONST(0xd010))
+// Register SDP_RDMA_D_DATA_CUBE_HEIGHT_0
+#define SDP_RDMA_D_DATA_CUBE_HEIGHT_0                   (_MK_ADDR_CONST(0xa010))
 #define SDP_RDMA_D_DATA_CUBE_HEIGHT_0_SECURE                               (0x0)
 #define SDP_RDMA_D_DATA_CUBE_HEIGHT_0_DUAL                                 (0x0)
 #define SDP_RDMA_D_DATA_CUBE_HEIGHT_0_SCR                                    (0)
@@ -6571,8 +6667,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_DATA_CUBE_CHANNEL_0 */
-#define SDP_RDMA_D_DATA_CUBE_CHANNEL_0                  (_MK_ADDR_CONST(0xd014))
+// Register SDP_RDMA_D_DATA_CUBE_CHANNEL_0
+#define SDP_RDMA_D_DATA_CUBE_CHANNEL_0                  (_MK_ADDR_CONST(0xa014))
 #define SDP_RDMA_D_DATA_CUBE_CHANNEL_0_SECURE                              (0x0)
 #define SDP_RDMA_D_DATA_CUBE_CHANNEL_0_DUAL                                (0x0)
 #define SDP_RDMA_D_DATA_CUBE_CHANNEL_0_SCR                                   (0)
@@ -6602,8 +6698,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_SRC_BASE_ADDR_LOW_0 */
-#define SDP_RDMA_D_SRC_BASE_ADDR_LOW_0                  (_MK_ADDR_CONST(0xd018))
+// Register SDP_RDMA_D_SRC_BASE_ADDR_LOW_0
+#define SDP_RDMA_D_SRC_BASE_ADDR_LOW_0                  (_MK_ADDR_CONST(0xa018))
 #define SDP_RDMA_D_SRC_BASE_ADDR_LOW_0_SECURE                              (0x0)
 #define SDP_RDMA_D_SRC_BASE_ADDR_LOW_0_DUAL                                (0x0)
 #define SDP_RDMA_D_SRC_BASE_ADDR_LOW_0_SCR                                   (0)
@@ -6637,29 +6733,32 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0 */
-#define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0                 (_MK_ADDR_CONST(0xd01c))
+// Register SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0
+#define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0                 (_MK_ADDR_CONST(0xa01c))
 #define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SECURE                             (0x0)
 #define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_DUAL                               (0x0)
 #define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SCR                                  (0)
 #define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_WORD_COUNT                         (0x1)
 #define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_RESET_VAL          (_MK_MASK_CONST(0x0))
-#define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_RESET_MASK        (_MK_MASK_CONST(0xff))
+#define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_RESET_MASK \
+	(_MK_MASK_CONST(0xffffffff))
 #define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SW_DEFAULT_VAL     (_MK_MASK_CONST(0x0))
 #define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SW_DEFAULT_MASK    (_MK_MASK_CONST(0x0))
-#define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_READ_MASK         (_MK_MASK_CONST(0xff))
-#define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_WRITE_MASK        (_MK_MASK_CONST(0xff))
+#define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_READ_MASK \
+	(_MK_MASK_CONST(0xffffffff))
+#define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_WRITE_MASK \
+	(_MK_MASK_CONST(0xffffffff))
 #define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_SHIFT \
 	(_MK_SHIFT_CONST(0))
 #define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_FIELD \
-	(_MK_FIELD_CONST(0xff, \
+	(_MK_FIELD_CONST(0xffffffff, \
 	SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_SHIFT))
-#define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_RANGE           (7:0)
+#define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_RANGE          (31:0)
 #define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_WOFFSET         (0x0)
 #define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_DEFAULT_MASK \
-	(_MK_MASK_CONST(0xff))
+	(_MK_MASK_CONST(0xffffffff))
 #define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_SW_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define SDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_SW_DEFAULT_MASK \
@@ -6670,8 +6769,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_SRC_LINE_STRIDE_0 */
-#define SDP_RDMA_D_SRC_LINE_STRIDE_0                    (_MK_ADDR_CONST(0xd020))
+// Register SDP_RDMA_D_SRC_LINE_STRIDE_0
+#define SDP_RDMA_D_SRC_LINE_STRIDE_0                    (_MK_ADDR_CONST(0xa020))
 #define SDP_RDMA_D_SRC_LINE_STRIDE_0_SECURE                                (0x0)
 #define SDP_RDMA_D_SRC_LINE_STRIDE_0_DUAL                                  (0x0)
 #define SDP_RDMA_D_SRC_LINE_STRIDE_0_SCR                                     (0)
@@ -6703,8 +6802,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_SRC_SURFACE_STRIDE_0 */
-#define SDP_RDMA_D_SRC_SURFACE_STRIDE_0                 (_MK_ADDR_CONST(0xd024))
+// Register SDP_RDMA_D_SRC_SURFACE_STRIDE_0
+#define SDP_RDMA_D_SRC_SURFACE_STRIDE_0                 (_MK_ADDR_CONST(0xa024))
 #define SDP_RDMA_D_SRC_SURFACE_STRIDE_0_SECURE                             (0x0)
 #define SDP_RDMA_D_SRC_SURFACE_STRIDE_0_DUAL                               (0x0)
 #define SDP_RDMA_D_SRC_SURFACE_STRIDE_0_SCR                                  (0)
@@ -6739,8 +6838,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_BRDMA_CFG_0 */
-#define SDP_RDMA_D_BRDMA_CFG_0                          (_MK_ADDR_CONST(0xd028))
+// Register SDP_RDMA_D_BRDMA_CFG_0
+#define SDP_RDMA_D_BRDMA_CFG_0                          (_MK_ADDR_CONST(0xa028))
 #define SDP_RDMA_D_BRDMA_CFG_0_SECURE                                      (0x0)
 #define SDP_RDMA_D_BRDMA_CFG_0_DUAL                                        (0x0)
 #define SDP_RDMA_D_BRDMA_CFG_0_SCR                                           (0)
@@ -6848,8 +6947,8 @@
 #define SDP_RDMA_D_BRDMA_CFG_0_BRDMA_RAM_TYPE_MC             (_MK_ENUM_CONST(1))
 
 
-/* Register SDP_RDMA_D_BS_BASE_ADDR_LOW_0 */
-#define SDP_RDMA_D_BS_BASE_ADDR_LOW_0                   (_MK_ADDR_CONST(0xd02c))
+// Register SDP_RDMA_D_BS_BASE_ADDR_LOW_0
+#define SDP_RDMA_D_BS_BASE_ADDR_LOW_0                   (_MK_ADDR_CONST(0xa02c))
 #define SDP_RDMA_D_BS_BASE_ADDR_LOW_0_SECURE                               (0x0)
 #define SDP_RDMA_D_BS_BASE_ADDR_LOW_0_DUAL                                 (0x0)
 #define SDP_RDMA_D_BS_BASE_ADDR_LOW_0_SCR                                    (0)
@@ -6881,29 +6980,31 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_BS_BASE_ADDR_HIGH_0 */
-#define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0                  (_MK_ADDR_CONST(0xd030))
+// Register SDP_RDMA_D_BS_BASE_ADDR_HIGH_0
+#define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0                  (_MK_ADDR_CONST(0xa030))
 #define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_SECURE                              (0x0)
 #define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_DUAL                                (0x0)
 #define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_SCR                                   (0)
 #define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_WORD_COUNT                          (0x1)
 #define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_RESET_VAL           (_MK_MASK_CONST(0x0))
-#define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_RESET_MASK         (_MK_MASK_CONST(0xff))
+#define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_RESET_MASK \
+	(_MK_MASK_CONST(0xffffffff))
 #define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_SW_DEFAULT_VAL      (_MK_MASK_CONST(0x0))
 #define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_SW_DEFAULT_MASK     (_MK_MASK_CONST(0x0))
-#define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_READ_MASK          (_MK_MASK_CONST(0xff))
-#define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_WRITE_MASK         (_MK_MASK_CONST(0xff))
+#define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_READ_MASK    (_MK_MASK_CONST(0xffffffff))
+#define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_WRITE_MASK \
+	(_MK_MASK_CONST(0xffffffff))
 #define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_BS_BASE_ADDR_HIGH_SHIFT \
 	(_MK_SHIFT_CONST(0))
 #define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_BS_BASE_ADDR_HIGH_FIELD \
-	(_MK_FIELD_CONST(0xff, \
+	(_MK_FIELD_CONST(0xffffffff, \
 	SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_BS_BASE_ADDR_HIGH_SHIFT))
-#define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_BS_BASE_ADDR_HIGH_RANGE             (7:0)
+#define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_BS_BASE_ADDR_HIGH_RANGE            (31:0)
 #define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_BS_BASE_ADDR_HIGH_WOFFSET           (0x0)
 #define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_BS_BASE_ADDR_HIGH_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_BS_BASE_ADDR_HIGH_DEFAULT_MASK \
-	(_MK_MASK_CONST(0xff))
+	(_MK_MASK_CONST(0xffffffff))
 #define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_BS_BASE_ADDR_HIGH_SW_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define SDP_RDMA_D_BS_BASE_ADDR_HIGH_0_BS_BASE_ADDR_HIGH_SW_DEFAULT_MASK \
@@ -6914,8 +7015,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_BS_LINE_STRIDE_0 */
-#define SDP_RDMA_D_BS_LINE_STRIDE_0                     (_MK_ADDR_CONST(0xd034))
+// Register SDP_RDMA_D_BS_LINE_STRIDE_0
+#define SDP_RDMA_D_BS_LINE_STRIDE_0                     (_MK_ADDR_CONST(0xa034))
 #define SDP_RDMA_D_BS_LINE_STRIDE_0_SECURE                                 (0x0)
 #define SDP_RDMA_D_BS_LINE_STRIDE_0_DUAL                                   (0x0)
 #define SDP_RDMA_D_BS_LINE_STRIDE_0_SCR                                      (0)
@@ -6946,8 +7047,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_BS_SURFACE_STRIDE_0 */
-#define SDP_RDMA_D_BS_SURFACE_STRIDE_0                  (_MK_ADDR_CONST(0xd038))
+// Register SDP_RDMA_D_BS_SURFACE_STRIDE_0
+#define SDP_RDMA_D_BS_SURFACE_STRIDE_0                  (_MK_ADDR_CONST(0xa038))
 #define SDP_RDMA_D_BS_SURFACE_STRIDE_0_SECURE                              (0x0)
 #define SDP_RDMA_D_BS_SURFACE_STRIDE_0_DUAL                                (0x0)
 #define SDP_RDMA_D_BS_SURFACE_STRIDE_0_SCR                                   (0)
@@ -6981,8 +7082,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_BS_BATCH_STRIDE_0 */
-#define SDP_RDMA_D_BS_BATCH_STRIDE_0                    (_MK_ADDR_CONST(0xd03c))
+// Register SDP_RDMA_D_BS_BATCH_STRIDE_0
+#define SDP_RDMA_D_BS_BATCH_STRIDE_0                    (_MK_ADDR_CONST(0xa03c))
 #define SDP_RDMA_D_BS_BATCH_STRIDE_0_SECURE                                (0x0)
 #define SDP_RDMA_D_BS_BATCH_STRIDE_0_DUAL                                  (0x0)
 #define SDP_RDMA_D_BS_BATCH_STRIDE_0_SCR                                     (0)
@@ -7014,8 +7115,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_NRDMA_CFG_0 */
-#define SDP_RDMA_D_NRDMA_CFG_0                          (_MK_ADDR_CONST(0xd040))
+// Register SDP_RDMA_D_NRDMA_CFG_0
+#define SDP_RDMA_D_NRDMA_CFG_0                          (_MK_ADDR_CONST(0xa040))
 #define SDP_RDMA_D_NRDMA_CFG_0_SECURE                                      (0x0)
 #define SDP_RDMA_D_NRDMA_CFG_0_DUAL                                        (0x0)
 #define SDP_RDMA_D_NRDMA_CFG_0_SCR                                           (0)
@@ -7123,8 +7224,8 @@
 #define SDP_RDMA_D_NRDMA_CFG_0_NRDMA_RAM_TYPE_MC             (_MK_ENUM_CONST(1))
 
 
-/* Register SDP_RDMA_D_BN_BASE_ADDR_LOW_0 */
-#define SDP_RDMA_D_BN_BASE_ADDR_LOW_0                   (_MK_ADDR_CONST(0xd044))
+// Register SDP_RDMA_D_BN_BASE_ADDR_LOW_0
+#define SDP_RDMA_D_BN_BASE_ADDR_LOW_0                   (_MK_ADDR_CONST(0xa044))
 #define SDP_RDMA_D_BN_BASE_ADDR_LOW_0_SECURE                               (0x0)
 #define SDP_RDMA_D_BN_BASE_ADDR_LOW_0_DUAL                                 (0x0)
 #define SDP_RDMA_D_BN_BASE_ADDR_LOW_0_SCR                                    (0)
@@ -7156,29 +7257,31 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_BN_BASE_ADDR_HIGH_0 */
-#define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0                  (_MK_ADDR_CONST(0xd048))
+// Register SDP_RDMA_D_BN_BASE_ADDR_HIGH_0
+#define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0                  (_MK_ADDR_CONST(0xa048))
 #define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_SECURE                              (0x0)
 #define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_DUAL                                (0x0)
 #define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_SCR                                   (0)
 #define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_WORD_COUNT                          (0x1)
 #define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_RESET_VAL           (_MK_MASK_CONST(0x0))
-#define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_RESET_MASK         (_MK_MASK_CONST(0xff))
+#define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_RESET_MASK \
+	(_MK_MASK_CONST(0xffffffff))
 #define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_SW_DEFAULT_VAL      (_MK_MASK_CONST(0x0))
 #define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_SW_DEFAULT_MASK     (_MK_MASK_CONST(0x0))
-#define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_READ_MASK          (_MK_MASK_CONST(0xff))
-#define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_WRITE_MASK         (_MK_MASK_CONST(0xff))
+#define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_READ_MASK    (_MK_MASK_CONST(0xffffffff))
+#define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_WRITE_MASK \
+	(_MK_MASK_CONST(0xffffffff))
 #define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_BN_BASE_ADDR_HIGH_SHIFT \
 	(_MK_SHIFT_CONST(0))
 #define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_BN_BASE_ADDR_HIGH_FIELD \
-	(_MK_FIELD_CONST(0xff, \
+	(_MK_FIELD_CONST(0xffffffff, \
 	SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_BN_BASE_ADDR_HIGH_SHIFT))
-#define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_BN_BASE_ADDR_HIGH_RANGE             (7:0)
+#define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_BN_BASE_ADDR_HIGH_RANGE            (31:0)
 #define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_BN_BASE_ADDR_HIGH_WOFFSET           (0x0)
 #define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_BN_BASE_ADDR_HIGH_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_BN_BASE_ADDR_HIGH_DEFAULT_MASK \
-	(_MK_MASK_CONST(0xff))
+	(_MK_MASK_CONST(0xffffffff))
 #define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_BN_BASE_ADDR_HIGH_SW_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define SDP_RDMA_D_BN_BASE_ADDR_HIGH_0_BN_BASE_ADDR_HIGH_SW_DEFAULT_MASK \
@@ -7189,8 +7292,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_BN_LINE_STRIDE_0 */
-#define SDP_RDMA_D_BN_LINE_STRIDE_0                     (_MK_ADDR_CONST(0xd04c))
+// Register SDP_RDMA_D_BN_LINE_STRIDE_0
+#define SDP_RDMA_D_BN_LINE_STRIDE_0                     (_MK_ADDR_CONST(0xa04c))
 #define SDP_RDMA_D_BN_LINE_STRIDE_0_SECURE                                 (0x0)
 #define SDP_RDMA_D_BN_LINE_STRIDE_0_DUAL                                   (0x0)
 #define SDP_RDMA_D_BN_LINE_STRIDE_0_SCR                                      (0)
@@ -7221,8 +7324,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_BN_SURFACE_STRIDE_0 */
-#define SDP_RDMA_D_BN_SURFACE_STRIDE_0                  (_MK_ADDR_CONST(0xd050))
+// Register SDP_RDMA_D_BN_SURFACE_STRIDE_0
+#define SDP_RDMA_D_BN_SURFACE_STRIDE_0                  (_MK_ADDR_CONST(0xa050))
 #define SDP_RDMA_D_BN_SURFACE_STRIDE_0_SECURE                              (0x0)
 #define SDP_RDMA_D_BN_SURFACE_STRIDE_0_DUAL                                (0x0)
 #define SDP_RDMA_D_BN_SURFACE_STRIDE_0_SCR                                   (0)
@@ -7256,8 +7359,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_BN_BATCH_STRIDE_0 */
-#define SDP_RDMA_D_BN_BATCH_STRIDE_0                    (_MK_ADDR_CONST(0xd054))
+// Register SDP_RDMA_D_BN_BATCH_STRIDE_0
+#define SDP_RDMA_D_BN_BATCH_STRIDE_0                    (_MK_ADDR_CONST(0xa054))
 #define SDP_RDMA_D_BN_BATCH_STRIDE_0_SECURE                                (0x0)
 #define SDP_RDMA_D_BN_BATCH_STRIDE_0_DUAL                                  (0x0)
 #define SDP_RDMA_D_BN_BATCH_STRIDE_0_SCR                                     (0)
@@ -7289,8 +7392,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_ERDMA_CFG_0 */
-#define SDP_RDMA_D_ERDMA_CFG_0                          (_MK_ADDR_CONST(0xd058))
+// Register SDP_RDMA_D_ERDMA_CFG_0
+#define SDP_RDMA_D_ERDMA_CFG_0                          (_MK_ADDR_CONST(0xa058))
 #define SDP_RDMA_D_ERDMA_CFG_0_SECURE                                      (0x0)
 #define SDP_RDMA_D_ERDMA_CFG_0_DUAL                                        (0x0)
 #define SDP_RDMA_D_ERDMA_CFG_0_SCR                                           (0)
@@ -7398,8 +7501,8 @@
 #define SDP_RDMA_D_ERDMA_CFG_0_ERDMA_RAM_TYPE_MC             (_MK_ENUM_CONST(1))
 
 
-/* Register SDP_RDMA_D_EW_BASE_ADDR_LOW_0 */
-#define SDP_RDMA_D_EW_BASE_ADDR_LOW_0                   (_MK_ADDR_CONST(0xd05c))
+// Register SDP_RDMA_D_EW_BASE_ADDR_LOW_0
+#define SDP_RDMA_D_EW_BASE_ADDR_LOW_0                   (_MK_ADDR_CONST(0xa05c))
 #define SDP_RDMA_D_EW_BASE_ADDR_LOW_0_SECURE                               (0x0)
 #define SDP_RDMA_D_EW_BASE_ADDR_LOW_0_DUAL                                 (0x0)
 #define SDP_RDMA_D_EW_BASE_ADDR_LOW_0_SCR                                    (0)
@@ -7431,29 +7534,31 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_EW_BASE_ADDR_HIGH_0 */
-#define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0                  (_MK_ADDR_CONST(0xd060))
+// Register SDP_RDMA_D_EW_BASE_ADDR_HIGH_0
+#define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0                  (_MK_ADDR_CONST(0xa060))
 #define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_SECURE                              (0x0)
 #define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_DUAL                                (0x0)
 #define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_SCR                                   (0)
 #define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_WORD_COUNT                          (0x1)
 #define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_RESET_VAL           (_MK_MASK_CONST(0x0))
-#define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_RESET_MASK         (_MK_MASK_CONST(0xff))
+#define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_RESET_MASK \
+	(_MK_MASK_CONST(0xffffffff))
 #define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_SW_DEFAULT_VAL      (_MK_MASK_CONST(0x0))
 #define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_SW_DEFAULT_MASK     (_MK_MASK_CONST(0x0))
-#define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_READ_MASK          (_MK_MASK_CONST(0xff))
-#define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_WRITE_MASK         (_MK_MASK_CONST(0xff))
+#define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_READ_MASK    (_MK_MASK_CONST(0xffffffff))
+#define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_WRITE_MASK \
+	(_MK_MASK_CONST(0xffffffff))
 #define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_EW_BASE_ADDR_HIGH_SHIFT \
 	(_MK_SHIFT_CONST(0))
 #define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_EW_BASE_ADDR_HIGH_FIELD \
-	(_MK_FIELD_CONST(0xff, \
+	(_MK_FIELD_CONST(0xffffffff, \
 	SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_EW_BASE_ADDR_HIGH_SHIFT))
-#define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_EW_BASE_ADDR_HIGH_RANGE             (7:0)
+#define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_EW_BASE_ADDR_HIGH_RANGE            (31:0)
 #define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_EW_BASE_ADDR_HIGH_WOFFSET           (0x0)
 #define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_EW_BASE_ADDR_HIGH_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_EW_BASE_ADDR_HIGH_DEFAULT_MASK \
-	(_MK_MASK_CONST(0xff))
+	(_MK_MASK_CONST(0xffffffff))
 #define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_EW_BASE_ADDR_HIGH_SW_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define SDP_RDMA_D_EW_BASE_ADDR_HIGH_0_EW_BASE_ADDR_HIGH_SW_DEFAULT_MASK \
@@ -7464,8 +7569,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_EW_LINE_STRIDE_0 */
-#define SDP_RDMA_D_EW_LINE_STRIDE_0                     (_MK_ADDR_CONST(0xd064))
+// Register SDP_RDMA_D_EW_LINE_STRIDE_0
+#define SDP_RDMA_D_EW_LINE_STRIDE_0                     (_MK_ADDR_CONST(0xa064))
 #define SDP_RDMA_D_EW_LINE_STRIDE_0_SECURE                                 (0x0)
 #define SDP_RDMA_D_EW_LINE_STRIDE_0_DUAL                                   (0x0)
 #define SDP_RDMA_D_EW_LINE_STRIDE_0_SCR                                      (0)
@@ -7496,8 +7601,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_EW_SURFACE_STRIDE_0 */
-#define SDP_RDMA_D_EW_SURFACE_STRIDE_0                  (_MK_ADDR_CONST(0xd068))
+// Register SDP_RDMA_D_EW_SURFACE_STRIDE_0
+#define SDP_RDMA_D_EW_SURFACE_STRIDE_0                  (_MK_ADDR_CONST(0xa068))
 #define SDP_RDMA_D_EW_SURFACE_STRIDE_0_SECURE                              (0x0)
 #define SDP_RDMA_D_EW_SURFACE_STRIDE_0_DUAL                                (0x0)
 #define SDP_RDMA_D_EW_SURFACE_STRIDE_0_SCR                                   (0)
@@ -7531,8 +7636,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_EW_BATCH_STRIDE_0 */
-#define SDP_RDMA_D_EW_BATCH_STRIDE_0                    (_MK_ADDR_CONST(0xd06c))
+// Register SDP_RDMA_D_EW_BATCH_STRIDE_0
+#define SDP_RDMA_D_EW_BATCH_STRIDE_0                    (_MK_ADDR_CONST(0xa06c))
 #define SDP_RDMA_D_EW_BATCH_STRIDE_0_SECURE                                (0x0)
 #define SDP_RDMA_D_EW_BATCH_STRIDE_0_DUAL                                  (0x0)
 #define SDP_RDMA_D_EW_BATCH_STRIDE_0_SCR                                     (0)
@@ -7564,8 +7669,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_FEATURE_MODE_CFG_0 */
-#define SDP_RDMA_D_FEATURE_MODE_CFG_0                   (_MK_ADDR_CONST(0xd070))
+// Register SDP_RDMA_D_FEATURE_MODE_CFG_0
+#define SDP_RDMA_D_FEATURE_MODE_CFG_0                   (_MK_ADDR_CONST(0xa070))
 #define SDP_RDMA_D_FEATURE_MODE_CFG_0_SECURE                               (0x0)
 #define SDP_RDMA_D_FEATURE_MODE_CFG_0_DUAL                                 (0x0)
 #define SDP_RDMA_D_FEATURE_MODE_CFG_0_SCR                                    (0)
@@ -7705,8 +7810,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_SRC_DMA_CFG_0 */
-#define SDP_RDMA_D_SRC_DMA_CFG_0                        (_MK_ADDR_CONST(0xd074))
+// Register SDP_RDMA_D_SRC_DMA_CFG_0
+#define SDP_RDMA_D_SRC_DMA_CFG_0                        (_MK_ADDR_CONST(0xa074))
 #define SDP_RDMA_D_SRC_DMA_CFG_0_SECURE                                    (0x0)
 #define SDP_RDMA_D_SRC_DMA_CFG_0_DUAL                                      (0x0)
 #define SDP_RDMA_D_SRC_DMA_CFG_0_SCR                                         (0)
@@ -7737,8 +7842,8 @@
 #define SDP_RDMA_D_SRC_DMA_CFG_0_SRC_RAM_TYPE_MC             (_MK_ENUM_CONST(1))
 
 
-/* Register SDP_RDMA_D_STATUS_NAN_INPUT_NUM_0 */
-#define SDP_RDMA_D_STATUS_NAN_INPUT_NUM_0               (_MK_ADDR_CONST(0xd078))
+// Register SDP_RDMA_D_STATUS_NAN_INPUT_NUM_0
+#define SDP_RDMA_D_STATUS_NAN_INPUT_NUM_0               (_MK_ADDR_CONST(0xa078))
 #define SDP_RDMA_D_STATUS_NAN_INPUT_NUM_0_SECURE                           (0x0)
 #define SDP_RDMA_D_STATUS_NAN_INPUT_NUM_0_DUAL                             (0x0)
 #define SDP_RDMA_D_STATUS_NAN_INPUT_NUM_0_SCR                                (0)
@@ -7774,8 +7879,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_STATUS_INF_INPUT_NUM_0 */
-#define SDP_RDMA_D_STATUS_INF_INPUT_NUM_0               (_MK_ADDR_CONST(0xd07c))
+// Register SDP_RDMA_D_STATUS_INF_INPUT_NUM_0
+#define SDP_RDMA_D_STATUS_INF_INPUT_NUM_0               (_MK_ADDR_CONST(0xa07c))
 #define SDP_RDMA_D_STATUS_INF_INPUT_NUM_0_SECURE                           (0x0)
 #define SDP_RDMA_D_STATUS_INF_INPUT_NUM_0_DUAL                             (0x0)
 #define SDP_RDMA_D_STATUS_INF_INPUT_NUM_0_SCR                                (0)
@@ -7811,8 +7916,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_PERF_ENABLE_0 */
-#define SDP_RDMA_D_PERF_ENABLE_0                        (_MK_ADDR_CONST(0xd080))
+// Register SDP_RDMA_D_PERF_ENABLE_0
+#define SDP_RDMA_D_PERF_ENABLE_0                        (_MK_ADDR_CONST(0xa080))
 #define SDP_RDMA_D_PERF_ENABLE_0_SECURE                                    (0x0)
 #define SDP_RDMA_D_PERF_ENABLE_0_DUAL                                      (0x0)
 #define SDP_RDMA_D_PERF_ENABLE_0_SCR                                         (0)
@@ -7867,8 +7972,8 @@
 	(_MK_ENUM_CONST(1))
 
 
-/* Register SDP_RDMA_D_PERF_MRDMA_READ_STALL_0 */
-#define SDP_RDMA_D_PERF_MRDMA_READ_STALL_0              (_MK_ADDR_CONST(0xd084))
+// Register SDP_RDMA_D_PERF_MRDMA_READ_STALL_0
+#define SDP_RDMA_D_PERF_MRDMA_READ_STALL_0              (_MK_ADDR_CONST(0xa084))
 #define SDP_RDMA_D_PERF_MRDMA_READ_STALL_0_SECURE                          (0x0)
 #define SDP_RDMA_D_PERF_MRDMA_READ_STALL_0_DUAL                            (0x0)
 #define SDP_RDMA_D_PERF_MRDMA_READ_STALL_0_SCR                               (0)
@@ -7904,8 +8009,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_PERF_BRDMA_READ_STALL_0 */
-#define SDP_RDMA_D_PERF_BRDMA_READ_STALL_0              (_MK_ADDR_CONST(0xd088))
+// Register SDP_RDMA_D_PERF_BRDMA_READ_STALL_0
+#define SDP_RDMA_D_PERF_BRDMA_READ_STALL_0              (_MK_ADDR_CONST(0xa088))
 #define SDP_RDMA_D_PERF_BRDMA_READ_STALL_0_SECURE                          (0x0)
 #define SDP_RDMA_D_PERF_BRDMA_READ_STALL_0_DUAL                            (0x0)
 #define SDP_RDMA_D_PERF_BRDMA_READ_STALL_0_SCR                               (0)
@@ -7941,8 +8046,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_PERF_NRDMA_READ_STALL_0 */
-#define SDP_RDMA_D_PERF_NRDMA_READ_STALL_0              (_MK_ADDR_CONST(0xd08c))
+// Register SDP_RDMA_D_PERF_NRDMA_READ_STALL_0
+#define SDP_RDMA_D_PERF_NRDMA_READ_STALL_0              (_MK_ADDR_CONST(0xa08c))
 #define SDP_RDMA_D_PERF_NRDMA_READ_STALL_0_SECURE                          (0x0)
 #define SDP_RDMA_D_PERF_NRDMA_READ_STALL_0_DUAL                            (0x0)
 #define SDP_RDMA_D_PERF_NRDMA_READ_STALL_0_SCR                               (0)
@@ -7978,8 +8083,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_RDMA_D_PERF_ERDMA_READ_STALL_0 */
-#define SDP_RDMA_D_PERF_ERDMA_READ_STALL_0              (_MK_ADDR_CONST(0xd090))
+// Register SDP_RDMA_D_PERF_ERDMA_READ_STALL_0
+#define SDP_RDMA_D_PERF_ERDMA_READ_STALL_0              (_MK_ADDR_CONST(0xa090))
 #define SDP_RDMA_D_PERF_ERDMA_READ_STALL_0_SECURE                          (0x0)
 #define SDP_RDMA_D_PERF_ERDMA_READ_STALL_0_DUAL                            (0x0)
 #define SDP_RDMA_D_PERF_ERDMA_READ_STALL_0_SCR                               (0)
@@ -8015,8 +8120,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_S_STATUS_0 */
-#define SDP_S_STATUS_0                                  (_MK_ADDR_CONST(0xe000))
+// Register SDP_S_STATUS_0
+#define SDP_S_STATUS_0                                  (_MK_ADDR_CONST(0xb000))
 #define SDP_S_STATUS_0_SECURE                                              (0x0)
 #define SDP_S_STATUS_0_DUAL                                                (0x0)
 #define SDP_S_STATUS_0_SCR                                                   (0)
@@ -8060,8 +8165,8 @@
 #define SDP_S_STATUS_0_STATUS_1_PENDING                      (_MK_ENUM_CONST(2))
 
 
-/* Register SDP_S_POINTER_0 */
-#define SDP_S_POINTER_0                                 (_MK_ADDR_CONST(0xe004))
+// Register SDP_S_POINTER_0
+#define SDP_S_POINTER_0                                 (_MK_ADDR_CONST(0xb004))
 #define SDP_S_POINTER_0_SECURE                                             (0x0)
 #define SDP_S_POINTER_0_DUAL                                               (0x0)
 #define SDP_S_POINTER_0_SCR                                                  (0)
@@ -8103,8 +8208,8 @@
 #define SDP_S_POINTER_0_CONSUMER_GROUP_1                     (_MK_ENUM_CONST(1))
 
 
-/* Register SDP_S_LUT_ACCESS_CFG_0 */
-#define SDP_S_LUT_ACCESS_CFG_0                          (_MK_ADDR_CONST(0xe008))
+// Register SDP_S_LUT_ACCESS_CFG_0
+#define SDP_S_LUT_ACCESS_CFG_0                          (_MK_ADDR_CONST(0xb008))
 #define SDP_S_LUT_ACCESS_CFG_0_SECURE                                      (0x0)
 #define SDP_S_LUT_ACCESS_CFG_0_DUAL                                        (0x0)
 #define SDP_S_LUT_ACCESS_CFG_0_SCR                                           (0)
@@ -8169,8 +8274,8 @@
 #define SDP_S_LUT_ACCESS_CFG_0_LUT_ACCESS_TYPE_WRITE         (_MK_ENUM_CONST(1))
 
 
-/* Register SDP_S_LUT_ACCESS_DATA_0 */
-#define SDP_S_LUT_ACCESS_DATA_0                         (_MK_ADDR_CONST(0xe00c))
+// Register SDP_S_LUT_ACCESS_DATA_0
+#define SDP_S_LUT_ACCESS_DATA_0                         (_MK_ADDR_CONST(0xb00c))
 #define SDP_S_LUT_ACCESS_DATA_0_SECURE                                     (0x0)
 #define SDP_S_LUT_ACCESS_DATA_0_DUAL                                       (0x0)
 #define SDP_S_LUT_ACCESS_DATA_0_SCR                                          (0)
@@ -8198,8 +8303,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_S_LUT_CFG_0 */
-#define SDP_S_LUT_CFG_0                                 (_MK_ADDR_CONST(0xe010))
+// Register SDP_S_LUT_CFG_0
+#define SDP_S_LUT_CFG_0                                 (_MK_ADDR_CONST(0xb010))
 #define SDP_S_LUT_CFG_0_SECURE                                             (0x0)
 #define SDP_S_LUT_CFG_0_DUAL                                               (0x0)
 #define SDP_S_LUT_CFG_0_SCR                                                  (0)
@@ -8280,8 +8385,8 @@
 #define SDP_S_LUT_CFG_0_LUT_HYBRID_PRIORITY_LO               (_MK_ENUM_CONST(1))
 
 
-/* Register SDP_S_LUT_INFO_0 */
-#define SDP_S_LUT_INFO_0                                (_MK_ADDR_CONST(0xe014))
+// Register SDP_S_LUT_INFO_0
+#define SDP_S_LUT_INFO_0                                (_MK_ADDR_CONST(0xb014))
 #define SDP_S_LUT_INFO_0_SECURE                                            (0x0)
 #define SDP_S_LUT_INFO_0_DUAL                                              (0x0)
 #define SDP_S_LUT_INFO_0_SCR                                                 (0)
@@ -8341,8 +8446,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_S_LUT_LE_START_0 */
-#define SDP_S_LUT_LE_START_0                            (_MK_ADDR_CONST(0xe018))
+// Register SDP_S_LUT_LE_START_0
+#define SDP_S_LUT_LE_START_0                            (_MK_ADDR_CONST(0xb018))
 #define SDP_S_LUT_LE_START_0_SECURE                                        (0x0)
 #define SDP_S_LUT_LE_START_0_DUAL                                          (0x0)
 #define SDP_S_LUT_LE_START_0_SCR                                             (0)
@@ -8371,8 +8476,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_S_LUT_LE_END_0 */
-#define SDP_S_LUT_LE_END_0                              (_MK_ADDR_CONST(0xe01c))
+// Register SDP_S_LUT_LE_END_0
+#define SDP_S_LUT_LE_END_0                              (_MK_ADDR_CONST(0xb01c))
 #define SDP_S_LUT_LE_END_0_SECURE                                          (0x0)
 #define SDP_S_LUT_LE_END_0_DUAL                                            (0x0)
 #define SDP_S_LUT_LE_END_0_SCR                                               (0)
@@ -8398,8 +8503,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_S_LUT_LO_START_0 */
-#define SDP_S_LUT_LO_START_0                            (_MK_ADDR_CONST(0xe020))
+// Register SDP_S_LUT_LO_START_0
+#define SDP_S_LUT_LO_START_0                            (_MK_ADDR_CONST(0xb020))
 #define SDP_S_LUT_LO_START_0_SECURE                                        (0x0)
 #define SDP_S_LUT_LO_START_0_DUAL                                          (0x0)
 #define SDP_S_LUT_LO_START_0_SCR                                             (0)
@@ -8428,8 +8533,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_S_LUT_LO_END_0 */
-#define SDP_S_LUT_LO_END_0                              (_MK_ADDR_CONST(0xe024))
+// Register SDP_S_LUT_LO_END_0
+#define SDP_S_LUT_LO_END_0                              (_MK_ADDR_CONST(0xb024))
 #define SDP_S_LUT_LO_END_0_SECURE                                          (0x0)
 #define SDP_S_LUT_LO_END_0_DUAL                                            (0x0)
 #define SDP_S_LUT_LO_END_0_SCR                                               (0)
@@ -8455,8 +8560,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_S_LUT_LE_SLOPE_SCALE_0 */
-#define SDP_S_LUT_LE_SLOPE_SCALE_0                      (_MK_ADDR_CONST(0xe028))
+// Register SDP_S_LUT_LE_SLOPE_SCALE_0
+#define SDP_S_LUT_LE_SLOPE_SCALE_0                      (_MK_ADDR_CONST(0xb028))
 #define SDP_S_LUT_LE_SLOPE_SCALE_0_SECURE                                  (0x0)
 #define SDP_S_LUT_LE_SLOPE_SCALE_0_DUAL                                    (0x0)
 #define SDP_S_LUT_LE_SLOPE_SCALE_0_SCR                                       (0)
@@ -8508,8 +8613,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_S_LUT_LE_SLOPE_SHIFT_0 */
-#define SDP_S_LUT_LE_SLOPE_SHIFT_0                      (_MK_ADDR_CONST(0xe02c))
+// Register SDP_S_LUT_LE_SLOPE_SHIFT_0
+#define SDP_S_LUT_LE_SLOPE_SHIFT_0                      (_MK_ADDR_CONST(0xb02c))
 #define SDP_S_LUT_LE_SLOPE_SHIFT_0_SECURE                                  (0x0)
 #define SDP_S_LUT_LE_SLOPE_SHIFT_0_DUAL                                    (0x0)
 #define SDP_S_LUT_LE_SLOPE_SHIFT_0_SCR                                       (0)
@@ -8561,8 +8666,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_S_LUT_LO_SLOPE_SCALE_0 */
-#define SDP_S_LUT_LO_SLOPE_SCALE_0                      (_MK_ADDR_CONST(0xe030))
+// Register SDP_S_LUT_LO_SLOPE_SCALE_0
+#define SDP_S_LUT_LO_SLOPE_SCALE_0                      (_MK_ADDR_CONST(0xb030))
 #define SDP_S_LUT_LO_SLOPE_SCALE_0_SECURE                                  (0x0)
 #define SDP_S_LUT_LO_SLOPE_SCALE_0_DUAL                                    (0x0)
 #define SDP_S_LUT_LO_SLOPE_SCALE_0_SCR                                       (0)
@@ -8614,8 +8719,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_S_LUT_LO_SLOPE_SHIFT_0 */
-#define SDP_S_LUT_LO_SLOPE_SHIFT_0                      (_MK_ADDR_CONST(0xe034))
+// Register SDP_S_LUT_LO_SLOPE_SHIFT_0
+#define SDP_S_LUT_LO_SLOPE_SHIFT_0                      (_MK_ADDR_CONST(0xb034))
 #define SDP_S_LUT_LO_SLOPE_SHIFT_0_SECURE                                  (0x0)
 #define SDP_S_LUT_LO_SLOPE_SHIFT_0_DUAL                                    (0x0)
 #define SDP_S_LUT_LO_SLOPE_SHIFT_0_SCR                                       (0)
@@ -8667,8 +8772,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_OP_ENABLE_0 */
-#define SDP_D_OP_ENABLE_0                               (_MK_ADDR_CONST(0xe038))
+// Register SDP_D_OP_ENABLE_0
+#define SDP_D_OP_ENABLE_0                               (_MK_ADDR_CONST(0xb038))
 #define SDP_D_OP_ENABLE_0_SECURE                                           (0x0)
 #define SDP_D_OP_ENABLE_0_DUAL                                             (0x0)
 #define SDP_D_OP_ENABLE_0_SCR                                                (0)
@@ -8695,8 +8800,8 @@
 #define SDP_D_OP_ENABLE_0_OP_EN_ENABLE                       (_MK_ENUM_CONST(1))
 
 
-/* Register SDP_D_DATA_CUBE_WIDTH_0 */
-#define SDP_D_DATA_CUBE_WIDTH_0                         (_MK_ADDR_CONST(0xe03c))
+// Register SDP_D_DATA_CUBE_WIDTH_0
+#define SDP_D_DATA_CUBE_WIDTH_0                         (_MK_ADDR_CONST(0xb03c))
 #define SDP_D_DATA_CUBE_WIDTH_0_SECURE                                     (0x0)
 #define SDP_D_DATA_CUBE_WIDTH_0_DUAL                                       (0x0)
 #define SDP_D_DATA_CUBE_WIDTH_0_SCR                                          (0)
@@ -8721,8 +8826,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DATA_CUBE_HEIGHT_0 */
-#define SDP_D_DATA_CUBE_HEIGHT_0                        (_MK_ADDR_CONST(0xe040))
+// Register SDP_D_DATA_CUBE_HEIGHT_0
+#define SDP_D_DATA_CUBE_HEIGHT_0                        (_MK_ADDR_CONST(0xb040))
 #define SDP_D_DATA_CUBE_HEIGHT_0_SECURE                                    (0x0)
 #define SDP_D_DATA_CUBE_HEIGHT_0_DUAL                                      (0x0)
 #define SDP_D_DATA_CUBE_HEIGHT_0_SCR                                         (0)
@@ -8748,8 +8853,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DATA_CUBE_CHANNEL_0 */
-#define SDP_D_DATA_CUBE_CHANNEL_0                       (_MK_ADDR_CONST(0xe044))
+// Register SDP_D_DATA_CUBE_CHANNEL_0
+#define SDP_D_DATA_CUBE_CHANNEL_0                       (_MK_ADDR_CONST(0xb044))
 #define SDP_D_DATA_CUBE_CHANNEL_0_SECURE                                   (0x0)
 #define SDP_D_DATA_CUBE_CHANNEL_0_DUAL                                     (0x0)
 #define SDP_D_DATA_CUBE_CHANNEL_0_SCR                                        (0)
@@ -8777,8 +8882,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DST_BASE_ADDR_LOW_0 */
-#define SDP_D_DST_BASE_ADDR_LOW_0                       (_MK_ADDR_CONST(0xe048))
+// Register SDP_D_DST_BASE_ADDR_LOW_0
+#define SDP_D_DST_BASE_ADDR_LOW_0                       (_MK_ADDR_CONST(0xb048))
 #define SDP_D_DST_BASE_ADDR_LOW_0_SECURE                                   (0x0)
 #define SDP_D_DST_BASE_ADDR_LOW_0_DUAL                                     (0x0)
 #define SDP_D_DST_BASE_ADDR_LOW_0_SCR                                        (0)
@@ -8810,29 +8915,29 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DST_BASE_ADDR_HIGH_0 */
-#define SDP_D_DST_BASE_ADDR_HIGH_0                      (_MK_ADDR_CONST(0xe04c))
+// Register SDP_D_DST_BASE_ADDR_HIGH_0
+#define SDP_D_DST_BASE_ADDR_HIGH_0                      (_MK_ADDR_CONST(0xb04c))
 #define SDP_D_DST_BASE_ADDR_HIGH_0_SECURE                                  (0x0)
 #define SDP_D_DST_BASE_ADDR_HIGH_0_DUAL                                    (0x0)
 #define SDP_D_DST_BASE_ADDR_HIGH_0_SCR                                       (0)
 #define SDP_D_DST_BASE_ADDR_HIGH_0_WORD_COUNT                              (0x1)
 #define SDP_D_DST_BASE_ADDR_HIGH_0_RESET_VAL               (_MK_MASK_CONST(0x0))
-#define SDP_D_DST_BASE_ADDR_HIGH_0_RESET_MASK             (_MK_MASK_CONST(0xff))
+#define SDP_D_DST_BASE_ADDR_HIGH_0_RESET_MASK       (_MK_MASK_CONST(0xffffffff))
 #define SDP_D_DST_BASE_ADDR_HIGH_0_SW_DEFAULT_VAL          (_MK_MASK_CONST(0x0))
 #define SDP_D_DST_BASE_ADDR_HIGH_0_SW_DEFAULT_MASK         (_MK_MASK_CONST(0x0))
-#define SDP_D_DST_BASE_ADDR_HIGH_0_READ_MASK              (_MK_MASK_CONST(0xff))
-#define SDP_D_DST_BASE_ADDR_HIGH_0_WRITE_MASK             (_MK_MASK_CONST(0xff))
+#define SDP_D_DST_BASE_ADDR_HIGH_0_READ_MASK        (_MK_MASK_CONST(0xffffffff))
+#define SDP_D_DST_BASE_ADDR_HIGH_0_WRITE_MASK       (_MK_MASK_CONST(0xffffffff))
 #define SDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_SHIFT \
 	(_MK_SHIFT_CONST(0))
 #define SDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_FIELD \
-	(_MK_FIELD_CONST(0xff, \
+	(_MK_FIELD_CONST(0xffffffff, \
 	SDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_SHIFT))
-#define SDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_RANGE                (7:0)
+#define SDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_RANGE               (31:0)
 #define SDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_WOFFSET              (0x0)
 #define SDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define SDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_DEFAULT_MASK \
-	(_MK_MASK_CONST(0xff))
+	(_MK_MASK_CONST(0xffffffff))
 #define SDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_SW_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define SDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_SW_DEFAULT_MASK \
@@ -8843,8 +8948,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DST_LINE_STRIDE_0 */
-#define SDP_D_DST_LINE_STRIDE_0                         (_MK_ADDR_CONST(0xe050))
+// Register SDP_D_DST_LINE_STRIDE_0
+#define SDP_D_DST_LINE_STRIDE_0                         (_MK_ADDR_CONST(0xb050))
 #define SDP_D_DST_LINE_STRIDE_0_SECURE                                     (0x0)
 #define SDP_D_DST_LINE_STRIDE_0_DUAL                                       (0x0)
 #define SDP_D_DST_LINE_STRIDE_0_SCR                                          (0)
@@ -8874,8 +8979,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DST_SURFACE_STRIDE_0 */
-#define SDP_D_DST_SURFACE_STRIDE_0                      (_MK_ADDR_CONST(0xe054))
+// Register SDP_D_DST_SURFACE_STRIDE_0
+#define SDP_D_DST_SURFACE_STRIDE_0                      (_MK_ADDR_CONST(0xb054))
 #define SDP_D_DST_SURFACE_STRIDE_0_SECURE                                  (0x0)
 #define SDP_D_DST_SURFACE_STRIDE_0_DUAL                                    (0x0)
 #define SDP_D_DST_SURFACE_STRIDE_0_SCR                                       (0)
@@ -8907,8 +9012,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DP_BS_CFG_0 */
-#define SDP_D_DP_BS_CFG_0                               (_MK_ADDR_CONST(0xe058))
+// Register SDP_D_DP_BS_CFG_0
+#define SDP_D_DP_BS_CFG_0                               (_MK_ADDR_CONST(0xb058))
 #define SDP_D_DP_BS_CFG_0_SECURE                                           (0x0)
 #define SDP_D_DP_BS_CFG_0_DUAL                                             (0x0)
 #define SDP_D_DP_BS_CFG_0_SCR                                                (0)
@@ -9015,8 +9120,8 @@
 #define SDP_D_DP_BS_CFG_0_BS_RELU_BYPASS_YES                 (_MK_ENUM_CONST(1))
 
 
-/* Register SDP_D_DP_BS_ALU_CFG_0 */
-#define SDP_D_DP_BS_ALU_CFG_0                           (_MK_ADDR_CONST(0xe05c))
+// Register SDP_D_DP_BS_ALU_CFG_0
+#define SDP_D_DP_BS_ALU_CFG_0                           (_MK_ADDR_CONST(0xb05c))
 #define SDP_D_DP_BS_ALU_CFG_0_SECURE                                       (0x0)
 #define SDP_D_DP_BS_ALU_CFG_0_DUAL                                         (0x0)
 #define SDP_D_DP_BS_ALU_CFG_0_SCR                                            (0)
@@ -9064,8 +9169,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DP_BS_ALU_SRC_VALUE_0 */
-#define SDP_D_DP_BS_ALU_SRC_VALUE_0                     (_MK_ADDR_CONST(0xe060))
+// Register SDP_D_DP_BS_ALU_SRC_VALUE_0
+#define SDP_D_DP_BS_ALU_SRC_VALUE_0                     (_MK_ADDR_CONST(0xb060))
 #define SDP_D_DP_BS_ALU_SRC_VALUE_0_SECURE                                 (0x0)
 #define SDP_D_DP_BS_ALU_SRC_VALUE_0_DUAL                                   (0x0)
 #define SDP_D_DP_BS_ALU_SRC_VALUE_0_SCR                                      (0)
@@ -9096,8 +9201,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DP_BS_MUL_CFG_0 */
-#define SDP_D_DP_BS_MUL_CFG_0                           (_MK_ADDR_CONST(0xe064))
+// Register SDP_D_DP_BS_MUL_CFG_0
+#define SDP_D_DP_BS_MUL_CFG_0                           (_MK_ADDR_CONST(0xb064))
 #define SDP_D_DP_BS_MUL_CFG_0_SECURE                                       (0x0)
 #define SDP_D_DP_BS_MUL_CFG_0_DUAL                                         (0x0)
 #define SDP_D_DP_BS_MUL_CFG_0_SCR                                            (0)
@@ -9145,8 +9250,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DP_BS_MUL_SRC_VALUE_0 */
-#define SDP_D_DP_BS_MUL_SRC_VALUE_0                     (_MK_ADDR_CONST(0xe068))
+// Register SDP_D_DP_BS_MUL_SRC_VALUE_0
+#define SDP_D_DP_BS_MUL_SRC_VALUE_0                     (_MK_ADDR_CONST(0xb068))
 #define SDP_D_DP_BS_MUL_SRC_VALUE_0_SECURE                                 (0x0)
 #define SDP_D_DP_BS_MUL_SRC_VALUE_0_DUAL                                   (0x0)
 #define SDP_D_DP_BS_MUL_SRC_VALUE_0_SCR                                      (0)
@@ -9177,8 +9282,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DP_BN_CFG_0 */
-#define SDP_D_DP_BN_CFG_0                               (_MK_ADDR_CONST(0xe06c))
+// Register SDP_D_DP_BN_CFG_0
+#define SDP_D_DP_BN_CFG_0                               (_MK_ADDR_CONST(0xb06c))
 #define SDP_D_DP_BN_CFG_0_SECURE                                           (0x0)
 #define SDP_D_DP_BN_CFG_0_DUAL                                             (0x0)
 #define SDP_D_DP_BN_CFG_0_SCR                                                (0)
@@ -9285,8 +9390,8 @@
 #define SDP_D_DP_BN_CFG_0_BN_RELU_BYPASS_YES                 (_MK_ENUM_CONST(1))
 
 
-/* Register SDP_D_DP_BN_ALU_CFG_0 */
-#define SDP_D_DP_BN_ALU_CFG_0                           (_MK_ADDR_CONST(0xe070))
+// Register SDP_D_DP_BN_ALU_CFG_0
+#define SDP_D_DP_BN_ALU_CFG_0                           (_MK_ADDR_CONST(0xb070))
 #define SDP_D_DP_BN_ALU_CFG_0_SECURE                                       (0x0)
 #define SDP_D_DP_BN_ALU_CFG_0_DUAL                                         (0x0)
 #define SDP_D_DP_BN_ALU_CFG_0_SCR                                            (0)
@@ -9334,8 +9439,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DP_BN_ALU_SRC_VALUE_0 */
-#define SDP_D_DP_BN_ALU_SRC_VALUE_0                     (_MK_ADDR_CONST(0xe074))
+// Register SDP_D_DP_BN_ALU_SRC_VALUE_0
+#define SDP_D_DP_BN_ALU_SRC_VALUE_0                     (_MK_ADDR_CONST(0xb074))
 #define SDP_D_DP_BN_ALU_SRC_VALUE_0_SECURE                                 (0x0)
 #define SDP_D_DP_BN_ALU_SRC_VALUE_0_DUAL                                   (0x0)
 #define SDP_D_DP_BN_ALU_SRC_VALUE_0_SCR                                      (0)
@@ -9366,8 +9471,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DP_BN_MUL_CFG_0 */
-#define SDP_D_DP_BN_MUL_CFG_0                           (_MK_ADDR_CONST(0xe078))
+// Register SDP_D_DP_BN_MUL_CFG_0
+#define SDP_D_DP_BN_MUL_CFG_0                           (_MK_ADDR_CONST(0xb078))
 #define SDP_D_DP_BN_MUL_CFG_0_SECURE                                       (0x0)
 #define SDP_D_DP_BN_MUL_CFG_0_DUAL                                         (0x0)
 #define SDP_D_DP_BN_MUL_CFG_0_SCR                                            (0)
@@ -9415,8 +9520,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DP_BN_MUL_SRC_VALUE_0 */
-#define SDP_D_DP_BN_MUL_SRC_VALUE_0                     (_MK_ADDR_CONST(0xe07c))
+// Register SDP_D_DP_BN_MUL_SRC_VALUE_0
+#define SDP_D_DP_BN_MUL_SRC_VALUE_0                     (_MK_ADDR_CONST(0xb07c))
 #define SDP_D_DP_BN_MUL_SRC_VALUE_0_SECURE                                 (0x0)
 #define SDP_D_DP_BN_MUL_SRC_VALUE_0_DUAL                                   (0x0)
 #define SDP_D_DP_BN_MUL_SRC_VALUE_0_SCR                                      (0)
@@ -9447,8 +9552,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DP_EW_CFG_0 */
-#define SDP_D_DP_EW_CFG_0                               (_MK_ADDR_CONST(0xe080))
+// Register SDP_D_DP_EW_CFG_0
+#define SDP_D_DP_EW_CFG_0                               (_MK_ADDR_CONST(0xb080))
 #define SDP_D_DP_EW_CFG_0_SECURE                                           (0x0)
 #define SDP_D_DP_EW_CFG_0_DUAL                                             (0x0)
 #define SDP_D_DP_EW_CFG_0_SCR                                                (0)
@@ -9555,8 +9660,8 @@
 #define SDP_D_DP_EW_CFG_0_EW_LUT_BYPASS_YES                  (_MK_ENUM_CONST(1))
 
 
-/* Register SDP_D_DP_EW_ALU_CFG_0 */
-#define SDP_D_DP_EW_ALU_CFG_0                           (_MK_ADDR_CONST(0xe084))
+// Register SDP_D_DP_EW_ALU_CFG_0
+#define SDP_D_DP_EW_ALU_CFG_0                           (_MK_ADDR_CONST(0xb084))
 #define SDP_D_DP_EW_ALU_CFG_0_SECURE                                       (0x0)
 #define SDP_D_DP_EW_ALU_CFG_0_DUAL                                         (0x0)
 #define SDP_D_DP_EW_ALU_CFG_0_SCR                                            (0)
@@ -9604,8 +9709,8 @@
 #define SDP_D_DP_EW_ALU_CFG_0_EW_ALU_CVT_BYPASS_YES          (_MK_ENUM_CONST(1))
 
 
-/* Register SDP_D_DP_EW_ALU_SRC_VALUE_0 */
-#define SDP_D_DP_EW_ALU_SRC_VALUE_0                     (_MK_ADDR_CONST(0xe088))
+// Register SDP_D_DP_EW_ALU_SRC_VALUE_0
+#define SDP_D_DP_EW_ALU_SRC_VALUE_0                     (_MK_ADDR_CONST(0xb088))
 #define SDP_D_DP_EW_ALU_SRC_VALUE_0_SECURE                                 (0x0)
 #define SDP_D_DP_EW_ALU_SRC_VALUE_0_DUAL                                   (0x0)
 #define SDP_D_DP_EW_ALU_SRC_VALUE_0_SCR                                      (0)
@@ -9636,8 +9741,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DP_EW_ALU_CVT_OFFSET_VALUE_0 */
-#define SDP_D_DP_EW_ALU_CVT_OFFSET_VALUE_0              (_MK_ADDR_CONST(0xe08c))
+// Register SDP_D_DP_EW_ALU_CVT_OFFSET_VALUE_0
+#define SDP_D_DP_EW_ALU_CVT_OFFSET_VALUE_0              (_MK_ADDR_CONST(0xb08c))
 #define SDP_D_DP_EW_ALU_CVT_OFFSET_VALUE_0_SECURE                          (0x0)
 #define SDP_D_DP_EW_ALU_CVT_OFFSET_VALUE_0_DUAL                            (0x0)
 #define SDP_D_DP_EW_ALU_CVT_OFFSET_VALUE_0_SCR                               (0)
@@ -9674,8 +9779,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DP_EW_ALU_CVT_SCALE_VALUE_0 */
-#define SDP_D_DP_EW_ALU_CVT_SCALE_VALUE_0               (_MK_ADDR_CONST(0xe090))
+// Register SDP_D_DP_EW_ALU_CVT_SCALE_VALUE_0
+#define SDP_D_DP_EW_ALU_CVT_SCALE_VALUE_0               (_MK_ADDR_CONST(0xb090))
 #define SDP_D_DP_EW_ALU_CVT_SCALE_VALUE_0_SECURE                           (0x0)
 #define SDP_D_DP_EW_ALU_CVT_SCALE_VALUE_0_DUAL                             (0x0)
 #define SDP_D_DP_EW_ALU_CVT_SCALE_VALUE_0_SCR                                (0)
@@ -9709,8 +9814,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DP_EW_ALU_CVT_TRUNCATE_VALUE_0 */
-#define SDP_D_DP_EW_ALU_CVT_TRUNCATE_VALUE_0            (_MK_ADDR_CONST(0xe094))
+// Register SDP_D_DP_EW_ALU_CVT_TRUNCATE_VALUE_0
+#define SDP_D_DP_EW_ALU_CVT_TRUNCATE_VALUE_0            (_MK_ADDR_CONST(0xb094))
 #define SDP_D_DP_EW_ALU_CVT_TRUNCATE_VALUE_0_SECURE                        (0x0)
 #define SDP_D_DP_EW_ALU_CVT_TRUNCATE_VALUE_0_DUAL                          (0x0)
 #define SDP_D_DP_EW_ALU_CVT_TRUNCATE_VALUE_0_SCR                             (0)
@@ -9747,8 +9852,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DP_EW_MUL_CFG_0 */
-#define SDP_D_DP_EW_MUL_CFG_0                           (_MK_ADDR_CONST(0xe098))
+// Register SDP_D_DP_EW_MUL_CFG_0
+#define SDP_D_DP_EW_MUL_CFG_0                           (_MK_ADDR_CONST(0xb098))
 #define SDP_D_DP_EW_MUL_CFG_0_SECURE                                       (0x0)
 #define SDP_D_DP_EW_MUL_CFG_0_DUAL                                         (0x0)
 #define SDP_D_DP_EW_MUL_CFG_0_SCR                                            (0)
@@ -9796,8 +9901,8 @@
 #define SDP_D_DP_EW_MUL_CFG_0_EW_MUL_CVT_BYPASS_YES          (_MK_ENUM_CONST(1))
 
 
-/* Register SDP_D_DP_EW_MUL_SRC_VALUE_0 */
-#define SDP_D_DP_EW_MUL_SRC_VALUE_0                     (_MK_ADDR_CONST(0xe09c))
+// Register SDP_D_DP_EW_MUL_SRC_VALUE_0
+#define SDP_D_DP_EW_MUL_SRC_VALUE_0                     (_MK_ADDR_CONST(0xb09c))
 #define SDP_D_DP_EW_MUL_SRC_VALUE_0_SECURE                                 (0x0)
 #define SDP_D_DP_EW_MUL_SRC_VALUE_0_DUAL                                   (0x0)
 #define SDP_D_DP_EW_MUL_SRC_VALUE_0_SCR                                      (0)
@@ -9828,8 +9933,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DP_EW_MUL_CVT_OFFSET_VALUE_0 */
-#define SDP_D_DP_EW_MUL_CVT_OFFSET_VALUE_0              (_MK_ADDR_CONST(0xe0a0))
+// Register SDP_D_DP_EW_MUL_CVT_OFFSET_VALUE_0
+#define SDP_D_DP_EW_MUL_CVT_OFFSET_VALUE_0              (_MK_ADDR_CONST(0xb0a0))
 #define SDP_D_DP_EW_MUL_CVT_OFFSET_VALUE_0_SECURE                          (0x0)
 #define SDP_D_DP_EW_MUL_CVT_OFFSET_VALUE_0_DUAL                            (0x0)
 #define SDP_D_DP_EW_MUL_CVT_OFFSET_VALUE_0_SCR                               (0)
@@ -9866,8 +9971,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DP_EW_MUL_CVT_SCALE_VALUE_0 */
-#define SDP_D_DP_EW_MUL_CVT_SCALE_VALUE_0               (_MK_ADDR_CONST(0xe0a4))
+// Register SDP_D_DP_EW_MUL_CVT_SCALE_VALUE_0
+#define SDP_D_DP_EW_MUL_CVT_SCALE_VALUE_0               (_MK_ADDR_CONST(0xb0a4))
 #define SDP_D_DP_EW_MUL_CVT_SCALE_VALUE_0_SECURE                           (0x0)
 #define SDP_D_DP_EW_MUL_CVT_SCALE_VALUE_0_DUAL                             (0x0)
 #define SDP_D_DP_EW_MUL_CVT_SCALE_VALUE_0_SCR                                (0)
@@ -9901,8 +10006,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DP_EW_MUL_CVT_TRUNCATE_VALUE_0 */
-#define SDP_D_DP_EW_MUL_CVT_TRUNCATE_VALUE_0            (_MK_ADDR_CONST(0xe0a8))
+// Register SDP_D_DP_EW_MUL_CVT_TRUNCATE_VALUE_0
+#define SDP_D_DP_EW_MUL_CVT_TRUNCATE_VALUE_0            (_MK_ADDR_CONST(0xb0a8))
 #define SDP_D_DP_EW_MUL_CVT_TRUNCATE_VALUE_0_SECURE                        (0x0)
 #define SDP_D_DP_EW_MUL_CVT_TRUNCATE_VALUE_0_DUAL                          (0x0)
 #define SDP_D_DP_EW_MUL_CVT_TRUNCATE_VALUE_0_SCR                             (0)
@@ -9939,8 +10044,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DP_EW_TRUNCATE_VALUE_0 */
-#define SDP_D_DP_EW_TRUNCATE_VALUE_0                    (_MK_ADDR_CONST(0xe0ac))
+// Register SDP_D_DP_EW_TRUNCATE_VALUE_0
+#define SDP_D_DP_EW_TRUNCATE_VALUE_0                    (_MK_ADDR_CONST(0xb0ac))
 #define SDP_D_DP_EW_TRUNCATE_VALUE_0_SECURE                                (0x0)
 #define SDP_D_DP_EW_TRUNCATE_VALUE_0_DUAL                                  (0x0)
 #define SDP_D_DP_EW_TRUNCATE_VALUE_0_SCR                                     (0)
@@ -9971,8 +10076,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_FEATURE_MODE_CFG_0 */
-#define SDP_D_FEATURE_MODE_CFG_0                        (_MK_ADDR_CONST(0xe0b0))
+// Register SDP_D_FEATURE_MODE_CFG_0
+#define SDP_D_FEATURE_MODE_CFG_0                        (_MK_ADDR_CONST(0xb0b0))
 #define SDP_D_FEATURE_MODE_CFG_0_SECURE                                    (0x0)
 #define SDP_D_FEATURE_MODE_CFG_0_DUAL                                      (0x0)
 #define SDP_D_FEATURE_MODE_CFG_0_SCR                                         (0)
@@ -10073,8 +10178,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DST_DMA_CFG_0 */
-#define SDP_D_DST_DMA_CFG_0                             (_MK_ADDR_CONST(0xe0b4))
+// Register SDP_D_DST_DMA_CFG_0
+#define SDP_D_DST_DMA_CFG_0                             (_MK_ADDR_CONST(0xb0b4))
 #define SDP_D_DST_DMA_CFG_0_SECURE                                         (0x0)
 #define SDP_D_DST_DMA_CFG_0_DUAL                                           (0x0)
 #define SDP_D_DST_DMA_CFG_0_SCR                                              (0)
@@ -10103,8 +10208,8 @@
 #define SDP_D_DST_DMA_CFG_0_DST_RAM_TYPE_MC                  (_MK_ENUM_CONST(1))
 
 
-/* Register SDP_D_DST_BATCH_STRIDE_0 */
-#define SDP_D_DST_BATCH_STRIDE_0                        (_MK_ADDR_CONST(0xe0b8))
+// Register SDP_D_DST_BATCH_STRIDE_0
+#define SDP_D_DST_BATCH_STRIDE_0                        (_MK_ADDR_CONST(0xb0b8))
 #define SDP_D_DST_BATCH_STRIDE_0_SECURE                                    (0x0)
 #define SDP_D_DST_BATCH_STRIDE_0_DUAL                                      (0x0)
 #define SDP_D_DST_BATCH_STRIDE_0_SCR                                         (0)
@@ -10135,8 +10240,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_DATA_FORMAT_0 */
-#define SDP_D_DATA_FORMAT_0                             (_MK_ADDR_CONST(0xe0bc))
+// Register SDP_D_DATA_FORMAT_0
+#define SDP_D_DATA_FORMAT_0                             (_MK_ADDR_CONST(0xb0bc))
 #define SDP_D_DATA_FORMAT_0_SECURE                                         (0x0)
 #define SDP_D_DATA_FORMAT_0_DUAL                                           (0x0)
 #define SDP_D_DATA_FORMAT_0_SCR                                              (0)
@@ -10184,8 +10289,8 @@
 #define SDP_D_DATA_FORMAT_0_OUT_PRECISION_FP16               (_MK_ENUM_CONST(2))
 
 
-/* Register SDP_D_CVT_OFFSET_0 */
-#define SDP_D_CVT_OFFSET_0                              (_MK_ADDR_CONST(0xe0c0))
+// Register SDP_D_CVT_OFFSET_0
+#define SDP_D_CVT_OFFSET_0                              (_MK_ADDR_CONST(0xb0c0))
 #define SDP_D_CVT_OFFSET_0_SECURE                                          (0x0)
 #define SDP_D_CVT_OFFSET_0_DUAL                                            (0x0)
 #define SDP_D_CVT_OFFSET_0_SCR                                               (0)
@@ -10211,8 +10316,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_CVT_SCALE_0 */
-#define SDP_D_CVT_SCALE_0                               (_MK_ADDR_CONST(0xe0c4))
+// Register SDP_D_CVT_SCALE_0
+#define SDP_D_CVT_SCALE_0                               (_MK_ADDR_CONST(0xb0c4))
 #define SDP_D_CVT_SCALE_0_SECURE                                           (0x0)
 #define SDP_D_CVT_SCALE_0_DUAL                                             (0x0)
 #define SDP_D_CVT_SCALE_0_SCR                                                (0)
@@ -10236,8 +10341,8 @@
 #define SDP_D_CVT_SCALE_0_CVT_SCALE_PLATFORM_DEPENDENT     (_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_CVT_SHIFT_0 */
-#define SDP_D_CVT_SHIFT_0                               (_MK_ADDR_CONST(0xe0c8))
+// Register SDP_D_CVT_SHIFT_0
+#define SDP_D_CVT_SHIFT_0                               (_MK_ADDR_CONST(0xb0c8))
 #define SDP_D_CVT_SHIFT_0_SECURE                                           (0x0)
 #define SDP_D_CVT_SHIFT_0_DUAL                                             (0x0)
 #define SDP_D_CVT_SHIFT_0_SCR                                                (0)
@@ -10261,8 +10366,8 @@
 #define SDP_D_CVT_SHIFT_0_CVT_SHIFT_PLATFORM_DEPENDENT     (_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_STATUS_0 */
-#define SDP_D_STATUS_0                                  (_MK_ADDR_CONST(0xe0cc))
+// Register SDP_D_STATUS_0
+#define SDP_D_STATUS_0                                  (_MK_ADDR_CONST(0xb0cc))
 #define SDP_D_STATUS_0_SECURE                                              (0x0)
 #define SDP_D_STATUS_0_DUAL                                                (0x0)
 #define SDP_D_STATUS_0_SCR                                                   (0)
@@ -10287,8 +10392,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_STATUS_NAN_INPUT_NUM_0 */
-#define SDP_D_STATUS_NAN_INPUT_NUM_0                    (_MK_ADDR_CONST(0xe0d0))
+// Register SDP_D_STATUS_NAN_INPUT_NUM_0
+#define SDP_D_STATUS_NAN_INPUT_NUM_0                    (_MK_ADDR_CONST(0xb0d0))
 #define SDP_D_STATUS_NAN_INPUT_NUM_0_SECURE                                (0x0)
 #define SDP_D_STATUS_NAN_INPUT_NUM_0_DUAL                                  (0x0)
 #define SDP_D_STATUS_NAN_INPUT_NUM_0_SCR                                     (0)
@@ -10320,8 +10425,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_STATUS_INF_INPUT_NUM_0 */
-#define SDP_D_STATUS_INF_INPUT_NUM_0                    (_MK_ADDR_CONST(0xe0d4))
+// Register SDP_D_STATUS_INF_INPUT_NUM_0
+#define SDP_D_STATUS_INF_INPUT_NUM_0                    (_MK_ADDR_CONST(0xb0d4))
 #define SDP_D_STATUS_INF_INPUT_NUM_0_SECURE                                (0x0)
 #define SDP_D_STATUS_INF_INPUT_NUM_0_DUAL                                  (0x0)
 #define SDP_D_STATUS_INF_INPUT_NUM_0_SCR                                     (0)
@@ -10353,8 +10458,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_STATUS_NAN_OUTPUT_NUM_0 */
-#define SDP_D_STATUS_NAN_OUTPUT_NUM_0                   (_MK_ADDR_CONST(0xe0d8))
+// Register SDP_D_STATUS_NAN_OUTPUT_NUM_0
+#define SDP_D_STATUS_NAN_OUTPUT_NUM_0                   (_MK_ADDR_CONST(0xb0d8))
 #define SDP_D_STATUS_NAN_OUTPUT_NUM_0_SECURE                               (0x0)
 #define SDP_D_STATUS_NAN_OUTPUT_NUM_0_DUAL                                 (0x0)
 #define SDP_D_STATUS_NAN_OUTPUT_NUM_0_SCR                                    (0)
@@ -10386,8 +10491,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_PERF_ENABLE_0 */
-#define SDP_D_PERF_ENABLE_0                             (_MK_ADDR_CONST(0xe0dc))
+// Register SDP_D_PERF_ENABLE_0
+#define SDP_D_PERF_ENABLE_0                             (_MK_ADDR_CONST(0xb0dc))
 #define SDP_D_PERF_ENABLE_0_SECURE                                         (0x0)
 #define SDP_D_PERF_ENABLE_0_DUAL                                           (0x0)
 #define SDP_D_PERF_ENABLE_0_SCR                                              (0)
@@ -10472,8 +10577,8 @@
 #define SDP_D_PERF_ENABLE_0_PERF_NAN_INF_COUNT_EN_YES        (_MK_ENUM_CONST(1))
 
 
-/* Register SDP_D_PERF_WDMA_WRITE_STALL_0 */
-#define SDP_D_PERF_WDMA_WRITE_STALL_0                   (_MK_ADDR_CONST(0xe0e0))
+// Register SDP_D_PERF_WDMA_WRITE_STALL_0
+#define SDP_D_PERF_WDMA_WRITE_STALL_0                   (_MK_ADDR_CONST(0xb0e0))
 #define SDP_D_PERF_WDMA_WRITE_STALL_0_SECURE                               (0x0)
 #define SDP_D_PERF_WDMA_WRITE_STALL_0_DUAL                                 (0x0)
 #define SDP_D_PERF_WDMA_WRITE_STALL_0_SCR                                    (0)
@@ -10504,8 +10609,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_PERF_LUT_UFLOW_0 */
-#define SDP_D_PERF_LUT_UFLOW_0                          (_MK_ADDR_CONST(0xe0e4))
+// Register SDP_D_PERF_LUT_UFLOW_0
+#define SDP_D_PERF_LUT_UFLOW_0                          (_MK_ADDR_CONST(0xb0e4))
 #define SDP_D_PERF_LUT_UFLOW_0_SECURE                                      (0x0)
 #define SDP_D_PERF_LUT_UFLOW_0_DUAL                                        (0x0)
 #define SDP_D_PERF_LUT_UFLOW_0_SCR                                           (0)
@@ -10533,8 +10638,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_PERF_LUT_OFLOW_0 */
-#define SDP_D_PERF_LUT_OFLOW_0                          (_MK_ADDR_CONST(0xe0e8))
+// Register SDP_D_PERF_LUT_OFLOW_0
+#define SDP_D_PERF_LUT_OFLOW_0                          (_MK_ADDR_CONST(0xb0e8))
 #define SDP_D_PERF_LUT_OFLOW_0_SECURE                                      (0x0)
 #define SDP_D_PERF_LUT_OFLOW_0_DUAL                                        (0x0)
 #define SDP_D_PERF_LUT_OFLOW_0_SCR                                           (0)
@@ -10562,8 +10667,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_PERF_OUT_SATURATION_0 */
-#define SDP_D_PERF_OUT_SATURATION_0                     (_MK_ADDR_CONST(0xe0ec))
+// Register SDP_D_PERF_OUT_SATURATION_0
+#define SDP_D_PERF_OUT_SATURATION_0                     (_MK_ADDR_CONST(0xb0ec))
 #define SDP_D_PERF_OUT_SATURATION_0_SECURE                                 (0x0)
 #define SDP_D_PERF_OUT_SATURATION_0_DUAL                                   (0x0)
 #define SDP_D_PERF_OUT_SATURATION_0_SCR                                      (0)
@@ -10594,8 +10699,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_PERF_LUT_HYBRID_0 */
-#define SDP_D_PERF_LUT_HYBRID_0                         (_MK_ADDR_CONST(0xe0f0))
+// Register SDP_D_PERF_LUT_HYBRID_0
+#define SDP_D_PERF_LUT_HYBRID_0                         (_MK_ADDR_CONST(0xb0f0))
 #define SDP_D_PERF_LUT_HYBRID_0_SECURE                                     (0x0)
 #define SDP_D_PERF_LUT_HYBRID_0_DUAL                                       (0x0)
 #define SDP_D_PERF_LUT_HYBRID_0_SCR                                          (0)
@@ -10624,8 +10729,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_PERF_LUT_LE_HIT_0 */
-#define SDP_D_PERF_LUT_LE_HIT_0                         (_MK_ADDR_CONST(0xe0f4))
+// Register SDP_D_PERF_LUT_LE_HIT_0
+#define SDP_D_PERF_LUT_LE_HIT_0                         (_MK_ADDR_CONST(0xb0f4))
 #define SDP_D_PERF_LUT_LE_HIT_0_SECURE                                     (0x0)
 #define SDP_D_PERF_LUT_LE_HIT_0_DUAL                                       (0x0)
 #define SDP_D_PERF_LUT_LE_HIT_0_SCR                                          (0)
@@ -10654,8 +10759,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register SDP_D_PERF_LUT_LO_HIT_0 */
-#define SDP_D_PERF_LUT_LO_HIT_0                         (_MK_ADDR_CONST(0xe0f8))
+// Register SDP_D_PERF_LUT_LO_HIT_0
+#define SDP_D_PERF_LUT_LO_HIT_0                         (_MK_ADDR_CONST(0xb0f8))
 #define SDP_D_PERF_LUT_LO_HIT_0_SECURE                                     (0x0)
 #define SDP_D_PERF_LUT_LO_HIT_0_DUAL                                       (0x0)
 #define SDP_D_PERF_LUT_LO_HIT_0_SCR                                          (0)
@@ -10684,8 +10789,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_RDMA_S_STATUS_0 */
-#define PDP_RDMA_S_STATUS_0                             (_MK_ADDR_CONST(0xf000))
+// Register PDP_RDMA_S_STATUS_0
+#define PDP_RDMA_S_STATUS_0                             (_MK_ADDR_CONST(0xc000))
 #define PDP_RDMA_S_STATUS_0_SECURE                                         (0x0)
 #define PDP_RDMA_S_STATUS_0_DUAL                                           (0x0)
 #define PDP_RDMA_S_STATUS_0_SCR                                              (0)
@@ -10729,8 +10834,8 @@
 #define PDP_RDMA_S_STATUS_0_STATUS_1_PENDING                 (_MK_ENUM_CONST(2))
 
 
-/* Register PDP_RDMA_S_POINTER_0 */
-#define PDP_RDMA_S_POINTER_0                            (_MK_ADDR_CONST(0xf004))
+// Register PDP_RDMA_S_POINTER_0
+#define PDP_RDMA_S_POINTER_0                            (_MK_ADDR_CONST(0xc004))
 #define PDP_RDMA_S_POINTER_0_SECURE                                        (0x0)
 #define PDP_RDMA_S_POINTER_0_DUAL                                          (0x0)
 #define PDP_RDMA_S_POINTER_0_SCR                                             (0)
@@ -10774,8 +10879,8 @@
 #define PDP_RDMA_S_POINTER_0_CONSUMER_GROUP_1                (_MK_ENUM_CONST(1))
 
 
-/* Register PDP_RDMA_D_OP_ENABLE_0 */
-#define PDP_RDMA_D_OP_ENABLE_0                          (_MK_ADDR_CONST(0xf008))
+// Register PDP_RDMA_D_OP_ENABLE_0
+#define PDP_RDMA_D_OP_ENABLE_0                          (_MK_ADDR_CONST(0xc008))
 #define PDP_RDMA_D_OP_ENABLE_0_SECURE                                      (0x0)
 #define PDP_RDMA_D_OP_ENABLE_0_DUAL                                        (0x0)
 #define PDP_RDMA_D_OP_ENABLE_0_SCR                                           (0)
@@ -10802,8 +10907,8 @@
 #define PDP_RDMA_D_OP_ENABLE_0_OP_EN_ENABLE                  (_MK_ENUM_CONST(1))
 
 
-/* Register PDP_RDMA_D_DATA_CUBE_IN_WIDTH_0 */
-#define PDP_RDMA_D_DATA_CUBE_IN_WIDTH_0                 (_MK_ADDR_CONST(0xf00c))
+// Register PDP_RDMA_D_DATA_CUBE_IN_WIDTH_0
+#define PDP_RDMA_D_DATA_CUBE_IN_WIDTH_0                 (_MK_ADDR_CONST(0xc00c))
 #define PDP_RDMA_D_DATA_CUBE_IN_WIDTH_0_SECURE                             (0x0)
 #define PDP_RDMA_D_DATA_CUBE_IN_WIDTH_0_DUAL                               (0x0)
 #define PDP_RDMA_D_DATA_CUBE_IN_WIDTH_0_SCR                                  (0)
@@ -10835,8 +10940,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_RDMA_D_DATA_CUBE_IN_HEIGHT_0 */
-#define PDP_RDMA_D_DATA_CUBE_IN_HEIGHT_0                (_MK_ADDR_CONST(0xf010))
+// Register PDP_RDMA_D_DATA_CUBE_IN_HEIGHT_0
+#define PDP_RDMA_D_DATA_CUBE_IN_HEIGHT_0                (_MK_ADDR_CONST(0xc010))
 #define PDP_RDMA_D_DATA_CUBE_IN_HEIGHT_0_SECURE                            (0x0)
 #define PDP_RDMA_D_DATA_CUBE_IN_HEIGHT_0_DUAL                              (0x0)
 #define PDP_RDMA_D_DATA_CUBE_IN_HEIGHT_0_SCR                                 (0)
@@ -10869,8 +10974,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_RDMA_D_DATA_CUBE_IN_CHANNEL_0 */
-#define PDP_RDMA_D_DATA_CUBE_IN_CHANNEL_0               (_MK_ADDR_CONST(0xf014))
+// Register PDP_RDMA_D_DATA_CUBE_IN_CHANNEL_0
+#define PDP_RDMA_D_DATA_CUBE_IN_CHANNEL_0               (_MK_ADDR_CONST(0xc014))
 #define PDP_RDMA_D_DATA_CUBE_IN_CHANNEL_0_SECURE                           (0x0)
 #define PDP_RDMA_D_DATA_CUBE_IN_CHANNEL_0_DUAL                             (0x0)
 #define PDP_RDMA_D_DATA_CUBE_IN_CHANNEL_0_SCR                                (0)
@@ -10904,8 +11009,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_RDMA_D_FLYING_MODE_0 */
-#define PDP_RDMA_D_FLYING_MODE_0                        (_MK_ADDR_CONST(0xf018))
+// Register PDP_RDMA_D_FLYING_MODE_0
+#define PDP_RDMA_D_FLYING_MODE_0                        (_MK_ADDR_CONST(0xc018))
 #define PDP_RDMA_D_FLYING_MODE_0_SECURE                                    (0x0)
 #define PDP_RDMA_D_FLYING_MODE_0_DUAL                                      (0x0)
 #define PDP_RDMA_D_FLYING_MODE_0_SCR                                         (0)
@@ -10935,8 +11040,8 @@
 #define PDP_RDMA_D_FLYING_MODE_0_FLYING_MODE_OFF_FLYING      (_MK_ENUM_CONST(1))
 
 
-/* Register PDP_RDMA_D_SRC_BASE_ADDR_LOW_0 */
-#define PDP_RDMA_D_SRC_BASE_ADDR_LOW_0                  (_MK_ADDR_CONST(0xf01c))
+// Register PDP_RDMA_D_SRC_BASE_ADDR_LOW_0
+#define PDP_RDMA_D_SRC_BASE_ADDR_LOW_0                  (_MK_ADDR_CONST(0xc01c))
 #define PDP_RDMA_D_SRC_BASE_ADDR_LOW_0_SECURE                              (0x0)
 #define PDP_RDMA_D_SRC_BASE_ADDR_LOW_0_DUAL                                (0x0)
 #define PDP_RDMA_D_SRC_BASE_ADDR_LOW_0_SCR                                   (0)
@@ -10970,29 +11075,32 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0 */
-#define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0                 (_MK_ADDR_CONST(0xf020))
+// Register PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0
+#define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0                 (_MK_ADDR_CONST(0xc020))
 #define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SECURE                             (0x0)
 #define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_DUAL                               (0x0)
 #define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SCR                                  (0)
 #define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_WORD_COUNT                         (0x1)
 #define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_RESET_VAL          (_MK_MASK_CONST(0x0))
-#define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_RESET_MASK        (_MK_MASK_CONST(0xff))
+#define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_RESET_MASK \
+	(_MK_MASK_CONST(0xffffffff))
 #define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SW_DEFAULT_VAL     (_MK_MASK_CONST(0x0))
 #define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SW_DEFAULT_MASK    (_MK_MASK_CONST(0x0))
-#define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_READ_MASK         (_MK_MASK_CONST(0xff))
-#define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_WRITE_MASK        (_MK_MASK_CONST(0xff))
+#define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_READ_MASK \
+	(_MK_MASK_CONST(0xffffffff))
+#define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_WRITE_MASK \
+	(_MK_MASK_CONST(0xffffffff))
 #define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_SHIFT \
 	(_MK_SHIFT_CONST(0))
 #define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_FIELD \
-	(_MK_FIELD_CONST(0xff, \
+	(_MK_FIELD_CONST(0xffffffff, \
 	PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_SHIFT))
-#define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_RANGE           (7:0)
+#define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_RANGE          (31:0)
 #define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_WOFFSET         (0x0)
 #define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_DEFAULT_MASK \
-	(_MK_MASK_CONST(0xff))
+	(_MK_MASK_CONST(0xffffffff))
 #define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_SW_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define PDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_SW_DEFAULT_MASK \
@@ -11003,8 +11111,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_RDMA_D_SRC_LINE_STRIDE_0 */
-#define PDP_RDMA_D_SRC_LINE_STRIDE_0                    (_MK_ADDR_CONST(0xf024))
+// Register PDP_RDMA_D_SRC_LINE_STRIDE_0
+#define PDP_RDMA_D_SRC_LINE_STRIDE_0                    (_MK_ADDR_CONST(0xc024))
 #define PDP_RDMA_D_SRC_LINE_STRIDE_0_SECURE                                (0x0)
 #define PDP_RDMA_D_SRC_LINE_STRIDE_0_DUAL                                  (0x0)
 #define PDP_RDMA_D_SRC_LINE_STRIDE_0_SCR                                     (0)
@@ -11036,8 +11144,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_RDMA_D_SRC_SURFACE_STRIDE_0 */
-#define PDP_RDMA_D_SRC_SURFACE_STRIDE_0                 (_MK_ADDR_CONST(0xf028))
+// Register PDP_RDMA_D_SRC_SURFACE_STRIDE_0
+#define PDP_RDMA_D_SRC_SURFACE_STRIDE_0                 (_MK_ADDR_CONST(0xc028))
 #define PDP_RDMA_D_SRC_SURFACE_STRIDE_0_SECURE                             (0x0)
 #define PDP_RDMA_D_SRC_SURFACE_STRIDE_0_DUAL                               (0x0)
 #define PDP_RDMA_D_SRC_SURFACE_STRIDE_0_SCR                                  (0)
@@ -11072,8 +11180,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_RDMA_D_SRC_RAM_CFG_0 */
-#define PDP_RDMA_D_SRC_RAM_CFG_0                        (_MK_ADDR_CONST(0xf02c))
+// Register PDP_RDMA_D_SRC_RAM_CFG_0
+#define PDP_RDMA_D_SRC_RAM_CFG_0                        (_MK_ADDR_CONST(0xc02c))
 #define PDP_RDMA_D_SRC_RAM_CFG_0_SECURE                                    (0x0)
 #define PDP_RDMA_D_SRC_RAM_CFG_0_DUAL                                      (0x0)
 #define PDP_RDMA_D_SRC_RAM_CFG_0_SCR                                         (0)
@@ -11104,8 +11212,8 @@
 #define PDP_RDMA_D_SRC_RAM_CFG_0_SRC_RAM_TYPE_MC             (_MK_ENUM_CONST(1))
 
 
-/* Register PDP_RDMA_D_DATA_FORMAT_0 */
-#define PDP_RDMA_D_DATA_FORMAT_0                        (_MK_ADDR_CONST(0xf030))
+// Register PDP_RDMA_D_DATA_FORMAT_0
+#define PDP_RDMA_D_DATA_FORMAT_0                        (_MK_ADDR_CONST(0xc030))
 #define PDP_RDMA_D_DATA_FORMAT_0_SECURE                                    (0x0)
 #define PDP_RDMA_D_DATA_FORMAT_0_DUAL                                      (0x0)
 #define PDP_RDMA_D_DATA_FORMAT_0_SCR                                         (0)
@@ -11136,8 +11244,8 @@
 #define PDP_RDMA_D_DATA_FORMAT_0_INPUT_DATA_FP16             (_MK_ENUM_CONST(2))
 
 
-/* Register PDP_RDMA_D_OPERATION_MODE_CFG_0 */
-#define PDP_RDMA_D_OPERATION_MODE_CFG_0                 (_MK_ADDR_CONST(0xf034))
+// Register PDP_RDMA_D_OPERATION_MODE_CFG_0
+#define PDP_RDMA_D_OPERATION_MODE_CFG_0                 (_MK_ADDR_CONST(0xc034))
 #define PDP_RDMA_D_OPERATION_MODE_CFG_0_SECURE                             (0x0)
 #define PDP_RDMA_D_OPERATION_MODE_CFG_0_DUAL                               (0x0)
 #define PDP_RDMA_D_OPERATION_MODE_CFG_0_SCR                                  (0)
@@ -11168,8 +11276,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_RDMA_D_POOLING_KERNEL_CFG_0 */
-#define PDP_RDMA_D_POOLING_KERNEL_CFG_0                 (_MK_ADDR_CONST(0xf038))
+// Register PDP_RDMA_D_POOLING_KERNEL_CFG_0
+#define PDP_RDMA_D_POOLING_KERNEL_CFG_0                 (_MK_ADDR_CONST(0xc038))
 #define PDP_RDMA_D_POOLING_KERNEL_CFG_0_SECURE                             (0x0)
 #define PDP_RDMA_D_POOLING_KERNEL_CFG_0_DUAL                               (0x0)
 #define PDP_RDMA_D_POOLING_KERNEL_CFG_0_SCR                                  (0)
@@ -11237,8 +11345,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_RDMA_D_POOLING_PADDING_CFG_0 */
-#define PDP_RDMA_D_POOLING_PADDING_CFG_0                (_MK_ADDR_CONST(0xf03c))
+// Register PDP_RDMA_D_POOLING_PADDING_CFG_0
+#define PDP_RDMA_D_POOLING_PADDING_CFG_0                (_MK_ADDR_CONST(0xc03c))
 #define PDP_RDMA_D_POOLING_PADDING_CFG_0_SECURE                            (0x0)
 #define PDP_RDMA_D_POOLING_PADDING_CFG_0_DUAL                              (0x0)
 #define PDP_RDMA_D_POOLING_PADDING_CFG_0_SCR                                 (0)
@@ -11270,8 +11378,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_RDMA_D_PARTIAL_WIDTH_IN_0 */
-#define PDP_RDMA_D_PARTIAL_WIDTH_IN_0                   (_MK_ADDR_CONST(0xf040))
+// Register PDP_RDMA_D_PARTIAL_WIDTH_IN_0
+#define PDP_RDMA_D_PARTIAL_WIDTH_IN_0                   (_MK_ADDR_CONST(0xc040))
 #define PDP_RDMA_D_PARTIAL_WIDTH_IN_0_SECURE                               (0x0)
 #define PDP_RDMA_D_PARTIAL_WIDTH_IN_0_DUAL                                 (0x0)
 #define PDP_RDMA_D_PARTIAL_WIDTH_IN_0_SCR                                    (0)
@@ -11343,8 +11451,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_RDMA_D_PERF_ENABLE_0 */
-#define PDP_RDMA_D_PERF_ENABLE_0                        (_MK_ADDR_CONST(0xf044))
+// Register PDP_RDMA_D_PERF_ENABLE_0
+#define PDP_RDMA_D_PERF_ENABLE_0                        (_MK_ADDR_CONST(0xc044))
 #define PDP_RDMA_D_PERF_ENABLE_0_SECURE                                    (0x0)
 #define PDP_RDMA_D_PERF_ENABLE_0_DUAL                                      (0x0)
 #define PDP_RDMA_D_PERF_ENABLE_0_SCR                                         (0)
@@ -11373,8 +11481,8 @@
 #define PDP_RDMA_D_PERF_ENABLE_0_DMA_EN_ENABLE               (_MK_ENUM_CONST(1))
 
 
-/* Register PDP_RDMA_D_PERF_READ_STALL_0 */
-#define PDP_RDMA_D_PERF_READ_STALL_0                    (_MK_ADDR_CONST(0xf048))
+// Register PDP_RDMA_D_PERF_READ_STALL_0
+#define PDP_RDMA_D_PERF_READ_STALL_0                    (_MK_ADDR_CONST(0xc048))
 #define PDP_RDMA_D_PERF_READ_STALL_0_SECURE                                (0x0)
 #define PDP_RDMA_D_PERF_READ_STALL_0_DUAL                                  (0x0)
 #define PDP_RDMA_D_PERF_READ_STALL_0_SCR                                     (0)
@@ -11406,8 +11514,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_RDMA_D_CYA_0 */
-#define PDP_RDMA_D_CYA_0                                (_MK_ADDR_CONST(0xf04c))
+// Register PDP_RDMA_D_CYA_0
+#define PDP_RDMA_D_CYA_0                                (_MK_ADDR_CONST(0xc04c))
 #define PDP_RDMA_D_CYA_0_SECURE                                            (0x0)
 #define PDP_RDMA_D_CYA_0_DUAL                                              (0x0)
 #define PDP_RDMA_D_CYA_0_SCR                                                 (0)
@@ -11431,8 +11539,8 @@
 #define PDP_RDMA_D_CYA_0_CYA_PLATFORM_DEPENDENT            (_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_S_STATUS_0 */
-#define PDP_S_STATUS_0                                 (_MK_ADDR_CONST(0x10000))
+// Register PDP_S_STATUS_0
+#define PDP_S_STATUS_0                                  (_MK_ADDR_CONST(0xd000))
 #define PDP_S_STATUS_0_SECURE                                              (0x0)
 #define PDP_S_STATUS_0_DUAL                                                (0x0)
 #define PDP_S_STATUS_0_SCR                                                   (0)
@@ -11476,8 +11584,8 @@
 #define PDP_S_STATUS_0_STATUS_1_PENDING                      (_MK_ENUM_CONST(2))
 
 
-/* Register PDP_S_POINTER_0 */
-#define PDP_S_POINTER_0                                (_MK_ADDR_CONST(0x10004))
+// Register PDP_S_POINTER_0
+#define PDP_S_POINTER_0                                 (_MK_ADDR_CONST(0xd004))
 #define PDP_S_POINTER_0_SECURE                                             (0x0)
 #define PDP_S_POINTER_0_DUAL                                               (0x0)
 #define PDP_S_POINTER_0_SCR                                                  (0)
@@ -11519,8 +11627,8 @@
 #define PDP_S_POINTER_0_CONSUMER_GROUP_1                     (_MK_ENUM_CONST(1))
 
 
-/* Register PDP_D_OP_ENABLE_0 */
-#define PDP_D_OP_ENABLE_0                              (_MK_ADDR_CONST(0x10008))
+// Register PDP_D_OP_ENABLE_0
+#define PDP_D_OP_ENABLE_0                               (_MK_ADDR_CONST(0xd008))
 #define PDP_D_OP_ENABLE_0_SECURE                                           (0x0)
 #define PDP_D_OP_ENABLE_0_DUAL                                             (0x0)
 #define PDP_D_OP_ENABLE_0_SCR                                                (0)
@@ -11547,8 +11655,8 @@
 #define PDP_D_OP_ENABLE_0_OP_EN_ENABLE                       (_MK_ENUM_CONST(1))
 
 
-/* Register PDP_D_DATA_CUBE_IN_WIDTH_0 */
-#define PDP_D_DATA_CUBE_IN_WIDTH_0                     (_MK_ADDR_CONST(0x1000c))
+// Register PDP_D_DATA_CUBE_IN_WIDTH_0
+#define PDP_D_DATA_CUBE_IN_WIDTH_0                      (_MK_ADDR_CONST(0xd00c))
 #define PDP_D_DATA_CUBE_IN_WIDTH_0_SECURE                                  (0x0)
 #define PDP_D_DATA_CUBE_IN_WIDTH_0_DUAL                                    (0x0)
 #define PDP_D_DATA_CUBE_IN_WIDTH_0_SCR                                       (0)
@@ -11579,8 +11687,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_DATA_CUBE_IN_HEIGHT_0 */
-#define PDP_D_DATA_CUBE_IN_HEIGHT_0                    (_MK_ADDR_CONST(0x10010))
+// Register PDP_D_DATA_CUBE_IN_HEIGHT_0
+#define PDP_D_DATA_CUBE_IN_HEIGHT_0                     (_MK_ADDR_CONST(0xd010))
 #define PDP_D_DATA_CUBE_IN_HEIGHT_0_SECURE                                 (0x0)
 #define PDP_D_DATA_CUBE_IN_HEIGHT_0_DUAL                                   (0x0)
 #define PDP_D_DATA_CUBE_IN_HEIGHT_0_SCR                                      (0)
@@ -11611,8 +11719,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_DATA_CUBE_IN_CHANNEL_0 */
-#define PDP_D_DATA_CUBE_IN_CHANNEL_0                   (_MK_ADDR_CONST(0x10014))
+// Register PDP_D_DATA_CUBE_IN_CHANNEL_0
+#define PDP_D_DATA_CUBE_IN_CHANNEL_0                    (_MK_ADDR_CONST(0xd014))
 #define PDP_D_DATA_CUBE_IN_CHANNEL_0_SECURE                                (0x0)
 #define PDP_D_DATA_CUBE_IN_CHANNEL_0_DUAL                                  (0x0)
 #define PDP_D_DATA_CUBE_IN_CHANNEL_0_SCR                                     (0)
@@ -11644,8 +11752,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_DATA_CUBE_OUT_WIDTH_0 */
-#define PDP_D_DATA_CUBE_OUT_WIDTH_0                    (_MK_ADDR_CONST(0x10018))
+// Register PDP_D_DATA_CUBE_OUT_WIDTH_0
+#define PDP_D_DATA_CUBE_OUT_WIDTH_0                     (_MK_ADDR_CONST(0xd018))
 #define PDP_D_DATA_CUBE_OUT_WIDTH_0_SECURE                                 (0x0)
 #define PDP_D_DATA_CUBE_OUT_WIDTH_0_DUAL                                   (0x0)
 #define PDP_D_DATA_CUBE_OUT_WIDTH_0_SCR                                      (0)
@@ -11676,8 +11784,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_DATA_CUBE_OUT_HEIGHT_0 */
-#define PDP_D_DATA_CUBE_OUT_HEIGHT_0                   (_MK_ADDR_CONST(0x1001c))
+// Register PDP_D_DATA_CUBE_OUT_HEIGHT_0
+#define PDP_D_DATA_CUBE_OUT_HEIGHT_0                    (_MK_ADDR_CONST(0xd01c))
 #define PDP_D_DATA_CUBE_OUT_HEIGHT_0_SECURE                                (0x0)
 #define PDP_D_DATA_CUBE_OUT_HEIGHT_0_DUAL                                  (0x0)
 #define PDP_D_DATA_CUBE_OUT_HEIGHT_0_SCR                                     (0)
@@ -11709,8 +11817,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_DATA_CUBE_OUT_CHANNEL_0 */
-#define PDP_D_DATA_CUBE_OUT_CHANNEL_0                  (_MK_ADDR_CONST(0x10020))
+// Register PDP_D_DATA_CUBE_OUT_CHANNEL_0
+#define PDP_D_DATA_CUBE_OUT_CHANNEL_0                   (_MK_ADDR_CONST(0xd020))
 #define PDP_D_DATA_CUBE_OUT_CHANNEL_0_SECURE                               (0x0)
 #define PDP_D_DATA_CUBE_OUT_CHANNEL_0_DUAL                                 (0x0)
 #define PDP_D_DATA_CUBE_OUT_CHANNEL_0_SCR                                    (0)
@@ -11742,8 +11850,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_OPERATION_MODE_CFG_0 */
-#define PDP_D_OPERATION_MODE_CFG_0                     (_MK_ADDR_CONST(0x10024))
+// Register PDP_D_OPERATION_MODE_CFG_0
+#define PDP_D_OPERATION_MODE_CFG_0                      (_MK_ADDR_CONST(0xd024))
 #define PDP_D_OPERATION_MODE_CFG_0_SECURE                                  (0x0)
 #define PDP_D_OPERATION_MODE_CFG_0_DUAL                                    (0x0)
 #define PDP_D_OPERATION_MODE_CFG_0_SCR                                       (0)
@@ -11815,8 +11923,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_NAN_FLUSH_TO_ZERO_0 */
-#define PDP_D_NAN_FLUSH_TO_ZERO_0                      (_MK_ADDR_CONST(0x10028))
+// Register PDP_D_NAN_FLUSH_TO_ZERO_0
+#define PDP_D_NAN_FLUSH_TO_ZERO_0                       (_MK_ADDR_CONST(0xd028))
 #define PDP_D_NAN_FLUSH_TO_ZERO_0_SECURE                                   (0x0)
 #define PDP_D_NAN_FLUSH_TO_ZERO_0_DUAL                                     (0x0)
 #define PDP_D_NAN_FLUSH_TO_ZERO_0_SCR                                        (0)
@@ -11848,8 +11956,8 @@
 #define PDP_D_NAN_FLUSH_TO_ZERO_0_NAN_TO_ZERO_ENABLE         (_MK_ENUM_CONST(1))
 
 
-/* Register PDP_D_PARTIAL_WIDTH_IN_0 */
-#define PDP_D_PARTIAL_WIDTH_IN_0                       (_MK_ADDR_CONST(0x1002c))
+// Register PDP_D_PARTIAL_WIDTH_IN_0
+#define PDP_D_PARTIAL_WIDTH_IN_0                        (_MK_ADDR_CONST(0xd02c))
 #define PDP_D_PARTIAL_WIDTH_IN_0_SECURE                                    (0x0)
 #define PDP_D_PARTIAL_WIDTH_IN_0_DUAL                                      (0x0)
 #define PDP_D_PARTIAL_WIDTH_IN_0_SCR                                         (0)
@@ -11921,8 +12029,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_PARTIAL_WIDTH_OUT_0 */
-#define PDP_D_PARTIAL_WIDTH_OUT_0                      (_MK_ADDR_CONST(0x10030))
+// Register PDP_D_PARTIAL_WIDTH_OUT_0
+#define PDP_D_PARTIAL_WIDTH_OUT_0                       (_MK_ADDR_CONST(0xd030))
 #define PDP_D_PARTIAL_WIDTH_OUT_0_SECURE                                   (0x0)
 #define PDP_D_PARTIAL_WIDTH_OUT_0_DUAL                                     (0x0)
 #define PDP_D_PARTIAL_WIDTH_OUT_0_SCR                                        (0)
@@ -11994,8 +12102,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_POOLING_KERNEL_CFG_0 */
-#define PDP_D_POOLING_KERNEL_CFG_0                     (_MK_ADDR_CONST(0x10034))
+// Register PDP_D_POOLING_KERNEL_CFG_0
+#define PDP_D_POOLING_KERNEL_CFG_0                      (_MK_ADDR_CONST(0xd034))
 #define PDP_D_POOLING_KERNEL_CFG_0_SECURE                                  (0x0)
 #define PDP_D_POOLING_KERNEL_CFG_0_DUAL                                    (0x0)
 #define PDP_D_POOLING_KERNEL_CFG_0_SCR                                       (0)
@@ -12115,8 +12223,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_RECIP_KERNEL_WIDTH_0 */
-#define PDP_D_RECIP_KERNEL_WIDTH_0                     (_MK_ADDR_CONST(0x10038))
+// Register PDP_D_RECIP_KERNEL_WIDTH_0
+#define PDP_D_RECIP_KERNEL_WIDTH_0                      (_MK_ADDR_CONST(0xd038))
 #define PDP_D_RECIP_KERNEL_WIDTH_0_SECURE                                  (0x0)
 #define PDP_D_RECIP_KERNEL_WIDTH_0_DUAL                                    (0x0)
 #define PDP_D_RECIP_KERNEL_WIDTH_0_SCR                                       (0)
@@ -12148,8 +12256,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_RECIP_KERNEL_HEIGHT_0 */
-#define PDP_D_RECIP_KERNEL_HEIGHT_0                    (_MK_ADDR_CONST(0x1003c))
+// Register PDP_D_RECIP_KERNEL_HEIGHT_0
+#define PDP_D_RECIP_KERNEL_HEIGHT_0                     (_MK_ADDR_CONST(0xd03c))
 #define PDP_D_RECIP_KERNEL_HEIGHT_0_SECURE                                 (0x0)
 #define PDP_D_RECIP_KERNEL_HEIGHT_0_DUAL                                   (0x0)
 #define PDP_D_RECIP_KERNEL_HEIGHT_0_SCR                                      (0)
@@ -12181,8 +12289,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_POOLING_PADDING_CFG_0 */
-#define PDP_D_POOLING_PADDING_CFG_0                    (_MK_ADDR_CONST(0x10040))
+// Register PDP_D_POOLING_PADDING_CFG_0
+#define PDP_D_POOLING_PADDING_CFG_0                     (_MK_ADDR_CONST(0xd040))
 #define PDP_D_POOLING_PADDING_CFG_0_SECURE                                 (0x0)
 #define PDP_D_POOLING_PADDING_CFG_0_DUAL                                   (0x0)
 #define PDP_D_POOLING_PADDING_CFG_0_SCR                                      (0)
@@ -12260,8 +12368,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_POOLING_PADDING_VALUE_1_CFG_0 */
-#define PDP_D_POOLING_PADDING_VALUE_1_CFG_0            (_MK_ADDR_CONST(0x10044))
+// Register PDP_D_POOLING_PADDING_VALUE_1_CFG_0
+#define PDP_D_POOLING_PADDING_VALUE_1_CFG_0             (_MK_ADDR_CONST(0xd044))
 #define PDP_D_POOLING_PADDING_VALUE_1_CFG_0_SECURE                         (0x0)
 #define PDP_D_POOLING_PADDING_VALUE_1_CFG_0_DUAL                           (0x0)
 #define PDP_D_POOLING_PADDING_VALUE_1_CFG_0_SCR                              (0)
@@ -12298,8 +12406,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_POOLING_PADDING_VALUE_2_CFG_0 */
-#define PDP_D_POOLING_PADDING_VALUE_2_CFG_0            (_MK_ADDR_CONST(0x10048))
+// Register PDP_D_POOLING_PADDING_VALUE_2_CFG_0
+#define PDP_D_POOLING_PADDING_VALUE_2_CFG_0             (_MK_ADDR_CONST(0xd048))
 #define PDP_D_POOLING_PADDING_VALUE_2_CFG_0_SECURE                         (0x0)
 #define PDP_D_POOLING_PADDING_VALUE_2_CFG_0_DUAL                           (0x0)
 #define PDP_D_POOLING_PADDING_VALUE_2_CFG_0_SCR                              (0)
@@ -12336,8 +12444,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_POOLING_PADDING_VALUE_3_CFG_0 */
-#define PDP_D_POOLING_PADDING_VALUE_3_CFG_0            (_MK_ADDR_CONST(0x1004c))
+// Register PDP_D_POOLING_PADDING_VALUE_3_CFG_0
+#define PDP_D_POOLING_PADDING_VALUE_3_CFG_0             (_MK_ADDR_CONST(0xd04c))
 #define PDP_D_POOLING_PADDING_VALUE_3_CFG_0_SECURE                         (0x0)
 #define PDP_D_POOLING_PADDING_VALUE_3_CFG_0_DUAL                           (0x0)
 #define PDP_D_POOLING_PADDING_VALUE_3_CFG_0_SCR                              (0)
@@ -12374,8 +12482,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_POOLING_PADDING_VALUE_4_CFG_0 */
-#define PDP_D_POOLING_PADDING_VALUE_4_CFG_0            (_MK_ADDR_CONST(0x10050))
+// Register PDP_D_POOLING_PADDING_VALUE_4_CFG_0
+#define PDP_D_POOLING_PADDING_VALUE_4_CFG_0             (_MK_ADDR_CONST(0xd050))
 #define PDP_D_POOLING_PADDING_VALUE_4_CFG_0_SECURE                         (0x0)
 #define PDP_D_POOLING_PADDING_VALUE_4_CFG_0_DUAL                           (0x0)
 #define PDP_D_POOLING_PADDING_VALUE_4_CFG_0_SCR                              (0)
@@ -12412,8 +12520,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_POOLING_PADDING_VALUE_5_CFG_0 */
-#define PDP_D_POOLING_PADDING_VALUE_5_CFG_0            (_MK_ADDR_CONST(0x10054))
+// Register PDP_D_POOLING_PADDING_VALUE_5_CFG_0
+#define PDP_D_POOLING_PADDING_VALUE_5_CFG_0             (_MK_ADDR_CONST(0xd054))
 #define PDP_D_POOLING_PADDING_VALUE_5_CFG_0_SECURE                         (0x0)
 #define PDP_D_POOLING_PADDING_VALUE_5_CFG_0_DUAL                           (0x0)
 #define PDP_D_POOLING_PADDING_VALUE_5_CFG_0_SCR                              (0)
@@ -12450,8 +12558,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_POOLING_PADDING_VALUE_6_CFG_0 */
-#define PDP_D_POOLING_PADDING_VALUE_6_CFG_0            (_MK_ADDR_CONST(0x10058))
+// Register PDP_D_POOLING_PADDING_VALUE_6_CFG_0
+#define PDP_D_POOLING_PADDING_VALUE_6_CFG_0             (_MK_ADDR_CONST(0xd058))
 #define PDP_D_POOLING_PADDING_VALUE_6_CFG_0_SECURE                         (0x0)
 #define PDP_D_POOLING_PADDING_VALUE_6_CFG_0_DUAL                           (0x0)
 #define PDP_D_POOLING_PADDING_VALUE_6_CFG_0_SCR                              (0)
@@ -12488,8 +12596,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_POOLING_PADDING_VALUE_7_CFG_0 */
-#define PDP_D_POOLING_PADDING_VALUE_7_CFG_0            (_MK_ADDR_CONST(0x1005c))
+// Register PDP_D_POOLING_PADDING_VALUE_7_CFG_0
+#define PDP_D_POOLING_PADDING_VALUE_7_CFG_0             (_MK_ADDR_CONST(0xd05c))
 #define PDP_D_POOLING_PADDING_VALUE_7_CFG_0_SECURE                         (0x0)
 #define PDP_D_POOLING_PADDING_VALUE_7_CFG_0_DUAL                           (0x0)
 #define PDP_D_POOLING_PADDING_VALUE_7_CFG_0_SCR                              (0)
@@ -12526,8 +12634,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_SRC_BASE_ADDR_LOW_0 */
-#define PDP_D_SRC_BASE_ADDR_LOW_0                      (_MK_ADDR_CONST(0x10060))
+// Register PDP_D_SRC_BASE_ADDR_LOW_0
+#define PDP_D_SRC_BASE_ADDR_LOW_0                       (_MK_ADDR_CONST(0xd060))
 #define PDP_D_SRC_BASE_ADDR_LOW_0_SECURE                                   (0x0)
 #define PDP_D_SRC_BASE_ADDR_LOW_0_DUAL                                     (0x0)
 #define PDP_D_SRC_BASE_ADDR_LOW_0_SCR                                        (0)
@@ -12559,29 +12667,29 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_SRC_BASE_ADDR_HIGH_0 */
-#define PDP_D_SRC_BASE_ADDR_HIGH_0                     (_MK_ADDR_CONST(0x10064))
+// Register PDP_D_SRC_BASE_ADDR_HIGH_0
+#define PDP_D_SRC_BASE_ADDR_HIGH_0                      (_MK_ADDR_CONST(0xd064))
 #define PDP_D_SRC_BASE_ADDR_HIGH_0_SECURE                                  (0x0)
 #define PDP_D_SRC_BASE_ADDR_HIGH_0_DUAL                                    (0x0)
 #define PDP_D_SRC_BASE_ADDR_HIGH_0_SCR                                       (0)
 #define PDP_D_SRC_BASE_ADDR_HIGH_0_WORD_COUNT                              (0x1)
 #define PDP_D_SRC_BASE_ADDR_HIGH_0_RESET_VAL               (_MK_MASK_CONST(0x0))
-#define PDP_D_SRC_BASE_ADDR_HIGH_0_RESET_MASK             (_MK_MASK_CONST(0xff))
+#define PDP_D_SRC_BASE_ADDR_HIGH_0_RESET_MASK       (_MK_MASK_CONST(0xffffffff))
 #define PDP_D_SRC_BASE_ADDR_HIGH_0_SW_DEFAULT_VAL          (_MK_MASK_CONST(0x0))
 #define PDP_D_SRC_BASE_ADDR_HIGH_0_SW_DEFAULT_MASK         (_MK_MASK_CONST(0x0))
-#define PDP_D_SRC_BASE_ADDR_HIGH_0_READ_MASK              (_MK_MASK_CONST(0xff))
-#define PDP_D_SRC_BASE_ADDR_HIGH_0_WRITE_MASK             (_MK_MASK_CONST(0xff))
+#define PDP_D_SRC_BASE_ADDR_HIGH_0_READ_MASK        (_MK_MASK_CONST(0xffffffff))
+#define PDP_D_SRC_BASE_ADDR_HIGH_0_WRITE_MASK       (_MK_MASK_CONST(0xffffffff))
 #define PDP_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_SHIFT \
 	(_MK_SHIFT_CONST(0))
 #define PDP_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_FIELD \
-	(_MK_FIELD_CONST(0xff, \
+	(_MK_FIELD_CONST(0xffffffff, \
 	PDP_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_SHIFT))
-#define PDP_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_RANGE                (7:0)
+#define PDP_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_RANGE               (31:0)
 #define PDP_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_WOFFSET              (0x0)
 #define PDP_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define PDP_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_DEFAULT_MASK \
-	(_MK_MASK_CONST(0xff))
+	(_MK_MASK_CONST(0xffffffff))
 #define PDP_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_SW_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define PDP_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_SW_DEFAULT_MASK \
@@ -12592,8 +12700,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_SRC_LINE_STRIDE_0 */
-#define PDP_D_SRC_LINE_STRIDE_0                        (_MK_ADDR_CONST(0x10068))
+// Register PDP_D_SRC_LINE_STRIDE_0
+#define PDP_D_SRC_LINE_STRIDE_0                         (_MK_ADDR_CONST(0xd068))
 #define PDP_D_SRC_LINE_STRIDE_0_SECURE                                     (0x0)
 #define PDP_D_SRC_LINE_STRIDE_0_DUAL                                       (0x0)
 #define PDP_D_SRC_LINE_STRIDE_0_SCR                                          (0)
@@ -12623,8 +12731,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_SRC_SURFACE_STRIDE_0 */
-#define PDP_D_SRC_SURFACE_STRIDE_0                     (_MK_ADDR_CONST(0x1006c))
+// Register PDP_D_SRC_SURFACE_STRIDE_0
+#define PDP_D_SRC_SURFACE_STRIDE_0                      (_MK_ADDR_CONST(0xd06c))
 #define PDP_D_SRC_SURFACE_STRIDE_0_SECURE                                  (0x0)
 #define PDP_D_SRC_SURFACE_STRIDE_0_DUAL                                    (0x0)
 #define PDP_D_SRC_SURFACE_STRIDE_0_SCR                                       (0)
@@ -12656,8 +12764,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_DST_BASE_ADDR_LOW_0 */
-#define PDP_D_DST_BASE_ADDR_LOW_0                      (_MK_ADDR_CONST(0x10070))
+// Register PDP_D_DST_BASE_ADDR_LOW_0
+#define PDP_D_DST_BASE_ADDR_LOW_0                       (_MK_ADDR_CONST(0xd070))
 #define PDP_D_DST_BASE_ADDR_LOW_0_SECURE                                   (0x0)
 #define PDP_D_DST_BASE_ADDR_LOW_0_DUAL                                     (0x0)
 #define PDP_D_DST_BASE_ADDR_LOW_0_SCR                                        (0)
@@ -12689,29 +12797,29 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_DST_BASE_ADDR_HIGH_0 */
-#define PDP_D_DST_BASE_ADDR_HIGH_0                     (_MK_ADDR_CONST(0x10074))
+// Register PDP_D_DST_BASE_ADDR_HIGH_0
+#define PDP_D_DST_BASE_ADDR_HIGH_0                      (_MK_ADDR_CONST(0xd074))
 #define PDP_D_DST_BASE_ADDR_HIGH_0_SECURE                                  (0x0)
 #define PDP_D_DST_BASE_ADDR_HIGH_0_DUAL                                    (0x0)
 #define PDP_D_DST_BASE_ADDR_HIGH_0_SCR                                       (0)
 #define PDP_D_DST_BASE_ADDR_HIGH_0_WORD_COUNT                              (0x1)
 #define PDP_D_DST_BASE_ADDR_HIGH_0_RESET_VAL               (_MK_MASK_CONST(0x0))
-#define PDP_D_DST_BASE_ADDR_HIGH_0_RESET_MASK             (_MK_MASK_CONST(0xff))
+#define PDP_D_DST_BASE_ADDR_HIGH_0_RESET_MASK       (_MK_MASK_CONST(0xffffffff))
 #define PDP_D_DST_BASE_ADDR_HIGH_0_SW_DEFAULT_VAL          (_MK_MASK_CONST(0x0))
 #define PDP_D_DST_BASE_ADDR_HIGH_0_SW_DEFAULT_MASK         (_MK_MASK_CONST(0x0))
-#define PDP_D_DST_BASE_ADDR_HIGH_0_READ_MASK              (_MK_MASK_CONST(0xff))
-#define PDP_D_DST_BASE_ADDR_HIGH_0_WRITE_MASK             (_MK_MASK_CONST(0xff))
+#define PDP_D_DST_BASE_ADDR_HIGH_0_READ_MASK        (_MK_MASK_CONST(0xffffffff))
+#define PDP_D_DST_BASE_ADDR_HIGH_0_WRITE_MASK       (_MK_MASK_CONST(0xffffffff))
 #define PDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_SHIFT \
 	(_MK_SHIFT_CONST(0))
 #define PDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_FIELD \
-	(_MK_FIELD_CONST(0xff, \
+	(_MK_FIELD_CONST(0xffffffff, \
 	PDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_SHIFT))
-#define PDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_RANGE                (7:0)
+#define PDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_RANGE               (31:0)
 #define PDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_WOFFSET              (0x0)
 #define PDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define PDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_DEFAULT_MASK \
-	(_MK_MASK_CONST(0xff))
+	(_MK_MASK_CONST(0xffffffff))
 #define PDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_SW_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define PDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_SW_DEFAULT_MASK \
@@ -12722,8 +12830,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_DST_LINE_STRIDE_0 */
-#define PDP_D_DST_LINE_STRIDE_0                        (_MK_ADDR_CONST(0x10078))
+// Register PDP_D_DST_LINE_STRIDE_0
+#define PDP_D_DST_LINE_STRIDE_0                         (_MK_ADDR_CONST(0xd078))
 #define PDP_D_DST_LINE_STRIDE_0_SECURE                                     (0x0)
 #define PDP_D_DST_LINE_STRIDE_0_DUAL                                       (0x0)
 #define PDP_D_DST_LINE_STRIDE_0_SCR                                          (0)
@@ -12753,8 +12861,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_DST_SURFACE_STRIDE_0 */
-#define PDP_D_DST_SURFACE_STRIDE_0                     (_MK_ADDR_CONST(0x1007c))
+// Register PDP_D_DST_SURFACE_STRIDE_0
+#define PDP_D_DST_SURFACE_STRIDE_0                      (_MK_ADDR_CONST(0xd07c))
 #define PDP_D_DST_SURFACE_STRIDE_0_SECURE                                  (0x0)
 #define PDP_D_DST_SURFACE_STRIDE_0_DUAL                                    (0x0)
 #define PDP_D_DST_SURFACE_STRIDE_0_SCR                                       (0)
@@ -12786,8 +12894,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_DST_RAM_CFG_0 */
-#define PDP_D_DST_RAM_CFG_0                            (_MK_ADDR_CONST(0x10080))
+// Register PDP_D_DST_RAM_CFG_0
+#define PDP_D_DST_RAM_CFG_0                             (_MK_ADDR_CONST(0xd080))
 #define PDP_D_DST_RAM_CFG_0_SECURE                                         (0x0)
 #define PDP_D_DST_RAM_CFG_0_DUAL                                           (0x0)
 #define PDP_D_DST_RAM_CFG_0_SCR                                              (0)
@@ -12816,8 +12924,8 @@
 #define PDP_D_DST_RAM_CFG_0_DST_RAM_TYPE_MC                  (_MK_ENUM_CONST(1))
 
 
-/* Register PDP_D_DATA_FORMAT_0 */
-#define PDP_D_DATA_FORMAT_0                            (_MK_ADDR_CONST(0x10084))
+// Register PDP_D_DATA_FORMAT_0
+#define PDP_D_DATA_FORMAT_0                             (_MK_ADDR_CONST(0xd084))
 #define PDP_D_DATA_FORMAT_0_SECURE                                         (0x0)
 #define PDP_D_DATA_FORMAT_0_DUAL                                           (0x0)
 #define PDP_D_DATA_FORMAT_0_SCR                                              (0)
@@ -12846,8 +12954,8 @@
 #define PDP_D_DATA_FORMAT_0_INPUT_DATA_FP16                  (_MK_ENUM_CONST(2))
 
 
-/* Register PDP_D_INF_INPUT_NUM_0 */
-#define PDP_D_INF_INPUT_NUM_0                          (_MK_ADDR_CONST(0x10088))
+// Register PDP_D_INF_INPUT_NUM_0
+#define PDP_D_INF_INPUT_NUM_0                           (_MK_ADDR_CONST(0xd088))
 #define PDP_D_INF_INPUT_NUM_0_SECURE                                       (0x0)
 #define PDP_D_INF_INPUT_NUM_0_DUAL                                         (0x0)
 #define PDP_D_INF_INPUT_NUM_0_SCR                                            (0)
@@ -12876,8 +12984,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_NAN_INPUT_NUM_0 */
-#define PDP_D_NAN_INPUT_NUM_0                          (_MK_ADDR_CONST(0x1008c))
+// Register PDP_D_NAN_INPUT_NUM_0
+#define PDP_D_NAN_INPUT_NUM_0                           (_MK_ADDR_CONST(0xd08c))
 #define PDP_D_NAN_INPUT_NUM_0_SECURE                                       (0x0)
 #define PDP_D_NAN_INPUT_NUM_0_DUAL                                         (0x0)
 #define PDP_D_NAN_INPUT_NUM_0_SCR                                            (0)
@@ -12906,8 +13014,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_NAN_OUTPUT_NUM_0 */
-#define PDP_D_NAN_OUTPUT_NUM_0                         (_MK_ADDR_CONST(0x10090))
+// Register PDP_D_NAN_OUTPUT_NUM_0
+#define PDP_D_NAN_OUTPUT_NUM_0                          (_MK_ADDR_CONST(0xd090))
 #define PDP_D_NAN_OUTPUT_NUM_0_SECURE                                      (0x0)
 #define PDP_D_NAN_OUTPUT_NUM_0_DUAL                                        (0x0)
 #define PDP_D_NAN_OUTPUT_NUM_0_SCR                                           (0)
@@ -12937,8 +13045,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_PERF_ENABLE_0 */
-#define PDP_D_PERF_ENABLE_0                            (_MK_ADDR_CONST(0x10094))
+// Register PDP_D_PERF_ENABLE_0
+#define PDP_D_PERF_ENABLE_0                             (_MK_ADDR_CONST(0xd094))
 #define PDP_D_PERF_ENABLE_0_SECURE                                         (0x0)
 #define PDP_D_PERF_ENABLE_0_DUAL                                           (0x0)
 #define PDP_D_PERF_ENABLE_0_SCR                                              (0)
@@ -12965,8 +13073,8 @@
 #define PDP_D_PERF_ENABLE_0_DMA_EN_ENABLE                    (_MK_ENUM_CONST(1))
 
 
-/* Register PDP_D_PERF_WRITE_STALL_0 */
-#define PDP_D_PERF_WRITE_STALL_0                       (_MK_ADDR_CONST(0x10098))
+// Register PDP_D_PERF_WRITE_STALL_0
+#define PDP_D_PERF_WRITE_STALL_0                        (_MK_ADDR_CONST(0xd098))
 #define PDP_D_PERF_WRITE_STALL_0_SECURE                                    (0x0)
 #define PDP_D_PERF_WRITE_STALL_0_DUAL                                      (0x0)
 #define PDP_D_PERF_WRITE_STALL_0_SCR                                         (0)
@@ -12997,8 +13105,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register PDP_D_CYA_0 */
-#define PDP_D_CYA_0                                    (_MK_ADDR_CONST(0x1009c))
+// Register PDP_D_CYA_0
+#define PDP_D_CYA_0                                     (_MK_ADDR_CONST(0xd09c))
 #define PDP_D_CYA_0_SECURE                                                 (0x0)
 #define PDP_D_CYA_0_DUAL                                                   (0x0)
 #define PDP_D_CYA_0_SCR                                                      (0)
@@ -13022,8 +13130,8 @@
 #define PDP_D_CYA_0_CYA_PLATFORM_DEPENDENT                 (_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_RDMA_S_STATUS_0 */
-#define CDP_RDMA_S_STATUS_0                            (_MK_ADDR_CONST(0x11000))
+// Register CDP_RDMA_S_STATUS_0
+#define CDP_RDMA_S_STATUS_0                             (_MK_ADDR_CONST(0xe000))
 #define CDP_RDMA_S_STATUS_0_SECURE                                         (0x0)
 #define CDP_RDMA_S_STATUS_0_DUAL                                           (0x0)
 #define CDP_RDMA_S_STATUS_0_SCR                                              (0)
@@ -13067,8 +13175,8 @@
 #define CDP_RDMA_S_STATUS_0_STATUS_1_PENDING                 (_MK_ENUM_CONST(2))
 
 
-/* Register CDP_RDMA_S_POINTER_0 */
-#define CDP_RDMA_S_POINTER_0                           (_MK_ADDR_CONST(0x11004))
+// Register CDP_RDMA_S_POINTER_0
+#define CDP_RDMA_S_POINTER_0                            (_MK_ADDR_CONST(0xe004))
 #define CDP_RDMA_S_POINTER_0_SECURE                                        (0x0)
 #define CDP_RDMA_S_POINTER_0_DUAL                                          (0x0)
 #define CDP_RDMA_S_POINTER_0_SCR                                             (0)
@@ -13112,8 +13220,8 @@
 #define CDP_RDMA_S_POINTER_0_CONSUMER_GROUP_1                (_MK_ENUM_CONST(1))
 
 
-/* Register CDP_RDMA_D_OP_ENABLE_0 */
-#define CDP_RDMA_D_OP_ENABLE_0                         (_MK_ADDR_CONST(0x11008))
+// Register CDP_RDMA_D_OP_ENABLE_0
+#define CDP_RDMA_D_OP_ENABLE_0                          (_MK_ADDR_CONST(0xe008))
 #define CDP_RDMA_D_OP_ENABLE_0_SECURE                                      (0x0)
 #define CDP_RDMA_D_OP_ENABLE_0_DUAL                                        (0x0)
 #define CDP_RDMA_D_OP_ENABLE_0_SCR                                           (0)
@@ -13140,8 +13248,8 @@
 #define CDP_RDMA_D_OP_ENABLE_0_OP_EN_ENABLE                  (_MK_ENUM_CONST(1))
 
 
-/* Register CDP_RDMA_D_DATA_CUBE_WIDTH_0 */
-#define CDP_RDMA_D_DATA_CUBE_WIDTH_0                   (_MK_ADDR_CONST(0x1100c))
+// Register CDP_RDMA_D_DATA_CUBE_WIDTH_0
+#define CDP_RDMA_D_DATA_CUBE_WIDTH_0                    (_MK_ADDR_CONST(0xe00c))
 #define CDP_RDMA_D_DATA_CUBE_WIDTH_0_SECURE                                (0x0)
 #define CDP_RDMA_D_DATA_CUBE_WIDTH_0_DUAL                                  (0x0)
 #define CDP_RDMA_D_DATA_CUBE_WIDTH_0_SCR                                     (0)
@@ -13169,8 +13277,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_RDMA_D_DATA_CUBE_HEIGHT_0 */
-#define CDP_RDMA_D_DATA_CUBE_HEIGHT_0                  (_MK_ADDR_CONST(0x11010))
+// Register CDP_RDMA_D_DATA_CUBE_HEIGHT_0
+#define CDP_RDMA_D_DATA_CUBE_HEIGHT_0                   (_MK_ADDR_CONST(0xe010))
 #define CDP_RDMA_D_DATA_CUBE_HEIGHT_0_SECURE                               (0x0)
 #define CDP_RDMA_D_DATA_CUBE_HEIGHT_0_DUAL                                 (0x0)
 #define CDP_RDMA_D_DATA_CUBE_HEIGHT_0_SCR                                    (0)
@@ -13198,8 +13306,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_RDMA_D_DATA_CUBE_CHANNEL_0 */
-#define CDP_RDMA_D_DATA_CUBE_CHANNEL_0                 (_MK_ADDR_CONST(0x11014))
+// Register CDP_RDMA_D_DATA_CUBE_CHANNEL_0
+#define CDP_RDMA_D_DATA_CUBE_CHANNEL_0                  (_MK_ADDR_CONST(0xe014))
 #define CDP_RDMA_D_DATA_CUBE_CHANNEL_0_SECURE                              (0x0)
 #define CDP_RDMA_D_DATA_CUBE_CHANNEL_0_DUAL                                (0x0)
 #define CDP_RDMA_D_DATA_CUBE_CHANNEL_0_SCR                                   (0)
@@ -13229,8 +13337,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_RDMA_D_SRC_BASE_ADDR_LOW_0 */
-#define CDP_RDMA_D_SRC_BASE_ADDR_LOW_0                 (_MK_ADDR_CONST(0x11018))
+// Register CDP_RDMA_D_SRC_BASE_ADDR_LOW_0
+#define CDP_RDMA_D_SRC_BASE_ADDR_LOW_0                  (_MK_ADDR_CONST(0xe018))
 #define CDP_RDMA_D_SRC_BASE_ADDR_LOW_0_SECURE                              (0x0)
 #define CDP_RDMA_D_SRC_BASE_ADDR_LOW_0_DUAL                                (0x0)
 #define CDP_RDMA_D_SRC_BASE_ADDR_LOW_0_SCR                                   (0)
@@ -13264,29 +13372,32 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0 */
-#define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0                (_MK_ADDR_CONST(0x1101c))
+// Register CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0
+#define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0                 (_MK_ADDR_CONST(0xe01c))
 #define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SECURE                             (0x0)
 #define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_DUAL                               (0x0)
 #define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SCR                                  (0)
 #define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_WORD_COUNT                         (0x1)
 #define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_RESET_VAL          (_MK_MASK_CONST(0x0))
-#define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_RESET_MASK        (_MK_MASK_CONST(0xff))
+#define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_RESET_MASK \
+	(_MK_MASK_CONST(0xffffffff))
 #define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SW_DEFAULT_VAL     (_MK_MASK_CONST(0x0))
 #define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SW_DEFAULT_MASK    (_MK_MASK_CONST(0x0))
-#define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_READ_MASK         (_MK_MASK_CONST(0xff))
-#define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_WRITE_MASK        (_MK_MASK_CONST(0xff))
+#define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_READ_MASK \
+	(_MK_MASK_CONST(0xffffffff))
+#define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_WRITE_MASK \
+	(_MK_MASK_CONST(0xffffffff))
 #define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_SHIFT \
 	(_MK_SHIFT_CONST(0))
 #define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_FIELD \
-	(_MK_FIELD_CONST(0xff, \
+	(_MK_FIELD_CONST(0xffffffff, \
 	CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_SHIFT))
-#define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_RANGE           (7:0)
+#define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_RANGE          (31:0)
 #define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_WOFFSET         (0x0)
 #define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_DEFAULT_MASK \
-	(_MK_MASK_CONST(0xff))
+	(_MK_MASK_CONST(0xffffffff))
 #define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_SW_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define CDP_RDMA_D_SRC_BASE_ADDR_HIGH_0_SRC_BASE_ADDR_HIGH_SW_DEFAULT_MASK \
@@ -13297,8 +13408,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_RDMA_D_SRC_LINE_STRIDE_0 */
-#define CDP_RDMA_D_SRC_LINE_STRIDE_0                   (_MK_ADDR_CONST(0x11020))
+// Register CDP_RDMA_D_SRC_LINE_STRIDE_0
+#define CDP_RDMA_D_SRC_LINE_STRIDE_0                    (_MK_ADDR_CONST(0xe020))
 #define CDP_RDMA_D_SRC_LINE_STRIDE_0_SECURE                                (0x0)
 #define CDP_RDMA_D_SRC_LINE_STRIDE_0_DUAL                                  (0x0)
 #define CDP_RDMA_D_SRC_LINE_STRIDE_0_SCR                                     (0)
@@ -13330,8 +13441,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_RDMA_D_SRC_SURFACE_STRIDE_0 */
-#define CDP_RDMA_D_SRC_SURFACE_STRIDE_0                (_MK_ADDR_CONST(0x11024))
+// Register CDP_RDMA_D_SRC_SURFACE_STRIDE_0
+#define CDP_RDMA_D_SRC_SURFACE_STRIDE_0                 (_MK_ADDR_CONST(0xe024))
 #define CDP_RDMA_D_SRC_SURFACE_STRIDE_0_SECURE                             (0x0)
 #define CDP_RDMA_D_SRC_SURFACE_STRIDE_0_DUAL                               (0x0)
 #define CDP_RDMA_D_SRC_SURFACE_STRIDE_0_SCR                                  (0)
@@ -13366,8 +13477,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_RDMA_D_SRC_DMA_CFG_0 */
-#define CDP_RDMA_D_SRC_DMA_CFG_0                       (_MK_ADDR_CONST(0x11028))
+// Register CDP_RDMA_D_SRC_DMA_CFG_0
+#define CDP_RDMA_D_SRC_DMA_CFG_0                        (_MK_ADDR_CONST(0xe028))
 #define CDP_RDMA_D_SRC_DMA_CFG_0_SECURE                                    (0x0)
 #define CDP_RDMA_D_SRC_DMA_CFG_0_DUAL                                      (0x0)
 #define CDP_RDMA_D_SRC_DMA_CFG_0_SCR                                         (0)
@@ -13398,8 +13509,8 @@
 #define CDP_RDMA_D_SRC_DMA_CFG_0_SRC_RAM_TYPE_MC             (_MK_ENUM_CONST(1))
 
 
-/* Register CDP_RDMA_D_SRC_COMPRESSION_EN_0 */
-#define CDP_RDMA_D_SRC_COMPRESSION_EN_0                (_MK_ADDR_CONST(0x1102c))
+// Register CDP_RDMA_D_SRC_COMPRESSION_EN_0
+#define CDP_RDMA_D_SRC_COMPRESSION_EN_0                 (_MK_ADDR_CONST(0xe02c))
 #define CDP_RDMA_D_SRC_COMPRESSION_EN_0_SECURE                             (0x0)
 #define CDP_RDMA_D_SRC_COMPRESSION_EN_0_DUAL                               (0x0)
 #define CDP_RDMA_D_SRC_COMPRESSION_EN_0_SCR                                  (0)
@@ -13435,8 +13546,8 @@
 	(_MK_ENUM_CONST(1))
 
 
-/* Register CDP_RDMA_D_OPERATION_MODE_0 */
-#define CDP_RDMA_D_OPERATION_MODE_0                    (_MK_ADDR_CONST(0x11030))
+// Register CDP_RDMA_D_OPERATION_MODE_0
+#define CDP_RDMA_D_OPERATION_MODE_0                     (_MK_ADDR_CONST(0xe030))
 #define CDP_RDMA_D_OPERATION_MODE_0_SECURE                                 (0x0)
 #define CDP_RDMA_D_OPERATION_MODE_0_DUAL                                   (0x0)
 #define CDP_RDMA_D_OPERATION_MODE_0_SCR                                      (0)
@@ -13473,8 +13584,8 @@
 	(_MK_ENUM_CONST(2))
 
 
-/* Register CDP_RDMA_D_DATA_FORMAT_0 */
-#define CDP_RDMA_D_DATA_FORMAT_0                       (_MK_ADDR_CONST(0x11034))
+// Register CDP_RDMA_D_DATA_FORMAT_0
+#define CDP_RDMA_D_DATA_FORMAT_0                        (_MK_ADDR_CONST(0xe034))
 #define CDP_RDMA_D_DATA_FORMAT_0_SECURE                                    (0x0)
 #define CDP_RDMA_D_DATA_FORMAT_0_DUAL                                      (0x0)
 #define CDP_RDMA_D_DATA_FORMAT_0_SCR                                         (0)
@@ -13505,8 +13616,8 @@
 #define CDP_RDMA_D_DATA_FORMAT_0_INPUT_DATA_FP16             (_MK_ENUM_CONST(2))
 
 
-/* Register CDP_RDMA_D_PERF_ENABLE_0 */
-#define CDP_RDMA_D_PERF_ENABLE_0                       (_MK_ADDR_CONST(0x11038))
+// Register CDP_RDMA_D_PERF_ENABLE_0
+#define CDP_RDMA_D_PERF_ENABLE_0                        (_MK_ADDR_CONST(0xe038))
 #define CDP_RDMA_D_PERF_ENABLE_0_SECURE                                    (0x0)
 #define CDP_RDMA_D_PERF_ENABLE_0_DUAL                                      (0x0)
 #define CDP_RDMA_D_PERF_ENABLE_0_SCR                                         (0)
@@ -13535,8 +13646,8 @@
 #define CDP_RDMA_D_PERF_ENABLE_0_DMA_EN_ENABLE               (_MK_ENUM_CONST(1))
 
 
-/* Register CDP_RDMA_D_PERF_READ_STALL_0 */
-#define CDP_RDMA_D_PERF_READ_STALL_0                   (_MK_ADDR_CONST(0x1103c))
+// Register CDP_RDMA_D_PERF_READ_STALL_0
+#define CDP_RDMA_D_PERF_READ_STALL_0                    (_MK_ADDR_CONST(0xe03c))
 #define CDP_RDMA_D_PERF_READ_STALL_0_SECURE                                (0x0)
 #define CDP_RDMA_D_PERF_READ_STALL_0_DUAL                                  (0x0)
 #define CDP_RDMA_D_PERF_READ_STALL_0_SCR                                     (0)
@@ -13568,8 +13679,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_RDMA_D_CYA_0 */
-#define CDP_RDMA_D_CYA_0                               (_MK_ADDR_CONST(0x11040))
+// Register CDP_RDMA_D_CYA_0
+#define CDP_RDMA_D_CYA_0                                (_MK_ADDR_CONST(0xe040))
 #define CDP_RDMA_D_CYA_0_SECURE                                            (0x0)
 #define CDP_RDMA_D_CYA_0_DUAL                                              (0x0)
 #define CDP_RDMA_D_CYA_0_SCR                                                 (0)
@@ -13593,8 +13704,8 @@
 #define CDP_RDMA_D_CYA_0_CYA_PLATFORM_DEPENDENT            (_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_S_STATUS_0 */
-#define CDP_S_STATUS_0                                 (_MK_ADDR_CONST(0x12000))
+// Register CDP_S_STATUS_0
+#define CDP_S_STATUS_0                                  (_MK_ADDR_CONST(0xf000))
 #define CDP_S_STATUS_0_SECURE                                              (0x0)
 #define CDP_S_STATUS_0_DUAL                                                (0x0)
 #define CDP_S_STATUS_0_SCR                                                   (0)
@@ -13638,8 +13749,8 @@
 #define CDP_S_STATUS_0_STATUS_1_PENDING                      (_MK_ENUM_CONST(2))
 
 
-/* Register CDP_S_POINTER_0 */
-#define CDP_S_POINTER_0                                (_MK_ADDR_CONST(0x12004))
+// Register CDP_S_POINTER_0
+#define CDP_S_POINTER_0                                 (_MK_ADDR_CONST(0xf004))
 #define CDP_S_POINTER_0_SECURE                                             (0x0)
 #define CDP_S_POINTER_0_DUAL                                               (0x0)
 #define CDP_S_POINTER_0_SCR                                                  (0)
@@ -13681,8 +13792,8 @@
 #define CDP_S_POINTER_0_CONSUMER_GROUP_1                     (_MK_ENUM_CONST(1))
 
 
-/* Register CDP_S_LUT_ACCESS_CFG_0 */
-#define CDP_S_LUT_ACCESS_CFG_0                         (_MK_ADDR_CONST(0x12008))
+// Register CDP_S_LUT_ACCESS_CFG_0
+#define CDP_S_LUT_ACCESS_CFG_0                          (_MK_ADDR_CONST(0xf008))
 #define CDP_S_LUT_ACCESS_CFG_0_SECURE                                      (0x0)
 #define CDP_S_LUT_ACCESS_CFG_0_DUAL                                        (0x0)
 #define CDP_S_LUT_ACCESS_CFG_0_SCR                                           (0)
@@ -13745,8 +13856,8 @@
 #define CDP_S_LUT_ACCESS_CFG_0_LUT_ACCESS_TYPE_WRITE         (_MK_ENUM_CONST(1))
 
 
-/* Register CDP_S_LUT_ACCESS_DATA_0 */
-#define CDP_S_LUT_ACCESS_DATA_0                        (_MK_ADDR_CONST(0x1200c))
+// Register CDP_S_LUT_ACCESS_DATA_0
+#define CDP_S_LUT_ACCESS_DATA_0                         (_MK_ADDR_CONST(0xf00c))
 #define CDP_S_LUT_ACCESS_DATA_0_SECURE                                     (0x0)
 #define CDP_S_LUT_ACCESS_DATA_0_DUAL                                       (0x0)
 #define CDP_S_LUT_ACCESS_DATA_0_SCR                                          (0)
@@ -13774,8 +13885,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_S_LUT_CFG_0 */
-#define CDP_S_LUT_CFG_0                                (_MK_ADDR_CONST(0x12010))
+// Register CDP_S_LUT_CFG_0
+#define CDP_S_LUT_CFG_0                                 (_MK_ADDR_CONST(0xf010))
 #define CDP_S_LUT_CFG_0_SECURE                                             (0x0)
 #define CDP_S_LUT_CFG_0_DUAL                                               (0x0)
 #define CDP_S_LUT_CFG_0_SCR                                                  (0)
@@ -13855,8 +13966,8 @@
 #define CDP_S_LUT_CFG_0_LUT_HYBRID_PRIORITY_LO               (_MK_ENUM_CONST(1))
 
 
-/* Register CDP_S_LUT_INFO_0 */
-#define CDP_S_LUT_INFO_0                               (_MK_ADDR_CONST(0x12014))
+// Register CDP_S_LUT_INFO_0
+#define CDP_S_LUT_INFO_0                                (_MK_ADDR_CONST(0xf014))
 #define CDP_S_LUT_INFO_0_SECURE                                            (0x0)
 #define CDP_S_LUT_INFO_0_DUAL                                              (0x0)
 #define CDP_S_LUT_INFO_0_SCR                                                 (0)
@@ -13916,8 +14027,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_S_LUT_LE_START_LOW_0 */
-#define CDP_S_LUT_LE_START_LOW_0                       (_MK_ADDR_CONST(0x12018))
+// Register CDP_S_LUT_LE_START_LOW_0
+#define CDP_S_LUT_LE_START_LOW_0                        (_MK_ADDR_CONST(0xf018))
 #define CDP_S_LUT_LE_START_LOW_0_SECURE                                    (0x0)
 #define CDP_S_LUT_LE_START_LOW_0_DUAL                                      (0x0)
 #define CDP_S_LUT_LE_START_LOW_0_SCR                                         (0)
@@ -13948,8 +14059,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_S_LUT_LE_START_HIGH_0 */
-#define CDP_S_LUT_LE_START_HIGH_0                      (_MK_ADDR_CONST(0x1201c))
+// Register CDP_S_LUT_LE_START_HIGH_0
+#define CDP_S_LUT_LE_START_HIGH_0                       (_MK_ADDR_CONST(0xf01c))
 #define CDP_S_LUT_LE_START_HIGH_0_SECURE                                   (0x0)
 #define CDP_S_LUT_LE_START_HIGH_0_DUAL                                     (0x0)
 #define CDP_S_LUT_LE_START_HIGH_0_SCR                                        (0)
@@ -13981,8 +14092,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_S_LUT_LE_END_LOW_0 */
-#define CDP_S_LUT_LE_END_LOW_0                         (_MK_ADDR_CONST(0x12020))
+// Register CDP_S_LUT_LE_END_LOW_0
+#define CDP_S_LUT_LE_END_LOW_0                          (_MK_ADDR_CONST(0xf020))
 #define CDP_S_LUT_LE_END_LOW_0_SECURE                                      (0x0)
 #define CDP_S_LUT_LE_END_LOW_0_DUAL                                        (0x0)
 #define CDP_S_LUT_LE_END_LOW_0_SCR                                           (0)
@@ -14012,8 +14123,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_S_LUT_LE_END_HIGH_0 */
-#define CDP_S_LUT_LE_END_HIGH_0                        (_MK_ADDR_CONST(0x12024))
+// Register CDP_S_LUT_LE_END_HIGH_0
+#define CDP_S_LUT_LE_END_HIGH_0                         (_MK_ADDR_CONST(0xf024))
 #define CDP_S_LUT_LE_END_HIGH_0_SECURE                                     (0x0)
 #define CDP_S_LUT_LE_END_HIGH_0_DUAL                                       (0x0)
 #define CDP_S_LUT_LE_END_HIGH_0_SCR                                          (0)
@@ -14043,8 +14154,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_S_LUT_LO_START_LOW_0 */
-#define CDP_S_LUT_LO_START_LOW_0                       (_MK_ADDR_CONST(0x12028))
+// Register CDP_S_LUT_LO_START_LOW_0
+#define CDP_S_LUT_LO_START_LOW_0                        (_MK_ADDR_CONST(0xf028))
 #define CDP_S_LUT_LO_START_LOW_0_SECURE                                    (0x0)
 #define CDP_S_LUT_LO_START_LOW_0_DUAL                                      (0x0)
 #define CDP_S_LUT_LO_START_LOW_0_SCR                                         (0)
@@ -14075,8 +14186,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_S_LUT_LO_START_HIGH_0 */
-#define CDP_S_LUT_LO_START_HIGH_0                      (_MK_ADDR_CONST(0x1202c))
+// Register CDP_S_LUT_LO_START_HIGH_0
+#define CDP_S_LUT_LO_START_HIGH_0                       (_MK_ADDR_CONST(0xf02c))
 #define CDP_S_LUT_LO_START_HIGH_0_SECURE                                   (0x0)
 #define CDP_S_LUT_LO_START_HIGH_0_DUAL                                     (0x0)
 #define CDP_S_LUT_LO_START_HIGH_0_SCR                                        (0)
@@ -14108,8 +14219,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_S_LUT_LO_END_LOW_0 */
-#define CDP_S_LUT_LO_END_LOW_0                         (_MK_ADDR_CONST(0x12030))
+// Register CDP_S_LUT_LO_END_LOW_0
+#define CDP_S_LUT_LO_END_LOW_0                          (_MK_ADDR_CONST(0xf030))
 #define CDP_S_LUT_LO_END_LOW_0_SECURE                                      (0x0)
 #define CDP_S_LUT_LO_END_LOW_0_DUAL                                        (0x0)
 #define CDP_S_LUT_LO_END_LOW_0_SCR                                           (0)
@@ -14139,8 +14250,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_S_LUT_LO_END_HIGH_0 */
-#define CDP_S_LUT_LO_END_HIGH_0                        (_MK_ADDR_CONST(0x12034))
+// Register CDP_S_LUT_LO_END_HIGH_0
+#define CDP_S_LUT_LO_END_HIGH_0                         (_MK_ADDR_CONST(0xf034))
 #define CDP_S_LUT_LO_END_HIGH_0_SECURE                                     (0x0)
 #define CDP_S_LUT_LO_END_HIGH_0_DUAL                                       (0x0)
 #define CDP_S_LUT_LO_END_HIGH_0_SCR                                          (0)
@@ -14170,8 +14281,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_S_LUT_LE_SLOPE_SCALE_0 */
-#define CDP_S_LUT_LE_SLOPE_SCALE_0                     (_MK_ADDR_CONST(0x12038))
+// Register CDP_S_LUT_LE_SLOPE_SCALE_0
+#define CDP_S_LUT_LE_SLOPE_SCALE_0                      (_MK_ADDR_CONST(0xf038))
 #define CDP_S_LUT_LE_SLOPE_SCALE_0_SECURE                                  (0x0)
 #define CDP_S_LUT_LE_SLOPE_SCALE_0_DUAL                                    (0x0)
 #define CDP_S_LUT_LE_SLOPE_SCALE_0_SCR                                       (0)
@@ -14223,8 +14334,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_S_LUT_LE_SLOPE_SHIFT_0 */
-#define CDP_S_LUT_LE_SLOPE_SHIFT_0                     (_MK_ADDR_CONST(0x1203c))
+// Register CDP_S_LUT_LE_SLOPE_SHIFT_0
+#define CDP_S_LUT_LE_SLOPE_SHIFT_0                      (_MK_ADDR_CONST(0xf03c))
 #define CDP_S_LUT_LE_SLOPE_SHIFT_0_SECURE                                  (0x0)
 #define CDP_S_LUT_LE_SLOPE_SHIFT_0_DUAL                                    (0x0)
 #define CDP_S_LUT_LE_SLOPE_SHIFT_0_SCR                                       (0)
@@ -14276,8 +14387,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_S_LUT_LO_SLOPE_SCALE_0 */
-#define CDP_S_LUT_LO_SLOPE_SCALE_0                     (_MK_ADDR_CONST(0x12040))
+// Register CDP_S_LUT_LO_SLOPE_SCALE_0
+#define CDP_S_LUT_LO_SLOPE_SCALE_0                      (_MK_ADDR_CONST(0xf040))
 #define CDP_S_LUT_LO_SLOPE_SCALE_0_SECURE                                  (0x0)
 #define CDP_S_LUT_LO_SLOPE_SCALE_0_DUAL                                    (0x0)
 #define CDP_S_LUT_LO_SLOPE_SCALE_0_SCR                                       (0)
@@ -14329,8 +14440,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_S_LUT_LO_SLOPE_SHIFT_0 */
-#define CDP_S_LUT_LO_SLOPE_SHIFT_0                     (_MK_ADDR_CONST(0x12044))
+// Register CDP_S_LUT_LO_SLOPE_SHIFT_0
+#define CDP_S_LUT_LO_SLOPE_SHIFT_0                      (_MK_ADDR_CONST(0xf044))
 #define CDP_S_LUT_LO_SLOPE_SHIFT_0_SECURE                                  (0x0)
 #define CDP_S_LUT_LO_SLOPE_SHIFT_0_DUAL                                    (0x0)
 #define CDP_S_LUT_LO_SLOPE_SHIFT_0_SCR                                       (0)
@@ -14382,8 +14493,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_D_OP_ENABLE_0 */
-#define CDP_D_OP_ENABLE_0                              (_MK_ADDR_CONST(0x12048))
+// Register CDP_D_OP_ENABLE_0
+#define CDP_D_OP_ENABLE_0                               (_MK_ADDR_CONST(0xf048))
 #define CDP_D_OP_ENABLE_0_SECURE                                           (0x0)
 #define CDP_D_OP_ENABLE_0_DUAL                                             (0x0)
 #define CDP_D_OP_ENABLE_0_SCR                                                (0)
@@ -14410,8 +14521,8 @@
 #define CDP_D_OP_ENABLE_0_OP_EN_ENABLE                       (_MK_ENUM_CONST(1))
 
 
-/* Register CDP_D_FUNC_BYPASS_0 */
-#define CDP_D_FUNC_BYPASS_0                            (_MK_ADDR_CONST(0x1204c))
+// Register CDP_D_FUNC_BYPASS_0
+#define CDP_D_FUNC_BYPASS_0                             (_MK_ADDR_CONST(0xf04c))
 #define CDP_D_FUNC_BYPASS_0_SECURE                                         (0x0)
 #define CDP_D_FUNC_BYPASS_0_DUAL                                           (0x0)
 #define CDP_D_FUNC_BYPASS_0_SCR                                              (0)
@@ -14458,8 +14569,8 @@
 #define CDP_D_FUNC_BYPASS_0_MUL_BYPASS_ENABLE                (_MK_ENUM_CONST(1))
 
 
-/* Register CDP_D_DST_BASE_ADDR_LOW_0 */
-#define CDP_D_DST_BASE_ADDR_LOW_0                      (_MK_ADDR_CONST(0x12050))
+// Register CDP_D_DST_BASE_ADDR_LOW_0
+#define CDP_D_DST_BASE_ADDR_LOW_0                       (_MK_ADDR_CONST(0xf050))
 #define CDP_D_DST_BASE_ADDR_LOW_0_SECURE                                   (0x0)
 #define CDP_D_DST_BASE_ADDR_LOW_0_DUAL                                     (0x0)
 #define CDP_D_DST_BASE_ADDR_LOW_0_SCR                                        (0)
@@ -14491,29 +14602,29 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_D_DST_BASE_ADDR_HIGH_0 */
-#define CDP_D_DST_BASE_ADDR_HIGH_0                     (_MK_ADDR_CONST(0x12054))
+// Register CDP_D_DST_BASE_ADDR_HIGH_0
+#define CDP_D_DST_BASE_ADDR_HIGH_0                      (_MK_ADDR_CONST(0xf054))
 #define CDP_D_DST_BASE_ADDR_HIGH_0_SECURE                                  (0x0)
 #define CDP_D_DST_BASE_ADDR_HIGH_0_DUAL                                    (0x0)
 #define CDP_D_DST_BASE_ADDR_HIGH_0_SCR                                       (0)
 #define CDP_D_DST_BASE_ADDR_HIGH_0_WORD_COUNT                              (0x1)
 #define CDP_D_DST_BASE_ADDR_HIGH_0_RESET_VAL               (_MK_MASK_CONST(0x0))
-#define CDP_D_DST_BASE_ADDR_HIGH_0_RESET_MASK             (_MK_MASK_CONST(0xff))
+#define CDP_D_DST_BASE_ADDR_HIGH_0_RESET_MASK       (_MK_MASK_CONST(0xffffffff))
 #define CDP_D_DST_BASE_ADDR_HIGH_0_SW_DEFAULT_VAL          (_MK_MASK_CONST(0x0))
 #define CDP_D_DST_BASE_ADDR_HIGH_0_SW_DEFAULT_MASK         (_MK_MASK_CONST(0x0))
-#define CDP_D_DST_BASE_ADDR_HIGH_0_READ_MASK              (_MK_MASK_CONST(0xff))
-#define CDP_D_DST_BASE_ADDR_HIGH_0_WRITE_MASK             (_MK_MASK_CONST(0xff))
+#define CDP_D_DST_BASE_ADDR_HIGH_0_READ_MASK        (_MK_MASK_CONST(0xffffffff))
+#define CDP_D_DST_BASE_ADDR_HIGH_0_WRITE_MASK       (_MK_MASK_CONST(0xffffffff))
 #define CDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_SHIFT \
 	(_MK_SHIFT_CONST(0))
 #define CDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_FIELD \
-	(_MK_FIELD_CONST(0xff, \
+	(_MK_FIELD_CONST(0xffffffff, \
 	CDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_SHIFT))
-#define CDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_RANGE                (7:0)
+#define CDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_RANGE               (31:0)
 #define CDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_WOFFSET              (0x0)
 #define CDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define CDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_DEFAULT_MASK \
-	(_MK_MASK_CONST(0xff))
+	(_MK_MASK_CONST(0xffffffff))
 #define CDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_SW_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define CDP_D_DST_BASE_ADDR_HIGH_0_DST_BASE_ADDR_HIGH_SW_DEFAULT_MASK \
@@ -14524,8 +14635,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_D_DST_LINE_STRIDE_0 */
-#define CDP_D_DST_LINE_STRIDE_0                        (_MK_ADDR_CONST(0x12058))
+// Register CDP_D_DST_LINE_STRIDE_0
+#define CDP_D_DST_LINE_STRIDE_0                         (_MK_ADDR_CONST(0xf058))
 #define CDP_D_DST_LINE_STRIDE_0_SECURE                                     (0x0)
 #define CDP_D_DST_LINE_STRIDE_0_DUAL                                       (0x0)
 #define CDP_D_DST_LINE_STRIDE_0_SCR                                          (0)
@@ -14555,8 +14666,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_D_DST_SURFACE_STRIDE_0 */
-#define CDP_D_DST_SURFACE_STRIDE_0                     (_MK_ADDR_CONST(0x1205c))
+// Register CDP_D_DST_SURFACE_STRIDE_0
+#define CDP_D_DST_SURFACE_STRIDE_0                      (_MK_ADDR_CONST(0xf05c))
 #define CDP_D_DST_SURFACE_STRIDE_0_SECURE                                  (0x0)
 #define CDP_D_DST_SURFACE_STRIDE_0_DUAL                                    (0x0)
 #define CDP_D_DST_SURFACE_STRIDE_0_SCR                                       (0)
@@ -14588,8 +14699,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_D_DST_DMA_CFG_0 */
-#define CDP_D_DST_DMA_CFG_0                            (_MK_ADDR_CONST(0x12060))
+// Register CDP_D_DST_DMA_CFG_0
+#define CDP_D_DST_DMA_CFG_0                             (_MK_ADDR_CONST(0xf060))
 #define CDP_D_DST_DMA_CFG_0_SECURE                                         (0x0)
 #define CDP_D_DST_DMA_CFG_0_DUAL                                           (0x0)
 #define CDP_D_DST_DMA_CFG_0_SCR                                              (0)
@@ -14618,8 +14729,8 @@
 #define CDP_D_DST_DMA_CFG_0_DST_RAM_TYPE_MC                  (_MK_ENUM_CONST(1))
 
 
-/* Register CDP_D_DST_COMPRESSION_EN_0 */
-#define CDP_D_DST_COMPRESSION_EN_0                     (_MK_ADDR_CONST(0x12064))
+// Register CDP_D_DST_COMPRESSION_EN_0
+#define CDP_D_DST_COMPRESSION_EN_0                      (_MK_ADDR_CONST(0xf064))
 #define CDP_D_DST_COMPRESSION_EN_0_SECURE                                  (0x0)
 #define CDP_D_DST_COMPRESSION_EN_0_DUAL                                    (0x0)
 #define CDP_D_DST_COMPRESSION_EN_0_SCR                                       (0)
@@ -14655,8 +14766,8 @@
 	(_MK_ENUM_CONST(1))
 
 
-/* Register CDP_D_DATA_FORMAT_0 */
-#define CDP_D_DATA_FORMAT_0                            (_MK_ADDR_CONST(0x12068))
+// Register CDP_D_DATA_FORMAT_0
+#define CDP_D_DATA_FORMAT_0                             (_MK_ADDR_CONST(0xf068))
 #define CDP_D_DATA_FORMAT_0_SECURE                                         (0x0)
 #define CDP_D_DATA_FORMAT_0_DUAL                                           (0x0)
 #define CDP_D_DATA_FORMAT_0_SCR                                              (0)
@@ -14687,8 +14798,8 @@
 #define CDP_D_DATA_FORMAT_0_INPUT_DATA_TYPE_FP16             (_MK_ENUM_CONST(2))
 
 
-/* Register CDP_D_NAN_FLUSH_TO_ZERO_0 */
-#define CDP_D_NAN_FLUSH_TO_ZERO_0                      (_MK_ADDR_CONST(0x1206c))
+// Register CDP_D_NAN_FLUSH_TO_ZERO_0
+#define CDP_D_NAN_FLUSH_TO_ZERO_0                       (_MK_ADDR_CONST(0xf06c))
 #define CDP_D_NAN_FLUSH_TO_ZERO_0_SECURE                                   (0x0)
 #define CDP_D_NAN_FLUSH_TO_ZERO_0_DUAL                                     (0x0)
 #define CDP_D_NAN_FLUSH_TO_ZERO_0_SCR                                        (0)
@@ -14720,8 +14831,8 @@
 #define CDP_D_NAN_FLUSH_TO_ZERO_0_NAN_TO_ZERO_ENABLE         (_MK_ENUM_CONST(1))
 
 
-/* Register CDP_D_LRN_CFG_0 */
-#define CDP_D_LRN_CFG_0                                (_MK_ADDR_CONST(0x12070))
+// Register CDP_D_LRN_CFG_0
+#define CDP_D_LRN_CFG_0                                 (_MK_ADDR_CONST(0xf070))
 #define CDP_D_LRN_CFG_0_SECURE                                             (0x0)
 #define CDP_D_LRN_CFG_0_DUAL                                               (0x0)
 #define CDP_D_LRN_CFG_0_SCR                                                  (0)
@@ -14749,8 +14860,8 @@
 #define CDP_D_LRN_CFG_0_NORMALZ_LEN_LEN9                     (_MK_ENUM_CONST(3))
 
 
-/* Register CDP_D_DATIN_OFFSET_0 */
-#define CDP_D_DATIN_OFFSET_0                           (_MK_ADDR_CONST(0x12074))
+// Register CDP_D_DATIN_OFFSET_0
+#define CDP_D_DATIN_OFFSET_0                            (_MK_ADDR_CONST(0xf074))
 #define CDP_D_DATIN_OFFSET_0_SECURE                                        (0x0)
 #define CDP_D_DATIN_OFFSET_0_DUAL                                          (0x0)
 #define CDP_D_DATIN_OFFSET_0_SCR                                             (0)
@@ -14778,8 +14889,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_D_DATIN_SCALE_0 */
-#define CDP_D_DATIN_SCALE_0                            (_MK_ADDR_CONST(0x12078))
+// Register CDP_D_DATIN_SCALE_0
+#define CDP_D_DATIN_SCALE_0                             (_MK_ADDR_CONST(0xf078))
 #define CDP_D_DATIN_SCALE_0_SECURE                                         (0x0)
 #define CDP_D_DATIN_SCALE_0_DUAL                                           (0x0)
 #define CDP_D_DATIN_SCALE_0_SCR                                              (0)
@@ -14805,8 +14916,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_D_DATIN_SHIFTER_0 */
-#define CDP_D_DATIN_SHIFTER_0                          (_MK_ADDR_CONST(0x1207c))
+// Register CDP_D_DATIN_SHIFTER_0
+#define CDP_D_DATIN_SHIFTER_0                           (_MK_ADDR_CONST(0xf07c))
 #define CDP_D_DATIN_SHIFTER_0_SECURE                                       (0x0)
 #define CDP_D_DATIN_SHIFTER_0_DUAL                                         (0x0)
 #define CDP_D_DATIN_SHIFTER_0_SCR                                            (0)
@@ -14834,8 +14945,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_D_DATOUT_OFFSET_0 */
-#define CDP_D_DATOUT_OFFSET_0                          (_MK_ADDR_CONST(0x12080))
+// Register CDP_D_DATOUT_OFFSET_0
+#define CDP_D_DATOUT_OFFSET_0                           (_MK_ADDR_CONST(0xf080))
 #define CDP_D_DATOUT_OFFSET_0_SECURE                                       (0x0)
 #define CDP_D_DATOUT_OFFSET_0_DUAL                                         (0x0)
 #define CDP_D_DATOUT_OFFSET_0_SCR                                            (0)
@@ -14864,8 +14975,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_D_DATOUT_SCALE_0 */
-#define CDP_D_DATOUT_SCALE_0                           (_MK_ADDR_CONST(0x12084))
+// Register CDP_D_DATOUT_SCALE_0
+#define CDP_D_DATOUT_SCALE_0                            (_MK_ADDR_CONST(0xf084))
 #define CDP_D_DATOUT_SCALE_0_SECURE                                        (0x0)
 #define CDP_D_DATOUT_SCALE_0_DUAL                                          (0x0)
 #define CDP_D_DATOUT_SCALE_0_SCR                                             (0)
@@ -14893,8 +15004,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_D_DATOUT_SHIFTER_0 */
-#define CDP_D_DATOUT_SHIFTER_0                         (_MK_ADDR_CONST(0x12088))
+// Register CDP_D_DATOUT_SHIFTER_0
+#define CDP_D_DATOUT_SHIFTER_0                          (_MK_ADDR_CONST(0xf088))
 #define CDP_D_DATOUT_SHIFTER_0_SECURE                                      (0x0)
 #define CDP_D_DATOUT_SHIFTER_0_DUAL                                        (0x0)
 #define CDP_D_DATOUT_SHIFTER_0_SCR                                           (0)
@@ -14923,8 +15034,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_D_NAN_INPUT_NUM_0 */
-#define CDP_D_NAN_INPUT_NUM_0                          (_MK_ADDR_CONST(0x1208c))
+// Register CDP_D_NAN_INPUT_NUM_0
+#define CDP_D_NAN_INPUT_NUM_0                           (_MK_ADDR_CONST(0xf08c))
 #define CDP_D_NAN_INPUT_NUM_0_SECURE                                       (0x0)
 #define CDP_D_NAN_INPUT_NUM_0_DUAL                                         (0x0)
 #define CDP_D_NAN_INPUT_NUM_0_SCR                                            (0)
@@ -14953,8 +15064,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_D_INF_INPUT_NUM_0 */
-#define CDP_D_INF_INPUT_NUM_0                          (_MK_ADDR_CONST(0x12090))
+// Register CDP_D_INF_INPUT_NUM_0
+#define CDP_D_INF_INPUT_NUM_0                           (_MK_ADDR_CONST(0xf090))
 #define CDP_D_INF_INPUT_NUM_0_SECURE                                       (0x0)
 #define CDP_D_INF_INPUT_NUM_0_DUAL                                         (0x0)
 #define CDP_D_INF_INPUT_NUM_0_SCR                                            (0)
@@ -14983,8 +15094,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_D_NAN_OUTPUT_NUM_0 */
-#define CDP_D_NAN_OUTPUT_NUM_0                         (_MK_ADDR_CONST(0x12094))
+// Register CDP_D_NAN_OUTPUT_NUM_0
+#define CDP_D_NAN_OUTPUT_NUM_0                          (_MK_ADDR_CONST(0xf094))
 #define CDP_D_NAN_OUTPUT_NUM_0_SECURE                                      (0x0)
 #define CDP_D_NAN_OUTPUT_NUM_0_DUAL                                        (0x0)
 #define CDP_D_NAN_OUTPUT_NUM_0_SCR                                           (0)
@@ -15014,8 +15125,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_D_OUT_SATURATION_0 */
-#define CDP_D_OUT_SATURATION_0                         (_MK_ADDR_CONST(0x12098))
+// Register CDP_D_OUT_SATURATION_0
+#define CDP_D_OUT_SATURATION_0                          (_MK_ADDR_CONST(0xf098))
 #define CDP_D_OUT_SATURATION_0_SECURE                                      (0x0)
 #define CDP_D_OUT_SATURATION_0_DUAL                                        (0x0)
 #define CDP_D_OUT_SATURATION_0_SCR                                           (0)
@@ -15045,8 +15156,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_D_PERF_ENABLE_0 */
-#define CDP_D_PERF_ENABLE_0                            (_MK_ADDR_CONST(0x1209c))
+// Register CDP_D_PERF_ENABLE_0
+#define CDP_D_PERF_ENABLE_0                             (_MK_ADDR_CONST(0xf09c))
 #define CDP_D_PERF_ENABLE_0_SECURE                                         (0x0)
 #define CDP_D_PERF_ENABLE_0_DUAL                                           (0x0)
 #define CDP_D_PERF_ENABLE_0_SCR                                              (0)
@@ -15088,8 +15199,8 @@
 #define CDP_D_PERF_ENABLE_0_LUT_EN_ENABLE                    (_MK_ENUM_CONST(1))
 
 
-/* Register CDP_D_PERF_WRITE_STALL_0 */
-#define CDP_D_PERF_WRITE_STALL_0                       (_MK_ADDR_CONST(0x120a0))
+// Register CDP_D_PERF_WRITE_STALL_0
+#define CDP_D_PERF_WRITE_STALL_0                        (_MK_ADDR_CONST(0xf0a0))
 #define CDP_D_PERF_WRITE_STALL_0_SECURE                                    (0x0)
 #define CDP_D_PERF_WRITE_STALL_0_DUAL                                      (0x0)
 #define CDP_D_PERF_WRITE_STALL_0_SCR                                         (0)
@@ -15120,8 +15231,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_D_PERF_LUT_UFLOW_0 */
-#define CDP_D_PERF_LUT_UFLOW_0                         (_MK_ADDR_CONST(0x120a4))
+// Register CDP_D_PERF_LUT_UFLOW_0
+#define CDP_D_PERF_LUT_UFLOW_0                          (_MK_ADDR_CONST(0xf0a4))
 #define CDP_D_PERF_LUT_UFLOW_0_SECURE                                      (0x0)
 #define CDP_D_PERF_LUT_UFLOW_0_DUAL                                        (0x0)
 #define CDP_D_PERF_LUT_UFLOW_0_SCR                                           (0)
@@ -15151,8 +15262,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_D_PERF_LUT_OFLOW_0 */
-#define CDP_D_PERF_LUT_OFLOW_0                         (_MK_ADDR_CONST(0x120a8))
+// Register CDP_D_PERF_LUT_OFLOW_0
+#define CDP_D_PERF_LUT_OFLOW_0                          (_MK_ADDR_CONST(0xf0a8))
 #define CDP_D_PERF_LUT_OFLOW_0_SECURE                                      (0x0)
 #define CDP_D_PERF_LUT_OFLOW_0_DUAL                                        (0x0)
 #define CDP_D_PERF_LUT_OFLOW_0_SCR                                           (0)
@@ -15182,8 +15293,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_D_PERF_LUT_HYBRID_0 */
-#define CDP_D_PERF_LUT_HYBRID_0                        (_MK_ADDR_CONST(0x120ac))
+// Register CDP_D_PERF_LUT_HYBRID_0
+#define CDP_D_PERF_LUT_HYBRID_0                         (_MK_ADDR_CONST(0xf0ac))
 #define CDP_D_PERF_LUT_HYBRID_0_SECURE                                     (0x0)
 #define CDP_D_PERF_LUT_HYBRID_0_DUAL                                       (0x0)
 #define CDP_D_PERF_LUT_HYBRID_0_SCR                                          (0)
@@ -15213,8 +15324,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_D_PERF_LUT_LE_HIT_0 */
-#define CDP_D_PERF_LUT_LE_HIT_0                        (_MK_ADDR_CONST(0x120b0))
+// Register CDP_D_PERF_LUT_LE_HIT_0
+#define CDP_D_PERF_LUT_LE_HIT_0                         (_MK_ADDR_CONST(0xf0b0))
 #define CDP_D_PERF_LUT_LE_HIT_0_SECURE                                     (0x0)
 #define CDP_D_PERF_LUT_LE_HIT_0_DUAL                                       (0x0)
 #define CDP_D_PERF_LUT_LE_HIT_0_SCR                                          (0)
@@ -15244,8 +15355,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_D_PERF_LUT_LO_HIT_0 */
-#define CDP_D_PERF_LUT_LO_HIT_0                        (_MK_ADDR_CONST(0x120b4))
+// Register CDP_D_PERF_LUT_LO_HIT_0
+#define CDP_D_PERF_LUT_LO_HIT_0                         (_MK_ADDR_CONST(0xf0b4))
 #define CDP_D_PERF_LUT_LO_HIT_0_SECURE                                     (0x0)
 #define CDP_D_PERF_LUT_LO_HIT_0_DUAL                                       (0x0)
 #define CDP_D_PERF_LUT_LO_HIT_0_SCR                                          (0)
@@ -15275,8 +15386,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register CDP_D_CYA_0 */
-#define CDP_D_CYA_0                                    (_MK_ADDR_CONST(0x120b8))
+// Register CDP_D_CYA_0
+#define CDP_D_CYA_0                                     (_MK_ADDR_CONST(0xf0b8))
 #define CDP_D_CYA_0_SECURE                                                 (0x0)
 #define CDP_D_CYA_0_DUAL                                                   (0x0)
 #define CDP_D_CYA_0_SCR                                                      (0)
@@ -15300,8 +15411,8 @@
 #define CDP_D_CYA_0_CYA_PLATFORM_DEPENDENT                 (_MK_MASK_CONST(0x1))
 
 
-/* Register RBK_S_STATUS_0 */
-#define RBK_S_STATUS_0                                 (_MK_ADDR_CONST(0x13000))
+// Register RBK_S_STATUS_0
+#define RBK_S_STATUS_0                                 (_MK_ADDR_CONST(0x10000))
 #define RBK_S_STATUS_0_SECURE                                              (0x0)
 #define RBK_S_STATUS_0_DUAL                                                (0x0)
 #define RBK_S_STATUS_0_SCR                                                   (0)
@@ -15345,8 +15456,8 @@
 #define RBK_S_STATUS_0_STATUS_1_PENDING                      (_MK_ENUM_CONST(2))
 
 
-/* Register RBK_S_POINTER_0 */
-#define RBK_S_POINTER_0                                (_MK_ADDR_CONST(0x13004))
+// Register RBK_S_POINTER_0
+#define RBK_S_POINTER_0                                (_MK_ADDR_CONST(0x10004))
 #define RBK_S_POINTER_0_SECURE                                             (0x0)
 #define RBK_S_POINTER_0_DUAL                                               (0x0)
 #define RBK_S_POINTER_0_SCR                                                  (0)
@@ -15388,8 +15499,8 @@
 #define RBK_S_POINTER_0_CONSUMER_GROUP_1                     (_MK_ENUM_CONST(1))
 
 
-/* Register RBK_D_OP_ENABLE_0 */
-#define RBK_D_OP_ENABLE_0                              (_MK_ADDR_CONST(0x13008))
+// Register RBK_D_OP_ENABLE_0
+#define RBK_D_OP_ENABLE_0                              (_MK_ADDR_CONST(0x10008))
 #define RBK_D_OP_ENABLE_0_SECURE                                           (0x0)
 #define RBK_D_OP_ENABLE_0_DUAL                                             (0x0)
 #define RBK_D_OP_ENABLE_0_SCR                                                (0)
@@ -15416,8 +15527,8 @@
 #define RBK_D_OP_ENABLE_0_OP_EN_ENABLE                       (_MK_ENUM_CONST(1))
 
 
-/* Register RBK_D_MISC_CFG_0 */
-#define RBK_D_MISC_CFG_0                               (_MK_ADDR_CONST(0x1300c))
+// Register RBK_D_MISC_CFG_0
+#define RBK_D_MISC_CFG_0                               (_MK_ADDR_CONST(0x1000c))
 #define RBK_D_MISC_CFG_0_SECURE                                            (0x0)
 #define RBK_D_MISC_CFG_0_DUAL                                              (0x0)
 #define RBK_D_MISC_CFG_0_SCR                                                 (0)
@@ -15462,8 +15573,8 @@
 #define RBK_D_MISC_CFG_0_IN_PRECISION_FP16                   (_MK_ENUM_CONST(2))
 
 
-/* Register RBK_D_DAIN_RAM_TYPE_0 */
-#define RBK_D_DAIN_RAM_TYPE_0                          (_MK_ADDR_CONST(0x13010))
+// Register RBK_D_DAIN_RAM_TYPE_0
+#define RBK_D_DAIN_RAM_TYPE_0                          (_MK_ADDR_CONST(0x10010))
 #define RBK_D_DAIN_RAM_TYPE_0_SECURE                                       (0x0)
 #define RBK_D_DAIN_RAM_TYPE_0_DUAL                                         (0x0)
 #define RBK_D_DAIN_RAM_TYPE_0_SCR                                            (0)
@@ -15495,8 +15606,8 @@
 #define RBK_D_DAIN_RAM_TYPE_0_DATAIN_RAM_TYPE_MCIF           (_MK_ENUM_CONST(1))
 
 
-/* Register RBK_D_DATAIN_SIZE_0_0 */
-#define RBK_D_DATAIN_SIZE_0_0                          (_MK_ADDR_CONST(0x13014))
+// Register RBK_D_DATAIN_SIZE_0_0
+#define RBK_D_DATAIN_SIZE_0_0                          (_MK_ADDR_CONST(0x10014))
 #define RBK_D_DATAIN_SIZE_0_0_SECURE                                       (0x0)
 #define RBK_D_DATAIN_SIZE_0_0_DUAL                                         (0x0)
 #define RBK_D_DATAIN_SIZE_0_0_SCR                                            (0)
@@ -15540,8 +15651,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register RBK_D_DATAIN_SIZE_1_0 */
-#define RBK_D_DATAIN_SIZE_1_0                          (_MK_ADDR_CONST(0x13018))
+// Register RBK_D_DATAIN_SIZE_1_0
+#define RBK_D_DATAIN_SIZE_1_0                          (_MK_ADDR_CONST(0x10018))
 #define RBK_D_DATAIN_SIZE_1_0_SECURE                                       (0x0)
 #define RBK_D_DATAIN_SIZE_1_0_DUAL                                         (0x0)
 #define RBK_D_DATAIN_SIZE_1_0_SCR                                            (0)
@@ -15569,26 +15680,27 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register RBK_D_DAIN_ADDR_HIGH_0 */
-#define RBK_D_DAIN_ADDR_HIGH_0                         (_MK_ADDR_CONST(0x1301c))
+// Register RBK_D_DAIN_ADDR_HIGH_0
+#define RBK_D_DAIN_ADDR_HIGH_0                         (_MK_ADDR_CONST(0x1001c))
 #define RBK_D_DAIN_ADDR_HIGH_0_SECURE                                      (0x0)
 #define RBK_D_DAIN_ADDR_HIGH_0_DUAL                                        (0x0)
 #define RBK_D_DAIN_ADDR_HIGH_0_SCR                                           (0)
 #define RBK_D_DAIN_ADDR_HIGH_0_WORD_COUNT                                  (0x1)
 #define RBK_D_DAIN_ADDR_HIGH_0_RESET_VAL                   (_MK_MASK_CONST(0x0))
-#define RBK_D_DAIN_ADDR_HIGH_0_RESET_MASK                 (_MK_MASK_CONST(0xff))
+#define RBK_D_DAIN_ADDR_HIGH_0_RESET_MASK           (_MK_MASK_CONST(0xffffffff))
 #define RBK_D_DAIN_ADDR_HIGH_0_SW_DEFAULT_VAL              (_MK_MASK_CONST(0x0))
 #define RBK_D_DAIN_ADDR_HIGH_0_SW_DEFAULT_MASK             (_MK_MASK_CONST(0x0))
-#define RBK_D_DAIN_ADDR_HIGH_0_READ_MASK                  (_MK_MASK_CONST(0xff))
-#define RBK_D_DAIN_ADDR_HIGH_0_WRITE_MASK                 (_MK_MASK_CONST(0xff))
+#define RBK_D_DAIN_ADDR_HIGH_0_READ_MASK            (_MK_MASK_CONST(0xffffffff))
+#define RBK_D_DAIN_ADDR_HIGH_0_WRITE_MASK           (_MK_MASK_CONST(0xffffffff))
 #define RBK_D_DAIN_ADDR_HIGH_0_DAIN_ADDR_HIGH_SHIFT         (_MK_SHIFT_CONST(0))
 #define RBK_D_DAIN_ADDR_HIGH_0_DAIN_ADDR_HIGH_FIELD \
-	(_MK_FIELD_CONST(0xff, RBK_D_DAIN_ADDR_HIGH_0_DAIN_ADDR_HIGH_SHIFT))
-#define RBK_D_DAIN_ADDR_HIGH_0_DAIN_ADDR_HIGH_RANGE                        (7:0)
+	(_MK_FIELD_CONST(0xffffffff, \
+	RBK_D_DAIN_ADDR_HIGH_0_DAIN_ADDR_HIGH_SHIFT))
+#define RBK_D_DAIN_ADDR_HIGH_0_DAIN_ADDR_HIGH_RANGE                       (31:0)
 #define RBK_D_DAIN_ADDR_HIGH_0_DAIN_ADDR_HIGH_WOFFSET                      (0x0)
 #define RBK_D_DAIN_ADDR_HIGH_0_DAIN_ADDR_HIGH_DEFAULT      (_MK_MASK_CONST(0x0))
 #define RBK_D_DAIN_ADDR_HIGH_0_DAIN_ADDR_HIGH_DEFAULT_MASK \
-	(_MK_MASK_CONST(0xff))
+	(_MK_MASK_CONST(0xffffffff))
 #define RBK_D_DAIN_ADDR_HIGH_0_DAIN_ADDR_HIGH_SW_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define RBK_D_DAIN_ADDR_HIGH_0_DAIN_ADDR_HIGH_SW_DEFAULT_MASK \
@@ -15599,8 +15711,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register RBK_D_DAIN_ADDR_LOW_0 */
-#define RBK_D_DAIN_ADDR_LOW_0                          (_MK_ADDR_CONST(0x13020))
+// Register RBK_D_DAIN_ADDR_LOW_0
+#define RBK_D_DAIN_ADDR_LOW_0                          (_MK_ADDR_CONST(0x10020))
 #define RBK_D_DAIN_ADDR_LOW_0_SECURE                                       (0x0)
 #define RBK_D_DAIN_ADDR_LOW_0_DUAL                                         (0x0)
 #define RBK_D_DAIN_ADDR_LOW_0_SCR                                            (0)
@@ -15629,8 +15741,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register RBK_D_DAIN_LINE_STRIDE_0 */
-#define RBK_D_DAIN_LINE_STRIDE_0                       (_MK_ADDR_CONST(0x13024))
+// Register RBK_D_DAIN_LINE_STRIDE_0
+#define RBK_D_DAIN_LINE_STRIDE_0                       (_MK_ADDR_CONST(0x10024))
 #define RBK_D_DAIN_LINE_STRIDE_0_SECURE                                    (0x0)
 #define RBK_D_DAIN_LINE_STRIDE_0_DUAL                                      (0x0)
 #define RBK_D_DAIN_LINE_STRIDE_0_SCR                                         (0)
@@ -15661,8 +15773,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register RBK_D_DAIN_SURF_STRIDE_0 */
-#define RBK_D_DAIN_SURF_STRIDE_0                       (_MK_ADDR_CONST(0x13028))
+// Register RBK_D_DAIN_SURF_STRIDE_0
+#define RBK_D_DAIN_SURF_STRIDE_0                       (_MK_ADDR_CONST(0x10028))
 #define RBK_D_DAIN_SURF_STRIDE_0_SECURE                                    (0x0)
 #define RBK_D_DAIN_SURF_STRIDE_0_DUAL                                      (0x0)
 #define RBK_D_DAIN_SURF_STRIDE_0_SCR                                         (0)
@@ -15693,8 +15805,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register RBK_D_DAIN_PLANAR_STRIDE_0 */
-#define RBK_D_DAIN_PLANAR_STRIDE_0                     (_MK_ADDR_CONST(0x1302c))
+// Register RBK_D_DAIN_PLANAR_STRIDE_0
+#define RBK_D_DAIN_PLANAR_STRIDE_0                     (_MK_ADDR_CONST(0x1002c))
 #define RBK_D_DAIN_PLANAR_STRIDE_0_SECURE                                  (0x0)
 #define RBK_D_DAIN_PLANAR_STRIDE_0_DUAL                                    (0x0)
 #define RBK_D_DAIN_PLANAR_STRIDE_0_SCR                                       (0)
@@ -15726,8 +15838,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register RBK_D_DAOUT_RAM_TYPE_0 */
-#define RBK_D_DAOUT_RAM_TYPE_0                         (_MK_ADDR_CONST(0x13030))
+// Register RBK_D_DAOUT_RAM_TYPE_0
+#define RBK_D_DAOUT_RAM_TYPE_0                         (_MK_ADDR_CONST(0x10030))
 #define RBK_D_DAOUT_RAM_TYPE_0_SECURE                                      (0x0)
 #define RBK_D_DAOUT_RAM_TYPE_0_DUAL                                        (0x0)
 #define RBK_D_DAOUT_RAM_TYPE_0_SCR                                           (0)
@@ -15759,8 +15871,8 @@
 #define RBK_D_DAOUT_RAM_TYPE_0_DATAOUT_RAM_TYPE_MCIF         (_MK_ENUM_CONST(1))
 
 
-/* Register RBK_D_DATAOUT_SIZE_1_0 */
-#define RBK_D_DATAOUT_SIZE_1_0                         (_MK_ADDR_CONST(0x13034))
+// Register RBK_D_DATAOUT_SIZE_1_0
+#define RBK_D_DATAOUT_SIZE_1_0                         (_MK_ADDR_CONST(0x10034))
 #define RBK_D_DATAOUT_SIZE_1_0_SECURE                                      (0x0)
 #define RBK_D_DATAOUT_SIZE_1_0_DUAL                                        (0x0)
 #define RBK_D_DATAOUT_SIZE_1_0_SCR                                           (0)
@@ -15790,27 +15902,27 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register RBK_D_DAOUT_ADDR_HIGH_0 */
-#define RBK_D_DAOUT_ADDR_HIGH_0                        (_MK_ADDR_CONST(0x13038))
+// Register RBK_D_DAOUT_ADDR_HIGH_0
+#define RBK_D_DAOUT_ADDR_HIGH_0                        (_MK_ADDR_CONST(0x10038))
 #define RBK_D_DAOUT_ADDR_HIGH_0_SECURE                                     (0x0)
 #define RBK_D_DAOUT_ADDR_HIGH_0_DUAL                                       (0x0)
 #define RBK_D_DAOUT_ADDR_HIGH_0_SCR                                          (0)
 #define RBK_D_DAOUT_ADDR_HIGH_0_WORD_COUNT                                 (0x1)
 #define RBK_D_DAOUT_ADDR_HIGH_0_RESET_VAL                  (_MK_MASK_CONST(0x0))
-#define RBK_D_DAOUT_ADDR_HIGH_0_RESET_MASK                (_MK_MASK_CONST(0xff))
+#define RBK_D_DAOUT_ADDR_HIGH_0_RESET_MASK          (_MK_MASK_CONST(0xffffffff))
 #define RBK_D_DAOUT_ADDR_HIGH_0_SW_DEFAULT_VAL             (_MK_MASK_CONST(0x0))
 #define RBK_D_DAOUT_ADDR_HIGH_0_SW_DEFAULT_MASK            (_MK_MASK_CONST(0x0))
-#define RBK_D_DAOUT_ADDR_HIGH_0_READ_MASK                 (_MK_MASK_CONST(0xff))
-#define RBK_D_DAOUT_ADDR_HIGH_0_WRITE_MASK                (_MK_MASK_CONST(0xff))
+#define RBK_D_DAOUT_ADDR_HIGH_0_READ_MASK           (_MK_MASK_CONST(0xffffffff))
+#define RBK_D_DAOUT_ADDR_HIGH_0_WRITE_MASK          (_MK_MASK_CONST(0xffffffff))
 #define RBK_D_DAOUT_ADDR_HIGH_0_DAOUT_ADDR_HIGH_SHIFT       (_MK_SHIFT_CONST(0))
 #define RBK_D_DAOUT_ADDR_HIGH_0_DAOUT_ADDR_HIGH_FIELD \
-	(_MK_FIELD_CONST(0xff, \
+	(_MK_FIELD_CONST(0xffffffff, \
 	RBK_D_DAOUT_ADDR_HIGH_0_DAOUT_ADDR_HIGH_SHIFT))
-#define RBK_D_DAOUT_ADDR_HIGH_0_DAOUT_ADDR_HIGH_RANGE                      (7:0)
+#define RBK_D_DAOUT_ADDR_HIGH_0_DAOUT_ADDR_HIGH_RANGE                     (31:0)
 #define RBK_D_DAOUT_ADDR_HIGH_0_DAOUT_ADDR_HIGH_WOFFSET                    (0x0)
 #define RBK_D_DAOUT_ADDR_HIGH_0_DAOUT_ADDR_HIGH_DEFAULT    (_MK_MASK_CONST(0x0))
 #define RBK_D_DAOUT_ADDR_HIGH_0_DAOUT_ADDR_HIGH_DEFAULT_MASK \
-	(_MK_MASK_CONST(0xff))
+	(_MK_MASK_CONST(0xffffffff))
 #define RBK_D_DAOUT_ADDR_HIGH_0_DAOUT_ADDR_HIGH_SW_DEFAULT \
 	(_MK_MASK_CONST(0x0))
 #define RBK_D_DAOUT_ADDR_HIGH_0_DAOUT_ADDR_HIGH_SW_DEFAULT_MASK \
@@ -15821,8 +15933,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register RBK_D_DAOUT_ADDR_LOW_0 */
-#define RBK_D_DAOUT_ADDR_LOW_0                         (_MK_ADDR_CONST(0x1303c))
+// Register RBK_D_DAOUT_ADDR_LOW_0
+#define RBK_D_DAOUT_ADDR_LOW_0                         (_MK_ADDR_CONST(0x1003c))
 #define RBK_D_DAOUT_ADDR_LOW_0_SECURE                                      (0x0)
 #define RBK_D_DAOUT_ADDR_LOW_0_DUAL                                        (0x0)
 #define RBK_D_DAOUT_ADDR_LOW_0_SCR                                           (0)
@@ -15852,8 +15964,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register RBK_D_DAOUT_LINE_STRIDE_0 */
-#define RBK_D_DAOUT_LINE_STRIDE_0                      (_MK_ADDR_CONST(0x13040))
+// Register RBK_D_DAOUT_LINE_STRIDE_0
+#define RBK_D_DAOUT_LINE_STRIDE_0                      (_MK_ADDR_CONST(0x10040))
 #define RBK_D_DAOUT_LINE_STRIDE_0_SECURE                                   (0x0)
 #define RBK_D_DAOUT_LINE_STRIDE_0_DUAL                                     (0x0)
 #define RBK_D_DAOUT_LINE_STRIDE_0_SCR                                        (0)
@@ -15885,8 +15997,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register RBK_D_CONTRACT_STRIDE_0_0 */
-#define RBK_D_CONTRACT_STRIDE_0_0                      (_MK_ADDR_CONST(0x13044))
+// Register RBK_D_CONTRACT_STRIDE_0_0
+#define RBK_D_CONTRACT_STRIDE_0_0                      (_MK_ADDR_CONST(0x10044))
 #define RBK_D_CONTRACT_STRIDE_0_0_SECURE                                   (0x0)
 #define RBK_D_CONTRACT_STRIDE_0_0_DUAL                                     (0x0)
 #define RBK_D_CONTRACT_STRIDE_0_0_SCR                                        (0)
@@ -15918,8 +16030,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register RBK_D_CONTRACT_STRIDE_1_0 */
-#define RBK_D_CONTRACT_STRIDE_1_0                      (_MK_ADDR_CONST(0x13048))
+// Register RBK_D_CONTRACT_STRIDE_1_0
+#define RBK_D_CONTRACT_STRIDE_1_0                      (_MK_ADDR_CONST(0x10048))
 #define RBK_D_CONTRACT_STRIDE_1_0_SECURE                                   (0x0)
 #define RBK_D_CONTRACT_STRIDE_1_0_DUAL                                     (0x0)
 #define RBK_D_CONTRACT_STRIDE_1_0_SCR                                        (0)
@@ -15951,8 +16063,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register RBK_D_DAOUT_SURF_STRIDE_0 */
-#define RBK_D_DAOUT_SURF_STRIDE_0                      (_MK_ADDR_CONST(0x1304c))
+// Register RBK_D_DAOUT_SURF_STRIDE_0
+#define RBK_D_DAOUT_SURF_STRIDE_0                      (_MK_ADDR_CONST(0x1004c))
 #define RBK_D_DAOUT_SURF_STRIDE_0_SECURE                                   (0x0)
 #define RBK_D_DAOUT_SURF_STRIDE_0_DUAL                                     (0x0)
 #define RBK_D_DAOUT_SURF_STRIDE_0_SCR                                        (0)
@@ -15984,8 +16096,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register RBK_D_DAOUT_PLANAR_STRIDE_0 */
-#define RBK_D_DAOUT_PLANAR_STRIDE_0                    (_MK_ADDR_CONST(0x13050))
+// Register RBK_D_DAOUT_PLANAR_STRIDE_0
+#define RBK_D_DAOUT_PLANAR_STRIDE_0                    (_MK_ADDR_CONST(0x10050))
 #define RBK_D_DAOUT_PLANAR_STRIDE_0_SECURE                                 (0x0)
 #define RBK_D_DAOUT_PLANAR_STRIDE_0_DUAL                                   (0x0)
 #define RBK_D_DAOUT_PLANAR_STRIDE_0_SCR                                      (0)
@@ -16017,8 +16129,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register RBK_D_DECONV_STRIDE_0 */
-#define RBK_D_DECONV_STRIDE_0                          (_MK_ADDR_CONST(0x13054))
+// Register RBK_D_DECONV_STRIDE_0
+#define RBK_D_DECONV_STRIDE_0                          (_MK_ADDR_CONST(0x10054))
 #define RBK_D_DECONV_STRIDE_0_SECURE                                       (0x0)
 #define RBK_D_DECONV_STRIDE_0_DUAL                                         (0x0)
 #define RBK_D_DECONV_STRIDE_0_SCR                                            (0)
@@ -16064,8 +16176,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register RBK_D_PERF_ENABLE_0 */
-#define RBK_D_PERF_ENABLE_0                            (_MK_ADDR_CONST(0x13058))
+// Register RBK_D_PERF_ENABLE_0
+#define RBK_D_PERF_ENABLE_0                            (_MK_ADDR_CONST(0x10058))
 #define RBK_D_PERF_ENABLE_0_SECURE                                         (0x0)
 #define RBK_D_PERF_ENABLE_0_DUAL                                           (0x0)
 #define RBK_D_PERF_ENABLE_0_SCR                                              (0)
@@ -16089,8 +16201,8 @@
 #define RBK_D_PERF_ENABLE_0_PERF_EN_PLATFORM_DEPENDENT     (_MK_MASK_CONST(0x1))
 
 
-/* Register RBK_D_PERF_READ_STALL_0 */
-#define RBK_D_PERF_READ_STALL_0                        (_MK_ADDR_CONST(0x1305c))
+// Register RBK_D_PERF_READ_STALL_0
+#define RBK_D_PERF_READ_STALL_0                        (_MK_ADDR_CONST(0x1005c))
 #define RBK_D_PERF_READ_STALL_0_SECURE                                     (0x0)
 #define RBK_D_PERF_READ_STALL_0_DUAL                                       (0x0)
 #define RBK_D_PERF_READ_STALL_0_SCR                                          (0)
@@ -16119,8 +16231,8 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/* Register RBK_D_PERF_WRITE_STALL_0 */
-#define RBK_D_PERF_WRITE_STALL_0                       (_MK_ADDR_CONST(0x13060))
+// Register RBK_D_PERF_WRITE_STALL_0
+#define RBK_D_PERF_WRITE_STALL_0                       (_MK_ADDR_CONST(0x10060))
 #define RBK_D_PERF_WRITE_STALL_0_SECURE                                    (0x0)
 #define RBK_D_PERF_WRITE_STALL_0_DUAL                                      (0x0)
 #define RBK_D_PERF_WRITE_STALL_0_SCR                                         (0)
@@ -16150,48 +16262,14 @@
 	(_MK_MASK_CONST(0x1))
 
 
-/*
- *
- * REGISTER LIST
- *
- */
+//
+// REGISTER LIST
+//
 #define LIST_ARREGS(_op_) \
 (_op_(GLB_S_NVDLA_HW_VERSION_0) \
 _op_(GLB_S_INTR_MASK_0) \
 _op_(GLB_S_INTR_SET_0) \
 _op_(GLB_S_INTR_STATUS_0) \
-_op_(GEC_FEATURE_0) \
-_op_(GEC_SWRESET_0) \
-_op_(GEC_MISSIONERR_TYPE_0) \
-_op_(GEC_CURRENT_COUNTER_VALUE_0) \
-_op_(GEC_MISSIONERR_INDEX_0) \
-_op_(GEC_CORRECTABLE_THRESHOLD_0) \
-_op_(GEC_MISSIONERR_INJECT_UNLOCK_0) \
-_op_(GEC_ERRSLICE0_MISSIONERR_ENABLE_0) \
-_op_(GEC_ERRSLICE0_MISSIONERR_FORCE_0) \
-_op_(GEC_ERRSLICE0_MISSIONERR_STATUS_0) \
-_op_(GEC_ERRSLICE0_MISSIONERR_INJECT_0) \
-_op_(GEC_ERRSLICE0_LATENTERR_ENABLE_0) \
-_op_(GEC_ERRSLICE0_LATENTERR_FORCE_0) \
-_op_(GEC_ERRSLICE0_LATENTERR_STATUS_0) \
-_op_(GEC_ERRSLICE0_COUNTER_RELOAD_0) \
-_op_(GEC_ERRSLICE1_MISSIONERR_ENABLE_0) \
-_op_(GEC_ERRSLICE1_MISSIONERR_FORCE_0) \
-_op_(GEC_ERRSLICE1_MISSIONERR_STATUS_0) \
-_op_(GEC_ERRSLICE1_MISSIONERR_INJECT_0) \
-_op_(GEC_ERRSLICE1_LATENTERR_ENABLE_0) \
-_op_(GEC_ERRSLICE1_LATENTERR_FORCE_0) \
-_op_(GEC_ERRSLICE1_LATENTERR_STATUS_0) \
-_op_(GEC_ERRSLICE1_COUNTER_RELOAD_0) \
-_op_(GEC_ERRSLICE1_MISSIONERR_ECC_CORRECTION_DIS_0) \
-_op_(GEC_ERRSLICE2_MISSIONERR_ENABLE_0) \
-_op_(GEC_ERRSLICE2_MISSIONERR_FORCE_0) \
-_op_(GEC_ERRSLICE2_MISSIONERR_STATUS_0) \
-_op_(GEC_ERRSLICE2_MISSIONERR_INJECT_0) \
-_op_(GEC_ERRSLICE2_LATENTERR_ENABLE_0) \
-_op_(GEC_ERRSLICE2_LATENTERR_FORCE_0) \
-_op_(GEC_ERRSLICE2_LATENTERR_STATUS_0) \
-_op_(GEC_ERRSLICE2_COUNTER_RELOAD_0) \
 _op_(MCIF_CFG_RD_WEIGHT_0_0) \
 _op_(MCIF_CFG_RD_WEIGHT_1_0) \
 _op_(MCIF_CFG_RD_WEIGHT_2_0) \
@@ -16247,8 +16325,8 @@ _op_(CDMA_D_LINE_STRIDE_0) \
 _op_(CDMA_D_LINE_UV_STRIDE_0) \
 _op_(CDMA_D_SURF_STRIDE_0) \
 _op_(CDMA_D_DAIN_MAP_0) \
-_op_(CDMA_D_BLOCK_X_CFG_0) \
-_op_(CDMA_D_BLOCK_Y_CFG_0) \
+_op_(CDMA_D_RESERVED_X_CFG_0) \
+_op_(CDMA_D_RESERVED_Y_CFG_0) \
 _op_(CDMA_D_BATCH_NUMBER_0) \
 _op_(CDMA_D_BATCH_STRIDE_0) \
 _op_(CDMA_D_ENTRY_PER_SLICE_0) \
@@ -16585,89 +16663,66 @@ _op_(RBK_D_PERF_READ_STALL_0) \
 _op_(RBK_D_PERF_WRITE_STALL_0))
 
 
-/*
- *
- * ADDRESS SPACES
- *
- */
+//
+// ADDRESS SPACES
+//
 
-#define BASE_ADDRESS_NVDLA_GLB                                      (0x00003000)
-#define BASE_ADDRESS_NVDLA_GEC                                      (0x00004000)
-#define BASE_ADDRESS_NVDLA_MCIF                                     (0x00005000)
-#define BASE_ADDRESS_NVDLA_CVIF                                     (0x00006000)
-#define BASE_ADDRESS_NVDLA_BDMA                                     (0x00007000)
-#define BASE_ADDRESS_NVDLA_CDMA                                     (0x00008000)
-#define BASE_ADDRESS_NVDLA_CSC                                      (0x00009000)
-#define BASE_ADDRESS_NVDLA_CMAC_A                                   (0x0000a000)
-#define BASE_ADDRESS_NVDLA_CMAC_B                                   (0x0000b000)
-#define BASE_ADDRESS_NVDLA_CACC                                     (0x0000c000)
-#define BASE_ADDRESS_NVDLA_SDP_RDMA                                 (0x0000d000)
-#define BASE_ADDRESS_NVDLA_SDP                                      (0x0000e000)
-#define BASE_ADDRESS_NVDLA_PDP_RDMA                                 (0x0000f000)
-#define BASE_ADDRESS_NVDLA_PDP                                      (0x00010000)
-#define BASE_ADDRESS_NVDLA_CDP_RDMA                                 (0x00011000)
-#define BASE_ADDRESS_NVDLA_CDP                                      (0x00012000)
-#define BASE_ADDRESS_NVDLA_RBK                                      (0x00013000)
+#define BASE_ADDRESS_NVDLA_GLB                                      (0x00000000)
+#define BASE_ADDRESS_NVDLA_MCIF                                     (0x00002000)
+#define BASE_ADDRESS_NVDLA_CVIF                                     (0x00003000)
+#define BASE_ADDRESS_NVDLA_BDMA                                     (0x00004000)
+#define BASE_ADDRESS_NVDLA_CDMA                                     (0x00005000)
+#define BASE_ADDRESS_NVDLA_CSC                                      (0x00006000)
+#define BASE_ADDRESS_NVDLA_CMAC_A                                   (0x00007000)
+#define BASE_ADDRESS_NVDLA_CMAC_B                                   (0x00008000)
+#define BASE_ADDRESS_NVDLA_CACC                                     (0x00009000)
+#define BASE_ADDRESS_NVDLA_SDP_RDMA                                 (0x0000a000)
+#define BASE_ADDRESS_NVDLA_SDP                                      (0x0000b000)
+#define BASE_ADDRESS_NVDLA_PDP_RDMA                                 (0x0000c000)
+#define BASE_ADDRESS_NVDLA_PDP                                      (0x0000d000)
+#define BASE_ADDRESS_NVDLA_CDP_RDMA                                 (0x0000e000)
+#define BASE_ADDRESS_NVDLA_CDP                                      (0x0000f000)
+#define BASE_ADDRESS_NVDLA_RBK                                      (0x00010000)
 
-/*
- *
- * ARNVDLA REGISTER BANKS
- *
- */
+//
+// ARNVDLA REGISTER BANKS
+//
 
-#define GLB0_FIRST_REG                                                  (0x3000)
-#define GLB0_LAST_REG                                                   (0x300c)
-#define GEC0_FIRST_REG                                                  (0x4000)
-#define GEC0_LAST_REG                                                   (0x400c)
-#define GEC1_FIRST_REG                                                  (0x4014)
-#define GEC1_LAST_REG                                                   (0x401c)
-#define GEC2_FIRST_REG                                                  (0x4030)
-#define GEC2_LAST_REG                                                   (0x4048)
-#define GEC3_FIRST_REG                                                  (0x4050)
-#define GEC3_LAST_REG                                                   (0x4050)
-#define GEC4_FIRST_REG                                                  (0x4060)
-#define GEC4_LAST_REG                                                   (0x4078)
-#define GEC5_FIRST_REG                                                  (0x4080)
-#define GEC5_LAST_REG                                                   (0x4084)
-#define GEC6_FIRST_REG                                                  (0x4090)
-#define GEC6_LAST_REG                                                   (0x40a8)
-#define GEC7_FIRST_REG                                                  (0x40b0)
-#define GEC7_LAST_REG                                                   (0x40b0)
-#define MCIF0_FIRST_REG                                                 (0x5000)
-#define MCIF0_LAST_REG                                                  (0x5018)
-#define CVIF0_FIRST_REG                                                 (0x6000)
-#define CVIF0_LAST_REG                                                  (0x6018)
-#define BDMA0_FIRST_REG                                                 (0x7000)
-#define BDMA0_LAST_REG                                                  (0x7050)
-#define CDMA0_FIRST_REG                                                 (0x8000)
-#define CDMA0_LAST_REG                                                  (0x80e8)
-#define CSC0_FIRST_REG                                                  (0x9000)
-#define CSC0_LAST_REG                                                   (0x9064)
-#define CMAC_A0_FIRST_REG                                               (0xa000)
-#define CMAC_A0_LAST_REG                                                (0xa00c)
-#define CMAC_B0_FIRST_REG                                               (0xb000)
-#define CMAC_B0_LAST_REG                                                (0xb00c)
-#define CACC0_FIRST_REG                                                 (0xc000)
-#define CACC0_LAST_REG                                                  (0xc034)
-#define SDP_RDMA0_FIRST_REG                                             (0xd000)
-#define SDP_RDMA0_LAST_REG                                              (0xd090)
-#define SDP0_FIRST_REG                                                  (0xe000)
-#define SDP0_LAST_REG                                                   (0xe0f8)
-#define PDP_RDMA0_FIRST_REG                                             (0xf000)
-#define PDP_RDMA0_LAST_REG                                              (0xf04c)
-#define PDP0_FIRST_REG                                                 (0x10000)
-#define PDP0_LAST_REG                                                  (0x1009c)
-#define CDP_RDMA0_FIRST_REG                                            (0x11000)
-#define CDP_RDMA0_LAST_REG                                             (0x11040)
-#define CDP0_FIRST_REG                                                 (0x12000)
-#define CDP0_LAST_REG                                                  (0x120b8)
-#define RBK0_FIRST_REG                                                 (0x13000)
-#define RBK0_LAST_REG                                                  (0x13060)
+#define GLB0_FIRST_REG                                                  (0x0000)
+#define GLB0_LAST_REG                                                   (0x000c)
+#define MCIF0_FIRST_REG                                                 (0x2000)
+#define MCIF0_LAST_REG                                                  (0x2018)
+#define CVIF0_FIRST_REG                                                 (0x3000)
+#define CVIF0_LAST_REG                                                  (0x3018)
+#define BDMA0_FIRST_REG                                                 (0x4000)
+#define BDMA0_LAST_REG                                                  (0x4050)
+#define CDMA0_FIRST_REG                                                 (0x5000)
+#define CDMA0_LAST_REG                                                  (0x50e8)
+#define CSC0_FIRST_REG                                                  (0x6000)
+#define CSC0_LAST_REG                                                   (0x6064)
+#define CMAC_A0_FIRST_REG                                               (0x7000)
+#define CMAC_A0_LAST_REG                                                (0x700c)
+#define CMAC_B0_FIRST_REG                                               (0x8000)
+#define CMAC_B0_LAST_REG                                                (0x800c)
+#define CACC0_FIRST_REG                                                 (0x9000)
+#define CACC0_LAST_REG                                                  (0x9034)
+#define SDP_RDMA0_FIRST_REG                                             (0xa000)
+#define SDP_RDMA0_LAST_REG                                              (0xa090)
+#define SDP0_FIRST_REG                                                  (0xb000)
+#define SDP0_LAST_REG                                                   (0xb0f8)
+#define PDP_RDMA0_FIRST_REG                                             (0xc000)
+#define PDP_RDMA0_LAST_REG                                              (0xc04c)
+#define PDP0_FIRST_REG                                                  (0xd000)
+#define PDP0_LAST_REG                                                   (0xd09c)
+#define CDP_RDMA0_FIRST_REG                                             (0xe000)
+#define CDP_RDMA0_LAST_REG                                              (0xe040)
+#define CDP0_FIRST_REG                                                  (0xf000)
+#define CDP0_LAST_REG                                                   (0xf0b8)
+#define RBK0_FIRST_REG                                                 (0x10000)
+#define RBK0_LAST_REG                                                  (0x10060)
 
-/*
- * To satisfy various compilers and platforms,
- * we let users control the types and syntax of certain constants, using macros.
- */
+// To satisfy various compilers and platforms,
+// we let users control the types and syntax of certain constants, using macros.
 #ifndef _MK_SHIFT_CONST
 #define _MK_SHIFT_CONST(_constant_)                                 (_constant_)
 #endif
@@ -16685,4 +16740,4 @@ _op_(RBK_D_PERF_WRITE_STALL_0))
 	((_MK_MASK_CONST(_mask_) << _MK_SHIFT_CONST(_shift_)))
 #endif
 
-#endif
+#endif // ifndef ___ARH_INC_
