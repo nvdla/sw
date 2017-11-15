@@ -420,6 +420,7 @@ static struct drm_driver nvdla_drm_driver = {
 
 int32_t nvdla_drm_probe(struct nvdla_device *nvdla_dev)
 {
+	int32_t dma;
 	int32_t err;
 	struct drm_device *drm;
 	struct drm_driver *driver = &nvdla_drm_driver;
@@ -433,6 +434,17 @@ int32_t nvdla_drm_probe(struct nvdla_device *nvdla_dev)
 	err = drm_dev_register(drm, 0);
 	if (err < 0)
 		goto unref;
+
+	/**
+	 * TODO Register separate driver for memory and use DT node to
+	 * read memory range
+	 */
+	dma = dma_declare_coherent_memory(drm->dev, 0xC0000000, 0xC0000000,
+			0x40000000, DMA_MEMORY_MAP | DMA_MEMORY_EXCLUSIVE);
+	if (!(dma & DMA_MEMORY_MAP)) {
+		err = -ENOMEM;
+		goto unref;
+	}
 
 	return 0;
 
