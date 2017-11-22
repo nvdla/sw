@@ -64,7 +64,7 @@
 /**
  * Used to print debug network data
  */
-#define DEBUG_NETWORK_DATA		1
+#define DEBUG_NETWORK_DATA		0
 
 #define pr_dump_stack(format, ...)
 #define dla_trace(format, ...)
