@@ -320,7 +320,7 @@ int32_t nvdla_task_submit(struct nvdla_device *nvdla_dev, struct nvdla_task *tas
 
 /* driver probe and init */
 static const struct of_device_id nvdla_of_match[] = {
-	{ .name = "nvdla", .compatible = "nvidia,nvdla-1", },
+	{ .name = "nvdla", .compatible = "nvidia,nvdla_os_initial", },
 	{ },
 };
 
