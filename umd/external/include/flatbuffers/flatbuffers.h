@@ -14,14 +14,8 @@
  * limitations under the License.
  */
 
-
-//
-// copied and modified from include/flatbuffers/flatbuffers.h
-//     github.com:google/flatbuffers.git tag 1.6.0
-//
-
-#ifndef NVDLA_FLATBUFFERS_H_
-#define NVDLA_FLATBUFFERS_H_
+#ifndef FLATBUFFERS_H_
+#define FLATBUFFERS_H_
 
 #include <assert.h>
 
@@ -1855,4 +1849,4 @@ volatile __attribute__((weak)) const char *flatbuffer_version_string =
 /// @endcond
 }  // namespace flatbuffers
 
-#endif  // NVDLA_FLATBUFFERS_H_
+#endif  // FLATBUFFERS_H_
