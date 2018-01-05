@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -33,7 +33,9 @@
 #include "dlaerror.h"
 
 #include "nvdla_inf.h"
+#include "nvdla_os_inf.h"
 
+#include "priv/Emulator.h"
 #include "priv/Loadable.h"
 #include "priv/Runtime.h"
 
@@ -109,6 +111,7 @@ BiMap<void *, IRuntime*> RuntimeFactory::s_self;
 Runtime::Runtime() :
     IRuntime(),
     m_dla_handle(0),
+    m_emu_engine(0),
     h_network_desc_mem(0),
     h_op_desc_mem(0),
     h_surf_desc_mem(0),
@@ -122,6 +125,35 @@ Runtime::Runtime() :
 Runtime::~Runtime()
 {
 
+}
+
+bool Runtime::initEMU(void)
+{
+    bool ok = true;
+
+    // Ping EMU device
+    if (!m_emu_engine)
+    {
+        m_emu_engine = new Emulator();
+        m_emu_engine->start();
+
+        // Wait for emulator engine to warm up
+        // We should have the ability to timeout here
+        while (!m_emu_engine->ping())
+        {
+            NvDlaSleepMS(200);
+        }
+    }
+    else
+    {
+        if (!m_emu_engine->ping())
+        {
+            gLogError << "Emu ping failed (timeout)" << endl;
+            ok = false;
+        }
+    }
+
+    return ok;
 }
 
 NvU16 Runtime::getFactoryType() const
@@ -346,6 +378,7 @@ bool Runtime::bindInputTensor(int index, void *hMem)
     // unlikely to be > size 1, but...
     for (size_t bmi = 0, BMI = bind_to_mem.size(); bmi != BMI; ++bmi ) {
         bind_to_mem[bmi]->setHandle(hMem);
+        bind_to_mem[bmi]->setVirtAddr(m_hmem_memory_map[hMem]);
     }
 
  done:
@@ -371,6 +404,7 @@ bool Runtime::bindOutputTensor(int index, void *hMem)
     // unlikely to be > size 1, but...
     for (size_t bmi = 0, BMI = bind_to_mem.size(); bmi != BMI; ++bmi ) {
         bind_to_mem[bmi]->setHandle(hMem);
+        bind_to_mem[bmi]->setVirtAddr(m_hmem_memory_map[hMem]);
     }
 
 done:
@@ -424,6 +458,65 @@ bool Runtime::fillTaskAddressList(Task *task, NvDlaTask *dla_task)
     return true;
 }
 
+bool Runtime::fillEMUTaskAddressList(Task *task, EMUTaskDescAccessor taskDescAcc)
+{
+    size_t num_memory_ids = m_memory.size();
+    size_t num_task_addr_list_entries = task->mEntry.address_list.size();
+
+    if ( debugTasks() || debugMemoryLayout() )
+    {
+        gLogInfo << "filling emu task_id=" << task->id() << " address list entries=" << num_task_addr_list_entries << endl;
+    }
+
+    if ( num_task_addr_list_entries > taskDescAcc.maxBuffersPerTask() )
+    {
+        gLogError << __func__ << " too many address list entries." << endl;
+        return false;
+    }
+
+    *taskDescAcc.numAddresses() = num_task_addr_list_entries;
+
+    for ( size_t ali = 0, ALI = num_task_addr_list_entries; ali != ALI; ++ali )
+    {
+
+        NvS16 address_list_entry_id = task->mEntry.address_list[ali];
+        if ( ! ( (address_list_entry_id >= 0) && (size_t(address_list_entry_id) < m_address.size() )) )
+        {
+            gLogError << __func__ << " address list entry=" << ali << " id=" << address_list_entry_id << " is bogus" << endl;
+            return false;
+        }
+
+        NvS16 memory_id = m_address[address_list_entry_id].mem_id();
+        if ( ! ((memory_id >= 0) && (size_t(memory_id) < num_memory_ids) ))
+        {
+            gLogError << __func__ << " memory id out of bounds: " << memory_id << endl;
+            return false;
+        }
+
+        Memory *mem = &m_memory[memory_id];
+        void *hMem = mem->getVirtAddr();
+        NvU64         offset = m_address[address_list_entry_id].mEntry.offset;
+
+        if ( mem->domain() == ILoadable::MemoryListEntry::domain_sram() )
+        {
+            hMem = 0;
+            offset  = 0;
+        }
+
+        *((void **)taskDescAcc.addressList(ali).hMem()) = hMem;
+        *taskDescAcc.addressList(ali).offset() = offset;
+
+        if ( debugTasks() || debugMemoryLayout() )
+        {
+            gLogInfo << "\tali=" << ali << " offset=" << offset << " handle=" << hMem << endl;
+        }
+
+
+    }
+
+    return true;
+}
+
 bool Runtime::submit()
 {
     NvDlaError e = NvDlaSuccess;
@@ -436,7 +529,9 @@ NvDlaError Runtime::submitInternal()
     NvDlaError e = NvDlaSuccess;
     Task *task;
 
+    vector<EMUTaskDescAccessor*> emu_task_descs;
     size_t ii;
+    size_t num_emu_instances;
 
     bool ok = true;
     NVDLA_UNUSED(ok);
@@ -452,7 +547,11 @@ NvDlaError Runtime::submitInternal()
         ORIGINATE_ERROR_FAIL(NvDlaError_InvalidState, "no submission sets to exec");
     }
 
+    num_emu_instances = 1;
+
     for ( size_t ss=0; ss < m_submit.size(); ss++ ) {
+
+        size_t emu_instance = 0;
 
         for ( ii=0; ii < m_submit[ss].tasks().size(); ii++ )
         {
@@ -482,6 +581,34 @@ NvDlaError Runtime::submitInternal()
                     PROPAGATE_ERROR_FAIL( NvDlaSubmit(NULL, dev, &dla_task, 1) );
                 }
                 break;
+                case ILoadable::Interface_EMU1:
+                {
+                    EMUInterface *emu_if = new EMUInterfaceA();
+
+                    NvU8* task_mem = new NvU8[emu_if->taskDescAccessor(0).struct_size()];
+                    EMUTaskDescAccessor emu_task_desc = emu_if->taskDescAccessor(task_mem);
+                    emu_task_descs.push_back(&emu_task_desc);
+
+                    if (!m_emu_engine)
+                    {
+                        ORIGINATE_ERROR_FAIL(NvDlaError_NotInitialized);
+                    }
+
+                    if ( task->instance() != ILoadable::TaskListEntry::instance_ANY() ) {
+                        if ( task->instance() < (int)num_emu_instances ) {
+                            emu_instance = task->instance();
+                        } else {
+                            ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "emu instance out of bounds");
+                        }
+                    }
+
+                    fillEMUTaskAddressList(task, *(emu_task_descs.back()));
+
+                    PROPAGATE_ERROR_FAIL( m_emu_engine->submit(task_mem, 1) );
+
+                    emu_instance = (emu_instance + 1) % num_emu_instances;
+                }
+                break;
                 default:
                     ok = false;
                     ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "unrecognized interface %d", task->interface());
@@ -504,6 +631,7 @@ NvDlaError Runtime::allocateSystemMemory(void **phMem, NvU64 size, void **pData)
 
     /* Allocate memory for network */
     PROPAGATE_ERROR_FAIL( NvDlaAllocMem(NULL, hDla, phMem, pData, size, NvDlaHeap_System) );
+    m_hmem_memory_map.insert(std::make_pair(*phMem, *pData));
 
 fail:
     return e;
@@ -529,7 +657,7 @@ NvDlaError Runtime::loadMemory(Loadable *l, Memory *memory)
     if ( memory->domain() == ILoadable::MemoryListEntry::domain_sysmem() )
     {
 
-        void *mapped_mem;
+        void *mapped_mem = NULL;
 
         NvU64 size = memory->size();
         void *hDla = getDLADeviceContext(m_loaded_instance);
@@ -538,6 +666,7 @@ NvDlaError Runtime::loadMemory(Loadable *l, Memory *memory)
         PROPAGATE_ERROR_FAIL( NvDlaAllocMem(m_dla_handle, hDla, &hMem, (void **)(&mapped_mem), size, NvDlaHeap_System) );
 
         memory->setHandle(hMem);
+        memory->setVirtAddr(mapped_mem);
 
         if ( memory->flags() & ILoadable::MemoryListEntry::flags_set() )
         {
@@ -786,7 +915,6 @@ NvDlaError Runtime::mergeSetTensorDesc(IOD /*w*/, int /*bindId*/, int tensorDesc
     NvDlaError e = NvDlaSuccess;
 
     ILoadable::TensorDescListEntry * origEntry = &m_tensor_desc[tensorDescId].mEntry;
-    // Runtime::TensorDesc *origDesc = &m_tensor_desc[tensorDescId];
 
     bool sizeDiff   = origEntry->size   != tdl->size;
     bool offsetDiff = origEntry->offset != tdl->offset;
@@ -826,7 +954,6 @@ NvDlaError Runtime::mergeSetTensorDesc(IOD /*w*/, int /*bindId*/, int tensorDesc
         ORIGINATE_ERROR_FAIL(NvDlaError_NotImplemented, "size/offset change requested");
     }
 
-    // allow changing dimensions?  unlikely, but maybe?
     if ( dimsDiff )
     {
         ORIGINATE_ERROR_FAIL(NvDlaError_NotSupported, "dimensions change requested");
@@ -861,7 +988,6 @@ NvDlaError Runtime::setInputTensorDesc(int bindId, const NvDlaTensor *td)
         ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "Tensor desc id out of range:%d", tensorDescId);
     }
 
-    //     m_tensor_desc[tensorDescId].mEntry = *tdl;
     PROPAGATE_ERROR_FAIL( mergeSetTensorDesc(IOD_Input, bindId, tensorDescId, &tdl) );
 
  fail:
@@ -888,7 +1014,6 @@ NvDlaError Runtime::setOutputTensorDesc(int bindId, const NvDlaTensor *td)
         ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "Tensor desc id out of range:%d", tensorDescId);
     }
 
-    //    m_tensor_desc[tensorDescId].mEntry = *tdl;
     PROPAGATE_ERROR_FAIL( mergeSetTensorDesc(IOD_Output, bindId, tensorDescId, &tdl) );
 
  fail:

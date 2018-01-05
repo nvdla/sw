@@ -26,52 +26,57 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _NVDLA_INF_H_
-#define _NVDLA_INF_H_
+#ifndef NVDLA_PRIV_EMULATOR_H
+#define NVDLA_PRIV_EMULATOR_H
 
-#include "dlaerror.h"
-#include "dlatypes.h"
+#include <queue>
 
-#define NVDLA_MAX_BUFFERS_PER_TASK (512)
+#include "priv/EMUInterface.h"
 
-struct NvDlaMemDescRec{
-    void *handle;
-    NvU32 offset;
+#include "nvdla_os_inf.h"
+
+namespace nvdla
+{
+class ITensor;
+
+namespace priv
+{
+
+class Emulator
+{
+public: // externally facing
+    Emulator();
+    virtual ~Emulator();
+
+    bool ping();
+
+    NvDlaError submit(NvU8* task_mem, bool blocking);
+    NvDlaError start();
+    bool stop();
+    bool run();
+
+public: // internally facing
+    inline bool debugOps() { return false; }
+
+protected:
+    static void threadFunction(void* arg);
+    bool processTask(NvU8* task_mem, std::vector<NvU8*> addressList);
+
+    NvDlaError getAddrOffset(EMUBufferDescAccessor in, NvU32 x, NvU32 y, NvU32 c, NvU32* offset);
+
+    bool executePower(EMUPowerOpDescAccessor opDesc, EMUPowerBufferDescsAccessor bufDescs, std::vector<NvU8*> addressList);
+    bool executeSoftmax(EMUSoftmaxOpDescAccessor opDesc, EMUSoftmaxBufferDescsAccessor bufDescs, std::vector<NvU8*> addressList);
+
+private:
+    std::queue<NvU8*> m_taskQueue;
+
+    NvDlaThreadHandle m_thread;
+    bool m_threadActive;
+
+    bool m_signalShutdown;
 };
-typedef struct NvDlaMemDescRec NvDlaMemDesc;
 
-struct NvDlaTaskRec {
-    NvU64 task_id;
-    NvU32 num_addresses;
-    NvDlaMemDesc address_list[NVDLA_MAX_BUFFERS_PER_TASK];
-};
-typedef struct NvDlaTaskRec NvDlaTask;
+} // nvdla::priv
+} // nvdla
 
-typedef enum NvDlaHeap {
-    NvDlaHeap_System,
-    NvDlaHeap_SRAM,
-} NvDlaHeap;
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-NvDlaError NvDlaInitialize(void **session_handle);
-void NvDlaDestroy(void *session_handle);
-
-NvDlaError NvDlaOpen(void *session_handle, NvU32 instance, void **device_handle);
-void NvDlaClose(void *device_handle);
-
-NvDlaError NvDlaSubmit(void *session_handle, void *device_handle, NvDlaTask *tasks, NvU32 num_tasks);
-
-NvDlaError NvDlaAllocMem(void *session_handle, void *device_handle,
-                         void **mem_handle, void **pData, NvU32 size,
-                         NvDlaHeap heap);
-NvDlaError NvDlaFreeMem(void *session_handle, void *device_handle, void *mem_handle,
-                        void *pData, NvU32 size);
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* end of _NVDLA_INF_H_ */
+#endif // NVDLA_PRIV_EMULATOR_H

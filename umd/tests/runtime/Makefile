@@ -1,4 +1,4 @@
-# Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+# Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -52,4 +52,4 @@ include rules.mk
 # the logic to compile and link stuff is in here
 $(TEST_BIN): $(ALLMODULE_OBJS) $(SHARED_LIBS)
 	@echo building $(MODULE)  $@
-	$(TOOLCHAIN_PREFIX)g++ $(ALLMODULE_OBJS) -L$(BUILDOUT)/libnvdla_runtime -lnvdla_runtime -o $@
+	$(TOOLCHAIN_PREFIX)g++ $(ALLMODULE_OBJS) -pthread -L$(BUILDOUT)/libnvdla_runtime -lnvdla_runtime -o $@

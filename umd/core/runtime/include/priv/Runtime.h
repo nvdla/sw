@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -40,6 +40,8 @@
 #include "nvdla/ILoadable.h"
 #include "nvdla/IRuntime.h"
 
+#include "priv/EMUInterface.h"
+
 namespace nvdla
 {
 class ITensor;
@@ -75,6 +77,8 @@ public: // externally facing
     // device interfaces
     virtual NvU16 getMaxDevices();
     virtual NvU16 getNumDevices();
+
+    virtual bool initEMU(void);
 
     virtual bool load(NvU8 *buf, int instance);
     virtual NvDlaError allocateSystemMemory(void **h_mem, NvU64 size, void **pData);
@@ -118,6 +122,7 @@ protected:
 
     void *m_dla_handle;
     void *m_dla_device_handles[2];
+    Emulator *m_emu_engine;
 
     void *h_network_desc_mem;
     void *h_op_desc_mem;
@@ -173,6 +178,8 @@ protected:
         inline NvU8 flags() { return mEntry.flags; }
         inline void setHandle(void *h) { hMem = h; }
         inline void *getHandle() const { return hMem; }
+        inline void setVirtAddr(void *addr) { pVirtAddr = addr; }
+        inline void *getVirtAddr() const { return pVirtAddr; }
         inline std::vector<std::string> & contents() { return mEntry.contents; }
         inline std::vector<uint64_t> & offsets() { return mEntry.offsets; }
         inline int inputBindId() const {
@@ -214,6 +221,7 @@ protected:
     protected:
         friend class Runtime;
         void *hMem;
+        void *pVirtAddr;
         ILoadable::MemoryListEntry mEntry;
     };
 
@@ -275,12 +283,15 @@ protected:
     NvDlaError loadMemory(Loadable *, Memory *);
     bool fillTaskAddressList(Task *task, NvDlaTask *);
 
+    bool fillEMUTaskAddressList(Task *task, EMUTaskDescAccessor taskDescAcc);
+
     //
     // maintenance of ids/lookups for bind ids, associated memory, tensor descs
     //
     NvDlaError initBindableMemory();
     NvDlaError getMemoryFromBindId(IOD w, int id, Memory * &bound_mem);
     std::vector<std::vector<Memory *>> m_bindable_memory; // indexed on [iod][bind_id]
+    std::map<void *, void *> m_hmem_memory_map; // maintains 1-1 relation between hmem and mapped memory.
 
     class MemoryId_BindId_Is // helper predicate
     {

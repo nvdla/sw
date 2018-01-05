@@ -1,4 +1,4 @@
-# Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+# Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -33,9 +33,12 @@ LOCAL_DIR := $(GET_LOCAL_DIR)
 NVDLA_RUNTIME_SRC_FILES := \
     $(ROOT)/core/common/Check.cpp \
     $(ROOT)/core/common/ErrorLogging.c \
+    $(ROOT)/core/common/EMUInterface.cpp \
+    $(ROOT)/core/common/EMUInterfaceA.cpp \
     $(ROOT)/core/common/Loadable.cpp \
     $(ROOT)/port/linux/nvdla.c \
     $(ROOT)/port/linux/nvdla_os.c \
+    Emulator.cpp \
     Runtime.cpp
 
 INCLUDES += \

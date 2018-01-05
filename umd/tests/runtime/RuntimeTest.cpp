@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -127,6 +127,9 @@ NvDlaError setupInputBuffer
     if (!runtime)
         ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "getRuntime() failed");
 
+    // start the emulator
+    if (!runtime->initEMU())
+        ORIGINATE_ERROR(NvDlaError_DeviceNotFound, "runtime->initEMU() failed");
     PROPAGATE_ERROR_FAIL(runtime->getNumInputTensors(&numInputTensors));
 
     i->numInputs = numInputTensors;

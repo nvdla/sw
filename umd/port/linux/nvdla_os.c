@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -44,10 +44,45 @@
 #include <sys/types.h>
 #include <limits.h>
 #include <errno.h>
+#include <pthread.h>
 
 #include <time.h>
 
 #include "nvdla_os_inf.h"
+
+typedef struct
+{
+    NvDlaThreadFunction function;
+    NvDlaThread        *thread;
+    pthread_mutex_t     barrier;
+    pthread_mutex_t     cond_lock;
+    pthread_cond_t      cond;
+    NvU32               init;
+    void               *thread_args;
+} NvDlaThreadArgs;
+
+static void *thread_wrapper(void *v)
+{
+    NvDlaThreadArgs *args = (NvDlaThreadArgs *)v;
+
+    if (!v)
+        return NULL;
+
+    pthread_mutex_lock(&args->cond_lock);
+    args->init = 1;
+    pthread_cond_signal(&args->cond);
+    pthread_mutex_unlock(&args->cond_lock);
+
+    pthread_mutex_lock(&args->barrier);
+    pthread_mutex_unlock(&args->barrier);
+
+    /* jump to user thread */
+    args->function(args->thread_args);
+    pthread_mutex_destroy(&args->barrier);
+    NvDlaFree(args);
+
+    return NULL;
+}
 
 static NvDlaError getOpenMode(NvU32 flags, int *mode)
 {
@@ -133,6 +168,96 @@ void NvDlaDebugPrintf(const char *format, ... )
     va_start( ap, format );
     vprintf(format, ap);
     va_end( ap );
+}
+
+NvDlaError
+NvDlaThreadCreate( NvDlaThreadFunction function, void *args,
+    NvDlaThreadHandle *thread)
+{
+    NvDlaError e;
+    NvDlaThread *t = NULL;
+    NvDlaThreadArgs *a = NULL;
+    pthread_t *handle = NULL;
+    int err;
+
+    if (!function || !thread)
+        return NvDlaError_BadParameter;
+
+    t = NvDlaAlloc(sizeof(NvDlaThread));
+    if (!t) {
+        e = NvDlaError_InsufficientMemory;
+        goto fail_to_allocate_thread;
+    }
+    NvDlaMemset(t, 0, sizeof(NvDlaThread));
+
+    handle = (pthread_t *)NvDlaAlloc(sizeof(pthread_t));
+    if (!handle) {
+        e = NvDlaError_InsufficientMemory;
+        goto fail_to_allocate_handle;
+    }
+    t->handle = (void *)handle;
+
+    a = NvDlaAlloc(sizeof(NvDlaThreadArgs));
+    if (!a) {
+        e = NvDlaError_InsufficientMemory;
+        goto fail_to_allocate_args;
+    }
+
+    a->function = function;
+    a->thread = t;
+    a->thread_args = args;
+    a->init = 0;
+    (void)pthread_mutex_init(&a->barrier, NULL);
+    (void)pthread_mutex_init(&a->cond_lock, NULL);
+    (void)pthread_cond_init(&a->cond, NULL);
+
+    pthread_mutex_lock(&a->barrier);
+    err = pthread_create((pthread_t *)t->handle, NULL, thread_wrapper, (void *)a);
+    if (err != 0) {
+        e = NvDlaError_InsufficientMemory;
+        goto fail_to_spawn_thread;
+    }
+
+    pthread_mutex_lock(&a->cond_lock);
+    while(!a->init)
+        pthread_cond_wait(&a->cond, &a->cond_lock);
+    *thread = t;
+    pthread_mutex_unlock(&a->cond_lock);
+
+    pthread_mutex_unlock(&a->barrier);
+
+    return NvDlaSuccess;
+
+fail_to_spawn_thread:
+    if(a) {
+        pthread_mutex_unlock(&a->barrier);
+        pthread_mutex_destroy(&a->barrier);
+    }
+    NvDlaFree(a);
+fail_to_allocate_args:
+    NvDlaFree(handle);
+fail_to_allocate_handle:
+    NvDlaFree(t);
+fail_to_allocate_thread:
+    return e;
+}
+
+void NvDlaThreadJoin(NvDlaThreadHandle thread)
+{
+    if (!thread)
+        return;
+
+    int e = pthread_join(*((pthread_t *)thread->handle), 0);
+    if( e != 0 )
+        return;
+
+    NvDlaFree(thread->handle);
+    NvDlaFree(thread);
+}
+
+void NvDlaThreadYield(void)
+{
+    (void)sched_yield();
 }
 
 NvDlaError NvDlaStat(const char *filename, NvDlaStatType *stat)

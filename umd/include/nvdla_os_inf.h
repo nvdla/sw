@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -39,6 +39,17 @@
 #define NVDLA_OPEN_READ (0x2)
 #define NVDLA_OPEN_CREATE (0x4)
 #define NVDLA_OPEN_APPEND (0x8)
+
+/*
+ * Thread structures
+ */
+struct NvDlaThreadRec {
+    void *handle;
+};
+typedef struct NvDlaThreadRec NvDlaThread;
+typedef struct NvDlaThreadRec* NvDlaThreadHandle;
+
+typedef void (*NvDlaThreadFunction)(void *args);
 
 /*
  * Files and directory structures.
@@ -96,6 +107,15 @@ void NvDlaDebugPrintf( const char *format, ... );
 
 NvU32 NvDlaGetTimeMS(void);
 void NvDlaSleepMS(NvU32 msec);
+
+/*
+ * Thread related functions
+ */
+NvDlaError
+NvDlaThreadCreate( NvDlaThreadFunction function, void *args,
+    NvDlaThreadHandle *thread);
+void NvDlaThreadJoin(NvDlaThreadHandle thread);
+void NvDlaThreadYield(void);
 
 /*
  * File and directory operations
