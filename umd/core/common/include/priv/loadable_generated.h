@@ -30,14 +30,16 @@ struct Loadable;
 enum Interface {
   Interface_NONE = 0,
   Interface_DLA1 = 1,
+  Interface_EMU1 = 2,
   Interface_MIN = Interface_NONE,
-  Interface_MAX = Interface_DLA1
+  Interface_MAX = Interface_EMU1
 };
 
 inline const char **EnumNamesInterface() {
   static const char *names[] = {
     "NONE",
     "DLA1",
+    "EMU1",
     nullptr
   };
   return names;

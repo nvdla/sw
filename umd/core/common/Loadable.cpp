@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -147,7 +147,6 @@ BiMap<void *, ILoadable*> LoadableFactory::s_self;
 // to organize this way preemptively.
 ILoadable *LoadableFactory::deserializeLoadable(NvU8 *buf)
 {
-    //    gLogError << __func__ << endl;
     LoadableFactory::LoadablePrivPair n = LoadableFactory::newLoadable();
     if ( !n ) {
         gLogError << __func__ << " error allocating new loadable" << endl;
@@ -491,6 +490,8 @@ bool Loadable::serializeToFlatBufferFile(const std::string &filename) const
         nvdla::loadable::Interface if_id;
         if ( tle.interface == nvdla::ILoadable::TaskListEntry::interface_DLA1() ) {
             if_id = nvdla::loadable::Interface_DLA1;
+        } else if ( tle.interface == nvdla::ILoadable::TaskListEntry::interface_EMU1() ) {
+            if_id = nvdla::loadable::Interface_EMU1;
         } else {
             if_id = nvdla::loadable::Interface_NONE;
         }
@@ -541,9 +542,7 @@ bool Loadable::serializeToFlatBufferFile(const std::string &filename) const
     for ( size_t ei = 0, EI = mEventListEntries.size(); ei != EI; ++ei) {
         const ILoadable::EventListEntry & ele = mEventListEntries[ei];
         nvdla::loadable::EventListEntryBuilder eleb(fbb);
-        //        eleb.add_flags( (nvdla::loadable::EventFlags) ele.flags );
         eleb.add_id(ele.id);
-        //        eleb.add_type( (nvdla::loadable::EventType) ele.type);
         eleb.add_op( (nvdla::loadable::EventOp) ele.op);
         eleb.add_target( ele.target );
         eleb.add_val( ele.val );
@@ -599,7 +598,6 @@ bool Loadable::serializeToFlatBufferFile(const std::string &filename) const
     flatbuffers::Offset<nvdla::loadable::Loadable> l =
         CreateLoadableDirect(fbb, &loadable_version, &task_list, &memory_list, &address_list, &event_list, &blobs, &tensor_desc_list, &submit_list);
 
-    //fbb.Finish(l, filename.c_str());
     fbb.Finish(l, "NVDA");
 
     size_t file_size = fbb.GetSize();

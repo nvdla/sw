@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -33,6 +33,7 @@
 
 #define NVDLA_LOADABLE_INTERFACE_NONE 0U
 #define NVDLA_LOADABLE_INTERFACE_DLA1 1U
+#define NVDLA_LOADABLE_INTERFACE_EMU1 2U
 
 #define NVDLA_LOADABLE_MEMORY_DOMAIN_SYSMEM 0U
 #define NVDLA_LOADABLE_MEMORY_DOMAIN_SRAM 1U

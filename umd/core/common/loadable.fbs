@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+// Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions
@@ -38,7 +38,7 @@ namespace nvdla.loadable;
 // think of : class #s
 // 'NONE' can be used for raw data (images, weights, etc)
 //
-enum Interface : uint { NONE = 0, DLA1 = 1 }
+enum Interface : uint { NONE = 0, DLA1 = 1, EMU1 = 2 }
 
 //
 // fits DLA firmware interface version, but intent is to be generic

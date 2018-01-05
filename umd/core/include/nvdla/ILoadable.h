@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -96,6 +96,7 @@ public:
     enum Interface {
         Interface_NONE = NVDLA_LOADABLE_INTERFACE_NONE,
         Interface_DLA1 = NVDLA_LOADABLE_INTERFACE_DLA1,
+        Interface_EMU1 = NVDLA_LOADABLE_INTERFACE_EMU1,
     };
 
     enum MemoryDomain {
@@ -139,6 +140,7 @@ public:
         NvU32 alignment; // 0 for n/a, otherwise byte alignment
         NvU8  domain;
         static inline NvU8 domain_sysmem() { return MemoryDomain_SYSMEM; }
+        static inline NvU8 domain_sram() { return MemoryDomain_SRAM; }
         NvU8  flags; // alloc or alloc_content or is-input or is-output
         static inline NvU8  flags_alloc()  { return MemoryFlags_ALLOC;  }
         static inline NvU8  flags_set()    { return MemoryFlags_SET;    }
@@ -181,6 +183,7 @@ public:
         NvU32 interface; // DLA interface id
         static inline NvU32 interface_NONE() { return Interface_NONE; }
         static inline NvU32 interface_DLA1() { return Interface_DLA1; }
+        static inline NvU32 interface_EMU1() { return Interface_EMU1; }
 
         NvS16 instance; // -1 := for any available
         static inline NvS16 instance_ANY() { return -1; }
