@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -41,7 +41,8 @@
 enum TestImageTypes
 {
     IMAGE_TYPE_PGM = 0,
-    IMAGE_TYPE_UNKNOWN = 1,
+    IMAGE_TYPE_JPG = 1,
+    IMAGE_TYPE_UNKNOWN = 2,
 };
 
 NvDlaError launchTest(const TestAppArgs* appArgs);

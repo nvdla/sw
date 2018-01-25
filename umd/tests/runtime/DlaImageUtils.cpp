@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -31,6 +31,10 @@
 #include "ErrorMacros.h"
 #include "nvdla_os_inf.h"
 #include "half.h"
+
+extern "C" {
+#include "jpeglib.h"
+}
 
 #include <fstream>
 #include <algorithm>
@@ -93,6 +97,116 @@ NvDlaError PGM2DIMG(std::string inputfilename, NvDlaImage* output)
     hFile.close();
 
     return NvDlaSuccess;
+}
+
+NvDlaError JPEG2DIMG(std::string inputFileName, NvDlaImage* output)
+{
+    NvDlaError e = NvDlaSuccess;
+    NvU8* rowPtr[1];
+    struct jpeg_decompress_struct info;
+    struct jpeg_error_mgr err;
+
+    FILE* fp = fopen(inputFileName.c_str(), "rb");
+    if (!fp) {
+        ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "Cant open file %s", inputFileName.c_str());
+    }
+
+    // Prepare for jpeg decomp
+    info.err = jpeg_std_error(&err);
+    info.dct_method = JDCT_ISLOW;
+    jpeg_create_decompress(&info);
+
+    jpeg_stdio_src(&info, fp);
+    jpeg_read_header(&info, TRUE);
+
+    // FIXME: right now assuming 8-bit jpegs
+    switch(info.jpeg_color_space) {
+        case JCS_GRAYSCALE:
+            output->m_meta.surfaceFormat = NvDlaImage::T_R8;
+            output->m_meta.channel = 1;
+            break;
+#if defined(JCS_EXTENSIONS)
+        case JCS_YCbCr: // FIXME: dont know how to handle compression yet
+        case JCS_RGB:
+            info.out_color_space = JCS_EXT_BGR;                    // FIXME: currently extracting as BGR (since caffe ref model assumes BGR)
+            output->m_meta.surfaceFormat = NvDlaImage::T_B8G8R8;
+            output->m_meta.channel = 3;
+            break;
+        case JCS_EXT_RGB: // upsizing to 4 Chnls from 3 Chnls
+        case JCS_EXT_RGBX:
+            output->m_meta.surfaceFormat = NvDlaImage::T_R8G8B8X8;
+            output->m_meta.channel = 4;
+            break;
+        case JCS_EXT_BGR: // upsizing to 4 Chnls from 3 Chnls
+        case JCS_EXT_BGRX:
+            output->m_meta.surfaceFormat = NvDlaImage::T_B8G8R8X8;
+            output->m_meta.channel = 4;
+            break;
+        case JCS_EXT_XBGR:
+            output->m_meta.surfaceFormat = NvDlaImage::T_X8B8G8R8;
+            output->m_meta.channel = 4;
+            break;
+        case JCS_EXT_XRGB:
+            output->m_meta.surfaceFormat = NvDlaImage::T_X8R8G8B8;
+            output->m_meta.channel = 4;
+            break;
+#if defined(JCS_ALPHA_EXTENSIONS)
+        case JCS_EXT_RGBA:
+            output->m_meta.surfaceFormat = NvDlaImage::T_R8G8B8A8;
+            output->m_meta.channel = 4;
+            break;
+        case JCS_EXT_BGRA:
+            output->m_meta.surfaceFormat = NvDlaImage::T_B8G8R8A8;
+            output->m_meta.channel = 4;
+            break;
+        case JCS_EXT_ABGR:
+            output->m_meta.surfaceFormat = NvDlaImage::T_A8B8G8R8;
+            output->m_meta.channel = 4;
+            break;
+        case JCS_EXT_ARGB:
+            output->m_meta.surfaceFormat = NvDlaImage::T_A8R8G8B8;
+            output->m_meta.channel = 4;
+            break;
+#endif  // JCS_ALPHA_EXTENSIONS
+#endif  // JCS_EXTENSIONS
+        case JCS_CMYK:
+        case JCS_YCCK:
+        default: ORIGINATE_ERROR_FAIL(NvDlaError_NotSupported, "JPEG color space %d not supported", info.jpeg_color_space);
+    }
+
+    NvDlaDebugPrintf("surface format: %d\n", (int)output->m_meta.surfaceFormat);
+
+    jpeg_start_decompress(&info);
+
+    // Read image size
+    output->m_meta.height = info.image_height;
+    output->m_meta.width = info.image_width;
+    output->m_meta.lineStride = roundUp(output->m_meta.width * output->m_meta.channel * output->getBpe(), 32);
+    output->m_meta.surfaceStride = 0;
+    output->m_meta.size = output->m_meta.lineStride * output->m_meta.height;
+
+    NvDlaDebugPrintf("dlaimg height: %d x %d x %d: ", output->m_meta.height, output->m_meta.width, output->m_meta.channel);
+    NvDlaDebugPrintf("LS: %d SS: %d Size: %d\n", output->m_meta.lineStride, output->m_meta.surfaceStride, output->m_meta.size);
+
+    // Allocate the buffer
+    output->m_pData = NvDlaAlloc(output->m_meta.size);
+    NvDlaMemset(output->m_pData, 0, output->m_meta.size);
+    if (!output->m_pData)
+        ORIGINATE_ERROR(NvDlaError_InsufficientMemory);
+
+    // copy the data
+    {
+        rowPtr[0] = static_cast<NvU8*>(output->m_pData);
+        while (info.output_scanline < info.output_height) {
+            jpeg_read_scanlines(&info, rowPtr, 1);
+            rowPtr[0] += output->m_meta.lineStride;
+        }
+    }
+
+fail:
+    jpeg_finish_decompress(&info);
+    fclose(fp);
+    return e;
 }
 
 static NvDlaError parsePGMInfo(std::ifstream& hFile, NvDlaImage* image)

@@ -38,6 +38,7 @@ INCLUDES += \
     -I$(ROOT)/include \
     -I$(ROOT)/core/include \
     -I$(ROOT)/external/include \
+    -I$(ROOT)/external/libjpeg-turbo \
     -I$(LOCAL_DIR)/include \
     -I$(LOCAL_DIR)
 

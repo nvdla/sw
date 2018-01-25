@@ -52,6 +52,10 @@ static TestImageTypes getImageType(std::string imageFileName)
     {
         it = IMAGE_TYPE_PGM;
     }
+    else if (ext == "jpg")
+    {
+        it = IMAGE_TYPE_JPG;
+    }
 
     return it;
 }
@@ -78,6 +82,9 @@ static NvDlaError copyImageToInputTensor
     switch(imageType) {
         case IMAGE_TYPE_PGM:
             PROPAGATE_ERROR(PGM2DIMG(imgPath, R8Image));
+            break;
+        case IMAGE_TYPE_JPG:
+            PROPAGATE_ERROR(JPEG2DIMG(imgPath, R8Image));
             break;
         default:
             //TODO Fix this error condition

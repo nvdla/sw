@@ -52,4 +52,4 @@ include rules.mk
 # the logic to compile and link stuff is in here
 $(TEST_BIN): $(ALLMODULE_OBJS) $(SHARED_LIBS)
 	@echo building $(MODULE)  $@
-	$(TOOLCHAIN_PREFIX)g++ $(ALLMODULE_OBJS) -pthread -L$(BUILDOUT)/libnvdla_runtime -lnvdla_runtime -o $@
+	$(TOOLCHAIN_PREFIX)g++ $(ALLMODULE_OBJS) -pthread -L$(ROOT)/external/ -ljpeg -L$(BUILDOUT)/libnvdla_runtime -lnvdla_runtime -o $@
