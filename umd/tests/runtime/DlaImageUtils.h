@@ -35,7 +35,7 @@
 
 NvDlaError PGM2DIMG(std::string inputfilename, NvDlaImage* output);
 NvDlaError DIMG2Tiff(const NvDlaImage* input, std::string outputfilename);
-NvDlaError DIMG2DIMGFile(const NvDlaImage* input, std::string outputfilename, bool stableHash);
+NvDlaError DIMG2DIMGFile(const NvDlaImage* input, std::string outputfilename, bool stableHash, bool rawDump);
 NvDlaError DIMGFile2DIMG(std::string inputfilename, NvDlaImage* output);
 NvDlaError JPEG2DIMG(std::string inputfilename, NvDlaImage* output);
 

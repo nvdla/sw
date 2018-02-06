@@ -45,12 +45,14 @@ struct TestAppArgs
     std::string inputName;
     std::string loadableName;
     NvS32 serverPort;
+    bool rawOutputDump;
 
     TestAppArgs() :
         inputPath("./"),
         inputName(""),
         loadableName(""),
-        serverPort(6666)
+        serverPort(6666),
+        rawOutputDump(false)
     {}
 };
 

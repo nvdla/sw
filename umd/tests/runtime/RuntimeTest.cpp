@@ -42,6 +42,8 @@
 #include <cstdio> // snprintf, fopen
 #include <string>
 
+#define OUTPUT_DIMG "output.dimg"
+
 using namespace half_float;
 
 static TestImageTypes getImageType(std::string imageFileName)
@@ -293,6 +295,9 @@ NvDlaError runTest(const TestAppArgs* appArgs, TestInfo* i)
         ORIGINATE_ERROR(NvDlaError_BadParameter, "runtime->submit() failed");
 
     PROPAGATE_ERROR_FAIL(DlaBuffer2DIMG(&pOutputBuffer, pOutputImage));
+
+    /* Dump output dimg to a file */
+    PROPAGATE_ERROR_FAIL(DIMG2DIMGFile(pOutputImage, OUTPUT_DIMG, true, appArgs->rawOutputDump));
 
 fail:
     return e;

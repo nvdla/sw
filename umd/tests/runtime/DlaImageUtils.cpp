@@ -284,12 +284,15 @@ static NvDlaError parsePGMData(std::ifstream& hFile, NvDlaImage* image)
     return NvDlaSuccess;
 }
 
-NvDlaError DIMG2DIMGFile(const NvDlaImage* input, std::string outputfilename, bool stableHash)
+NvDlaError DIMG2DIMGFile(const NvDlaImage* input, std::string outputfilename, bool stableHash, bool rawDump)
 {
     // Prepare NvDlaImage serialization stream
     std::stringstream sstream;
 
-    PROPAGATE_ERROR(input->serialize(sstream, stableHash));
+    if (rawDump)
+        PROPAGATE_ERROR(input->packData(sstream, stableHash, true));
+    else
+        PROPAGATE_ERROR(input->serialize(sstream, stableHash));
 
     const std::string& str = sstream.str();
 

@@ -125,7 +125,7 @@ public:
 
     NvDlaError serialize(std::stringstream& sstream, bool stableHash) const;
     NvDlaError deserialize(std::stringstream& sstream);
-    NvDlaError packData(std::stringstream& sstream, bool stableHash) const;
+    NvDlaError packData(std::stringstream& sstream, bool stableHash, bool asRaw) const;
     NvDlaError unpackData(std::stringstream& sstream);
 };
 

@@ -518,7 +518,6 @@ static NvDlaError processGetOutput(const TestAppArgs* appArgs, TestInfo *testInf
 {
     NvDlaError e = NvDlaSuccess;
     std::stringstream sstream;
-    const std::string& str = sstream.str();
     void* buf = NULL;
     uint32_t len = 0;
     int32_t index = 0;
@@ -537,7 +536,7 @@ static NvDlaError processGetOutput(const TestAppArgs* appArgs, TestInfo *testInf
         return e;
 
     NvDlaDebugPrintf("Sending test output[%d]\n", index);
-    PROPAGATE_ERROR_FAIL(send(appArgs, testInfo, reinterpret_cast<const void*>(sstream.str().c_str()), str.length()));
+    PROPAGATE_ERROR_FAIL(send(appArgs, testInfo, reinterpret_cast<const void*>(sstream.str().c_str()), sstream.str().length()));
 
 fail:
     return e;

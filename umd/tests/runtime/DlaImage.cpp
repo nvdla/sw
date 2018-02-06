@@ -229,7 +229,7 @@ NvDlaError NvDlaImage::serialize(std::stringstream& sstream, bool stableHash) co
     sstream.write(reinterpret_cast<const char*>(&m_meta), sizeof(m_meta));
 
     // Serialize data
-    PROPAGATE_ERROR(packData(sstream, stableHash));
+    PROPAGATE_ERROR(packData(sstream, stableHash, false));
 
     return NvDlaSuccess;
 }
@@ -259,7 +259,7 @@ NvDlaError NvDlaImage::deserialize(std::stringstream& sstream)
     return NvDlaSuccess;
 }
 
-NvDlaError NvDlaImage::packData(std::stringstream& sstream, bool stableHash) const
+NvDlaError NvDlaImage::packData(std::stringstream& sstream, bool stableHash, bool asRaw) const
 {
     NvS8 bpe = getBpe();
     if (bpe <= 0)
@@ -268,6 +268,10 @@ NvDlaError NvDlaImage::packData(std::stringstream& sstream, bool stableHash) con
     PixelFormatType pftype = getPixelFormatType();
     if (pftype == UNKNOWN)
         ORIGINATE_ERROR(NvDlaError_BadParameter, "Unknown pixel format type %u\n", pftype);
+
+    /* Force stable hash if packing data need to raw (readable) */
+    if (asRaw)
+        stableHash = true;
 
     char* buf = reinterpret_cast<char*>(m_pData);
     for (NvU32 c=0; c<m_meta.channel; c++)
@@ -304,7 +308,10 @@ NvDlaError NvDlaImage::packData(std::stringstream& sstream, bool stableHash) con
                                 tmp = 0x7C00;
                             }
 
-                            sstream.write(reinterpret_cast<const char*>(&tmp), bpe);
+                            if (asRaw)
+                                sstream << tmp << " ";
+                            else
+                                sstream.write(reinterpret_cast<const char*>(&tmp), bpe);
                         }
                         else if (bpe == 4)
                         {
@@ -320,16 +327,31 @@ NvDlaError NvDlaImage::packData(std::stringstream& sstream, bool stableHash) con
                                 // Emit only one version of NaN
                                 tmp = 0x7FBFFFFF;
                             }
-                            sstream.write(reinterpret_cast<const char*>(&tmp), bpe);
+                            if (asRaw)
+                                sstream << tmp << " ";
+                            else
+                                sstream.write(reinterpret_cast<const char*>(&tmp), bpe);
                         }
                         else
                         {
                             ORIGINATE_ERROR(NvDlaError_NotSupported, "Unspported FP type");
                         }
                     }
-                    else if (pftype == UINT || pftype == INT)
+                    else if (pftype == UINT)
                     {
-                        sstream.write(reinterpret_cast<const char*>(buf + offset), bpe);
+                        unsigned tmp = *(reinterpret_cast<unsigned*>(buf + offset));
+                        if (asRaw)
+                            sstream << tmp << " ";
+                        else
+                            sstream.write(reinterpret_cast<const char*>(buf + offset), bpe);
+                    }
+                    else if (pftype == INT)
+                    {
+                        int tmp = *(reinterpret_cast<int*>(buf + offset));
+                        if (asRaw)
+                            sstream << tmp << " ";
+                        else
+                            sstream.write(reinterpret_cast<const char*>(buf + offset), bpe);
                     }
                     else
                     {

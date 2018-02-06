@@ -156,6 +156,10 @@ int main(int argc, char* argv[])
 
             testAppArgs.loadableName = std::string(argv[++ii]);
         }
+        else if (std::strcmp(arg, "--rawdump") == 0)
+        {
+            testAppArgs.rawOutputDump = true;
+        }
         else // unknown
         {
             // Unknown argument
@@ -180,6 +184,7 @@ int main(int argc, char* argv[])
         NvDlaDebugPrintf("    -h               print this help message\n");
         NvDlaDebugPrintf("    -s               launch test in server mode\n");
         NvDlaDebugPrintf("    --image <file>   input jpg/pgm file\n");
+        NvDlaDebugPrintf("    --rawdump        dump raw dimg data\n");
 
         if (unknownArg || missingArg)
             return EXIT_FAILURE;
