@@ -479,48 +479,6 @@ fail:
     return e;
 }
 
-static NvDlaError processPerformShift(const TestAppArgs* appArgs, TestInfo* testInfo)
-{
-    NvDlaError e = NvDlaSuccess;
-    void* buf = NULL;
-    uint32_t len = 0;
-
-    PROPAGATE_ERROR_FAIL(read(appArgs, testInfo, &buf, &len));
-
-    testInfo->imgShift = NvF32(atof((const char*)buf));
-
-fail:
-    return NvDlaSuccess;
-}
-
-static NvDlaError processPerformScale(const TestAppArgs* appArgs, TestInfo* testInfo)
-{
-    NvDlaError e = NvDlaSuccess;
-    void* buf = NULL;
-    uint32_t len = 0;
-
-    PROPAGATE_ERROR_FAIL(read(appArgs, testInfo, &buf, &len));
-
-    testInfo->imgScalingFactor = NvF32(atof((const char*)buf));
-
-fail:
-    return NvDlaSuccess;
-}
-
-static NvDlaError processPerformPower(const TestAppArgs* appArgs, TestInfo* testInfo)
-{
-    NvDlaError e = NvDlaSuccess;
-    void* buf = NULL;
-    uint32_t len = 0;
-
-    PROPAGATE_ERROR_FAIL(read(appArgs, testInfo, &buf, &len));
-
-    testInfo->imgPowerFactor = NvF32(atof((const char*)buf));
-
-fail:
-    return NvDlaSuccess;
-}
-
 static NvDlaError processRunImage(const TestAppArgs* appArgs, TestInfo* testInfo)
 {
     NvDlaError e = NvDlaSuccess;
@@ -541,23 +499,6 @@ static NvDlaError processRunImage(const TestAppArgs* appArgs, TestInfo* testInfo
 fail:
     return e;
 
-}
-
-static NvDlaError processPerformSoftmax(const TestAppArgs* appArgs, TestInfo* testInfo)
-{
-    NvDlaError e = NvDlaSuccess;
-    void* buf = NULL;
-    uint32_t len = 0;
-    std::string isPerformSM;
-
-    PROPAGATE_ERROR_FAIL(read(appArgs, testInfo, &buf, &len));
-
-    isPerformSM = std::string((const char*)buf);
-
-    testInfo->performSoftwareSoftmax = isPerformSM == "YES";
-
-fail:
-    return NvDlaSuccess;
 }
 
 static NvDlaError processGetNumOutputs(const TestAppArgs* appArgs, TestInfo *testInfo)
@@ -680,23 +621,11 @@ static NvDlaError mainEventLoop(TestAppArgs* appArgs, TestInfo *testInfo)
         } else if (strcmp(cmd, "READ_FLATBUF") == 0) {
             /* Get the flatbuffer and read it. */
             PROPAGATE_ERROR_FAIL(processReadFlatbuf(appArgs, testInfo));
-        } else if (strcmp(cmd, "PERFORM_SHIFT") == 0) {
-            /* Perform shift operation on test input image*/
-            PROPAGATE_ERROR_FAIL(processPerformShift(appArgs, testInfo));
-        } else if (strcmp(cmd, "PERFORM_SCALE") == 0) {
-            /* Perform scaling operation on test input image*/
-            PROPAGATE_ERROR_FAIL(processPerformScale(appArgs, testInfo));
-        } else if (strcmp(cmd, "PERFORM_POWER") == 0) {
-            /* Perform power operation on test input image */
-            PROPAGATE_ERROR_FAIL(processPerformPower(appArgs, testInfo));
         } else if (strCmd.find(std::string("RUN_IMAGE")) != std::string::npos) {
             /* Extract file name from command */
             appArgs->inputName = strCmd.substr(strCmd.find_last_of("_") + 1);
             /* Get the image and run inference on it using the flatbuffer cached in memory */
             PROPAGATE_ERROR_FAIL(processRunImage(appArgs, testInfo));
-        } else if (strcmp(cmd, "PERFORM_SOFTMAX") == 0) {
-            /* Select to perform cpu based softmax operation on test's output */
-            PROPAGATE_ERROR_FAIL(processPerformSoftmax(appArgs, testInfo));
         } else if (strcmp(cmd, "GET_NUMOUTPUTS") == 0) {
             /* Get the flatbuffer and run the test. */
             PROPAGATE_ERROR_FAIL(processGetNumOutputs(appArgs, testInfo));

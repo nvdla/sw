@@ -266,76 +266,6 @@ fail:
     return e;
 }
 
-static NvDlaError preProcessTest(const TestAppArgs* appArgs, TestInfo* i, NvDlaImage* pInput)
-{
-    NvDlaError e = NvDlaSuccess;
-    half* pSrc = reinterpret_cast<half*>(pInput->m_pData);
-    half* pDst = reinterpret_cast<half*>(NvDlaAlloc(pInput->m_meta.size));
-
-    // Execute
-    for (NvU32 channel=0; channel < pInput->m_meta.channel; channel++)
-    {
-        for (NvU32 height=0; height < pInput->m_meta.height; height++)
-        {
-            for (NvU32 width=0; width < pInput->m_meta.width; width++)
-            {
-                NvS32 srcoffset = pInput->getAddrOffset(width, height, channel);
-                NvS32 dstoffset = pInput->getAddrOffset(width, height, channel);
-
-                if (srcoffset == -1 || dstoffset == -1)
-                {
-                    ORIGINATE_ERROR_FAIL(NvDlaError_BadValue, "Offsets out of bounds");
-                }
-
-                half* srchalfp = reinterpret_cast<half*>(pSrc + srcoffset);
-                half* dsthalfp = reinterpret_cast<half*>(pDst + dstoffset);
-
-                NvF32 x = float(*srchalfp);
-                NvF32 y = powf(i->imgShift + (i->imgScalingFactor * x), i->imgPowerFactor);
-                *dsthalfp = half(y);
-            }
-        }
-    }
-
-    pInput->m_pData = pDst;
-
-fail:
-    return e;
-}
-
-static NvDlaError postProcessTest(const TestAppArgs* appArgs, TestInfo* i, NvDlaImage* pOutput)
-{
-    NvDlaError e = NvDlaSuccess;
-
-    if (i->performSoftwareSoftmax)
-    {
-        half* pSrc = reinterpret_cast<half*>(pOutput->m_pData);
-        half* pDst = reinterpret_cast<half*>(NvDlaAlloc(pOutput->m_meta.size));
-
-        NvF32 maxval = -INFINITY;
-        for (NvU32 ii=0; ii < pOutput->m_meta.channel; ii++)
-        {
-            if (float(pSrc[ii]) > maxval)
-            {
-                maxval = float(pSrc[ii]);
-            }
-        }
-        NvF32 sumexp = 0.0f;
-        for (NvU32 ii=0; ii < pOutput->m_meta.channel; ii++)
-        {
-            sumexp += expf(float(pSrc[ii])-maxval);
-        }
-        for (NvU32 ii=0; ii < pOutput->m_meta.channel; ii++)
-        {
-            pDst[ii] = expf(float(pSrc[ii])-maxval) / sumexp;
-        }
-
-        pOutput->m_pData = pDst;
-    }
-
-    return e;
-}
-
 NvDlaError runTest(const TestAppArgs* appArgs, TestInfo* i)
 {
     NvDlaError e = NvDlaSuccess;
@@ -358,15 +288,11 @@ NvDlaError runTest(const TestAppArgs* appArgs, TestInfo* i)
 
     PROPAGATE_ERROR_FAIL(setupOutputBuffer(appArgs, i, &pOutputBuffer, pOutputImage));
 
-    PROPAGATE_ERROR_FAIL(preProcessTest(appArgs, i, pInputImage));
-
     NvDlaDebugPrintf("submitting tasks...\n");
     if (!runtime->submit())
         ORIGINATE_ERROR(NvDlaError_BadParameter, "runtime->submit() failed");
 
     PROPAGATE_ERROR_FAIL(DlaBuffer2DIMG(&pOutputBuffer, pOutputImage));
-
-    PROPAGATE_ERROR_FAIL(postProcessTest(appArgs, i, pOutputImage));
 
 fail:
     return e;

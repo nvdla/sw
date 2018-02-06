@@ -65,14 +65,6 @@ def parse_options(argv):
                     default=False, help='Don\'t Shut Down Server.')
     parser.add_option('--image', '--img', dest='image_file', action='store',
                     default=None, help='Image file')
-    parser.add_option('--softmax', dest='softmax', action='store_true',
-                    default=False, help='Perform software softmax on test output')
-    parser.add_option('--shift', dest='image_shift', action='store', type="float",
-                    default=0.0, help='Perform shift operation on image input')
-    parser.add_option('--scale', dest='image_scale', action='store', type="float",
-                    default=1.0, help='Perform scale operation on image input')
-    parser.add_option('--power', dest='image_power', action='store', type="float",
-                    default=1.0, help='Perform power operation on image input')
 
     options, categories = parser.parse_args(argv[1:])
     _input = options.input_file
@@ -193,46 +185,12 @@ def readFlatbuf(sock, fbuf_file):
     sock.send(cmd)
     sock.send(data)
 
-def preProcessImage(sock, shift=0.0, scale=1.0, power=1.0):
-    logging.info("Pre process image with shift [{0}], scaling factor [{1}] and power factor [{2}]".format(shift, scale, power))
-    shift_data = "%.4f" % shift
-    cmd = "PERFORM_SHIFT"
-    sock.send(cmd)
-    sock.send(shift_data)
-
-    cmd = "PERFORM_SCALE"
-    scale_data = "%.4f" % scale
-    sock.send(cmd)
-    sock.send(scale_data)
-
-    cmd = "PERFORM_POWER"
-    power_data = "%.4f" % power
-    sock.send(cmd)
-    sock.send(power_data)
-
-def postProcessImage(sock, softmax=False):
-    if softmax:
-        logging.info("Perform softmax on test output")
-        cmd = "PERFORM_SOFTMAX"
-        data = 'YES'
-        sock.send(cmd)
-        sock.send(data)
-    else:
-        logging.info("Don't perform softmax on test output")
-        cmd = "PERFORM_SOFTMAX"
-        data = 'NO'
-        sock.send(cmd)
-        sock.send(data)
-
-def runImage(sock, img_file, shift=0.0, scale=1.0, power=1.0, softmax=False, timeout=1000):
+def runImage(sock, img_file, timeout=1000):
     image = getImageData(img_file)
     if image == "":
         logging.error("Unable to read the image: %s".format(img_file))
         sock.closeConnection()
         sys.exit(1)
-
-    preProcessImage(sock, shift, scale, power)
-    postProcessImage(sock, softmax)
 
     file_name = img_file.split("/")[-1]
     logging.info("Seding and running image");
@@ -348,9 +306,7 @@ def main():
             logging.info("Attempting to run image: [{0}], " \
                      "size[{1}].".format(image_file_name, img_size))
 
-            runImage(dlasocket, img_file, \
-                     options.image_shift, options.image_scale, options.image_power, \
-                     options.softmax)
+            runImage(dlasocket, img_file)
 
         numOutputs = getNumOutputs(dlasocket)
         for ii in range(numOutputs):

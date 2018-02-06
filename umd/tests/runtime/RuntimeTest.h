@@ -45,20 +45,12 @@ struct TestAppArgs
     std::string inputName;
     std::string loadableName;
     NvS32 serverPort;
-    bool performSoftwareSoftmax;
-    NvF32 imgShift;
-    NvF32 imgScalingFactor;
-    NvF32 imgPowerFactor;
 
     TestAppArgs() :
         inputPath("./"),
         inputName(""),
         loadableName(""),
-        serverPort(6666),
-        performSoftwareSoftmax(false),
-        imgShift(0.0),
-        imgScalingFactor(0.0),
-        imgPowerFactor(0.0)
+        serverPort(6666)
     {}
 };
 
@@ -69,10 +61,6 @@ struct TestInfo
         inputLoadablePath(""),
         pData(NULL),
         dlaServerRunning(false),
-        performSoftwareSoftmax(false),
-        imgShift(0.0f),
-        imgScalingFactor(1.0f),
-        imgPowerFactor(1.0f),
         dlaRemoteSock(-1),
         dlaServerSock(-1),
         numInputs(0),
@@ -85,10 +73,6 @@ struct TestInfo
     std::string inputLoadablePath;
     NvU8 *pData;
     bool dlaServerRunning;
-    bool performSoftwareSoftmax;
-    NvF32 imgShift;
-    NvF32 imgScalingFactor;
-    NvF32 imgPowerFactor;
     NvS32 dlaRemoteSock;
     NvS32 dlaServerSock;
     NvU32 numInputs;

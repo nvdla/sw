@@ -81,11 +81,6 @@ static NvDlaError launchTest(const TestAppArgs* appArgs)
     NvDlaError e = NvDlaSuccess;
     TestInfo testInfo;
 
-    testInfo.performSoftwareSoftmax = appArgs->performSoftwareSoftmax;
-    testInfo.imgShift = appArgs->imgShift;
-    testInfo.imgScalingFactor = appArgs->imgScalingFactor;
-    testInfo.imgPowerFactor = appArgs->imgPowerFactor;
-
     testInfo.dlaServerRunning = false;
     PROPAGATE_ERROR_FAIL(testSetup(appArgs, &testInfo));
 
@@ -102,14 +97,10 @@ int main(int argc, char* argv[])
     TestAppArgs testAppArgs = defaultTestAppArgs;
     bool showHelp = false;
     bool unknownArg = false;
+    bool missingArg = false;
     bool inputPathSet = false;
     bool serverMode = false;
     NVDLA_UNUSED(inputPathSet);
-
-    testAppArgs.performSoftwareSoftmax = false;
-    testAppArgs.imgShift = 0.0;
-    testAppArgs.imgScalingFactor = 0.0;
-    testAppArgs.imgPowerFactor = 0.0;
 
     NvS32 ii = 1;
     while(true)
@@ -165,50 +156,6 @@ int main(int argc, char* argv[])
 
             testAppArgs.loadableName = std::string(argv[++ii]);
         }
-        else if (std::strcmp(arg, "--imgshift") == 0)
-        {
-            if (ii+1 >= argc)
-            {
-                // Expecting another parameter
-                showHelp = true;
-                break;
-            }
-
-            testAppArgs.imgShift = NvF32(atof(argv[++ii]));
-        }
-        else if (std::strcmp(arg, "--imgscale") == 0)
-        {
-            if (ii+1 >= argc)
-            {
-                // Expecting another parameter
-                showHelp = true;
-                break;
-            }
-
-            testAppArgs.imgScalingFactor = NvF32(atof(argv[++ii]));
-        }
-        else if (std::strcmp(arg, "--imgpower") == 0)
-        {
-            if (ii+1 >= argc)
-            {
-                // Expecting another parameter
-                showHelp = true;
-                break;
-            }
-
-            testAppArgs.imgPowerFactor = NvF32(atof(argv[++ii]));
-        }
-        else if (std::strcmp(arg, "--softmax") == 0)
-        {
-            if (ii+1 >= argc)
-            {
-                // Expecting another parameter
-                showHelp = true;
-                break;
-            }
-
-            testAppArgs.performSoftwareSoftmax = true;
-        }
         else // unknown
         {
             // Unknown argument
@@ -220,20 +167,21 @@ int main(int argc, char* argv[])
         ii++;
     }
 
+    /* Check if any mandatory arguments are missing */
+    if (strcmp(testAppArgs.loadableName.c_str(), "") == 0 && !serverMode) {
+        showHelp = true;
+        missingArg = true;
+    }
+
     if (showHelp)
     {
         NvDlaDebugPrintf("Usage: %s [-options] --loadable <loadable_file>\n", argv[0]);
         NvDlaDebugPrintf("where options include:\n");
         NvDlaDebugPrintf("    -h               print this help message\n");
         NvDlaDebugPrintf("    -s               launch test in server mode\n");
-        NvDlaDebugPrintf("    --loadable <loadable_file>              \n");
-        NvDlaDebugPrintf("    --image <image_file>                    \n");
-        NvDlaDebugPrintf("    --imgshift <shift_value>                \n");
-        NvDlaDebugPrintf("    --imgscale <scale_value>                \n");
-        NvDlaDebugPrintf("    --imgpower <power_value>                \n");
-        NvDlaDebugPrintf("    --softmax                               \n");
+        NvDlaDebugPrintf("    --image <file>   input jpg/pgm file\n");
 
-        if (unknownArg)
+        if (unknownArg || missingArg)
             return EXIT_FAILURE;
         else
             return EXIT_SUCCESS;
