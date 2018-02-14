@@ -251,7 +251,7 @@ static int32_t
 processor_conv_program(struct dla_processor_group *group)
 {
 	int32_t ret = 0;
-	uint32_t reg, high, low;
+	uint32_t reg, high, low, shift, mask;
 	uint32_t stride_x, stride_y, pad_x, pad_y;
 	uint64_t weight_address = 0;
 	uint64_t wmb_address = 0;
@@ -327,32 +327,47 @@ processor_conv_program(struct dla_processor_group *group)
 
 	/* check if the register group is idle */
 	reg = cacc_reg_read(S_STATUS);
-	reg = reg >> (group->id ? SHIFT(CACC_S_STATUS_0, STATUS_1) :
-				SHIFT(CACC_S_STATUS_0, STATUS_0));
+	mask = group->id ? MASK(CACC_S_STATUS_0, STATUS_1) :
+		MASK(CACC_S_STATUS_0, STATUS_0);
+	shift = group->id ? SHIFT(CACC_S_STATUS_0, STATUS_1) :
+		SHIFT(CACC_S_STATUS_0, STATUS_0);
+	reg = (reg & mask) >> shift;
 	ASSERT_GOTO((reg == FIELD_ENUM(CACC_S_STATUS_0, STATUS_0, IDLE)),
 		ret, ERR(INVALID_INPUT), exit);
 
 	reg = cmac_a_reg_read(S_STATUS);
-	reg = reg >> (group->id ? SHIFT(CMAC_A_S_STATUS_0, STATUS_1) :
-				SHIFT(CMAC_A_S_STATUS_0, STATUS_0));
+	mask = group->id ? MASK(CMAC_A_S_STATUS_0, STATUS_1) :
+        MASK(CMAC_A_S_STATUS_0, STATUS_0);
+	shift = group->id ? SHIFT(CMAC_A_S_STATUS_0, STATUS_1) :
+		SHIFT(CMAC_A_S_STATUS_0, STATUS_0);
+	reg = (reg & mask) >> shift;
 	ASSERT_GOTO((reg == FIELD_ENUM(CMAC_A_S_STATUS_0, STATUS_0, IDLE)),
 		ret, ERR(INVALID_INPUT), exit);
 
 	reg = cmac_b_reg_read(S_STATUS);
-	reg = reg >> (group->id ? SHIFT(CMAC_B_S_STATUS_0, STATUS_1) :
-				SHIFT(CMAC_B_S_STATUS_0, STATUS_0));
+	mask = group->id ? MASK(CMAC_B_S_STATUS_0, STATUS_1) :
+		MASK(CMAC_B_S_STATUS_0, STATUS_0);
+	shift = group->id ? SHIFT(CMAC_B_S_STATUS_0, STATUS_1) :
+		SHIFT(CMAC_B_S_STATUS_0, STATUS_0);
+	reg = (reg & mask) >> shift;
 	ASSERT_GOTO((reg == FIELD_ENUM(CMAC_B_S_STATUS_0, STATUS_0, IDLE)),
 		ret, ERR(INVALID_INPUT), exit);
 
 	reg = csc_reg_read(S_STATUS);
-	reg = reg >> (group->id ? SHIFT(CSC_S_STATUS_0, STATUS_1) :
-				SHIFT(CSC_S_STATUS_0, STATUS_0));
+	mask = group->id ? MASK(CSC_S_STATUS_0, STATUS_1) :
+		MASK(CSC_S_STATUS_0, STATUS_0);
+	shift = group->id ? SHIFT(CSC_S_STATUS_0, STATUS_1) :
+		SHIFT(CSC_S_STATUS_0, STATUS_0);
+	reg = (reg & mask) >> shift;
 	ASSERT_GOTO((reg == FIELD_ENUM(CSC_S_STATUS_0, STATUS_0, IDLE)),
 		ret, ERR(INVALID_INPUT), exit);
 
 	reg = cdma_reg_read(S_STATUS);
-	reg = reg >> (group->id ? SHIFT(CDMA_S_STATUS_0, STATUS_1) :
-				SHIFT(CDMA_S_STATUS_0, STATUS_0));
+	mask = group->id ? MASK(CDMA_S_STATUS_0, STATUS_1) :
+		MASK(CDMA_S_STATUS_0, STATUS_0);
+	shift = group->id ? SHIFT(CDMA_S_STATUS_0, STATUS_1) :
+		SHIFT(CDMA_S_STATUS_0, STATUS_0);
+	reg = (reg & mask) >> shift;
 	ASSERT_GOTO((reg == FIELD_ENUM(CDMA_S_STATUS_0, STATUS_0, IDLE)),
 		ret, ERR(INVALID_INPUT), exit);
 
