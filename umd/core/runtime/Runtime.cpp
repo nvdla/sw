@@ -586,6 +586,9 @@ NvDlaError Runtime::submitInternal()
                     EMUInterface *emu_if = new EMUInterfaceA();
 
                     NvU8* task_mem = new NvU8[emu_if->taskDescAccessor(0).struct_size()];
+
+                    std::memset(task_mem, 0, emu_if->taskDescAccessor(0).struct_size());
+
                     EMUTaskDescAccessor emu_task_desc = emu_if->taskDescAccessor(task_mem);
                     emu_task_descs.push_back(&emu_task_desc);
 
