@@ -32,7 +32,7 @@
 #include "dlaerror.h"
 #include "dlatypes.h"
 
-#define NVDLA_MAX_BUFFERS_PER_TASK (512)
+#define NVDLA_MAX_BUFFERS_PER_TASK (6144)
 
 struct NvDlaMemDescRec{
     void *handle;

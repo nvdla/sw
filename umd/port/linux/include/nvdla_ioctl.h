@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License version 2
@@ -65,7 +65,7 @@ struct nvdla_mem_handle {
  *
  */
 struct nvdla_ioctl_submit_task {
-#define NVDLA_MAX_BUFFERS_PER_TASK (512)
+#define NVDLA_MAX_BUFFERS_PER_TASK (6144)
     __u32 num_addresses;
 #define NVDLA_NO_TIMEOUT    (0xffffffff)
     __u32 timeout;
