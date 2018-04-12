@@ -89,12 +89,12 @@ public: // externally facing
     virtual NvDlaError getNetworkDataType(uint8_t *) const;
 
     virtual NvDlaError getNumInputTensors(int *);
-    virtual NvDlaError getInputTensorDesc(int id, NvDlaTensor *);
-    virtual NvDlaError setInputTensorDesc(int id, const NvDlaTensor *);
+    virtual NvDlaError getInputTensorDesc(int id, IRuntime::NvDlaTensor *);
+    virtual NvDlaError setInputTensorDesc(int id, const IRuntime::NvDlaTensor *);
 
     virtual NvDlaError getNumOutputTensors(int *);
-    virtual NvDlaError getOutputTensorDesc(int id, NvDlaTensor *);
-    virtual NvDlaError setOutputTensorDesc(int id, const NvDlaTensor *);
+    virtual NvDlaError getOutputTensorDesc(int id, IRuntime::NvDlaTensor *);
+    virtual NvDlaError setOutputTensorDesc(int id, const IRuntime::NvDlaTensor *);
 
     virtual bool submit();
 
@@ -114,6 +114,7 @@ protected:
     inline bool debugVersions() const { return false; }
     inline bool debugLoadables() const { return false; }
     inline bool debugBinding() const { return false; }
+    inline bool debugStrideRewrite() const { return false; }
 
     NvDlaError submitInternal(void);
 
@@ -135,6 +136,7 @@ protected:
     std::vector<ILoadable::AddressListEntry> m_address_entries;
     std::vector<ILoadable::EventListEntry> m_event_entries;
     std::vector<ILoadable::TensorDescListEntry> m_tensor_desc_entries;
+    std::vector<ILoadable::RelocEntry> m_reloc_entries;
 
     class Task  {
     public:
@@ -167,9 +169,9 @@ protected:
 
     class Memory {
     public:
-        Memory() : hMem(0) { }
-        Memory(const ILoadable::MemoryListEntry &e) : hMem(0), mEntry(e) { }
-        Memory(const Memory &o)                     : hMem(o.hMem), mEntry(o.mEntry) { }
+        Memory() : hMem(0), pVirtAddr(0) { }
+        Memory(const ILoadable::MemoryListEntry &e) : hMem(0), pVirtAddr(0), mEntry(e) { }
+        Memory(const Memory &o)                     : hMem(o.hMem), pVirtAddr(0), mEntry(o.mEntry) { }
         inline NvU16 id() { return mEntry.id; }
         inline NvU64 size() { return mEntry.size; }
         inline NvU32 alignment() { return mEntry.alignment; }
@@ -249,23 +251,18 @@ protected:
         ILoadable::AddressListEntry mEntry;
     };
 
-    class TensorDesc {
+public:
+    class TensorDesc : public ILoadable::TensorDescListEntry {
     public:
-        TensorDesc() { }
-        TensorDesc(const ILoadable::TensorDescListEntry &e) : mEntry(e) { }
-        TensorDesc(const TensorDesc &o) : mEntry(o.mEntry) { }
-        NvU16 id() const { return mEntry.id; }
-        NvU16 memId() const { return mEntry.mem_id; }
-        NvU64 size() const { return mEntry.size; }
-        NvU64 offset() const { return mEntry.offset; }
-    public:
-        friend class Runtime;
-        ILoadable::TensorDescListEntry mEntry;
+        TensorDesc();
+        TensorDesc(const ILoadable::TensorDescListEntry &e);
+        IRuntime::NvDlaTensor bindTensorDesc() const;
     };
 
     bool bindTensorMemory(ITensor *, void *hMem);
     bool unbindTensorMemory(ITensor *, void *hMem);
 
+protected:
     std::vector<Task> m_task;
     std::vector<Submit> m_submit;
     std::vector<Memory> m_memory;
@@ -308,8 +305,8 @@ protected:
         bool operator() (Memory* const& i, Memory* const& j) { IOD na; return i->bindId(na) < j->bindId(na); }
     };
 
-    NvDlaError mergeSetTensorDesc(IOD w, int bindID, int tensorDescId, const ILoadable::TensorDescListEntry *tdl);
-
+    NvDlaError mergeSetTensorDesc(IOD w, int bindID, int tensorDescId, const IRuntime::NvDlaTensor *tdl);
+    NvDlaError rewriteStrides(IOD w, int bindID, int tensorDescId, const NvU32 *);
 
 };
 

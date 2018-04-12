@@ -50,7 +50,7 @@ struct Version {
 }
 
 enum LoadableVersionMajor    : ubyte { VAL = 0 }
-enum LoadableVersionMinor    : ubyte { VAL = 5 }
+enum LoadableVersionMinor    : ubyte { VAL = 6 }
 enum LoadableVersionSubMinor : ubyte { VAL = 0 }
 
 //
@@ -64,6 +64,7 @@ table Blob {
     name        : string;
     size        : ulong;
     interface   : Interface;   // e.g.: dla1 (firmware)
+    sub_interface: uint;       // e.g.: dla1-op-desc, dla1-surf-desc
     version     : Version;     // e.g.: firmware version
     data        : [ubyte];
 }
@@ -246,18 +247,29 @@ table TensorDescListEntry {
     data_category: DataCategory;
     pixel_format : PixelFormat;
     pixel_mapping : PixelMapping;
+
     n : int;
     c : int;
     h : int;
     w : int;
-    line_stride : uint;  // iff pixel_mapping == PITCH_LINEAR
-    surf_stride : uint;  //    " "
-    plane_stride : uint; //    " "
-    reserved0    : ushort;
-    reserved1 : ushort;
-    reserved2      : ubyte;
-    reserved3     : ubyte;
 
+    stride_0 : uint;
+    stride_1 : uint;
+    stride_2 : uint;
+    stride_3 : uint;
+    stride_4 : uint;
+    stride_5 : uint;
+    stride_6 : uint;
+    stride_7 : uint;
+}
+
+table RelocListEntry {
+    address_id : ushort;
+    write_id : ushort;
+    offset : ulong;
+    interface: uint;
+    sub_interface: uint;
+    reloc_type: ubyte;
 }
 
 
@@ -269,6 +281,7 @@ table Loadable {
       event_list   : [EventListEntry];
       blobs        : [Blob];
       tensor_desc_list : [TensorDescListEntry];
+      reloc_list   : [RelocListEntry];
       submit_list  : [SubmitListEntry];
 }
 

@@ -88,12 +88,12 @@ NvDlaError Tensor2DIMG(const nvdla::IRuntime::NvDlaTensor* tensor, NvDlaImage* i
     }
 
     image->m_meta.surfaceFormat = surfaceFormat;
-    image->m_meta.width = tensor->w;
-    image->m_meta.height = tensor->h;
-    image->m_meta.channel = tensor->c;
+    image->m_meta.width = tensor->dims.w;
+    image->m_meta.height = tensor->dims.h;
+    image->m_meta.channel = tensor->dims.c;
 
-    image->m_meta.lineStride = tensor->pitchLinear.lineStride;
-    image->m_meta.surfaceStride = tensor->pitchLinear.surfStride;
+    image->m_meta.lineStride = tensor->stride[1];
+    image->m_meta.surfaceStride = tensor->stride[2];
     image->m_meta.size = tensor->bufferSize;
 
     if ( 0 ) {

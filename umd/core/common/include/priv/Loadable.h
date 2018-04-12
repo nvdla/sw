@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -95,6 +95,9 @@ public: // externally facing
     virtual NvDlaError getNumOutputTensors(int *) const;
     virtual NvDlaError getOutputTensorDesc(NvU16 id, TensorDescListEntry *) const;
 
+    virtual int        getNumRelocEntries() const;
+    virtual RelocEntry getRelocEntry(NvU16 i) const;
+
 public: // internally facing
 
     virtual int setSymbolContent(std::string name, const ILoadable::Blob &, NvU8 *data);
@@ -108,6 +111,7 @@ public: // internally facing
     void setSubmitListEntries (const std::vector<SubmitListEntry>  &);
     void setAddressListEntries (const std::vector<AddressListEntry> &);
     void setTensorDescListEntries(const std::vector<TensorDescListEntry> &);
+    void setRelocEntries(const std::vector<RelocEntry> &);
 
     const std::vector<TaskListEntry> & getTaskListEntries()   const;
     const std::vector<SubmitListEntry> & getSubmitListEntries() const;
@@ -115,6 +119,7 @@ public: // internally facing
     const std::vector<AddressListEntry> & getAddressListEntries() const;
     const std::vector<EventListEntry> & getEventListEntries()  const;
     const std::vector<TensorDescListEntry> &getTensorDescListEntries() const;
+    const std::vector<RelocEntry> &getRelocEntries() const; 
 
     Loadable();
 
@@ -124,6 +129,7 @@ public: // internally facing
     struct Symbol {
         std::string name;
         ILoadable::Interface interface;
+        NvU32 subInterface;
         ILoadable::Version version;
         NvU64 size;
         NvU8 *data;
@@ -141,6 +147,7 @@ protected:
     std::vector<EventListEntry> mEventListEntries;
     std::vector<AddressListEntry> mAddressListEntries;
     std::vector<TensorDescListEntry> mTensorDescListEntries;
+    std::vector<RelocEntry> mRelocEntries;
 
     std::string mName;
     virtual ~Loadable();

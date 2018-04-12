@@ -259,6 +259,18 @@ const std::vector<ILoadable::TensorDescListEntry> &Loadable::getTensorDescListEn
     return mTensorDescListEntries;
 }
 
+int Loadable::getNumRelocEntries() const
+{
+    return mRelocEntries.size();
+}
+ILoadable::RelocEntry Loadable::getRelocEntry(NvU16 i) const
+{
+    return mRelocEntries[i];
+}
+const std::vector<ILoadable::RelocEntry> &Loadable::getRelocEntries() const
+{
+    return mRelocEntries;
+}
 
 //
 // internally facing
@@ -287,7 +299,10 @@ void Loadable::setTensorDescListEntries(const std::vector<ILoadable::TensorDescL
 {
     mTensorDescListEntries = e;
 }
-
+void Loadable::setRelocEntries(const std::vector<ILoadable::RelocEntry> &e)
+{
+    mRelocEntries = e;
+}
 
 int  Loadable::setSymbolContent(std::string name, const ILoadable::Blob &b, NvU8 *data)
 {
@@ -298,6 +313,7 @@ int  Loadable::setSymbolContent(std::string name, const ILoadable::Blob &b, NvU8
 
     mSymbols[name].name = b.name;
     mSymbols[name].interface = b.interface;
+    mSymbols[name].subInterface = b.subInterface;
     mSymbols[name].version   = b.version;
     mSymbols[name].size = b.size;
     mSymbols[name].data = data;
@@ -322,6 +338,7 @@ bool Loadable::getSymbolContent(std::string name, ILoadable::Blob &blob, NvU8 * 
     blob.size = f->second.size;
     blob.version = f->second.version;
     blob.interface = f->second.interface;
+    blob.subInterface = f->second.subInterface;
     data = f->second.data;
     return true;
 
@@ -471,6 +488,7 @@ bool Loadable::serializeToFlatBufferFile(const std::string &filename) const
     std::vector<flatbuffers::Offset<nvdla::loadable::EventListEntry>>   event_list;
     std::vector<flatbuffers::Offset<nvdla::loadable::Blob>>             blobs;
     std::vector<flatbuffers::Offset<nvdla::loadable::TensorDescListEntry>> tensor_desc_list;
+    std::vector<flatbuffers::Offset<nvdla::loadable::RelocListEntry>> reloc_list;
 
     nvdla::loadable::Version loadable_version(nvdla::loadable::LoadableVersionMajor_VAL,
                                               nvdla::loadable::LoadableVersionMinor_VAL,
@@ -568,35 +586,50 @@ bool Loadable::serializeToFlatBufferFile(const std::string &filename) const
         nvdla::loadable::TensorDescListEntryBuilder tdleb(fbb);
 
         tdleb.add_id(ele.id);
-        tdleb.add_mem_id(ele.mem_id);
+        tdleb.add_mem_id(ele.memId);
         tdleb.add_size(ele.size);
         tdleb.add_offset(ele.offset);
 
-        tdleb.add_data_format(  nvdla::loadable::DataFormat(ele.data_format) );
-        tdleb.add_data_type(  nvdla::loadable::DataType(ele.data_type) );
-        tdleb.add_data_category(  nvdla::loadable::DataCategory(ele.data_category) );
-        tdleb.add_pixel_format(  nvdla::loadable::PixelFormat(ele.pixel_format) );
-        tdleb.add_pixel_mapping(  nvdla::loadable::PixelMapping(ele.pixel_mapping) );
+        tdleb.add_data_format(  nvdla::loadable::DataFormat(ele.dataFormat) );
+        tdleb.add_data_type(  nvdla::loadable::DataType(ele.dataType) );
+        tdleb.add_data_category(  nvdla::loadable::DataCategory(ele.dataCategory) );
+        tdleb.add_pixel_format(  nvdla::loadable::PixelFormat(ele.pixelFormat) );
+        tdleb.add_pixel_mapping(  nvdla::loadable::PixelMapping(ele.pixelMapping) );
+
         tdleb.add_n( ele.dims.n );
         tdleb.add_c( ele.dims.c );
         tdleb.add_h( ele.dims.h );
         tdleb.add_w( ele.dims.w );
 
-        tdleb.add_line_stride( ele.line_stride );
-        tdleb.add_surf_stride( ele.surf_stride );
-        tdleb.add_plane_stride( ele.plane_stride );
-
-        tdleb.add_reserved0( 0 );
-        tdleb.add_reserved1( 0 );
-        tdleb.add_reserved2( 0 );
-        tdleb.add_reserved3( 0 );
+        tdleb.add_stride_0( ele.stride[0] );
+        tdleb.add_stride_1( ele.stride[1] );
+        tdleb.add_stride_2( ele.stride[2] );
+        tdleb.add_stride_3( ele.stride[3] );
+        tdleb.add_stride_4( ele.stride[4] );
+        tdleb.add_stride_5( ele.stride[5] );
+        tdleb.add_stride_6( ele.stride[6] );
+        tdleb.add_stride_7( ele.stride[7] );
 
         tensor_desc_list.push_back(tdleb.Finish());
     }
 
+    for ( size_t rli = 0, RLI = mRelocEntries.size(); rli != RLI; ++rli)
+    {
+        const ILoadable::RelocEntry & ele = mRelocEntries[rli];
+        nvdla::loadable::RelocListEntryBuilder rleb(fbb);
+
+        rleb.add_address_id(ele.addressListId);
+        rleb.add_write_id(ele.writeId);
+        rleb.add_offset(ele.offset);
+        rleb.add_interface(ele.interface);
+        rleb.add_sub_interface(ele.subInterface);
+        rleb.add_reloc_type(ele.relocType);
+
+        reloc_list.push_back(rleb.Finish());
+    }
 
     flatbuffers::Offset<nvdla::loadable::Loadable> l =
-        CreateLoadableDirect(fbb, &loadable_version, &task_list, &memory_list, &address_list, &event_list, &blobs, &tensor_desc_list, &submit_list);
+        CreateLoadableDirect(fbb, &loadable_version, &task_list, &memory_list, &address_list, &event_list, &blobs, &tensor_desc_list, &reloc_list, &submit_list);
 
     fbb.Finish(l, "NVDA");
 
@@ -624,6 +657,7 @@ bool Loadable::deserializeFrom(NvU8 *flatbuf)
     const flatbuffers::Vector<flatbuffers::Offset<nvdla::loadable::EventListEntry>>   *event_list   = loadable->event_list();
     const flatbuffers::Vector<flatbuffers::Offset<nvdla::loadable::Blob>>             *blobs        = loadable->blobs();
     const flatbuffers::Vector<flatbuffers::Offset<nvdla::loadable::TensorDescListEntry>> *tensor_desc_list        = loadable->tensor_desc_list();
+    const flatbuffers::Vector<flatbuffers::Offset<nvdla::loadable::RelocListEntry>> *reloc_list        = loadable->reloc_list();
 
     flatbuffers::Vector<flatbuffers::Offset<nvdla::loadable::TaskListEntry>>::const_iterator tli = task_list->begin();
 
@@ -745,6 +779,7 @@ bool Loadable::deserializeFrom(NvU8 *flatbuf)
         mSymbols[blob_name].version.minor = bi->version()->minor();
         mSymbols[blob_name].version.sub_minor = bi->version()->sub_minor();
         mSymbols[blob_name].interface = (nvdla::ILoadable::Interface)bi->interface();
+        mSymbols[blob_name].subInterface = bi->sub_interface();
 
         NvU8 *blob_data = new NvU8[mSymbols[blob_name].size];
         memset(blob_data, 0, mSymbols[blob_name].size);
@@ -763,25 +798,43 @@ bool Loadable::deserializeFrom(NvU8 *flatbuf)
         ILoadable::TensorDescListEntry ele;
 
         ele.id = tdle->id();
-        ele.mem_id = tdle->mem_id();
+        ele.memId = tdle->mem_id();
         ele.size = tdle->size();
         ele.offset = tdle->offset();
 
-        ele.data_format = tdle->data_format();
-        ele.data_type = tdle->data_type();
-        ele.data_category = tdle->data_category();
-        ele.pixel_format = tdle->pixel_format();
-        ele.pixel_mapping = tdle->pixel_mapping();
+        ele.dataFormat = tdle->data_format();
+        ele.dataType = tdle->data_type();
+        ele.dataCategory = tdle->data_category();
+        ele.pixelFormat = tdle->pixel_format();
+        ele.pixelMapping = tdle->pixel_mapping();
+
         ele.dims.n = tdle->n();
         ele.dims.c = tdle->c();
         ele.dims.h = tdle->h();
         ele.dims.w = tdle->w();
 
-        ele.line_stride = tdle->line_stride();
-        ele.surf_stride = tdle->surf_stride();
-        ele.plane_stride = tdle->plane_stride();
+        ele.stride[0] = tdle->stride_0();
+        ele.stride[1] = tdle->stride_1();
+        ele.stride[2] = tdle->stride_2();
+        ele.stride[3] = tdle->stride_3();
+        ele.stride[4] = tdle->stride_4();
+        ele.stride[5] = tdle->stride_5();
+        ele.stride[6] = tdle->stride_6();
+        ele.stride[7] = tdle->stride_7();
 
         mTensorDescListEntries.push_back(ele);
+    }
+
+    flatbuffers::Vector<flatbuffers::Offset<nvdla::loadable::RelocListEntry>>::const_iterator rle = reloc_list->begin();
+
+    for (; rle != reloc_list->end(); ++rle ) {
+        ILoadable::RelocEntry ele(rle->address_id(),
+                                  rle->write_id(),
+                                  rle->offset(),
+                                  rle->interface(),
+                                  rle->sub_interface(),
+                                  rle->reloc_type());
+        mRelocEntries.push_back(ele);
     }
 
     return true;

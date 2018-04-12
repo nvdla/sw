@@ -32,6 +32,8 @@
 #include "dlaerror.h"
 #include "dlatypes.h"
 
+#include "nvdla/IType.h"
+
 namespace nvdla
 {
 
@@ -90,26 +92,40 @@ public:
 
 #define TENSOR_PIXEL_MAPPING_PITCH_LINEAR 0U
 
-    typedef struct NvDlaTensor
+
+#define NVDLA_RUNTIME_TENSOR_DESC_NUM_STRIDES 8U /* a little room to grow */
+
+/* strides are in units of bytes */
+#define NVDLA_RUNTIME_TENSOR_DESC_NCHW_E_STRIDE   0U /* elem stride/bpe */
+#define NVDLA_RUNTIME_TENSOR_DESC_NCHW_W_STRIDE   1U /* line            */
+#define NVDLA_RUNTIME_TENSOR_DESC_NCHW_HW_STRIDE  2U /* surface         */
+#define NVDLA_RUNTIME_TENSOR_DESC_NCHW_CHW_STRIDE 3U /* tensor          */
+
+#define NVDLA_RUNTIME_TENSOR_DESC_NCxHWx_E_STRIDE     0U /* elem stride/bpe  */
+#define NVDLA_RUNTIME_TENSOR_DESC_NCxHWx_X_STRIDE     1U
+#define NVDLA_RUNTIME_TENSOR_DESC_NCxHWx_WX_STRIDE    2U /* line (hw pov)    */
+#define NVDLA_RUNTIME_TENSOR_DESC_NCxHWx_HWX_STRIDE   3U /* surface (hw pov) */
+#define NVDLA_RUNTIME_TENSOR_DESC_NCxHWx_CXHWX_STRIDE 4U /* tensor           */
+
+#define NVDLA_RUNTIME_TENSOR_DESC_NHWC_E_STRIDE   0U /* elem stride/bpe */
+#define NVDLA_RUNTIME_TENSOR_DESC_NHWC_C_STRIDE   1U /* channel   */
+#define NVDLA_RUNTIME_TENSOR_DESC_NHWC_WC_STRIDE  2U /* line      */
+#define NVDLA_RUNTIME_TENSOR_DESC_NHWC_HWC_STRIDE 3U /* tensor    */
+
+    struct NvDlaTensor
     {
         NvU64 bufferSize;
-        NvU32 n;
-        NvU32 c;
-        NvU32 h;
-        NvU32 w;
-        NvU8 dataFormat;
-        NvU8 dataType;
-        NvU8 pixelFormat;
-        NvU8 pixelMapping;
+        NvDlaDims4 dims;
+        NvU8 dataFormat;    /* _DATA_FORMAT   */
+        NvU8 dataType;      /* _DATA_TYPE     */
+        NvU8 dataCategory;  /* _DATA_CATEGORY */
+        NvU8 pixelFormat;   /* _PIXEL_FORMAT  */
+        NvU8 pixelMapping;  /* _PIXEL_MAPPING */
 
-        struct NvDlaPitchLinearMappingDesc
-        {
-            NvU32 lineStride;
-            NvU32 surfStride;
-            NvU32 planeStride;
-        } pitchLinear;
+        NvU32 stride[NVDLA_RUNTIME_TENSOR_DESC_NUM_STRIDES];
 
-    } NvDlaTensor;
+    };
+    typedef struct NvDlaTensor NvDlaTensor;
 
     virtual NvU16 getMaxDevices() = 0;
     virtual NvU16 getNumDevices() = 0;

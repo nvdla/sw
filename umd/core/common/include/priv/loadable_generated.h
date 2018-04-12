@@ -25,6 +25,8 @@ struct SubmitListEntry;
 
 struct TensorDescListEntry;
 
+struct RelocListEntry;
+
 struct Loadable;
 
 enum Interface {
@@ -70,7 +72,7 @@ inline const char *EnumNameLoadableVersionMajor(LoadableVersionMajor e) {
 }
 
 enum LoadableVersionMinor {
-  LoadableVersionMinor_VAL = 5,
+  LoadableVersionMinor_VAL = 6,
   LoadableVersionMinor_MIN = LoadableVersionMinor_VAL,
   LoadableVersionMinor_MAX = LoadableVersionMinor_VAL
 };
@@ -427,8 +429,9 @@ struct Blob FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
     VT_NAME = 4,
     VT_SIZE = 6,
     VT_INTERFACE = 8,
-    VT_VERSION = 10,
-    VT_DATA = 12
+    VT_SUB_INTERFACE = 10,
+    VT_VERSION = 12,
+    VT_DATA = 14
   };
   const flatbuffers::String *name() const {
     return GetPointer<const flatbuffers::String *>(VT_NAME);
@@ -438,6 +441,9 @@ struct Blob FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   }
   Interface interface() const {
     return static_cast<Interface>(GetField<uint32_t>(VT_INTERFACE, 0));
+  }
+  uint32_t sub_interface() const {
+    return GetField<uint32_t>(VT_SUB_INTERFACE, 0);
   }
   const Version *version() const {
     return GetStruct<const Version *>(VT_VERSION);
@@ -451,6 +457,7 @@ struct Blob FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
            verifier.Verify(name()) &&
            VerifyField<uint64_t>(verifier, VT_SIZE) &&
            VerifyField<uint32_t>(verifier, VT_INTERFACE) &&
+           VerifyField<uint32_t>(verifier, VT_SUB_INTERFACE) &&
            VerifyField<Version>(verifier, VT_VERSION) &&
            VerifyField<flatbuffers::uoffset_t>(verifier, VT_DATA) &&
            verifier.Verify(data()) &&
@@ -470,6 +477,9 @@ struct BlobBuilder {
   void add_interface(Interface interface) {
     fbb_.AddElement<uint32_t>(Blob::VT_INTERFACE, static_cast<uint32_t>(interface), 0);
   }
+  void add_sub_interface(uint32_t sub_interface) {
+    fbb_.AddElement<uint32_t>(Blob::VT_SUB_INTERFACE, sub_interface, 0);
+  }
   void add_version(const Version *version) {
     fbb_.AddStruct(Blob::VT_VERSION, version);
   }
@@ -482,7 +492,7 @@ struct BlobBuilder {
   }
   BlobBuilder &operator=(const BlobBuilder &);
   flatbuffers::Offset<Blob> Finish() {
-    const auto end = fbb_.EndTable(start_, 5);
+    const auto end = fbb_.EndTable(start_, 6);
     auto o = flatbuffers::Offset<Blob>(end);
     return o;
   }
@@ -493,12 +503,14 @@ inline flatbuffers::Offset<Blob> CreateBlob(
     flatbuffers::Offset<flatbuffers::String> name = 0,
     uint64_t size = 0,
     Interface interface = Interface_NONE,
+    uint32_t sub_interface = 0,
     const Version *version = 0,
     flatbuffers::Offset<flatbuffers::Vector<uint8_t>> data = 0) {
   BlobBuilder builder_(_fbb);
   builder_.add_size(size);
   builder_.add_data(data);
   builder_.add_version(version);
+  builder_.add_sub_interface(sub_interface);
   builder_.add_interface(interface);
   builder_.add_name(name);
   return builder_.Finish();
@@ -509,6 +521,7 @@ inline flatbuffers::Offset<Blob> CreateBlobDirect(
     const char *name = nullptr,
     uint64_t size = 0,
     Interface interface = Interface_NONE,
+    uint32_t sub_interface = 0,
     const Version *version = 0,
     const std::vector<uint8_t> *data = nullptr) {
   return nvdla::loadable::CreateBlob(
@@ -516,6 +529,7 @@ inline flatbuffers::Offset<Blob> CreateBlobDirect(
       name ? _fbb.CreateString(name) : 0,
       size,
       interface,
+      sub_interface,
       version,
       data ? _fbb.CreateVector<uint8_t>(*data) : 0);
 }
@@ -1004,13 +1018,14 @@ struct TensorDescListEntry FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table 
     VT_C = 24,
     VT_H = 26,
     VT_W = 28,
-    VT_LINE_STRIDE = 30,
-    VT_SURF_STRIDE = 32,
-    VT_PLANE_STRIDE = 34,
-    VT_RESERVED0 = 36,
-    VT_RESERVED1 = 38,
-    VT_RESERVED2 = 40,
-    VT_RESERVED3 = 42
+    VT_STRIDE_0 = 30,
+    VT_STRIDE_1 = 32,
+    VT_STRIDE_2 = 34,
+    VT_STRIDE_3 = 36,
+    VT_STRIDE_4 = 38,
+    VT_STRIDE_5 = 40,
+    VT_STRIDE_6 = 42,
+    VT_STRIDE_7 = 44
   };
   uint16_t id() const {
     return GetField<uint16_t>(VT_ID, 0);
@@ -1051,26 +1066,29 @@ struct TensorDescListEntry FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table 
   int32_t w() const {
     return GetField<int32_t>(VT_W, 0);
   }
-  uint32_t line_stride() const {
-    return GetField<uint32_t>(VT_LINE_STRIDE, 0);
+  uint32_t stride_0() const {
+    return GetField<uint32_t>(VT_STRIDE_0, 0);
   }
-  uint32_t surf_stride() const {
-    return GetField<uint32_t>(VT_SURF_STRIDE, 0);
+  uint32_t stride_1() const {
+    return GetField<uint32_t>(VT_STRIDE_1, 0);
   }
-  uint32_t plane_stride() const {
-    return GetField<uint32_t>(VT_PLANE_STRIDE, 0);
+  uint32_t stride_2() const {
+    return GetField<uint32_t>(VT_STRIDE_2, 0);
   }
-  uint16_t reserved0() const {
-    return GetField<uint16_t>(VT_RESERVED0, 0);
+  uint32_t stride_3() const {
+    return GetField<uint32_t>(VT_STRIDE_3, 0);
   }
-  uint16_t reserved1() const {
-    return GetField<uint16_t>(VT_RESERVED1, 0);
+  uint32_t stride_4() const {
+    return GetField<uint32_t>(VT_STRIDE_4, 0);
   }
-  uint8_t reserved2() const {
-    return GetField<uint8_t>(VT_RESERVED2, 0);
+  uint32_t stride_5() const {
+    return GetField<uint32_t>(VT_STRIDE_5, 0);
   }
-  uint8_t reserved3() const {
-    return GetField<uint8_t>(VT_RESERVED3, 0);
+  uint32_t stride_6() const {
+    return GetField<uint32_t>(VT_STRIDE_6, 0);
+  }
+  uint32_t stride_7() const {
+    return GetField<uint32_t>(VT_STRIDE_7, 0);
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
@@ -1087,13 +1105,14 @@ struct TensorDescListEntry FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table 
            VerifyField<int32_t>(verifier, VT_C) &&
            VerifyField<int32_t>(verifier, VT_H) &&
            VerifyField<int32_t>(verifier, VT_W) &&
-           VerifyField<uint32_t>(verifier, VT_LINE_STRIDE) &&
-           VerifyField<uint32_t>(verifier, VT_SURF_STRIDE) &&
-           VerifyField<uint32_t>(verifier, VT_PLANE_STRIDE) &&
-           VerifyField<uint16_t>(verifier, VT_RESERVED0) &&
-           VerifyField<uint16_t>(verifier, VT_RESERVED1) &&
-           VerifyField<uint8_t>(verifier, VT_RESERVED2) &&
-           VerifyField<uint8_t>(verifier, VT_RESERVED3) &&
+           VerifyField<uint32_t>(verifier, VT_STRIDE_0) &&
+           VerifyField<uint32_t>(verifier, VT_STRIDE_1) &&
+           VerifyField<uint32_t>(verifier, VT_STRIDE_2) &&
+           VerifyField<uint32_t>(verifier, VT_STRIDE_3) &&
+           VerifyField<uint32_t>(verifier, VT_STRIDE_4) &&
+           VerifyField<uint32_t>(verifier, VT_STRIDE_5) &&
+           VerifyField<uint32_t>(verifier, VT_STRIDE_6) &&
+           VerifyField<uint32_t>(verifier, VT_STRIDE_7) &&
            verifier.EndTable();
   }
 };
@@ -1140,26 +1159,29 @@ struct TensorDescListEntryBuilder {
   void add_w(int32_t w) {
     fbb_.AddElement<int32_t>(TensorDescListEntry::VT_W, w, 0);
   }
-  void add_line_stride(uint32_t line_stride) {
-    fbb_.AddElement<uint32_t>(TensorDescListEntry::VT_LINE_STRIDE, line_stride, 0);
+  void add_stride_0(uint32_t stride_0) {
+    fbb_.AddElement<uint32_t>(TensorDescListEntry::VT_STRIDE_0, stride_0, 0);
   }
-  void add_surf_stride(uint32_t surf_stride) {
-    fbb_.AddElement<uint32_t>(TensorDescListEntry::VT_SURF_STRIDE, surf_stride, 0);
+  void add_stride_1(uint32_t stride_1) {
+    fbb_.AddElement<uint32_t>(TensorDescListEntry::VT_STRIDE_1, stride_1, 0);
   }
-  void add_plane_stride(uint32_t plane_stride) {
-    fbb_.AddElement<uint32_t>(TensorDescListEntry::VT_PLANE_STRIDE, plane_stride, 0);
+  void add_stride_2(uint32_t stride_2) {
+    fbb_.AddElement<uint32_t>(TensorDescListEntry::VT_STRIDE_2, stride_2, 0);
   }
-  void add_reserved0(uint16_t reserved0) {
-    fbb_.AddElement<uint16_t>(TensorDescListEntry::VT_RESERVED0, reserved0, 0);
+  void add_stride_3(uint32_t stride_3) {
+    fbb_.AddElement<uint32_t>(TensorDescListEntry::VT_STRIDE_3, stride_3, 0);
   }
-  void add_reserved1(uint16_t reserved1) {
-    fbb_.AddElement<uint16_t>(TensorDescListEntry::VT_RESERVED1, reserved1, 0);
+  void add_stride_4(uint32_t stride_4) {
+    fbb_.AddElement<uint32_t>(TensorDescListEntry::VT_STRIDE_4, stride_4, 0);
   }
-  void add_reserved2(uint8_t reserved2) {
-    fbb_.AddElement<uint8_t>(TensorDescListEntry::VT_RESERVED2, reserved2, 0);
+  void add_stride_5(uint32_t stride_5) {
+    fbb_.AddElement<uint32_t>(TensorDescListEntry::VT_STRIDE_5, stride_5, 0);
   }
-  void add_reserved3(uint8_t reserved3) {
-    fbb_.AddElement<uint8_t>(TensorDescListEntry::VT_RESERVED3, reserved3, 0);
+  void add_stride_6(uint32_t stride_6) {
+    fbb_.AddElement<uint32_t>(TensorDescListEntry::VT_STRIDE_6, stride_6, 0);
+  }
+  void add_stride_7(uint32_t stride_7) {
+    fbb_.AddElement<uint32_t>(TensorDescListEntry::VT_STRIDE_7, stride_7, 0);
   }
   TensorDescListEntryBuilder(flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
@@ -1167,7 +1189,7 @@ struct TensorDescListEntryBuilder {
   }
   TensorDescListEntryBuilder &operator=(const TensorDescListEntryBuilder &);
   flatbuffers::Offset<TensorDescListEntry> Finish() {
-    const auto end = fbb_.EndTable(start_, 20);
+    const auto end = fbb_.EndTable(start_, 21);
     auto o = flatbuffers::Offset<TensorDescListEntry>(end);
     return o;
   }
@@ -1188,34 +1210,126 @@ inline flatbuffers::Offset<TensorDescListEntry> CreateTensorDescListEntry(
     int32_t c = 0,
     int32_t h = 0,
     int32_t w = 0,
-    uint32_t line_stride = 0,
-    uint32_t surf_stride = 0,
-    uint32_t plane_stride = 0,
-    uint16_t reserved0 = 0,
-    uint16_t reserved1 = 0,
-    uint8_t reserved2 = 0,
-    uint8_t reserved3 = 0) {
+    uint32_t stride_0 = 0,
+    uint32_t stride_1 = 0,
+    uint32_t stride_2 = 0,
+    uint32_t stride_3 = 0,
+    uint32_t stride_4 = 0,
+    uint32_t stride_5 = 0,
+    uint32_t stride_6 = 0,
+    uint32_t stride_7 = 0) {
   TensorDescListEntryBuilder builder_(_fbb);
   builder_.add_offset(offset);
   builder_.add_size(size);
-  builder_.add_plane_stride(plane_stride);
-  builder_.add_surf_stride(surf_stride);
-  builder_.add_line_stride(line_stride);
+  builder_.add_stride_7(stride_7);
+  builder_.add_stride_6(stride_6);
+  builder_.add_stride_5(stride_5);
+  builder_.add_stride_4(stride_4);
+  builder_.add_stride_3(stride_3);
+  builder_.add_stride_2(stride_2);
+  builder_.add_stride_1(stride_1);
+  builder_.add_stride_0(stride_0);
   builder_.add_w(w);
   builder_.add_h(h);
   builder_.add_c(c);
   builder_.add_n(n);
-  builder_.add_reserved1(reserved1);
-  builder_.add_reserved0(reserved0);
   builder_.add_mem_id(mem_id);
   builder_.add_id(id);
-  builder_.add_reserved3(reserved3);
-  builder_.add_reserved2(reserved2);
   builder_.add_pixel_mapping(pixel_mapping);
   builder_.add_pixel_format(pixel_format);
   builder_.add_data_category(data_category);
   builder_.add_data_type(data_type);
   builder_.add_data_format(data_format);
+  return builder_.Finish();
+}
+
+struct RelocListEntry FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  enum {
+    VT_ADDRESS_ID = 4,
+    VT_WRITE_ID = 6,
+    VT_OFFSET = 8,
+    VT_INTERFACE = 10,
+    VT_SUB_INTERFACE = 12,
+    VT_RELOC_TYPE = 14
+  };
+  uint16_t address_id() const {
+    return GetField<uint16_t>(VT_ADDRESS_ID, 0);
+  }
+  uint16_t write_id() const {
+    return GetField<uint16_t>(VT_WRITE_ID, 0);
+  }
+  uint64_t offset() const {
+    return GetField<uint64_t>(VT_OFFSET, 0);
+  }
+  uint32_t interface() const {
+    return GetField<uint32_t>(VT_INTERFACE, 0);
+  }
+  uint32_t sub_interface() const {
+    return GetField<uint32_t>(VT_SUB_INTERFACE, 0);
+  }
+  uint8_t reloc_type() const {
+    return GetField<uint8_t>(VT_RELOC_TYPE, 0);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint16_t>(verifier, VT_ADDRESS_ID) &&
+           VerifyField<uint16_t>(verifier, VT_WRITE_ID) &&
+           VerifyField<uint64_t>(verifier, VT_OFFSET) &&
+           VerifyField<uint32_t>(verifier, VT_INTERFACE) &&
+           VerifyField<uint32_t>(verifier, VT_SUB_INTERFACE) &&
+           VerifyField<uint8_t>(verifier, VT_RELOC_TYPE) &&
+           verifier.EndTable();
+  }
+};
+
+struct RelocListEntryBuilder {
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_address_id(uint16_t address_id) {
+    fbb_.AddElement<uint16_t>(RelocListEntry::VT_ADDRESS_ID, address_id, 0);
+  }
+  void add_write_id(uint16_t write_id) {
+    fbb_.AddElement<uint16_t>(RelocListEntry::VT_WRITE_ID, write_id, 0);
+  }
+  void add_offset(uint64_t offset) {
+    fbb_.AddElement<uint64_t>(RelocListEntry::VT_OFFSET, offset, 0);
+  }
+  void add_interface(uint32_t interface) {
+    fbb_.AddElement<uint32_t>(RelocListEntry::VT_INTERFACE, interface, 0);
+  }
+  void add_sub_interface(uint32_t sub_interface) {
+    fbb_.AddElement<uint32_t>(RelocListEntry::VT_SUB_INTERFACE, sub_interface, 0);
+  }
+  void add_reloc_type(uint8_t reloc_type) {
+    fbb_.AddElement<uint8_t>(RelocListEntry::VT_RELOC_TYPE, reloc_type, 0);
+  }
+  RelocListEntryBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  RelocListEntryBuilder &operator=(const RelocListEntryBuilder &);
+  flatbuffers::Offset<RelocListEntry> Finish() {
+    const auto end = fbb_.EndTable(start_, 6);
+    auto o = flatbuffers::Offset<RelocListEntry>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<RelocListEntry> CreateRelocListEntry(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint16_t address_id = 0,
+    uint16_t write_id = 0,
+    uint64_t offset = 0,
+    uint32_t interface = 0,
+    uint32_t sub_interface = 0,
+    uint8_t reloc_type = 0) {
+  RelocListEntryBuilder builder_(_fbb);
+  builder_.add_offset(offset);
+  builder_.add_sub_interface(sub_interface);
+  builder_.add_interface(interface);
+  builder_.add_write_id(write_id);
+  builder_.add_address_id(address_id);
+  builder_.add_reloc_type(reloc_type);
   return builder_.Finish();
 }
 
@@ -1228,7 +1342,8 @@ struct Loadable FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
     VT_EVENT_LIST = 12,
     VT_BLOBS = 14,
     VT_TENSOR_DESC_LIST = 16,
-    VT_SUBMIT_LIST = 18
+    VT_RELOC_LIST = 18,
+    VT_SUBMIT_LIST = 20
   };
   const Version *version() const {
     return GetStruct<const Version *>(VT_VERSION);
@@ -1250,6 +1365,9 @@ struct Loadable FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   }
   const flatbuffers::Vector<flatbuffers::Offset<TensorDescListEntry>> *tensor_desc_list() const {
     return GetPointer<const flatbuffers::Vector<flatbuffers::Offset<TensorDescListEntry>> *>(VT_TENSOR_DESC_LIST);
+  }
+  const flatbuffers::Vector<flatbuffers::Offset<RelocListEntry>> *reloc_list() const {
+    return GetPointer<const flatbuffers::Vector<flatbuffers::Offset<RelocListEntry>> *>(VT_RELOC_LIST);
   }
   const flatbuffers::Vector<flatbuffers::Offset<SubmitListEntry>> *submit_list() const {
     return GetPointer<const flatbuffers::Vector<flatbuffers::Offset<SubmitListEntry>> *>(VT_SUBMIT_LIST);
@@ -1275,6 +1393,9 @@ struct Loadable FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
            VerifyField<flatbuffers::uoffset_t>(verifier, VT_TENSOR_DESC_LIST) &&
            verifier.Verify(tensor_desc_list()) &&
            verifier.VerifyVectorOfTables(tensor_desc_list()) &&
+           VerifyField<flatbuffers::uoffset_t>(verifier, VT_RELOC_LIST) &&
+           verifier.Verify(reloc_list()) &&
+           verifier.VerifyVectorOfTables(reloc_list()) &&
            VerifyField<flatbuffers::uoffset_t>(verifier, VT_SUBMIT_LIST) &&
            verifier.Verify(submit_list()) &&
            verifier.VerifyVectorOfTables(submit_list()) &&
@@ -1306,6 +1427,9 @@ struct LoadableBuilder {
   void add_tensor_desc_list(flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<TensorDescListEntry>>> tensor_desc_list) {
     fbb_.AddOffset(Loadable::VT_TENSOR_DESC_LIST, tensor_desc_list);
   }
+  void add_reloc_list(flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<RelocListEntry>>> reloc_list) {
+    fbb_.AddOffset(Loadable::VT_RELOC_LIST, reloc_list);
+  }
   void add_submit_list(flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<SubmitListEntry>>> submit_list) {
     fbb_.AddOffset(Loadable::VT_SUBMIT_LIST, submit_list);
   }
@@ -1315,7 +1439,7 @@ struct LoadableBuilder {
   }
   LoadableBuilder &operator=(const LoadableBuilder &);
   flatbuffers::Offset<Loadable> Finish() {
-    const auto end = fbb_.EndTable(start_, 8);
+    const auto end = fbb_.EndTable(start_, 9);
     auto o = flatbuffers::Offset<Loadable>(end);
     fbb_.Required(o, Loadable::VT_VERSION);
     return o;
@@ -1331,9 +1455,11 @@ inline flatbuffers::Offset<Loadable> CreateLoadable(
     flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<EventListEntry>>> event_list = 0,
     flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<Blob>>> blobs = 0,
     flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<TensorDescListEntry>>> tensor_desc_list = 0,
+    flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<RelocListEntry>>> reloc_list = 0,
     flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<SubmitListEntry>>> submit_list = 0) {
   LoadableBuilder builder_(_fbb);
   builder_.add_submit_list(submit_list);
+  builder_.add_reloc_list(reloc_list);
   builder_.add_tensor_desc_list(tensor_desc_list);
   builder_.add_blobs(blobs);
   builder_.add_event_list(event_list);
@@ -1353,6 +1479,7 @@ inline flatbuffers::Offset<Loadable> CreateLoadableDirect(
     const std::vector<flatbuffers::Offset<EventListEntry>> *event_list = nullptr,
     const std::vector<flatbuffers::Offset<Blob>> *blobs = nullptr,
     const std::vector<flatbuffers::Offset<TensorDescListEntry>> *tensor_desc_list = nullptr,
+    const std::vector<flatbuffers::Offset<RelocListEntry>> *reloc_list = nullptr,
     const std::vector<flatbuffers::Offset<SubmitListEntry>> *submit_list = nullptr) {
   return nvdla::loadable::CreateLoadable(
       _fbb,
@@ -1363,6 +1490,7 @@ inline flatbuffers::Offset<Loadable> CreateLoadableDirect(
       event_list ? _fbb.CreateVector<flatbuffers::Offset<EventListEntry>>(*event_list) : 0,
       blobs ? _fbb.CreateVector<flatbuffers::Offset<Blob>>(*blobs) : 0,
       tensor_desc_list ? _fbb.CreateVector<flatbuffers::Offset<TensorDescListEntry>>(*tensor_desc_list) : 0,
+      reloc_list ? _fbb.CreateVector<flatbuffers::Offset<RelocListEntry>>(*reloc_list) : 0,
       submit_list ? _fbb.CreateVector<flatbuffers::Offset<SubmitListEntry>>(*submit_list) : 0);
 }
 

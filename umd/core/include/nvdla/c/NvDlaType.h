@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -35,6 +35,7 @@
 #define NVDLA_DATA_FORMAT_UNKNOWN   0U
 #define NVDLA_DATA_FORMAT_NCHW      1U
 #define NVDLA_DATA_FORMAT_NHWC      2U
+#define NVDLA_DATA_FORMAT_NCxHWx    3U
 
 #define NVDLA_DATA_TYPE_UNKNOWN 0U
 #define NVDLA_DATA_TYPE_FLOAT   1U
@@ -154,27 +155,6 @@ typedef struct NvDlaWeights
 #define NVDLA_ELEMENTWISE_OPERATION_SUM 0U
 #define NVDLA_ELEMENTWISE_OPERATION_PROD 1U
 #define NVDLA_ELEMENTWISE_OPERATION_MAX 2U
-
-typedef struct NvDlaTensorDesc
-{
-
-    NvU64 bufferSize;
-    NvDlaDims4 dims;
-    NvU8 dataFormat;   /* _DATA_FORMAT   */
-    NvU8 dataType;     /* _DATA_TYPE     */
-    NvU8 dataCategory; /* _DATA_CATEGORY */
-    NvU8 pixelFormat;  /* _PIXEL_FORMAT  */
-    NvU8 pixelMapping; /* _PIXEL_MAPPING */
-
-    // valid iff pixelMapping == PITCH_LINEAR
-    struct NvDlaPitchLinearMappingDesc
-    {
-        NvU32 lineStride;
-        NvU32 surfStride;
-        NvU32 planeStride;
-    } pitchLinear;
-
-} NvDlaTensorDesc;
 
 #ifdef __cplusplus
 extern "C" {

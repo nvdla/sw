@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -44,8 +44,11 @@ namespace nvdla
 namespace priv
 {
 
+// Note: these are used as array indices.
 enum IOD { IOD_Input = 0U, IOD_Output = 1U, IOD_Max = 3U };
 enum IO  { IO_Input = 0U, IO_Output = 1U, IO_Max = 2U };
+
+enum ELST { ELST_Elem = 0U, ELST_Line = 1U, ELST_Surf = 2U, ELST_Tensor = 3U, ELST_Max = 4U };
 
 //
 // this isn't meant to be complicated. just to reduce typing and errors.

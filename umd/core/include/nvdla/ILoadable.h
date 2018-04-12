@@ -36,6 +36,7 @@
 #include "nvdla/c/NvDlaLoadable.h"
 
 #include "nvdla/IType.h"
+#include "nvdla/IRuntime.h"
 
 
 
@@ -214,64 +215,53 @@ public:
         }
     };
 
-
     struct TensorDescListEntry
     {
         NvU16 id;
-        NvU16 mem_id;
+        NvU16 memId;
         NvU64 size;
         NvU64 offset;
+        NvDlaDims4 dims;
+        NvU8 dataFormat;
+        NvU8 dataType;
+        NvU8 dataCategory;
+        NvU8 pixelFormat;
+        NvU8 pixelMapping;
+        NvU32 stride[NVDLA_RUNTIME_TENSOR_DESC_NUM_STRIDES];
+    };
 
-        Dims4 dims;
-        DataFormat::UnderlyingType data_format;
-        DataType::UnderlyingType   data_type;
-        DataCategory::UnderlyingType data_category;
-        PixelFormat::UnderlyingType  pixel_format;
-        PixelMapping::UnderlyingType pixel_mapping;
+    struct RelocEntry
+    {
+        NvU16 addressListId; // fix vs. this addr list item
+        NvU16 writeId;   // fix *within this* memory id given offset below
+        NvU64 offset;    // buffer offset to the fixup
+        NvU32 interface; // dla1, emu1, etc.
+        NvU32 subInterface; //  dla1-surf_desc, etc.
+        NvU8  relocType; // stride0..7 (aka line, surf)
 
-        NvU32 line_stride;
-        NvU32 surf_stride;
-        NvU32 plane_stride;
+        RelocEntry(const RelocEntry &o) :
+            addressListId(o.addressListId),
+            writeId(o.writeId),
+            offset(o.offset),
+            interface(o.interface),
+            subInterface(o.subInterface),
+            relocType(o.relocType) { }
 
-        void fromC(const NvDlaLoadableTensorDescListEntry &c)
-        {
-            id = c.id;
-            mem_id = c.mem_id;
-            size   = c.size;
-            offset = c.offset;
-            dims.n = c.dims.n;
-            dims.c = c.dims.c;
-            dims.h = c.dims.h;
-            dims.w = c.dims.w;
-            data_format = c.dataFormat;
-            data_type = c.dataType;
-            data_category = c.dataCategory;
-            pixel_format = c.pixelFormat;
-            pixel_mapping = c.pixelMapping;
-            line_stride = c.lineStride;
-            surf_stride = c.surfStride;
-            plane_stride = c.planeStride;
-        }
+        RelocEntry(NvS16 a, NvU64 o, NvU32 i, NvU32 s, NvU8 r) :
+            addressListId(a),
+            writeId(0), // invalid
+            offset(o),
+            interface(i),
+            subInterface(s),
+            relocType(r) { }
 
-        void toC(NvDlaLoadableTensorDescListEntry &c) const
-        {
-            c.id = id;
-            c.mem_id = id;
-            c.size   = size;
-            c.offset = offset;
-            c.dims.n = dims.n;
-            c.dims.c = dims.c;
-            c.dims.h = dims.h;
-            c.dims.w = dims.w;
-            c.dataFormat = data_format;
-            c.dataType = data_type;
-            c.dataCategory = data_category;
-            c.pixelFormat = pixel_format;
-            c.pixelMapping = pixel_mapping;
-            c.lineStride = line_stride;
-            c.surfStride = surf_stride;
-            c.planeStride = plane_stride;
-        }
+        RelocEntry(NvS16 a, NvS16 w, NvU64 o, NvU32 i, NvU32 s, NvU8 r) :
+            addressListId(a),
+            writeId(w),
+            offset(o),
+            interface(i),
+            subInterface(s),
+            relocType(r) { }
     };
 
     struct Blob
@@ -279,6 +269,7 @@ public:
         std::string name;
         NvU64 size;
         Interface interface;
+        NvU32 subInterface;
         Version version;
     };
 

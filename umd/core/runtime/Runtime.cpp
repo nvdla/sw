@@ -28,6 +28,8 @@
 
 #include <cstring>
 #include <sstream>
+#include <map>
+#include <list>
 
 #include "dlatypes.h"
 #include "dlaerror.h"
@@ -47,7 +49,8 @@ using std::vector;
 using std::stringstream;
 using std::string;
 using std::endl;
-
+using std::map;
+using std::list;
 
 namespace nvdla
 {
@@ -255,6 +258,13 @@ bool Runtime::load(NvU8 *buf, int instance)
     m_memory_entries = loadable->getMemoryListEntries();
     m_address_entries = loadable->getAddressListEntries();
     m_tensor_desc_entries = loadable->getTensorDescListEntries();
+    m_reloc_entries = loadable->getRelocEntries();
+
+    if ( debugStrideRewrite() )
+    {
+        gLogInfo << "runtime sees loadable gave back " << m_reloc_entries.size() << " reloc entries" << endl;
+        // tbd: stash the per-address id reloc entries for quicker scanning
+    }
 
     if ( m_submit_entries.size() < 1 || m_task_entries.size() < 1 || m_memory_entries.size() < 1 ) {
         gLogError << "need at least one submit task and memory entry to load" << endl;
@@ -733,6 +743,9 @@ NvDlaError Runtime::initBindableMemory()
 
     for ( size_t tdi = 0, TDI = m_tensor_desc_entries.size(); tdi != TDI; ++tdi ) {
         m_tensor_desc[tdi] = TensorDesc(m_tensor_desc_entries[tdi]);
+        if ( m_tensor_desc[tdi].id != tdi ) {
+            gLogInfo << "tdi != TDI " << tdi << " " << m_tensor_desc[tdi].id << endl;
+        }
     }
 
     m_bindable_memory.resize(IOD_Max);
@@ -830,12 +843,29 @@ NvDlaError Runtime::getMemoryFromBindId(IOD w, int id, Memory * &bound_mem)
     return e;
 }
 
-NvDlaError Runtime::getInputTensorDesc(int id, NvDlaTensor *td)
+IRuntime::NvDlaTensor Runtime::TensorDesc::bindTensorDesc() const
+{
+    IRuntime::NvDlaTensor td;
+
+    td.bufferSize = size;
+    td.dims = dims;
+    td.dataFormat = dataFormat;
+    td.dataType = dataType;
+    td.dataCategory = dataCategory;
+    td.pixelFormat = pixelFormat;
+    td.pixelMapping = pixelMapping;
+    for ( size_t i = 0; i < NVDLA_RUNTIME_TENSOR_DESC_NUM_STRIDES; ++i )
+    {
+        td.stride[i] = stride[i];
+    }
+    return td;
+}
+
+NvDlaError Runtime::getInputTensorDesc(int id, IRuntime::NvDlaTensor *td)
 {
     NvDlaError e = NvDlaSuccess;
     Memory *bound_mem = 0;
     int tensor_desc_id = -1;
-    ILoadable::TensorDescListEntry t;
 
     if ( !td )
     {
@@ -849,32 +879,17 @@ NvDlaError Runtime::getInputTensorDesc(int id, NvDlaTensor *td)
         ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "Tensor desc id out of range:%d", tensor_desc_id);
     }
 
-    t = m_tensor_desc[tensor_desc_id].mEntry;
-
-    td->bufferSize = t.size;
-    td->n = t.dims.n;
-    td->c = t.dims.c;
-    td->h = t.dims.h;
-    td->w = t.dims.w;
-    td->dataFormat = t.data_format;
-    td->dataType = t.data_type;
-    td->pixelFormat = t.pixel_format;
-    td->pixelMapping = t.pixel_mapping;
-
-    td->pitchLinear.lineStride = t.line_stride;
-    td->pitchLinear.surfStride = t.surf_stride;
-    td->pitchLinear.planeStride = t.plane_stride;
+    *td = m_tensor_desc[tensor_desc_id].bindTensorDesc();
 
  fail:
     return e;
 }
 
-NvDlaError Runtime::getOutputTensorDesc(int id, NvDlaTensor *td)
+NvDlaError Runtime::getOutputTensorDesc(int id, IRuntime::NvDlaTensor *td)
 {
     NvDlaError e = NvDlaSuccess;
     Memory *bound_mem = 0;
     int tensor_desc_id = -1;
-    ILoadable::TensorDescListEntry t;
 
     if ( !td )
     {
@@ -888,21 +903,7 @@ NvDlaError Runtime::getOutputTensorDesc(int id, NvDlaTensor *td)
         ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "Tensor desc id out of range:%d", tensor_desc_id);
     }
 
-    t = m_tensor_desc[tensor_desc_id].mEntry;
-
-    td->bufferSize = t.size;
-    td->n = t.dims.n;
-    td->c = t.dims.c;
-    td->h = t.dims.h;
-    td->w = t.dims.w;
-    td->dataFormat = t.data_format;
-    td->dataType = t.data_type;
-    td->pixelFormat = t.pixel_format;
-    td->pixelMapping = t.pixel_mapping;
-
-    td->pitchLinear.lineStride = t.line_stride;
-    td->pitchLinear.surfStride = t.surf_stride;
-    td->pitchLinear.planeStride = t.plane_stride;
+    *td = m_tensor_desc[tensor_desc_id].bindTensorDesc();
 
  fail:
     return e;
@@ -913,30 +914,46 @@ NvDlaError Runtime::getOutputTensorDesc(int id, NvDlaTensor *td)
 // changed elements.  react to those which can be legitimately tweaked
 // (.e.g line_stride) and complain about any which cannot.
 //
-NvDlaError Runtime::mergeSetTensorDesc(IOD /*w*/, int /*bindId*/, int tensorDescId, const ILoadable::TensorDescListEntry *tdl)
+NvDlaError Runtime::mergeSetTensorDesc(IOD iod, int bindId, int tensorDescId, const IRuntime::NvDlaTensor *tdl)
 {
+    Runtime::TensorDesc *origEntry = 0;
+    const NvU32 *newStrides = 0;
+    NvU32 *oldStrides = 0;
+    bool stridesDiff = false, dimsDiff; //, sizeDiff;
+    bool dataFormatDiff, dataTypeDiff, dataCategoryDiff;
+    bool pixelFormatDiff, pixelMappingDiff;
+
     NvDlaError e = NvDlaSuccess;
 
-    ILoadable::TensorDescListEntry * origEntry = &m_tensor_desc[tensorDescId].mEntry;
+    if ( (tensorDescId < 0) || (size_t(tensorDescId) >= m_tensor_desc.size()) )
+    {
+        ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "Tensor desc id out of range:%d", tensorDescId);
+    }
 
-    bool sizeDiff   = origEntry->size   != tdl->size;
-    bool offsetDiff = origEntry->offset != tdl->offset;
+    origEntry = &m_tensor_desc[tensorDescId];
 
-    bool dimsDiff = ( (origEntry->dims.n != tdl->dims.n) ||
-                      (origEntry->dims.c != tdl->dims.c) ||
-                      (origEntry->dims.h != tdl->dims.h) ||
-                      (origEntry->dims.w != tdl->dims.w) );
+    newStrides = &tdl->stride[0];
+    oldStrides = &(origEntry->stride[0]);
 
-    bool lineStrideDiff  = origEntry->line_stride  != tdl->line_stride;
-    bool surfStrideDiff  = origEntry->surf_stride  != tdl->surf_stride;
-    bool planeStrideDiff = origEntry->plane_stride != tdl->plane_stride;
+    stridesDiff = false;
 
-    bool dataFormatDiff   = origEntry->data_format   != tdl->data_format;
-    bool dataTypeDiff     = origEntry->data_type     != tdl->data_type;
-    bool dataCategoryDiff = origEntry->data_category != tdl->data_category;
+    dimsDiff = ( (origEntry->dims.n != tdl->dims.n) ||
+                 (origEntry->dims.c != tdl->dims.c) ||
+                 (origEntry->dims.h != tdl->dims.h) ||
+                 (origEntry->dims.w != tdl->dims.w) );
 
-    bool pixelFormatDiff  = origEntry->pixel_format  != tdl->pixel_format;
-    bool pixelMappingDiff = origEntry->pixel_mapping != tdl->pixel_mapping;
+    for ( size_t ss = 0; ss < NVDLA_RUNTIME_TENSOR_DESC_NUM_STRIDES; ++ss )
+    {
+        // assume the worst for now.  avoid missing a set which was actually needed.
+        stridesDiff = true; // stridesDiff || (oldStrides[ss] != newStrides[ss]);
+    }
+
+    dataFormatDiff   = origEntry->dataFormat   != tdl->dataFormat;
+    dataTypeDiff     = origEntry->dataType     != tdl->dataType;
+    dataCategoryDiff = origEntry->dataCategory != tdl->dataCategory;
+
+    pixelFormatDiff  = origEntry->pixelFormat  != tdl->pixelFormat;
+    pixelMappingDiff = origEntry->pixelMapping != tdl->pixelMapping;
 
     // at the moment no formatting changes are allowed.  eventually we may be
     // in a position to do inline or hand-off formatting operations.
@@ -951,32 +968,32 @@ NvDlaError Runtime::mergeSetTensorDesc(IOD /*w*/, int /*bindId*/, int tensorDesc
         ORIGINATE_ERROR_FAIL(NvDlaError_NotSupported, "pixel format/mapping change requested");
     }
 
-    // do we want to be able to set different offsets?  size might need to follow if so.
-    if ( sizeDiff || offsetDiff )
-    {
-        ORIGINATE_ERROR_FAIL(NvDlaError_NotImplemented, "size/offset change requested");
-    }
-
     if ( dimsDiff )
     {
         ORIGINATE_ERROR_FAIL(NvDlaError_NotSupported, "dimensions change requested");
     }
 
-    if ( lineStrideDiff || surfStrideDiff || planeStrideDiff )
+    if ( stridesDiff )
     {
-        ORIGINATE_ERROR_FAIL(NvDlaError_NotImplemented, "stride changes not implemented yet");
+        // the way this works, whatever was written last is what will be set thereafter.
+        // even if extra work is required.  it's sticky.
+        for ( size_t ss = 0; ss < NVDLA_RUNTIME_TENSOR_DESC_NUM_STRIDES; ++ss )
+        {
+            oldStrides[ss] = newStrides[ss];
+        }
+
+        PROPAGATE_ERROR_FAIL( rewriteStrides(iod, bindId, tensorDescId, newStrides) );
     }
 
  fail:
     return e;
 }
 
-NvDlaError Runtime::setInputTensorDesc(int bindId, const NvDlaTensor *td)
+NvDlaError Runtime::setInputTensorDesc(int bindId, const IRuntime::NvDlaTensor *td)
 {
     NvDlaError e = NvDlaSuccess;
     Memory *boundMem = 0;
     int tensorDescId = -1;
-    ILoadable::TensorDescListEntry tdl;
 
     if ( !td )
     {
@@ -986,23 +1003,22 @@ NvDlaError Runtime::setInputTensorDesc(int bindId, const NvDlaTensor *td)
     PROPAGATE_ERROR_FAIL( getMemoryFromBindId(IOD_Input, bindId, boundMem) );
 
     tensorDescId = boundMem->tensorDescId();
-    if ( (tensorDescId < 0) || (size_t(tensorDescId) > m_tensor_desc.size()) )
+    if ( (tensorDescId < 0) || (size_t(tensorDescId) >= m_tensor_desc.size()) )
     {
         ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "Tensor desc id out of range:%d", tensorDescId);
     }
 
-    PROPAGATE_ERROR_FAIL( mergeSetTensorDesc(IOD_Input, bindId, tensorDescId, &tdl) );
+    PROPAGATE_ERROR_FAIL( mergeSetTensorDesc(IOD_Input, bindId, tensorDescId, td) );
 
  fail:
     return e;
 }
 
-NvDlaError Runtime::setOutputTensorDesc(int bindId, const NvDlaTensor *td)
+NvDlaError Runtime::setOutputTensorDesc(int bindId, const IRuntime::NvDlaTensor *td)
 {
     NvDlaError e = NvDlaSuccess;
     Memory *boundMem = 0;
     int tensorDescId = -1;
-    ILoadable::TensorDescListEntry tdl;
 
     if ( !td )
     {
@@ -1017,11 +1033,206 @@ NvDlaError Runtime::setOutputTensorDesc(int bindId, const NvDlaTensor *td)
         ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "Tensor desc id out of range:%d", tensorDescId);
     }
 
-    PROPAGATE_ERROR_FAIL( mergeSetTensorDesc(IOD_Output, bindId, tensorDescId, &tdl) );
+    PROPAGATE_ERROR_FAIL( mergeSetTensorDesc(IOD_Output, bindId, tensorDescId, td) );
 
  fail:
     return e;
 
+}
+
+static bool skipStrideRewrite = false;
+
+NvDlaError Runtime::rewriteStrides(IOD iod, int bindId, int tensorDescId, const NvU32 *newStrides)
+{
+    NvDlaError e = NvDlaSuccess;
+
+    Memory *boundMem = 0;
+    NvU16 memId;
+    list<Address *> alis;
+
+
+    PROPAGATE_ERROR_FAIL( getMemoryFromBindId(iod, bindId, boundMem) );
+
+    if ( !boundMem )
+    {
+        ORIGINATE_ERROR_FAIL(NvDlaError_InvalidState, "missing bound mem?");
+    }
+
+    memId = boundMem->id();
+
+    if ( debugStrideRewrite() )
+    {
+        gLogInfo << "rewriting strides for iod=" << (int)iod <<
+            " tensor desc id=" << tensorDescId << " bind id=" << bindId << endl;
+    }
+
+    //
+    // need to find all address list entries relative to this mem id.
+    // not likely to be >1 of these unless multi-batch is in play.
+    // with multibatch alive there can be more one address list
+    // id generated per batch elem, all sharing the original bindable mem id.
+    //
+    for ( size_t ali = 0, ALI = m_address_entries.size(); ali != ALI; ++ali )
+    {
+        if ( m_address[ali].mem_id() == memId )
+        {
+            alis.push_back(&m_address[ali]);
+        }
+    }
+
+    alis.unique();
+
+    if ( alis.size() )
+    {
+        list<Address *>::iterator a;
+
+        if ( debugStrideRewrite() )
+        {
+            stringstream ss;
+            string delim;
+            for ( a = alis.begin(); a != alis.end(); ++a )
+            {
+                ss << delim << (*a)->id();
+                delim = ", ";
+            }
+            gLogInfo << "rewrite needs to update relocation entries re: address list ids={" <<
+                ss.str() << "}" << endl;
+        }
+
+        for ( a = alis.begin(); a != alis.end(); ++a )
+        {
+            Address *addr = *a;
+            for ( size_t ri = 0, RI = m_reloc_entries.size(); ri != RI; ++ri )
+            {
+                ILoadable::RelocEntry &re = m_reloc_entries[ri];
+
+                if ( debugStrideRewrite() )
+                {
+                    gLogInfo << "consider reloc[" << ri << "].addr id=" << re.addressListId <<
+                        " vs. addr id=" << addr->id() << endl;
+                }
+
+                if ( re.addressListId != addr->id() )
+                {
+                    continue;
+                }
+
+                if ( debugStrideRewrite() )
+                {
+                    gLogInfo << "\treloc[" << ri << "].interface=" << re.interface <<
+                        ".subInterface=" << re.subInterface << endl;
+                }
+
+                if ( (re.interface == NVDLA_LOADABLE_INTERFACE_DLA1) ||
+                     (re.interface == NVDLA_LOADABLE_INTERFACE_EMU1) )
+                {
+                    switch ( re.subInterface )
+                    {
+                        case NVDLA_LOADABLE_SUB_INTERFACE_DLA1_DEPS:
+                            for ( size_t mi = 0, MI = m_memory.size(); mi != MI; ++mi )
+                            {
+                                if ( m_memory[mi].id() == re.writeId )
+                                {
+                                    ORIGINATE_ERROR_FAIL(NvDlaError_NotSupported,
+                                                         "write hot deps into mem id %d",
+                                                         re.writeId);
+                                }
+                            }
+                            break;
+
+                            /*
+                              dup'd enumerants. just being clear.
+                        case NVDLA_LOADABLE_SUB_INTERFACE_EMU1_OPS:
+                        case NVDLA_LOADABLE_SUB_INTERFACE_EMU1_SURFS:
+                            */
+                        case NVDLA_LOADABLE_SUB_INTERFACE_DLA1_OPS:
+                        case NVDLA_LOADABLE_SUB_INTERFACE_DLA1_SURFS:
+                            for ( size_t mi = 0, MI = m_memory.size(); mi != MI; ++mi )
+                            {
+                                NvU32 *addr = 0;
+                                NvU32 origVal;
+
+                                if ( m_memory[mi].id() != re.writeId )
+                                {
+                                    continue;
+                                }
+
+                                if ( !m_memory[mi].getVirtAddr() )
+                                {
+                                    continue;
+                                }
+
+                                addr = (NvU32*) ((NvU32 *)m_memory[mi].getVirtAddr() + re.offset);
+
+                                origVal = *addr;
+
+                                if ( !skipStrideRewrite )
+                                {
+                                    if ( re.relocType == ELST_Line )
+                                    {
+                                        *addr = newStrides[1];
+                                    }
+                                    else if ( re.relocType == ELST_Surf )
+                                    {
+                                        *addr = newStrides[2];
+                                    }
+                                    else
+                                    {
+                                        ORIGINATE_ERROR(NvDlaError_InvalidState, "bogus reloc type");
+                                    }
+                                }
+
+                                if ( debugStrideRewrite() && !skipStrideRewrite )
+                                {
+                                    gLogInfo << "wrote hot reloc interface=" << (int)re.interface <<
+                                        " subInterface=" << (int)re.subInterface <<
+                                        " type=" << (int)re.relocType <<
+                                        " into mem id" << re.writeId << " @" <<
+                                        (void*)(addr) << " + " << re.offset << " = " << addr <<
+                                        " orig val="    << std::hex << origVal << std::dec <<
+                                        " current val=" << std::hex << *addr   << std::dec << endl;
+                                }
+                            }
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+    }
+
+ fail:
+    return e;
+}
+
+Runtime::TensorDesc::TensorDesc()
+{
+    std::memset(this, 0, sizeof(*this));
+}
+
+Runtime::TensorDesc::TensorDesc(const ILoadable::TensorDescListEntry &e)
+{
+    id = e.id;
+    size         = e.size;
+    dims.n       = e.dims.n;
+    dims.c       = e.dims.c;
+    dims.h       = e.dims.h;
+    dims.w       = e.dims.w;
+    dataFormat   = e.dataFormat;
+    dataType     = e.dataType;
+    dataCategory = e.dataCategory;
+    pixelFormat  = e.pixelFormat;
+    pixelMapping = e.pixelMapping;
+    stride[0] = e.stride[0];
+    stride[1] = e.stride[1];
+    stride[2] = e.stride[2];
+    stride[3] = e.stride[3];
+    stride[4] = e.stride[4];
+    stride[5] = e.stride[5];
+    stride[6] = e.stride[6];
+    stride[7] = e.stride[7];
 }
 
 } // nvdla::priv

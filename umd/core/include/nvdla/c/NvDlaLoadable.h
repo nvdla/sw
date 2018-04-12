@@ -35,6 +35,21 @@
 #define NVDLA_LOADABLE_INTERFACE_DLA1 1U
 #define NVDLA_LOADABLE_INTERFACE_EMU1 2U
 
+#define NVDLA_LOADABLE_SUB_INTERFACE_DLA1_NONE  0U
+#define NVDLA_LOADABLE_SUB_INTERFACE_DLA1_ADDR0 1U
+#define NVDLA_LOADABLE_SUB_INTERFACE_DLA1_DEPS  2U
+#define NVDLA_LOADABLE_SUB_INTERFACE_DLA1_OPS   3U
+#define NVDLA_LOADABLE_SUB_INTERFACE_DLA1_SURFS 4U
+#define NVDLA_LOADABLE_SUB_INTERFACE_DLA1_LUTS  5U
+
+#define NVDLA_LOADABLE_SUB_INTERFACE_EMU1_NONE  0U
+#define NVDLA_LOADABLE_SUB_INTERFACE_EMU1_ADDR0 1U
+/* #define NVDLA_LOADABLE_SUB_INTERFACE_EMU1_DEPS  2U */
+#define NVDLA_LOADABLE_SUB_INTERFACE_EMU1_OPS   3U
+#define NVDLA_LOADABLE_SUB_INTERFACE_EMU1_SURFS 4U
+/* #define NVDLA_LOADABLE_SUB_INTERFACE_EMU1_LUTS  5U */
+
+
 #define NVDLA_LOADABLE_MEMORY_DOMAIN_SYSMEM 0U
 #define NVDLA_LOADABLE_MEMORY_DOMAIN_SRAM 1U
 
@@ -104,7 +119,7 @@ typedef struct NvDlaLoadableAddressListEntry
     NvU64 size;
     NvU64 offset;
 } NvDlaLoadableAddressListEntry;
-
+#if 0
 typedef struct NvDlaLoadableTensorDescListEntry
 {
     NvU16 id;
@@ -124,12 +139,13 @@ typedef struct NvDlaLoadableTensorDescListEntry
     NvU32 planeStride;
 
 } NvDlaLoadableTensorDescListEntry;
-
+#endif
 typedef struct NvDlaLoadableBlob
 {
     char *name;
     NvU64 size;
-    NvU8 interface;
+    NvU32 interface;
+    NvU32 sub_interface;
     NvDlaLoadableVersion version;
 } NvDlaLoadableBlob;
 
