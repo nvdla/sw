@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -302,14 +302,51 @@ dla_cdp_is_ready(struct dla_processor *processor,
 	struct dla_processor_group *next_group;
 	struct dla_cdp_op_desc *cdp_op;
 
+	cdp_op = &group->operation_desc->cdp_op;
 	next_group = &processor->groups[!group->id];
 
-	if (next_group->lut_index == -1)
+	/**
+	 * Single LUT is shared between two CDP groups, need to make
+	 * sure that usage does not conflict. Also, LUT write
+	 * access is locked when CDP sub-engine is active, so delay
+	 * writing LUT when another group is active.
+	 */
+
+	/**
+	 * if no LUT required for current group then it can be programmed
+	 * without further checks
+	 */
+	if (cdp_op->lut_index == -1)
 		return 1;
 
-	cdp_op = &group->operation_desc->cdp_op;
+	/**
+	 * if same LUT is used for both groups then it can be programmed
+	 * without more checks. Even if another group is active and LUT
+	 * is locked, it would have been programmed by another group.
+	 */
 	if (next_group->lut_index == cdp_op->lut_index)
 		return 1;
+
+	/**
+	 * if LUT index of another group is not -1 means some LUT is programmed,
+	 * then do not program current LUT as we already know current LUT is not
+	 * -1 and neither same as another group.
+	 */
+	if (next_group->lut_index != -1)
+		return 0;
+
+	/**
+	 * if current group needs LUT different than another group and that
+	 * group is not active then program it.
+	 */
+	if (!next_group->active)
+		return 1;
+
+	/**
+	 * if control is here it means current group is using LUT different than
+	 * another group and that group is active. Wait for another group to
+	 * become idle.
+	 */
 
 	return 0;
 }
