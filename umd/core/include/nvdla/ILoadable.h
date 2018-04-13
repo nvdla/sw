@@ -217,6 +217,7 @@ public:
 
     struct TensorDescListEntry
     {
+        std::string name;
         NvU16 id;
         NvU16 memId;
         NvU64 size;

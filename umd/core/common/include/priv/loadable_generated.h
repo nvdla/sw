@@ -72,7 +72,7 @@ inline const char *EnumNameLoadableVersionMajor(LoadableVersionMajor e) {
 }
 
 enum LoadableVersionMinor {
-  LoadableVersionMinor_VAL = 6,
+  LoadableVersionMinor_VAL = 7,
   LoadableVersionMinor_MIN = LoadableVersionMinor_VAL,
   LoadableVersionMinor_MAX = LoadableVersionMinor_VAL
 };
@@ -1005,28 +1005,32 @@ inline flatbuffers::Offset<SubmitListEntry> CreateSubmitListEntryDirect(
 
 struct TensorDescListEntry FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   enum {
-    VT_ID = 4,
-    VT_MEM_ID = 6,
-    VT_SIZE = 8,
-    VT_OFFSET = 10,
-    VT_DATA_FORMAT = 12,
-    VT_DATA_TYPE = 14,
-    VT_DATA_CATEGORY = 16,
-    VT_PIXEL_FORMAT = 18,
-    VT_PIXEL_MAPPING = 20,
-    VT_N = 22,
-    VT_C = 24,
-    VT_H = 26,
-    VT_W = 28,
-    VT_STRIDE_0 = 30,
-    VT_STRIDE_1 = 32,
-    VT_STRIDE_2 = 34,
-    VT_STRIDE_3 = 36,
-    VT_STRIDE_4 = 38,
-    VT_STRIDE_5 = 40,
-    VT_STRIDE_6 = 42,
-    VT_STRIDE_7 = 44
+    VT_NAME = 4,
+    VT_ID = 6,
+    VT_MEM_ID = 8,
+    VT_SIZE = 10,
+    VT_OFFSET = 12,
+    VT_DATA_FORMAT = 14,
+    VT_DATA_TYPE = 16,
+    VT_DATA_CATEGORY = 18,
+    VT_PIXEL_FORMAT = 20,
+    VT_PIXEL_MAPPING = 22,
+    VT_N = 24,
+    VT_C = 26,
+    VT_H = 28,
+    VT_W = 30,
+    VT_STRIDE_0 = 32,
+    VT_STRIDE_1 = 34,
+    VT_STRIDE_2 = 36,
+    VT_STRIDE_3 = 38,
+    VT_STRIDE_4 = 40,
+    VT_STRIDE_5 = 42,
+    VT_STRIDE_6 = 44,
+    VT_STRIDE_7 = 46
   };
+  const flatbuffers::String *name() const {
+    return GetPointer<const flatbuffers::String *>(VT_NAME);
+  }
   uint16_t id() const {
     return GetField<uint16_t>(VT_ID, 0);
   }
@@ -1092,6 +1096,8 @@ struct TensorDescListEntry FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table 
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
+           VerifyField<flatbuffers::uoffset_t>(verifier, VT_NAME) &&
+           verifier.Verify(name()) &&
            VerifyField<uint16_t>(verifier, VT_ID) &&
            VerifyField<uint16_t>(verifier, VT_MEM_ID) &&
            VerifyField<uint64_t>(verifier, VT_SIZE) &&
@@ -1120,6 +1126,9 @@ struct TensorDescListEntry FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table 
 struct TensorDescListEntryBuilder {
   flatbuffers::FlatBufferBuilder &fbb_;
   flatbuffers::uoffset_t start_;
+  void add_name(flatbuffers::Offset<flatbuffers::String> name) {
+    fbb_.AddOffset(TensorDescListEntry::VT_NAME, name);
+  }
   void add_id(uint16_t id) {
     fbb_.AddElement<uint16_t>(TensorDescListEntry::VT_ID, id, 0);
   }
@@ -1189,7 +1198,7 @@ struct TensorDescListEntryBuilder {
   }
   TensorDescListEntryBuilder &operator=(const TensorDescListEntryBuilder &);
   flatbuffers::Offset<TensorDescListEntry> Finish() {
-    const auto end = fbb_.EndTable(start_, 21);
+    const auto end = fbb_.EndTable(start_, 22);
     auto o = flatbuffers::Offset<TensorDescListEntry>(end);
     return o;
   }
@@ -1197,6 +1206,7 @@ struct TensorDescListEntryBuilder {
 
 inline flatbuffers::Offset<TensorDescListEntry> CreateTensorDescListEntry(
     flatbuffers::FlatBufferBuilder &_fbb,
+    flatbuffers::Offset<flatbuffers::String> name = 0,
     uint16_t id = 0,
     uint16_t mem_id = 0,
     uint64_t size = 0,
@@ -1233,6 +1243,7 @@ inline flatbuffers::Offset<TensorDescListEntry> CreateTensorDescListEntry(
   builder_.add_h(h);
   builder_.add_c(c);
   builder_.add_n(n);
+  builder_.add_name(name);
   builder_.add_mem_id(mem_id);
   builder_.add_id(id);
   builder_.add_pixel_mapping(pixel_mapping);
@@ -1241,6 +1252,56 @@ inline flatbuffers::Offset<TensorDescListEntry> CreateTensorDescListEntry(
   builder_.add_data_type(data_type);
   builder_.add_data_format(data_format);
   return builder_.Finish();
+}
+
+inline flatbuffers::Offset<TensorDescListEntry> CreateTensorDescListEntryDirect(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    const char *name = nullptr,
+    uint16_t id = 0,
+    uint16_t mem_id = 0,
+    uint64_t size = 0,
+    uint64_t offset = 0,
+    DataFormat data_format = DataFormat_UNKNOWN,
+    DataType data_type = DataType_UNKNOWN,
+    DataCategory data_category = DataCategory_IMAGE,
+    PixelFormat pixel_format = PixelFormat_R8,
+    PixelMapping pixel_mapping = PixelMapping_PITCH_LINEAR,
+    int32_t n = 0,
+    int32_t c = 0,
+    int32_t h = 0,
+    int32_t w = 0,
+    uint32_t stride_0 = 0,
+    uint32_t stride_1 = 0,
+    uint32_t stride_2 = 0,
+    uint32_t stride_3 = 0,
+    uint32_t stride_4 = 0,
+    uint32_t stride_5 = 0,
+    uint32_t stride_6 = 0,
+    uint32_t stride_7 = 0) {
+  return nvdla::loadable::CreateTensorDescListEntry(
+      _fbb,
+      name ? _fbb.CreateString(name) : 0,
+      id,
+      mem_id,
+      size,
+      offset,
+      data_format,
+      data_type,
+      data_category,
+      pixel_format,
+      pixel_mapping,
+      n,
+      c,
+      h,
+      w,
+      stride_0,
+      stride_1,
+      stride_2,
+      stride_3,
+      stride_4,
+      stride_5,
+      stride_6,
+      stride_7);
 }
 
 struct RelocListEntry FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {

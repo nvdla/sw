@@ -583,8 +583,10 @@ bool Loadable::serializeToFlatBufferFile(const std::string &filename) const
 
     for ( size_t tdi = 0, TDI = mTensorDescListEntries.size(); tdi != TDI; ++tdi) {
         const ILoadable::TensorDescListEntry & ele = mTensorDescListEntries[tdi];
+        auto name_s = fbb.CreateString(ele.name.c_str());
         nvdla::loadable::TensorDescListEntryBuilder tdleb(fbb);
 
+        tdleb.add_name(name_s);
         tdleb.add_id(ele.id);
         tdleb.add_mem_id(ele.memId);
         tdleb.add_size(ele.size);
@@ -797,6 +799,7 @@ bool Loadable::deserializeFrom(NvU8 *flatbuf)
 
         ILoadable::TensorDescListEntry ele;
 
+        ele.name = tdle->name()->str();
         ele.id = tdle->id();
         ele.memId = tdle->mem_id();
         ele.size = tdle->size();

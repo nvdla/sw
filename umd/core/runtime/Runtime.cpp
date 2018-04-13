@@ -26,6 +26,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <cstdio>
 #include <cstring>
 #include <sstream>
 #include <map>
@@ -847,6 +848,10 @@ IRuntime::NvDlaTensor Runtime::TensorDesc::bindTensorDesc() const
 {
     IRuntime::NvDlaTensor td;
 
+    int srcBytes = snprintf(td.name, sizeof(td.name), "%s", name.c_str());
+    if ((srcBytes < 0) || (static_cast<size_t>(srcBytes) >= sizeof(td.name)))
+        REPORT_ERROR(NvDlaError_BadValue, "String truncation encountered, \"%s\" -> \"%s\"", name.c_str(), td.name);
+
     td.bufferSize = size;
     td.dims = dims;
     td.dataFormat = dataFormat;
@@ -919,6 +924,7 @@ NvDlaError Runtime::mergeSetTensorDesc(IOD iod, int bindId, int tensorDescId, co
     Runtime::TensorDesc *origEntry = 0;
     const NvU32 *newStrides = 0;
     NvU32 *oldStrides = 0;
+    bool nameDiff = false;
     bool stridesDiff = false, dimsDiff; //, sizeDiff;
     bool dataFormatDiff, dataTypeDiff, dataCategoryDiff;
     bool pixelFormatDiff, pixelMappingDiff;
@@ -934,6 +940,8 @@ NvDlaError Runtime::mergeSetTensorDesc(IOD iod, int bindId, int tensorDescId, co
 
     newStrides = &tdl->stride[0];
     oldStrides = &(origEntry->stride[0]);
+
+    nameDiff = (std::strncmp(tdl->name, origEntry->name.c_str(), sizeof(tdl->name)) != 0);
 
     stridesDiff = false;
 
@@ -954,6 +962,12 @@ NvDlaError Runtime::mergeSetTensorDesc(IOD iod, int bindId, int tensorDescId, co
 
     pixelFormatDiff  = origEntry->pixelFormat  != tdl->pixelFormat;
     pixelMappingDiff = origEntry->pixelMapping != tdl->pixelMapping;
+
+    // Name changes are not supported
+    if ( nameDiff )
+    {
+        ORIGINATE_ERROR_FAIL(NvDlaError_NotSupported, "name change requested");
+    }
 
     // at the moment no formatting changes are allowed.  eventually we may be
     // in a position to do inline or hand-off formatting operations.
@@ -1209,13 +1223,36 @@ NvDlaError Runtime::rewriteStrides(IOD iod, int bindId, int tensorDescId, const 
 
 Runtime::TensorDesc::TensorDesc()
 {
-    std::memset(this, 0, sizeof(*this));
+    id = 0;
+    memId = 0;
+    size = 0;
+    offset = 0;
+    dims.n = 0;
+    dims.c = 0;
+    dims.h = 0;
+    dims.w = 0;
+    dataFormat = 0;
+    dataType = 0;
+    dataCategory = 0;
+    pixelFormat = 0;
+    pixelMapping = 0;
+    stride[0] = 0;
+    stride[1] = 0;
+    stride[2] = 0;
+    stride[3] = 0;
+    stride[4] = 0;
+    stride[5] = 0;
+    stride[6] = 0;
+    stride[7] = 0;
 }
 
 Runtime::TensorDesc::TensorDesc(const ILoadable::TensorDescListEntry &e)
 {
-    id = e.id;
+    name  = e.name;
+    id    = e.id;
+    memId = e.memId;
     size         = e.size;
+    offset       = e.offset;
     dims.n       = e.dims.n;
     dims.c       = e.dims.c;
     dims.h       = e.dims.h;

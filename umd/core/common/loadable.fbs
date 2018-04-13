@@ -50,7 +50,7 @@ struct Version {
 }
 
 enum LoadableVersionMajor    : ubyte { VAL = 0 }
-enum LoadableVersionMinor    : ubyte { VAL = 6 }
+enum LoadableVersionMinor    : ubyte { VAL = 7 }
 enum LoadableVersionSubMinor : ubyte { VAL = 0 }
 
 //
@@ -238,6 +238,7 @@ enum PixelFormat : ubyte {
 // id := 0..n-1, referenced by address list or memory list entries
 //
 table TensorDescListEntry {
+    name : string;
     id : ushort;
     mem_id : ushort;
     size   : ulong;

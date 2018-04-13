@@ -93,7 +93,8 @@ public:
 #define TENSOR_PIXEL_MAPPING_PITCH_LINEAR 0U
 
 
-#define NVDLA_RUNTIME_TENSOR_DESC_NUM_STRIDES 8U /* a little room to grow */
+#define NVDLA_RUNTIME_TENSOR_DESC_NAME_MAX_LEN 80U  /* name string length */
+#define NVDLA_RUNTIME_TENSOR_DESC_NUM_STRIDES 8U    /* a little room to grow */
 
 /* strides are in units of bytes */
 #define NVDLA_RUNTIME_TENSOR_DESC_NCHW_E_STRIDE   0U /* elem stride/bpe */
@@ -114,6 +115,7 @@ public:
 
     struct NvDlaTensor
     {
+        char name[NVDLA_RUNTIME_TENSOR_DESC_NAME_MAX_LEN + 1];
         NvU64 bufferSize;
         NvDlaDims4 dims;
         NvU8 dataFormat;    /* _DATA_FORMAT   */
