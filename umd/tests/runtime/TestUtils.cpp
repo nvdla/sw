@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -177,7 +177,7 @@ NvDlaError createFF16ImageCopy(NvDlaImage* in, NvDlaImage* out)
 
                 NvU8* inp = ibuf + ioffset;
                 half_float::half* outp = reinterpret_cast<half_float::half*>(obuf + ooffset);
-                *outp = half_float::half(float(*inp));
+                *outp = half_float::half(float(*inp)/255);
             }
         }
     }
