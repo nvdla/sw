@@ -345,6 +345,16 @@ processor_sdp_program(struct dla_processor_group *group)
 		CHECK_ALIGN(y_addr, 32);
 	}
 
+	reg = (map_fly[0] << SHIFT(SDP_RDMA_D_FEATURE_MODE_CFG_0, FLYING_MODE));
+	sdp_rdma_reg_write(D_FEATURE_MODE_CFG, reg);
+
+	reg = (map_ena[1] << SHIFT(SDP_RDMA_D_BRDMA_CFG_0, BRDMA_DISABLE));
+	sdp_rdma_reg_write(D_BRDMA_CFG, reg);
+	reg = (map_ena[1] << SHIFT(SDP_RDMA_D_NRDMA_CFG_0, NRDMA_DISABLE));
+	sdp_rdma_reg_write(D_NRDMA_CFG, reg);
+	reg = (map_ena[1] << SHIFT(SDP_RDMA_D_ERDMA_CFG_0, ERDMA_DISABLE));
+	sdp_rdma_reg_write(D_ERDMA_CFG, reg);
+
 	reg = (map_fly[fly] <<
 			SHIFT(SDP_RDMA_D_FEATURE_MODE_CFG_0, FLYING_MODE)) |
 	(map_wg[sdp_op->conv_mode == CONV_MODE_WINOGRAD] <<
@@ -356,13 +366,6 @@ processor_sdp_program(struct dla_processor_group *group)
 	((sdp_op->batch_num-1) <<
 			SHIFT(SDP_RDMA_D_FEATURE_MODE_CFG_0, BATCH_NUMBER));
 	sdp_rdma_reg_write(D_FEATURE_MODE_CFG, reg);
-
-	reg = (map_ena[1] << SHIFT(SDP_RDMA_D_BRDMA_CFG_0, BRDMA_DISABLE));
-	sdp_rdma_reg_write(D_BRDMA_CFG, reg);
-	reg = (map_ena[1] << SHIFT(SDP_RDMA_D_NRDMA_CFG_0, NRDMA_DISABLE));
-	sdp_rdma_reg_write(D_NRDMA_CFG, reg);
-	reg = (map_ena[1] << SHIFT(SDP_RDMA_D_ERDMA_CFG_0, ERDMA_DISABLE));
-	sdp_rdma_reg_write(D_ERDMA_CFG, reg);
 
 	if (group->is_rdma_needed) {
 
