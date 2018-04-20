@@ -361,6 +361,8 @@ processor_sdp_program(struct dla_processor_group *group)
 			SHIFT(SDP_RDMA_D_FEATURE_MODE_CFG_0, WINOGRAD)) |
 	(map_precision[sdp_op->src_precision] <<
 			SHIFT(SDP_RDMA_D_FEATURE_MODE_CFG_0, IN_PRECISION)) |
+	(map_precision[sdp_op->dst_precision] <<
+			SHIFT(SDP_RDMA_D_FEATURE_MODE_CFG_0, OUT_PRECISION)) |
 	(map_proc_precision[sdp_op->dst_precision][sdp_op->src_precision] <<
 			SHIFT(SDP_RDMA_D_FEATURE_MODE_CFG_0, PROC_PRECISION)) |
 	((sdp_op->batch_num-1) <<
