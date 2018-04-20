@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License version 2
@@ -158,6 +158,9 @@ static int32_t dla_read_dma_address(void *driver_context, void *task_data,
 	ret = nvdla_gem_dma_addr(nvdla_dev->drm, task->file,
 					handles[index].handle,
 					phys_addr);
+
+	/* Add offset to IOVA address */
+	*phys_addr = *phys_addr + handles[index].offset;
 
 	return ret;
 }
