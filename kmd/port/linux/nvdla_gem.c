@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License version 2
@@ -456,5 +456,6 @@ unref:
 void nvdla_drm_remove(struct nvdla_device *nvdla_dev)
 {
 	drm_dev_unregister(nvdla_dev->drm);
+	dma_release_declared_memory(&nvdla_dev->pdev->dev);
 	drm_dev_unref(nvdla_dev->drm);
 }
