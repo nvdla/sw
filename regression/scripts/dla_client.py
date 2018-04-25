@@ -143,7 +143,7 @@ def getWelcomeMessage(sock, timeout=1000):
 
     logging.info("Received welcome message: {%s}" % welcome);
 
-def runFlatbuf(sock, fbuf_file, timeout=1000):
+def runFlatbuf(sock, fbuf_file, timeout=1000000):
     logging.info("Sending and executing flatbuffer");
     cmd = "RUN_FLATBUF"
     sock.send(cmd)
@@ -161,7 +161,7 @@ def runFlatbuf(sock, fbuf_file, timeout=1000):
 
     validateTestExecution(testResults)
 
-def queryFlatbuf(sock, timeout=1000):
+def queryFlatbuf(sock, timeout=1000000):
     logging.info("Querying if flatbuf is cached.")
     cmd = "QUERY_FLATBUF"
     sock.send(cmd)
@@ -227,7 +227,7 @@ def getNumOutputs(sock, timeout=1000):
 
     return int(numOutputs)
 
-def writeOutput(sock, index, resultsDir, timeout=1000):
+def writeOutput(sock, index, resultsDir, timeout=1000000):
     logging.info("Requesting test output[%d]" % index);
     cmd = "GET_OUTPUT"
     sock.send(cmd)
