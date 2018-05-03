@@ -54,9 +54,6 @@ static int32_t nvdla_fill_task_desc(struct nvdla_ioctl_submit_task *local_task,
 	struct nvdla_mem_handle *handles;
 
 	/* update task desc fields */
-	if (local_task->num_addresses > NVDLA_MAX_BUFFERS_PER_TASK)
-		return -EINVAL;
-
 	task->num_addresses = local_task->num_addresses;
 
 	handles = kzalloc(local_task->num_addresses *
