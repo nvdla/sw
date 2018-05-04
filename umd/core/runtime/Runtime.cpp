@@ -558,6 +558,24 @@ NvDlaError Runtime::submitInternal()
         ORIGINATE_ERROR_FAIL(NvDlaError_InvalidState, "no submission sets to exec");
     }
 
+    // Force reload dependency graph contents from the loadable to
+    // satisfy firmware requirements
+    for ( size_t mi = 0, MI = m_memory_entries.size(); mi != MI; ++mi )
+    {
+        Memory* memory = &m_memory[mi];
+
+        if ( memory->flags() & ILoadable::MemoryListEntry::flags_set() )
+        {
+            for ( vector<string>::iterator ci = memory->contents().begin(); ci != memory->contents().end(); ++ci )
+            {
+                if ((*ci).find("dep_graph") != std::string::npos)
+                {
+                    PROPAGATE_ERROR_FAIL( loadMemory(m_loaded, &m_memory[mi]) );
+                }
+            }
+        }
+    }
+
     num_emu_instances = 1;
 
     for ( size_t ss=0; ss < m_submit.size(); ss++ ) {
