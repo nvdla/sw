@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -78,6 +78,7 @@ struct dla_processor {
 
 struct dla_engine {
 	struct dla_task *task;
+	struct dla_config *config_data;
 	struct dla_network_desc *network;
 	struct dla_processor processors[DLA_OP_NUM];
 

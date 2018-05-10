@@ -26,7 +26,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <arnvdla.h>
+#include <opendla.h>
 #include <dla_debug.h>
 #include <dla_interface.h>
 
@@ -262,6 +262,7 @@ processor_sdp_program(struct dla_processor_group *group)
 	uint64_t  y_addr = -1, dst_addr = -1;
 	uint32_t reg, high, low;
 	uint8_t fly;
+	uint32_t atom_size;
 	struct dla_sdp_op *x1_op;
 	struct dla_sdp_op *x2_op;
 	struct dla_sdp_op *y_op;
@@ -275,6 +276,7 @@ processor_sdp_program(struct dla_processor_group *group)
 	struct dla_sdp_surface_desc *sdp_surface;
 
 	dla_trace("Enter: %s", __func__);
+	atom_size = engine->config_data->atom_size;
 
 	sdp_op = &group->operation_desc->sdp_op;
 	sdp_surface = &group->surface_desc->sdp_surface;
@@ -297,7 +299,7 @@ processor_sdp_program(struct dla_processor_group *group)
 					    1);
 		if (ret)
 			goto exit;
-		CHECK_ALIGN(src_addr, 32);
+		CHECK_ALIGN(src_addr, atom_size);
 	}
 
 	if (out_dma_ena) {
@@ -306,7 +308,7 @@ processor_sdp_program(struct dla_processor_group *group)
 					sdp_surface->dst_data.address,
 					(void *)&dst_addr,
 					DESTINATION_DMA);
-		CHECK_ALIGN(dst_addr, 32);
+		CHECK_ALIGN(dst_addr, atom_size);
 	}
 
 	if (sdp_op->lut_index >= 0) {
@@ -326,7 +328,7 @@ processor_sdp_program(struct dla_processor_group *group)
 					sdp_surface->x1_data.address,
 					(void *)&x1_addr,
 					DESTINATION_DMA);
-		CHECK_ALIGN(x1_addr, 32);
+		CHECK_ALIGN(x1_addr, atom_size);
 	}
 	if (x2_rdma_ena) {
 		dla_get_dma_address(engine->driver_context,
@@ -334,7 +336,7 @@ processor_sdp_program(struct dla_processor_group *group)
 					sdp_surface->x2_data.address,
 					(void *)&x2_addr,
 					DESTINATION_DMA);
-		CHECK_ALIGN(x2_addr, 32);
+		CHECK_ALIGN(x2_addr, atom_size);
 	}
 	if (y_rdma_ena) {
 		dla_get_dma_address(engine->driver_context,
@@ -342,7 +344,7 @@ processor_sdp_program(struct dla_processor_group *group)
 					sdp_surface->y_data.address,
 					(void *)&y_addr,
 					DESTINATION_DMA);
-		CHECK_ALIGN(y_addr, 32);
+		CHECK_ALIGN(y_addr, atom_size);
 	}
 
 	reg = (map_fly[0] << SHIFT(SDP_RDMA_D_FEATURE_MODE_CFG_0, FLYING_MODE));

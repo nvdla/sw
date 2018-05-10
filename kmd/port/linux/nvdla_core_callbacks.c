@@ -56,6 +56,20 @@
 #include <nvdla_linux.h>
 #include <nvdla_ioctl.h>
 
+static struct nvdla_config nvdla_config_os_initial = {
+	.atom_size = 32,
+	.bdma_enable = true,
+	.rubik_enable = true,
+	.weight_compress_support = true,
+};
+
+static struct nvdla_config nvdla_config_small = {
+	.atom_size = 8,
+	.bdma_enable = false,
+	.rubik_enable = false,
+	.weight_compress_support = false,
+};
+
 void dla_debug(const char *str, ...)
 {
 	va_list args;
@@ -292,7 +306,7 @@ int32_t nvdla_task_submit(struct nvdla_device *nvdla_dev, struct nvdla_task *tas
 
 	nvdla_dev->task = task;
 
-	err = dla_execute_task(nvdla_dev->engine_context, (void *)task);
+	err = dla_execute_task(nvdla_dev->engine_context, (void *)task, nvdla_dev->config_data);
 	if (err) {
 		pr_err("Task execution failed\n");
 		return err;
@@ -323,7 +337,14 @@ int32_t nvdla_task_submit(struct nvdla_device *nvdla_dev, struct nvdla_task *tas
 
 /* driver probe and init */
 static const struct of_device_id nvdla_of_match[] = {
-	{ .name = "nvdla", .compatible = "nvidia,nvdla_os_initial", },
+	{
+		.compatible = "nvidia,nvdla_os_initial",
+		.data = &nvdla_config_os_initial,
+	},
+	{
+		.compatible = "nvidia,nvdla_2",
+		.data = &nvdla_config_small,
+	},
 	{ },
 };
 
@@ -333,6 +354,16 @@ static int32_t nvdla_probe(struct platform_device *pdev)
 	struct resource *res;
 	struct nvdla_device *nvdla_dev;
 	struct device *dev = &pdev->dev;
+	const struct of_device_id *match;
+
+	if (!pdev->dev.of_node)
+		return -EINVAL;
+
+	match = of_match_device(nvdla_of_match, &pdev->dev);
+	if (!match) {
+		pr_err("Missing DT entry!\n");
+		return -EINVAL;
+	}
 
 	nvdla_dev = devm_kzalloc(dev, sizeof(*nvdla_dev), GFP_KERNEL);
 	if (!nvdla_dev)
@@ -340,6 +371,7 @@ static int32_t nvdla_probe(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, nvdla_dev);
 	nvdla_dev->pdev = pdev;
+	nvdla_dev->config_data = (struct nvdla_config *)match->data;
 
 	init_completion(&nvdla_dev->event_notifier);
 
@@ -386,7 +418,7 @@ static struct platform_driver nvdla_driver = {
 	.driver = {
 		.owner = THIS_MODULE,
 		.name = "NVDLA",
-		.of_match_table = nvdla_of_match,
+		.of_match_table = of_match_ptr(nvdla_of_match),
 	},
 };
 module_platform_driver(nvdla_driver);

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -26,49 +26,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __DLA_SCHED_H_
-#define __DLA_SCHED_H_
+#ifndef __OPENDLA_H_
+#define __OPENDLA_H_
 
-struct dla_task {
-	/* platform specific data to communicate with portability layer */
-	void *task_data;
-	/* task state */
-	uint32_t state;
-	/* Task base address */
-	uint64_t base;
-	/* start address of a list of dla_operation_container */
-	uint64_t operation_desc_addr;
-	/* start address of a list of dla_surface_container */
-	uint64_t surface_desc_addr;
-	/* start address of a list of dla_common_op_desc */
-	uint64_t dependency_graph_addr;
-	/* start address of a list of dla_lut_param */
-	uint64_t lut_data_addr;
-	/*
-	 * start address of a list of dla_roi_desc,
-	 * the first one is dla_roi_array_desc
-	 * valid when network.dynamic_roi is true
-	 */
-	uint64_t roi_array_addr;
-	/* start address of a list of dla_surface_container */
-	uint64_t surface_addr;
-	/* start address of a list of dla_stat_container */
-	uint64_t stat_data_addr;
-} __packed __aligned(256);
-
-/**
- * @brief			Configuration parameters supported by the engine
- *
- * atom_size			Memory smallest access size
- * bdma_enable			Defines whether bdma is supported
- * rubik_enable			Defines whether rubik is supported
- * weight_compress_support	Defines whether weight data compression is supported
- */
-struct dla_config {
-	uint32_t atom_size;
-	bool bdma_enable;
-	bool rubik_enable;
-	bool weight_compress_support;
-};
+#ifdef DLA_SMALL_CONFIG
+#include <opendla_small.h>
+#else
+#include <opendla_initial.h>
+#endif
 
 #endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License version 2
@@ -59,6 +59,22 @@ struct nvdla_task {
 };
 
 /**
+ * @brief			Configuration parameters supported by the engine
+ *
+ * atom_size			Memory smallest access size
+ * bdma_enable			Defines whether bdma is supported
+ * rubik_enable			Defines whether rubik is supported
+ * weight_compress_support	Defines whether weight data compression is supported
+ */
+struct nvdla_config
+{
+	uint32_t atom_size;
+	bool bdma_enable;
+	bool rubik_enable;
+	bool weight_compress_support;
+};
+
+/**
  * @brief			NVDLA device
  *
  * irq				Interrupt number associated with this device
@@ -67,6 +83,7 @@ struct nvdla_task {
  * nvdla_lock			Spinlock used for synchronization
  * drm				DRM device instance
  * task				Pointer to task in execution
+ * config_data			Pointer to the configuration data
  * pdev				Pointer to NVDLA platform device
  * event_notifier		Completion object used to wait for events from HW
  * engine_context		Private data passed from engine in dla_engine_init
@@ -78,6 +95,7 @@ struct nvdla_device {
 	spinlock_t nvdla_lock;
 	struct drm_device *drm;
 	struct nvdla_task *task;
+	struct nvdla_config *config_data;
 	struct platform_device *pdev;
 	struct completion event_notifier;
 

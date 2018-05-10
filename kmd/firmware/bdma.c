@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -26,7 +26,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <arnvdla.h>
+#include <opendla.h>
 #include <dla_debug.h>
 #include <dla_err.h>
 #include <dla_interface.h>
@@ -242,8 +242,15 @@ dla_bdma_program(struct dla_processor_group *group)
 	int32_t i;
 	int32_t ret = 0;
 	struct dla_bdma_surface_desc *bdma_surface;
+	struct dla_engine *engine = dla_get_engine();
 
 	dla_debug("Enter: %s\n", __func__);
+
+	if (!engine->config_data->bdma_enable) {
+		dla_error("BDMA is not supported for this configuration\n");
+		ret = ERR(INVALID_INPUT);
+		goto exit;
+	}
 
 	bdma_surface = &group->surface_desc->bdma_surface;
 

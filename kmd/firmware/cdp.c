@@ -26,7 +26,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <arnvdla.h>
+#include <opendla.h>
 #include <dla_debug.h>
 #include <dla_err.h>
 #include <dla_interface.h>

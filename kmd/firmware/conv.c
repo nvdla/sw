@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -26,7 +26,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <arnvdla.h>
+#include <opendla.h>
 #include <dla_debug.h>
 #include <dla_err.h>
 #include <dla_interface.h>
@@ -258,16 +258,21 @@ processor_conv_program(struct dla_processor_group *group)
 	uint64_t wgs_address = 0;
 	uint64_t input_address = 0;
 	uint64_t output_address = 0;
+	uint32_t atom_size = 0;
+	bool weight_compress_support = false;
 	struct dla_engine *engine = dla_get_engine();
 	struct dla_conv_op_desc *conv_op;
 	struct dla_conv_surface_desc *conv_surface;
 
 	dla_trace("Enter: %s", __func__);
 
+	weight_compress_support = engine->config_data->weight_compress_support;
+	atom_size = engine->config_data->atom_size;
 	conv_op = &group->operation_desc->conv_op;
 	conv_surface = &group->surface_desc->conv_surface;
 
 	if (conv_op->weight_format == WEIGHT_FORMAT_COMPRESSED) {
+		ASSERT_GOTO((weight_compress_support), ret, ERR(INVALID_INPUT), exit);
 		ASSERT_GOTO((conv_surface->wmb_data.address != -1),
 			ret, ERR(INVALID_INPUT), exit);
 		dla_get_dma_address(engine->driver_context,
@@ -275,7 +280,7 @@ processor_conv_program(struct dla_processor_group *group)
 					conv_surface->wmb_data.address,
 					(void *)&wmb_address,
 					DESTINATION_DMA);
-		CHECK_ALIGN(wmb_address, 32);
+		CHECK_ALIGN(wmb_address, atom_size);
 		CHECK_ALIGN(conv_surface->wmb_data.size, 128);
 
 		ASSERT_GOTO((conv_surface->wgs_data.address != -1),
@@ -285,7 +290,7 @@ processor_conv_program(struct dla_processor_group *group)
 					conv_surface->wgs_data.address,
 					(void *)&wgs_address,
 					DESTINATION_DMA);
-		CHECK_ALIGN(wgs_address, 32);
+		CHECK_ALIGN(wgs_address, atom_size);
 		CHECK_ALIGN(conv_surface->wgs_data.size, 4);
 	}
 
@@ -295,7 +300,7 @@ processor_conv_program(struct dla_processor_group *group)
 					conv_surface->weight_data.address,
 					(void *)&weight_address,
 					DESTINATION_DMA);
-		CHECK_ALIGN(weight_address, 32);
+		CHECK_ALIGN(weight_address, atom_size);
 		CHECK_ALIGN(conv_surface->weight_data.size, 128);
 	}
 
@@ -305,10 +310,10 @@ processor_conv_program(struct dla_processor_group *group)
 					conv_surface->dst_data.address,
 					(void *)&output_address,
 					DESTINATION_DMA);
-		CHECK_ALIGN(output_address, 32);
-		CHECK_ALIGN(conv_surface->dst_data.size, 32);
-		CHECK_ALIGN(conv_surface->dst_data.line_stride, 32);
-		CHECK_ALIGN(conv_surface->dst_data.surf_stride, 32);
+		CHECK_ALIGN(output_address, atom_size);
+		CHECK_ALIGN(conv_surface->dst_data.size, atom_size);
+		CHECK_ALIGN(conv_surface->dst_data.line_stride, atom_size);
+		CHECK_ALIGN(conv_surface->dst_data.surf_stride, atom_size);
 	}
 
 	ret = dla_read_input_address(&conv_surface->src_data, &input_address,
@@ -318,7 +323,7 @@ processor_conv_program(struct dla_processor_group *group)
 	if (ret)
 		goto exit;
 
-	CHECK_ALIGN(input_address, 32);
+	CHECK_ALIGN(input_address, atom_size);
 
 	ASSERT_GOTO((conv_op->out_cvt.scale  == 1),
 		ret, ERR(INVALID_INPUT), exit);
@@ -399,7 +404,7 @@ processor_conv_program(struct dla_processor_group *group)
 	if (conv_surface->dst_data.width == 1 &&
 				conv_surface->dst_data.height == 1) {
 		ASSERT_GOTO((((uint32_t)conv_surface->dst_data.line_stride ==
-			(uint32_t)(conv_surface->dst_data.width << 5))),
+			(uint32_t)(conv_surface->dst_data.width * atom_size))),
 			ret, ERR(INVALID_INPUT), exit);
 		reg = (CACC_D_DATAOUT_MAP_0_LINE_PACKED_TRUE <<
 				SHIFT(CACC_D_DATAOUT_MAP_0, LINE_PACKED));
@@ -609,11 +614,11 @@ processor_conv_program(struct dla_processor_group *group)
 	cdma_reg_write(D_LINE_UV_STRIDE, conv_surface->in_line_uv_stride);
 
 	reg = ((conv_surface->src_data.line_stride ==
-			((uint32_t)conv_surface->src_data.width << 5))
+			((uint32_t)conv_surface->src_data.width * atom_size))
 		<< SHIFT(CDMA_D_DAIN_MAP_0, LINE_PACKED));
 	reg |= ((conv_surface->src_data.surf_stride ==
 			((uint32_t)(conv_surface->src_data.width *
-			conv_surface->src_data.height) << 5))
+			conv_surface->src_data.height) * atom_size))
 		<< SHIFT(CDMA_D_DAIN_MAP_0, SURF_PACKED));
 	cdma_reg_write(D_DAIN_MAP, reg);
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -26,7 +26,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <arnvdla.h>
+#include <opendla.h>
 #include <dla_debug.h>
 #include <dla_err.h>
 #include <dla_interface.h>
@@ -267,9 +267,17 @@ dla_rubik_dump_config(struct dla_processor_group *group)
 int
 dla_rubik_program(struct dla_processor_group *group)
 {
-	int32_t ret;
+	int32_t ret = 0;
+	struct dla_engine *engine = dla_get_engine();
 
 	dla_trace("Enter: %s", __func__);
+
+	if (!engine->config_data->rubik_enable) {
+		dla_error("RUBIK is not supported for this configuration\n");
+		ret = ERR(INVALID_INPUT);
+		goto exit;
+	}
+
 	dla_enable_intr(MASK(GLB_S_INTR_MASK_0, RUBIK_DONE_MASK1) |
 			MASK(GLB_S_INTR_MASK_0, RUBIK_DONE_MASK0));
 

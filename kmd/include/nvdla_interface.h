@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -114,11 +114,12 @@ void dla_clear_task(void *engine_context);
  *
  * @param engine_context	Engine specific data received in dla_register_driver
  * @param task_data		Task specific data to be passed when reading task info
+ * @param config_data		Configuration data to be passed
  *
  * @return			0 on success and negative on error
  *
  */
-int32_t dla_execute_task(void *engine_context, void *task_data);
+int32_t dla_execute_task(void *engine_context, void *task_data, void *config_data);
 
 /**
  * @brief			Register read
