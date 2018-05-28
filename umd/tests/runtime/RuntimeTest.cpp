@@ -66,19 +66,16 @@ static NvDlaError copyImageToInputTensor
 (
     const TestAppArgs* appArgs,
     TestInfo* i,
-    void** pImgBuffer,
-    NvDlaImage* pInputImage
+    void** pImgBuffer
 )
 {
     NvDlaError e = NvDlaSuccess;
 
     std::string imgPath = /*i->inputImagesPath + */appArgs->inputName;
     NvDlaImage* R8Image = new NvDlaImage();
-    NvDlaImage* FF16Image = pInputImage;
+    NvDlaImage* FF16Image = NULL;
     TestImageTypes imageType = getImageType(imgPath);
     if (!R8Image)
-        ORIGINATE_ERROR(NvDlaError_InsufficientMemory);
-    if (!FF16Image)
         ORIGINATE_ERROR(NvDlaError_InsufficientMemory);
 
     switch(imageType) {
@@ -95,10 +92,17 @@ static NvDlaError copyImageToInputTensor
             goto fail;
     }
 
+    FF16Image = i->inputImage;
+    if (FF16Image == NULL)
+        ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "NULL input Image");
     PROPAGATE_ERROR(createFF16ImageCopy(R8Image, FF16Image, appArgs->normalize_value));
     PROPAGATE_ERROR(DIMG2DlaBuffer(FF16Image, pImgBuffer));
 
 fail:
+    if (R8Image != NULL && R8Image->m_pData != NULL)
+        NvDlaFree(R8Image->m_pData);
+    delete R8Image;
+
     return e;
 }
 
@@ -123,12 +127,11 @@ NvDlaError setupInputBuffer
 (
     const TestAppArgs* appArgs,
     TestInfo* i,
-    void** pInputBuffer,
-    NvDlaImage* pInputImage
+    void** pInputBuffer
 )
 {
     NvDlaError e = NvDlaSuccess;
-    void *hMem;
+    void *hMem = NULL;
     NvS32 numInputTensors = 0;
     nvdla::IRuntime::NvDlaTensor tDesc;
 
@@ -136,9 +139,6 @@ NvDlaError setupInputBuffer
     if (!runtime)
         ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "getRuntime() failed");
 
-    // start the emulator
-    if (!runtime->initEMU())
-        ORIGINATE_ERROR(NvDlaError_DeviceNotFound, "runtime->initEMU() failed");
     PROPAGATE_ERROR_FAIL(runtime->getNumInputTensors(&numInputTensors));
 
     i->numInputs = numInputTensors;
@@ -147,8 +147,10 @@ NvDlaError setupInputBuffer
         goto fail;
 
     PROPAGATE_ERROR_FAIL(runtime->getInputTensorDesc(0, &tDesc));
+
     PROPAGATE_ERROR_FAIL(runtime->allocateSystemMemory(&hMem, tDesc.bufferSize, pInputBuffer));
-    PROPAGATE_ERROR_FAIL(copyImageToInputTensor(appArgs, i, pInputBuffer, pInputImage));
+    i->inputHandle = (NvU8 *)hMem;
+    PROPAGATE_ERROR_FAIL(copyImageToInputTensor(appArgs, i, pInputBuffer));
 
     if (!runtime->bindInputTensor(0, hMem))
         ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "runtime->bindInputTensor() failed");
@@ -157,12 +159,47 @@ fail:
     return e;
 }
 
+static void cleanupInputBuffer(const TestAppArgs *appArgs,
+                                TestInfo *i)
+{
+    nvdla::IRuntime *runtime = NULL;
+    NvS32 numInputTensors = 0;
+    nvdla::IRuntime::NvDlaTensor tDesc;
+    NvDlaError e = NvDlaSuccess;
+
+    if (i->inputImage != NULL && i->inputImage->m_pData != NULL) {
+        NvDlaFree(i->inputImage->m_pData);
+        i->inputImage->m_pData = NULL;
+    }
+
+    runtime = i->runtime;
+    if (runtime == NULL)
+        return;
+    e = runtime->getNumInputTensors(&numInputTensors);
+    if (e != NvDlaSuccess)
+        return;
+
+    if (numInputTensors < 1)
+        return;
+
+    e = runtime->getInputTensorDesc(0, &tDesc);
+    if (e != NvDlaSuccess)
+        return;
+
+    if (i->inputHandle == NULL)
+        return;
+
+    /* Free the buffer allocated */
+    runtime->freeSystemMemory(i->inputHandle, tDesc.bufferSize);
+    i->inputHandle = NULL;
+    return;
+}
+
 NvDlaError setupOutputBuffer
 (
     const TestAppArgs* appArgs,
     TestInfo* i,
-    void** pOutputBuffer,
-    NvDlaImage* pOutputImage
+    void** pOutputBuffer
 )
 {
     NVDLA_UNUSED(appArgs);
@@ -171,6 +208,7 @@ NvDlaError setupOutputBuffer
     void *hMem;
     NvS32 numOutputTensors = 0;
     nvdla::IRuntime::NvDlaTensor tDesc;
+    NvDlaImage *pOutputImage = NULL;
 
     nvdla::IRuntime* runtime = i->runtime;
     if (!runtime)
@@ -185,6 +223,11 @@ NvDlaError setupOutputBuffer
 
     PROPAGATE_ERROR_FAIL(runtime->getOutputTensorDesc(0, &tDesc));
     PROPAGATE_ERROR_FAIL(runtime->allocateSystemMemory(&hMem, tDesc.bufferSize, pOutputBuffer));
+    i->outputHandle = (NvU8 *)hMem;
+
+    pOutputImage = i->outputImage;
+    if (i->outputImage == NULL)
+        ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "NULL Output image");
     PROPAGATE_ERROR_FAIL(prepareOutputTensor(&tDesc, pOutputImage, pOutputBuffer));
 
     if (!runtime->bindOutputTensor(0, hMem))
@@ -192,6 +235,41 @@ NvDlaError setupOutputBuffer
 
 fail:
     return e;
+}
+
+static void cleanupOutputBuffer(const TestAppArgs *appArgs,
+                                TestInfo *i)
+{
+    nvdla::IRuntime *runtime = NULL;
+    NvS32 numOutputTensors = 0;
+    nvdla::IRuntime::NvDlaTensor tDesc;
+    NvDlaError e = NvDlaSuccess;
+
+    /* Do not clear outputImage if in server mode */
+    if (!i->dlaServerRunning &&
+            i->outputImage != NULL &&
+            i->outputImage->m_pData != NULL) {
+        NvDlaFree(i->outputImage->m_pData);
+        i->outputImage->m_pData = NULL;
+    }
+
+    runtime = i->runtime;
+    if (runtime == NULL)
+        return;
+    e = runtime->getNumOutputTensors(&numOutputTensors);
+    if (e != NvDlaSuccess)
+        return;
+    e = runtime->getOutputTensorDesc(0, &tDesc);
+    if (e != NvDlaSuccess)
+        return;
+
+    if (i->outputHandle == NULL)
+        return;
+
+    /* Free the buffer allocated */
+    runtime->freeSystemMemory(i->outputHandle, tDesc.bufferSize);
+    i->outputHandle = NULL;
+    return;
 }
 
 static NvDlaError readLoadable(const TestAppArgs* appArgs, TestInfo* i)
@@ -268,38 +346,59 @@ fail:
     return e;
 }
 
+void unloadLoadable(const TestAppArgs* appArgs, TestInfo *i)
+{
+    NVDLA_UNUSED(appArgs);
+    nvdla::IRuntime *runtime = NULL;
+
+    runtime = i->runtime;
+    if (runtime != NULL) {
+        runtime->unload();
+    }
+}
+
 NvDlaError runTest(const TestAppArgs* appArgs, TestInfo* i)
 {
     NvDlaError e = NvDlaSuccess;
     void* pInputBuffer = NULL;
     void* pOutputBuffer = NULL;
-    NvDlaImage* pInputImage = NULL;
-    NvDlaImage* pOutputImage = NULL;
 
     nvdla::IRuntime* runtime = i->runtime;
     if (!runtime)
         ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "getRuntime() failed");
 
-    pInputImage  = new NvDlaImage();
-    pOutputImage = new NvDlaImage();
+    i->inputImage = new NvDlaImage();
+    i->outputImage = new NvDlaImage();
 
-    i->inputImage = pInputImage;
-    i->outputImage = pOutputImage;
+    PROPAGATE_ERROR_FAIL(setupInputBuffer(appArgs, i, &pInputBuffer));
 
-    PROPAGATE_ERROR_FAIL(setupInputBuffer(appArgs, i, &pInputBuffer, pInputImage));
-
-    PROPAGATE_ERROR_FAIL(setupOutputBuffer(appArgs, i, &pOutputBuffer, pOutputImage));
-
+    PROPAGATE_ERROR_FAIL(setupOutputBuffer(appArgs, i, &pOutputBuffer));
     NvDlaDebugPrintf("submitting tasks...\n");
     if (!runtime->submit())
         ORIGINATE_ERROR(NvDlaError_BadParameter, "runtime->submit() failed");
 
-    PROPAGATE_ERROR_FAIL(DlaBuffer2DIMG(&pOutputBuffer, pOutputImage));
+    PROPAGATE_ERROR_FAIL(DlaBuffer2DIMG(&pOutputBuffer, i->outputImage));
 
     /* Dump output dimg to a file */
-    PROPAGATE_ERROR_FAIL(DIMG2DIMGFile(pOutputImage, OUTPUT_DIMG, true, appArgs->rawOutputDump));
+    PROPAGATE_ERROR_FAIL(DIMG2DIMGFile(i->outputImage,
+                                        OUTPUT_DIMG,
+                                        true,
+                                        appArgs->rawOutputDump));
 
 fail:
+    cleanupOutputBuffer(appArgs, i);
+    /* Do not clear outputImage if in server mode */
+    if (!i->dlaServerRunning && i->outputImage != NULL) {
+        delete i->outputImage;
+        i->outputImage = NULL;
+    }
+
+    cleanupInputBuffer(appArgs, i);
+    if (i->inputImage != NULL) {
+        delete i->inputImage;
+        i->inputImage = NULL;
+    }
+
     return e;
 }
 
@@ -307,17 +406,41 @@ NvDlaError run(const TestAppArgs* appArgs, TestInfo* i)
 {
     NvDlaError e = NvDlaSuccess;
 
+    /* Create runtime instance */
     NvDlaDebugPrintf("creating new runtime context...\n");
     i->runtime = nvdla::createRuntime();
-    if (!i->runtime)
+    if (i->runtime == NULL)
         ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "createRuntime() failed");
 
-    if ( !i->dlaServerRunning )
+    if (!i->dlaServerRunning)
         PROPAGATE_ERROR_FAIL(readLoadable(appArgs, i));
 
+    /* Load loadable */
     PROPAGATE_ERROR_FAIL(loadLoadable(appArgs, i));
 
+    /* Start emulator */
+    if (!i->runtime->initEMU())
+        ORIGINATE_ERROR(NvDlaError_DeviceNotFound, "runtime->initEMU() failed");
+
+    /* Run test */
     PROPAGATE_ERROR_FAIL(runTest(appArgs, i));
+
 fail:
+    /* Stop emulator */
+    if (i->runtime != NULL)
+        i->runtime->stopEMU();
+
+    /* Unload loadables */
+    unloadLoadable(appArgs, i);
+
+    /* Free if allocated in read Loadable */
+    if (!i->dlaServerRunning && i->pData != NULL) {
+        delete[] i->pData;
+        i->pData = NULL;
+    }
+
+    /* Destroy runtime */
+    nvdla::destroyRuntime(i->runtime);
+
     return e;
 }

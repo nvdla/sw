@@ -339,7 +339,12 @@ NvDlaError NvDlaImage::packData(std::stringstream& sstream, bool stableHash, boo
                     }
                     else if (pftype == UINT)
                     {
-                        unsigned tmp = *(reinterpret_cast<unsigned*>(buf + offset));
+                        unsigned tmp;
+                        if (bpe == 1)
+                            tmp = *(reinterpret_cast<NvU8*>(buf + offset));
+                        else
+                            tmp = *(reinterpret_cast<NvU16*>(buf + offset));
+
                         if (asRaw)
                             sstream << tmp << " ";
                         else
@@ -347,7 +352,12 @@ NvDlaError NvDlaImage::packData(std::stringstream& sstream, bool stableHash, boo
                     }
                     else if (pftype == INT)
                     {
-                        int tmp = *(reinterpret_cast<int*>(buf + offset));
+                        int tmp;
+                        if (bpe == 1)
+                            tmp = *(reinterpret_cast<NvS8*>(buf + offset));
+                        else
+                            tmp = *(reinterpret_cast<NvS16*>(buf + offset));
+
                         if (asRaw)
                             sstream << tmp << " ";
                         else

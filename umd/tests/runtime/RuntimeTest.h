@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -63,6 +63,8 @@ struct TestInfo
     TestInfo() :
         runtime(NULL),
         inputLoadablePath(""),
+        inputHandle(NULL),
+        outputHandle(NULL),
         pData(NULL),
         dlaServerRunning(false),
         dlaRemoteSock(-1),
@@ -75,6 +77,8 @@ struct TestInfo
     // runtime
     nvdla::IRuntime* runtime;
     std::string inputLoadablePath;
+    NvU8 *inputHandle;
+    NvU8 *outputHandle;
     NvU8 *pData;
     bool dlaServerRunning;
     NvS32 dlaRemoteSock;

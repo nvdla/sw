@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -497,6 +497,8 @@ static NvDlaError processRunImage(const TestAppArgs* appArgs, TestInfo* testInfo
     PROPAGATE_ERROR_FAIL(executeTest(appArgs, testInfo));
 
 fail:
+    if (buf != NULL)
+        free(buf);
     return e;
 
 }
@@ -539,6 +541,8 @@ static NvDlaError processGetOutput(const TestAppArgs* appArgs, TestInfo *testInf
     PROPAGATE_ERROR_FAIL(send(appArgs, testInfo, reinterpret_cast<const void*>(sstream.str().c_str()), sstream.str().length()));
 
 fail:
+    if (buf != NULL)
+        free(buf);
     return e;
 }
 
@@ -642,6 +646,11 @@ static NvDlaError mainEventLoop(TestAppArgs* appArgs, TestInfo *testInfo)
     }
 
 fail:
+    /* Clear the flatbuffer cached data if available */
+    if (testInfo->pData != NULL) {
+        free(testInfo->pData);
+        testInfo->pData = NULL;
+    }
     return e;
 }
 
