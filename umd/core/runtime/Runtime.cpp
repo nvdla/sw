@@ -65,6 +65,11 @@ IRuntime *createRuntime()
     return p.i();
 }
 
+void destroyRuntime(IRuntime *runtime)
+{
+    priv::RuntimeFactory::deleteRuntime(runtime);
+}
+
 namespace priv
 {
 
@@ -78,6 +83,19 @@ RuntimeFactory::RuntimePrivPair RuntimeFactory::newRuntime()
         s_self.insert(runtime, runtime);
     }
     return RuntimePrivPair(runtime, runtime_priv);
+}
+
+void RuntimeFactory::deleteRuntime(IRuntime *runtime)
+{
+    if (runtime) {
+        Runtime *runtime_priv = priv(runtime);
+        if (runtime_priv) {
+            delete runtime_priv;
+        }
+
+        s_priv.remove(runtime);
+        s_self.remove(runtime);
+    }
 }
 
 Runtime *RuntimeFactory::priv(IRuntime *runtime)
@@ -128,7 +146,9 @@ Runtime::Runtime() :
 
 Runtime::~Runtime()
 {
-
+    // Close all device nodes
+    NvDlaClose(m_dla_device_handles[0]);
+    NvDlaClose(m_dla_device_handles[1]);
 }
 
 bool Runtime::initEMU(void)
@@ -158,6 +178,16 @@ bool Runtime::initEMU(void)
     }
 
     return ok;
+}
+
+void Runtime::stopEMU(void)
+{
+    if (m_emu_engine == NULL)
+        return;
+
+    m_emu_engine->stop();
+    delete m_emu_engine;
+    m_emu_engine = NULL;
 }
 
 NvU16 Runtime::getFactoryType() const
@@ -365,6 +395,32 @@ bool Runtime::load(NvU8 *buf, int instance)
 
  fail:
     return false;
+}
+
+void Runtime::unload()
+{
+    // Free all non binded memories
+    for ( size_t mi = 0, MI = m_memory_entries.size(); mi != MI; ++mi ) {
+        unloadMemory(&m_memory[mi]);
+    }
+
+    m_task_entries.clear();
+    m_submit_entries.clear();
+    m_memory_entries.clear();
+    m_address_entries.clear();
+    m_tensor_desc_entries.clear();
+    m_reloc_entries.clear();
+
+    m_task.clear();
+    m_submit.clear();
+    m_memory.clear();
+    m_event.clear();
+    m_address.clear();
+    m_tensor_desc.clear();
+
+    if (m_loaded)
+        LoadableFactory::deleteLoadable(LoadableFactory::i(m_loaded));
+    m_loaded = 0;
 }
 
 //
@@ -639,6 +695,10 @@ NvDlaError Runtime::submitInternal()
                     PROPAGATE_ERROR_FAIL( m_emu_engine->submit(task_mem, 1) );
 
                     emu_instance = (emu_instance + 1) % num_emu_instances;
+
+                    /* since blocking call, deleting here should be fine.*/
+                    delete[] task_mem;
+                    delete emu_if;
                 }
                 break;
                 default:
@@ -665,14 +725,48 @@ NvDlaError Runtime::allocateSystemMemory(void **phMem, NvU64 size, void **pData)
     PROPAGATE_ERROR_FAIL( NvDlaAllocMem(NULL, hDla, phMem, pData, size, NvDlaHeap_System) );
     m_hmem_memory_map.insert(std::make_pair(*phMem, *pData));
 
+    return NvDlaSuccess;
+
 fail:
+    *phMem = NULL;
+    *pData = NULL;
     return e;
+}
+
+void Runtime::freeSystemMemory(void *phMem, NvU64 size)
+{
+    void *hDla = getDLADeviceContext(m_loaded_instance);
+    void *pData = m_hmem_memory_map[phMem];
+
+    /* Free memory */
+    NvDlaFreeMem(NULL, hDla, phMem, pData, size);
+    m_hmem_memory_map.erase(phMem);
+}
+
+void Runtime::unloadMemory(Memory *memory)
+{
+    if (! (memory->flags() & ILoadable::MemoryListEntry::flags_alloc()))
+        return;
+
+    if (memory->bindable())
+        return;
+
+    if (memory->domain() == ILoadable::MemoryListEntry::domain_sysmem()) {
+        void *hDla = getDLADeviceContext(m_loaded_instance);
+        void *hMem = memory->getHandle();
+        void *pData = memory->getVirtAddr();
+        NvU64 size = memory->size();
+
+        // TODO: unmap the memory before freeing
+        NvDlaFreeMem(NULL, hDla, hMem, pData, size);
+        memory->setHandle(0);
+        memory->setVirtAddr(0);
+    }
 }
 
 NvDlaError Runtime::loadMemory(Loadable *l, Memory *memory)
 {
     NvDlaError e = NvDlaSuccess;
-    void *hMem;
     NvU8 *mem;
     NVDLA_UNUSED(mem);
 
@@ -693,12 +787,18 @@ NvDlaError Runtime::loadMemory(Loadable *l, Memory *memory)
 
         NvU64 size = memory->size();
         void *hDla = getDLADeviceContext(m_loaded_instance);
+        void *hMem = memory->getHandle();
 
-        /* Allocate memory for network */
-        PROPAGATE_ERROR_FAIL( NvDlaAllocMem(m_dla_handle, hDla, &hMem, (void **)(&mapped_mem), size, NvDlaHeap_System) );
+        if (hMem == 0) {
+            /* Allocate memory for network */
+            PROPAGATE_ERROR_FAIL( NvDlaAllocMem(m_dla_handle, hDla, &hMem, (void **)(&mapped_mem), size, NvDlaHeap_System) );
 
-        memory->setHandle(hMem);
-        memory->setVirtAddr(mapped_mem);
+            memory->setHandle(hMem);
+            memory->setVirtAddr(mapped_mem);
+        }
+        else {
+            mapped_mem = memory->getVirtAddr();
+        }
 
         if ( memory->flags() & ILoadable::MemoryListEntry::flags_set() )
         {

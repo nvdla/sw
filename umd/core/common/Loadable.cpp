@@ -59,6 +59,19 @@ LoadableFactory::LoadablePrivPair LoadableFactory::newLoadable()
     return LoadablePrivPair(loadable, loadable_priv);
 }
 
+void LoadableFactory::deleteLoadable(ILoadable *loadable)
+{
+    if (loadable) {
+        Loadable *loadable_priv = priv(loadable);
+        if (loadable_priv) {
+            delete loadable_priv;
+        }
+
+        s_priv.remove(loadable);
+        s_self.remove(loadable);
+    }
+}
+
 Loadable *LoadableFactory::priv(ILoadable *loadable)
 {
     BiMap<ILoadable *, Loadable *>::left_iterator f = s_priv.find_left(loadable);
@@ -85,58 +98,6 @@ ILoadable *LoadableFactory::self(void *s)
         return NULL;
     }
     return f->second;
-}
-
-
-ILoadable *LoadableFactory::deserializeFrom(const std::string &fb_filename)
-{
-    NvDlaFileHandle file;
-    NvDlaStatType finfo;
-    size_t file_size;
-    NvU8 *buf = 0;
-
-    NvDlaError rc = NvDlaFopen(fb_filename.c_str(), NVDLA_OPEN_READ, &file);
-    if (rc != NvDlaSuccess)
-    {
-        gLogError << "couldn't open " << fb_filename << endl;
-        return 0;
-    }
-
-    rc = NvDlaFstat(file, &finfo);
-    if ( rc != NvDlaSuccess)
-    {
-        gLogError << "couldn't get file stats for " << fb_filename << endl;
-        return 0;
-    }
-
-    file_size = finfo.size;
-    if ( !file_size ) {
-        gLogError << "zero-length for " << fb_filename << endl;
-        return 0;
-    }
-
-    buf = new NvU8[file_size];
-
-    NvDlaFseek(file, 0, NvDlaSeek_Set);
-
-    size_t actually_read = 0;
-
-    rc = NvDlaFread(file, buf, file_size, &actually_read);
-    if ( rc != NvDlaSuccess )
-    {
-        gLogError << "read error for " << fb_filename << endl;
-        return 0;
-    }
-    NvDlaFclose(file);
-    if ( actually_read != file_size ) {
-        gLogError << "read wrong size for buffer? " << actually_read << endl;
-        return 0;
-    }
-
-
-    return deserializeLoadable(buf);
-
-
 }
 
 BiMap<ILoadable *, Loadable*> LoadableFactory::s_priv;
@@ -473,7 +434,20 @@ NvDlaError Loadable::getOutputTensorDesc(NvU16 id, TensorDescListEntry *t) const
 
 Loadable::~Loadable()
 {
-
+    // clear the contents of loadable before delete
+    std::map<std::string, Symbol>::iterator it;
+    for (it = mSymbols.begin(); it != mSymbols.end(); it++) {
+        Symbol symbol = it->second;
+        if (symbol.data != NULL)
+            delete[] symbol.data;
+    }
+    mMemoryListEntries.clear();
+    mTaskListEntries.clear();
+    mSubmitListEntries.clear();
+    mEventListEntries.clear();
+    mAddressListEntries.clear();
+    mTensorDescListEntries.clear();
+    mRelocEntries.clear();
 }
 
 bool Loadable::serializeToFlatBufferFile(const std::string &filename) const

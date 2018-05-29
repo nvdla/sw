@@ -59,6 +59,7 @@ public:
     typedef PrivPair<IRuntime *, Runtime*> RuntimePrivPair;
 
     static RuntimePrivPair newRuntime();
+    static void deleteRuntime(IRuntime *);
 
     static Runtime *priv(IRuntime *);
     static IRuntime *i(Runtime *);
@@ -79,9 +80,12 @@ public: // externally facing
     virtual NvU16 getNumDevices();
 
     virtual bool initEMU(void);
+    virtual void stopEMU(void);
 
     virtual bool load(NvU8 *buf, int instance);
+    virtual void unload(void);
     virtual NvDlaError allocateSystemMemory(void **h_mem, NvU64 size, void **pData);
+    virtual void freeSystemMemory(void *phMem, NvU64 size);
 
     virtual bool bindInputTensor (int index, void *hMem);
     virtual bool bindOutputTensor(int index, void *hMem);
@@ -278,6 +282,7 @@ protected:
     size_t m_numDLATasks;
 
     NvDlaError loadMemory(Loadable *, Memory *);
+    void unloadMemory(Memory *);
     bool fillTaskAddressList(Task *task, NvDlaTask *);
 
     bool fillEMUTaskAddressList(Task *task, EMUTaskDescAccessor taskDescAcc);

@@ -49,6 +49,7 @@ public:
     typedef PrivPair<ILoadable *, Loadable*> LoadablePrivPair;
 
     static LoadablePrivPair newLoadable();
+    static void deleteLoadable(ILoadable *loadable);
 
     static Loadable *priv(ILoadable *);
     static ILoadable *i(Loadable *);
@@ -119,9 +120,10 @@ public: // internally facing
     const std::vector<AddressListEntry> & getAddressListEntries() const;
     const std::vector<EventListEntry> & getEventListEntries()  const;
     const std::vector<TensorDescListEntry> &getTensorDescListEntries() const;
-    const std::vector<RelocEntry> &getRelocEntries() const; 
+    const std::vector<RelocEntry> &getRelocEntries() const;
 
     Loadable();
+    virtual ~Loadable();
 
     virtual bool serializeToFlatBufferFile(const std::string &file_name) const;
     virtual bool deserializeFrom(NvU8 *);
@@ -150,7 +152,6 @@ protected:
     std::vector<RelocEntry> mRelocEntries;
 
     std::string mName;
-    virtual ~Loadable();
 };
 
 } // nvdla::priv

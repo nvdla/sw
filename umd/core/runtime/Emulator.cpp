@@ -118,7 +118,7 @@ bool Emulator::run()
         if (!m_taskQueue.empty())
         {
             NvU8* task_mem = m_taskQueue.front();
-            NvDlaDebugPrintf("Work Found!\n", *task_mem);
+            NvDlaDebugPrintf("Work Found!\n");
 
             EMUTaskDescAccessor task_desc = emu_if->taskDescAccessor(task_mem);
 
@@ -166,6 +166,7 @@ bool Emulator::run()
         m_taskQueue.pop();
     }
 
+    delete emu_if;
     m_threadActive = false;
     m_signalShutdown = false;
 
@@ -202,6 +203,7 @@ bool Emulator::processTask(NvU8* task_mem, std::vector<NvU8*> addressList)
         NvDlaDebugPrintf("Unknown op type %u\n", *common_op_desc_0.op_type());
     }
 
+    delete emu_if;
 
     return true;
 }

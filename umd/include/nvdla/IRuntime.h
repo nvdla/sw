@@ -132,9 +132,12 @@ public:
     virtual NvU16 getMaxDevices() = 0;
     virtual NvU16 getNumDevices() = 0;
     virtual bool initEMU(void) = 0;
+    virtual void stopEMU(void) = 0;
 
     virtual bool load(NvU8 *buf, int instance) = 0;
+    virtual void unload(void) = 0;
     virtual NvDlaError allocateSystemMemory(void **h_mem, NvU64 size, void **pData) = 0;
+    virtual void freeSystemMemory(void *phMem, NvU64 size) = 0;
 
     virtual bool bindInputTensor(int index, void *hMem) = 0;
     virtual bool bindOutputTensor(int index, void *hMem) = 0;
@@ -157,6 +160,7 @@ protected:
 };
 
 IRuntime *createRuntime();
+void destroyRuntime(IRuntime *runtime);
 
 } // nvdla
 

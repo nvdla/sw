@@ -64,6 +64,11 @@ public:
     typedef typename std::map<R, L>::iterator right_iterator;
 
     void insert(L l, R r) { m_left_right[l] = r; m_right_left[r] = l; }
+    void remove(L l) {
+        R r = m_left_right[l];
+        m_left_right.erase(l);
+        m_right_left.erase(r);
+    }
 
     left_iterator begin_left()   { return m_left_right.begin(); }
     left_iterator end_left()     { return m_left_right.end();   }
