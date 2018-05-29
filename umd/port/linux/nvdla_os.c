@@ -127,7 +127,7 @@ void *NvDlaAlloc(size_t size)
 
 void NvDlaFree(void *ptr)
 {
-    if(!ptr)
+    if (ptr != NULL)
         free(ptr);
 }
 
@@ -262,29 +262,33 @@ void NvDlaThreadYield(void)
 
 NvDlaError NvDlaStat(const char *filename, NvDlaStatType *stat)
 {
-    NvDlaFileHandle file;
-    NvDlaDirHandle dir;
-    NvDlaError err;
+    NvDlaFileHandle file = 0;
+    NvDlaDirHandle dir = 0;
+    NvDlaError err = NvDlaSuccess;
 
-    if (!filename || !stat)
-        return NvDlaError_BadParameter;
+    if (!filename || !stat) {
+        err = NvDlaError_BadParameter;
+        goto fail;
+    }
 
     stat->size = 0;
     stat->type = NvDlaFileType_Unknown;
 
     if (NvDlaFopen(filename, NVDLA_OPEN_READ, &file) == NvDlaSuccess) {
         err = NvDlaFstat(file, stat);
-        NvDlaFclose(file);
-        return err;
+        goto close_file;
     }
 
     if (NvDlaOpendir(filename, &dir) == NvDlaSuccess) {
         stat->type = NvDlaFileType_Directory;
         stat->size = 0;
-        NvDlaClosedir(dir);
-        return NvDlaSuccess;
     }
-    return NvDlaError_BadParameter;
+
+    NvDlaClosedir(dir);
+close_file:
+    NvDlaFclose(file);
+fail:
+    return err;
 }
 
 NvDlaError NvDlaMkdir(char *dirname)
@@ -352,6 +356,7 @@ void NvDlaFclose(NvDlaFileHandle stream)
 
     // TODO: what if close fails. Insert assertions??
     (void)close(stream->fd);
+    stream->fd = -1;
     NvDlaFree(stream);
 }
 

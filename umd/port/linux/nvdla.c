@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2018, NVIDIA CORPORATION. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -99,6 +99,7 @@ NvDlaAllocMem(void *session_handle, void *device_handle, void **mem_handle,
 
     hMem->prime_handle = create_args.handle;
 
+    memset(&req, 0, sizeof(req));
     req.handle = create_args.handle;
     req.flags = DRM_CLOEXEC;
 
@@ -144,6 +145,20 @@ NvDlaFreeMem(void *session_handle, void *device_handle, void *mem_handle, void *
     struct nvdla_gem_destroy_args args;
     NvDlaMemHandle hMem = (NvDlaMemHandle)mem_handle;
     NvDlaDeviceHandle hDlaDev = (NvDlaDeviceHandle)device_handle;
+
+    if (hMem == 0)
+        return NvDlaError_BadParameter;
+
+    /* unmap data */
+    err = munmap(pData, size);
+    if (err != 0) {
+        printf("Failed to unmap memory err=%d, errno=%d\n",err, errno);
+        return NvDlaError_BadParameter;
+    }
+
+    /* Close the file handle corresponding to that mem */
+    if (hMem->fd != 0)
+        (void) close(hMem->fd);
 
     args.handle = hMem->prime_handle;
 
@@ -251,7 +266,12 @@ NvDlaClose(void *hDlaDevice)
 {
     NvDlaDeviceHandle device_handle = (NvDlaDeviceHandle)hDlaDevice;
 
+    if (hDlaDevice == NULL)
+        return;
+
     if (device_handle->fd != -1)
         (void)close(device_handle->fd);
+
+    NvDlaFree(device_handle);
     return;
 }
