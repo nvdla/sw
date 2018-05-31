@@ -131,7 +131,7 @@ static int roundUp(int num, int mul)
 }
 
 // This format conversion can be generalized and moved to DlaImageUtils
-NvDlaError createFF16ImageCopy(NvDlaImage* in, NvDlaImage* out)
+NvDlaError createFF16ImageCopy(NvDlaImage* in, NvDlaImage* out, NvU8 normalize_value)
 {
     out->m_meta.surfaceFormat = NvDlaImage::D_F16_CxHWx_x16_F;
     out->m_meta.width = in->m_meta.width;
@@ -177,7 +177,7 @@ NvDlaError createFF16ImageCopy(NvDlaImage* in, NvDlaImage* out)
 
                 NvU8* inp = ibuf + ioffset;
                 half_float::half* outp = reinterpret_cast<half_float::half*>(obuf + ooffset);
-                *outp = half_float::half(float(*inp)/255);
+                *outp = half_float::half(float(*inp)/normalize_value);
             }
         }
     }

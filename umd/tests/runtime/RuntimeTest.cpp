@@ -95,7 +95,7 @@ static NvDlaError copyImageToInputTensor
             goto fail;
     }
 
-    PROPAGATE_ERROR(createFF16ImageCopy(R8Image, FF16Image));
+    PROPAGATE_ERROR(createFF16ImageCopy(R8Image, FF16Image, appArgs->normalize_value));
     PROPAGATE_ERROR(DIMG2DlaBuffer(FF16Image, pImgBuffer));
 
 fail:

@@ -45,6 +45,7 @@ struct TestAppArgs
     std::string inputName;
     std::string loadableName;
     NvS32 serverPort;
+    NvU8 normalize_value;
     bool rawOutputDump;
 
     TestAppArgs() :
@@ -52,6 +53,7 @@ struct TestAppArgs
         inputName(""),
         loadableName(""),
         serverPort(6666),
+        normalize_value(1),
         rawOutputDump(false)
     {}
 };

@@ -156,6 +156,17 @@ int main(int argc, char* argv[])
 
             testAppArgs.loadableName = std::string(argv[++ii]);
         }
+        else if (std::strcmp(arg, "--normalize") == 0) // normalize value
+        {
+            if (ii+1 >= argc)
+            {
+                // Expecting another parameter
+                showHelp = true;
+                break;
+            }
+
+            testAppArgs.normalize_value = atoi(argv[++ii]);
+        }
         else if (std::strcmp(arg, "--rawdump") == 0)
         {
             testAppArgs.rawOutputDump = true;
@@ -181,10 +192,11 @@ int main(int argc, char* argv[])
     {
         NvDlaDebugPrintf("Usage: %s [-options] --loadable <loadable_file>\n", argv[0]);
         NvDlaDebugPrintf("where options include:\n");
-        NvDlaDebugPrintf("    -h               print this help message\n");
-        NvDlaDebugPrintf("    -s               launch test in server mode\n");
-        NvDlaDebugPrintf("    --image <file>   input jpg/pgm file\n");
-        NvDlaDebugPrintf("    --rawdump        dump raw dimg data\n");
+        NvDlaDebugPrintf("    -h                    print this help message\n");
+        NvDlaDebugPrintf("    -s                    launch test in server mode\n");
+        NvDlaDebugPrintf("    --image <file>        input jpg/pgm file\n");
+        NvDlaDebugPrintf("    --normalize <value>   normalize value for input image\n");
+        NvDlaDebugPrintf("    --rawdump             dump raw dimg data\n");
 
         if (unknownArg || missingArg)
             return EXIT_FAILURE;
