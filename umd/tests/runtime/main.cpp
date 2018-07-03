@@ -167,6 +167,28 @@ int main(int argc, char* argv[])
 
             testAppArgs.normalize_value = atoi(argv[++ii]);
         }
+        else if (std::strcmp(arg, "--mean") == 0) // Mean
+        {
+            if (ii+1 >= argc)
+            {
+                // Expecting another parameter
+                showHelp = true;
+                break;
+            }
+            char *token;
+            int i = 0;
+            token = strtok(argv[++ii], ",\n");
+            while( token != NULL ) {
+                if (i > 3) {
+                    NvDlaDebugPrintf("Number of mean values should not be greater than 4 \n");
+                    showHelp = true;
+                    break;
+                }
+                testAppArgs.mean[i] = atof(token);
+                token = strtok(NULL, ",\n");
+                i++;
+            }
+        }
         else if (std::strcmp(arg, "--rawdump") == 0)
         {
             testAppArgs.rawOutputDump = true;
@@ -196,6 +218,7 @@ int main(int argc, char* argv[])
         NvDlaDebugPrintf("    -s                    launch test in server mode\n");
         NvDlaDebugPrintf("    --image <file>        input jpg/pgm file\n");
         NvDlaDebugPrintf("    --normalize <value>   normalize value for input image\n");
+        NvDlaDebugPrintf("    --mean <value>        comma separated mean value for input image\n");
         NvDlaDebugPrintf("    --rawdump             dump raw dimg data\n");
 
         if (unknownArg || missingArg)

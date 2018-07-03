@@ -95,7 +95,7 @@ static NvDlaError copyImageToInputTensor
     FF16Image = i->inputImage;
     if (FF16Image == NULL)
         ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "NULL input Image");
-    PROPAGATE_ERROR(createFF16ImageCopy(R8Image, FF16Image, appArgs->normalize_value));
+    PROPAGATE_ERROR(createFF16ImageCopy(appArgs, R8Image, FF16Image));
     PROPAGATE_ERROR(DIMG2DlaBuffer(FF16Image, pImgBuffer));
 
 fail:

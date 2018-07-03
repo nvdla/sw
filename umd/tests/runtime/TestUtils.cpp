@@ -131,7 +131,7 @@ static int roundUp(int num, int mul)
 }
 
 // This format conversion can be generalized and moved to DlaImageUtils
-NvDlaError createFF16ImageCopy(NvDlaImage* in, NvDlaImage* out, NvU8 normalize_value)
+NvDlaError createFF16ImageCopy(const TestAppArgs* appArgs, NvDlaImage* in, NvDlaImage* out)
 {
     out->m_meta.surfaceFormat = NvDlaImage::D_F16_CxHWx_x16_F;
     out->m_meta.width = in->m_meta.width;
@@ -148,6 +148,11 @@ NvDlaError createFF16ImageCopy(NvDlaImage* in, NvDlaImage* out, NvU8 normalize_v
     // These calculations work for channels <= 16
     if (out->m_meta.channel > 16)
         ORIGINATE_ERROR(NvDlaError_BadParameter);
+
+    // Number of input channels should be <= 4
+    if (in->m_meta.channel > 4)
+        ORIGINATE_ERROR(NvDlaError_BadParameter);
+
     out->m_meta.lineStride = roundUp(out->m_meta.width * roundUp(out->m_meta.channel * bpe, strideAlign), strideAlign);
     out->m_meta.surfaceStride = roundUp(out->m_meta.lineStride * out->m_meta.height, strideAlign);
     out->m_meta.size = roundUp(out->m_meta.surfaceStride, sizeAlign);
@@ -177,7 +182,7 @@ NvDlaError createFF16ImageCopy(NvDlaImage* in, NvDlaImage* out, NvU8 normalize_v
 
                 NvU8* inp = ibuf + ioffset;
                 half_float::half* outp = reinterpret_cast<half_float::half*>(obuf + ooffset);
-                *outp = half_float::half(float(*inp)/normalize_value);
+                *outp = half_float::half((float(*inp) - float(appArgs->mean[z]))/appArgs->normalize_value);
             }
         }
     }
