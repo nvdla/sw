@@ -34,6 +34,7 @@
 #include <nvdla/ILoadable.h>
 
 #include "priv/Type.h"
+#include "priv/loadable_generated.h"
 
 namespace nvdla
 {
@@ -125,7 +126,9 @@ public: // internally facing
     Loadable();
     virtual ~Loadable();
 
-    virtual bool serializeToFlatBufferFile(const std::string &file_name) const;
+    virtual bool serialize();
+    virtual NvDlaError getSerializedData(NvU8 *buffer);
+    virtual NvDlaError getSerializedDataSize(NvU64 *size);
     virtual bool deserializeFrom(NvU8 *);
 
     struct Symbol {
@@ -152,6 +155,9 @@ protected:
     std::vector<RelocEntry> mRelocEntries;
 
     std::string mName;
+
+private:
+    flatbuffers::FlatBufferBuilder mFbb;
 };
 
 } // nvdla::priv

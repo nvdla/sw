@@ -448,12 +448,12 @@ Loadable::~Loadable()
     mAddressListEntries.clear();
     mTensorDescListEntries.clear();
     mRelocEntries.clear();
+    mFbb.Clear();
 }
 
-bool Loadable::serializeToFlatBufferFile(const std::string &filename) const
+bool Loadable::serialize()
 {
-    NvDlaError e = NvDlaSuccess;
-    flatbuffers::FlatBufferBuilder fbb;
+    // TODO: Check if already serialized.
 
     std::vector<flatbuffers::Offset<nvdla::loadable::SubmitListEntry>>  submit_list;
     std::vector<flatbuffers::Offset<nvdla::loadable::TaskListEntry>>    task_list;
@@ -470,11 +470,11 @@ bool Loadable::serializeToFlatBufferFile(const std::string &filename) const
 
     for ( size_t ti = 0, TI = mTaskListEntries.size(); ti != TI; ++ti ) {
         const ILoadable::TaskListEntry & tle = mTaskListEntries[ti];
-        auto addr_list_v = fbb.CreateVector<uint16_t>(tle.address_list);
-        auto pre_actions_v = fbb.CreateVector<uint16_t>(tle.preactions);
-        auto post_actions_v = fbb.CreateVector<uint16_t>(tle.postactions);
+        auto addr_list_v = mFbb.CreateVector<uint16_t>(tle.address_list);
+        auto pre_actions_v = mFbb.CreateVector<uint16_t>(tle.preactions);
+        auto post_actions_v = mFbb.CreateVector<uint16_t>(tle.postactions);
 
-        nvdla::loadable::TaskListEntryBuilder tleb(fbb);
+        nvdla::loadable::TaskListEntryBuilder tleb(mFbb);
         tleb.add_address_list(addr_list_v);
         tleb.add_pre_actions (pre_actions_v);
         tleb.add_post_actions(post_actions_v);
@@ -494,8 +494,8 @@ bool Loadable::serializeToFlatBufferFile(const std::string &filename) const
 
     for ( size_t si = 0, SI = mSubmitListEntries.size(); si != SI; ++si ) {
         const ILoadable::SubmitListEntry & sle = mSubmitListEntries[si];
-        auto tasks_v = fbb.CreateVector<uint16_t>(sle.tasks);
-        nvdla::loadable::SubmitListEntryBuilder sleb(fbb);
+        auto tasks_v = mFbb.CreateVector<uint16_t>(sle.tasks);
+        nvdla::loadable::SubmitListEntryBuilder sleb(mFbb);
         sleb.add_id(sle.id);
         sleb.add_task_id(tasks_v);
         submit_list.push_back(sleb.Finish());
@@ -504,9 +504,9 @@ bool Loadable::serializeToFlatBufferFile(const std::string &filename) const
     for ( size_t mi = 0, MI = mMemoryListEntries.size(); mi != MI; ++mi) {
 
         const ILoadable::MemoryListEntry & mle = mMemoryListEntries[mi];
-        auto contents_v = fbb.CreateVectorOfStrings(mle.contents);
-        auto offsets_v = fbb.CreateVector<uint64_t>(mle.offsets);
-        nvdla::loadable::MemoryListEntryBuilder mleb(fbb);
+        auto contents_v = mFbb.CreateVectorOfStrings(mle.contents);
+        auto offsets_v = mFbb.CreateVector<uint64_t>(mle.offsets);
+        nvdla::loadable::MemoryListEntryBuilder mleb(mFbb);
         mleb.add_contents(contents_v);
         mleb.add_offsets(offsets_v);
         mleb.add_size(mle.size);
@@ -522,7 +522,7 @@ bool Loadable::serializeToFlatBufferFile(const std::string &filename) const
 
     for ( size_t ai = 0, AI = mAddressListEntries.size(); ai != AI; ++ai) {
         const ILoadable::AddressListEntry & ale = mAddressListEntries[ai];
-        nvdla::loadable::AddressListEntryBuilder aleb(fbb);
+        nvdla::loadable::AddressListEntryBuilder aleb(mFbb);
         aleb.add_size(ale.size);
         aleb.add_offset(ale.offset);
         aleb.add_mem_id(ale.mem_id);
@@ -533,7 +533,7 @@ bool Loadable::serializeToFlatBufferFile(const std::string &filename) const
 
     for ( size_t ei = 0, EI = mEventListEntries.size(); ei != EI; ++ei) {
         const ILoadable::EventListEntry & ele = mEventListEntries[ei];
-        nvdla::loadable::EventListEntryBuilder eleb(fbb);
+        nvdla::loadable::EventListEntryBuilder eleb(mFbb);
         eleb.add_id(ele.id);
         eleb.add_op( (nvdla::loadable::EventOp) ele.op);
         eleb.add_target( ele.target );
@@ -543,9 +543,9 @@ bool Loadable::serializeToFlatBufferFile(const std::string &filename) const
 
     for ( std::map<std::string, Symbol>::const_iterator si = mSymbols.begin(); si != mSymbols.end(); ++si) {
         const Symbol &sym = si->second;
-        auto data_v = fbb.CreateVector<uint8_t>(sym.data, sym.size);
-        auto name_s = fbb.CreateString(sym.name.c_str());
-        nvdla::loadable::BlobBuilder bb(fbb);
+        auto data_v = mFbb.CreateVector<uint8_t>(sym.data, sym.size);
+        auto name_s = mFbb.CreateString(sym.name.c_str());
+        nvdla::loadable::BlobBuilder bb(mFbb);
         bb.add_data(data_v);
         bb.add_size(sym.size);
         nvdla::loadable::Version v(sym.version.major, sym.version.minor, sym.version.sub_minor);
@@ -557,8 +557,8 @@ bool Loadable::serializeToFlatBufferFile(const std::string &filename) const
 
     for ( size_t tdi = 0, TDI = mTensorDescListEntries.size(); tdi != TDI; ++tdi) {
         const ILoadable::TensorDescListEntry & ele = mTensorDescListEntries[tdi];
-        auto name_s = fbb.CreateString(ele.name.c_str());
-        nvdla::loadable::TensorDescListEntryBuilder tdleb(fbb);
+        auto name_s = mFbb.CreateString(ele.name.c_str());
+        nvdla::loadable::TensorDescListEntryBuilder tdleb(mFbb);
 
         tdleb.add_name(name_s);
         tdleb.add_id(ele.id);
@@ -592,7 +592,7 @@ bool Loadable::serializeToFlatBufferFile(const std::string &filename) const
     for ( size_t rli = 0, RLI = mRelocEntries.size(); rli != RLI; ++rli)
     {
         const ILoadable::RelocEntry & ele = mRelocEntries[rli];
-        nvdla::loadable::RelocListEntryBuilder rleb(fbb);
+        nvdla::loadable::RelocListEntryBuilder rleb(mFbb);
 
         rleb.add_address_id(ele.addressListId);
         rleb.add_write_id(ele.writeId);
@@ -605,22 +605,41 @@ bool Loadable::serializeToFlatBufferFile(const std::string &filename) const
     }
 
     flatbuffers::Offset<nvdla::loadable::Loadable> l =
-        CreateLoadableDirect(fbb, &loadable_version, &task_list, &memory_list, &address_list, &event_list, &blobs, &tensor_desc_list, &reloc_list, &submit_list);
+        CreateLoadableDirect(mFbb, &loadable_version, &task_list, &memory_list, &address_list, &event_list, &blobs, &tensor_desc_list, &reloc_list, &submit_list);
 
-    fbb.Finish(l, "NVDA");
+    mFbb.Finish(l, "NVDA");
 
-    size_t file_size = fbb.GetSize();
-    NvU8 * file_data = (NvU8*) fbb.GetBufferPointer();
-
-    NvDlaFileHandle file;
-    PROPAGATE_ERROR_FAIL(NvDlaFopen(filename.c_str(), NVDLA_OPEN_WRITE, &file));
-    PROPAGATE_ERROR_FAIL(NvDlaFwrite(file, file_data, file_size));
-    NvDlaFclose(file);
-
-fail:
     return true;
 }
 
+NvDlaError Loadable::getSerializedData(NvU8 *buffer)
+{
+    NvDlaError e = NvDlaSuccess;
+    NvU8 *tmp = NULL;
+    NvU64 size = 0;
+
+    if (buffer == NULL)
+        ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter);
+
+    size = mFbb.GetSize();
+    tmp = mFbb.GetBufferPointer();
+    memcpy(buffer, tmp, size);
+
+fail:
+    return e;
+}
+
+NvDlaError Loadable::getSerializedDataSize(NvU64 *size)
+{
+    NvDlaError e = NvDlaSuccess;
+    if (size == NULL)
+        ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter);
+
+    *size = mFbb.GetSize();
+
+fail:
+    return e;
+}
 
 bool Loadable::deserializeFrom(NvU8 *flatbuf)
 {
