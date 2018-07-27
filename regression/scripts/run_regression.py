@@ -126,7 +126,7 @@ def parseArguments(argv=None):
         help='Update lead files with test results if they mismatch'
     )
     save_group.add_argument(
-        '--savegold', dest='saveGold',
+        '--savegold',
         action='store_true', default=False,
         help='Update gold files with test results if they mismatch'
     )

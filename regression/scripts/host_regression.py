@@ -62,6 +62,8 @@ def execute_test(test, options):
 
     switch_keys = (
         'noclean',
+        'savelead',
+        'savegold',
     )
     for arg in switch_keys:
         if dict_opts[arg]:
