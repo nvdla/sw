@@ -68,6 +68,8 @@ def registerNvLargeTests(self, testplan):
          "Max pooling, 8x8x32 input cube, 8x8x32 output cube, no padding, 1x1 kernel size. No need to compare data. It is enough if task succeeds to pass this test."])
     testplan.append(
         [0, "Written", kmd, "NN_L0_1_large_random", None, nn, devices, "AlexNet - With random Data and Weights", "AlexNet"])
+    testplan.append(
+        [0, "Written", kmd, "NN_L0_1_large", None, nn, devices, "AlexNet", "AlexNet"])
 
 def registerFirmwareLargeTests(self):
     testplan = []
