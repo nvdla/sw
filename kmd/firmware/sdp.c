@@ -303,9 +303,10 @@ processor_sdp_program(struct dla_processor_group *group)
 	}
 
 	if (out_dma_ena) {
-		dla_get_dma_address(engine->driver_context,
+		dla_get_dma_cube_address(engine->driver_context,
 					engine->task->task_data,
 					sdp_surface->dst_data.address,
+					sdp_surface->dst_data.offset,
 					(void *)&dst_addr,
 					DESTINATION_DMA);
 		CHECK_ALIGN(dst_addr, atom_size);
@@ -323,25 +324,28 @@ processor_sdp_program(struct dla_processor_group *group)
 	y_rdma_ena &= (y_op->mode != SDP_OP_PER_LAYER);
 
 	if (x1_rdma_ena) {
-		dla_get_dma_address(engine->driver_context,
+		dla_get_dma_cube_address(engine->driver_context,
 					engine->task->task_data,
 					sdp_surface->x1_data.address,
+					sdp_surface->x1_data.offset,
 					(void *)&x1_addr,
 					DESTINATION_DMA);
 		CHECK_ALIGN(x1_addr, atom_size);
 	}
 	if (x2_rdma_ena) {
-		dla_get_dma_address(engine->driver_context,
+		dla_get_dma_cube_address(engine->driver_context,
 					engine->task->task_data,
 					sdp_surface->x2_data.address,
+					sdp_surface->x2_data.offset,
 					(void *)&x2_addr,
 					DESTINATION_DMA);
 		CHECK_ALIGN(x2_addr, atom_size);
 	}
 	if (y_rdma_ena) {
-		dla_get_dma_address(engine->driver_context,
+		dla_get_dma_cube_address(engine->driver_context,
 					engine->task->task_data,
 					sdp_surface->y_data.address,
+					sdp_surface->y_data.offset,
 					(void *)&y_addr,
 					DESTINATION_DMA);
 		CHECK_ALIGN(y_addr, atom_size);

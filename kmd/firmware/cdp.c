@@ -190,9 +190,10 @@ processor_cdp_program(struct dla_processor_group *group)
 	if (ret)
 		goto exit;
 
-	dla_get_dma_address(engine->driver_context,
+	dla_get_dma_cube_address(engine->driver_context,
 				engine->task->task_data,
 				cdp_surface->dst_data.address,
+				cdp_surface->dst_data.offset,
 				(void *)&output_address,
 				DESTINATION_DMA);
 	if (cdp_op->lut_index >= 0) {

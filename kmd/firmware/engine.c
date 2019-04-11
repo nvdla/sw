@@ -89,6 +89,27 @@ uint8_t bdma_grp_sts[2] = {
 struct dla_roi_desc roi_desc;
 
 /**
+ * Get DMA data cube address
+ */
+int32_t
+dla_get_dma_cube_address(void *driver_context, void *task_data,
+					int16_t index, uint32_t offset, void *dst_ptr,
+					uint32_t destination)
+{
+	int32_t ret = 0;
+	uint64_t *pdst = (uint64_t *)dst_ptr;
+       ret = dla_get_dma_address(driver_context, task_data, index,
+								dst_ptr, destination);
+	if (ret)
+		goto exit;
+
+	pdst[0] += offset;
+
+exit:
+	return ret;
+}
+
+/**
  * Read input buffer address
  *
  * For input layer, in case of static ROI this address is read
@@ -131,9 +152,10 @@ dla_read_input_address(struct dla_data_cube *data,
 		if (en->network->dynamic_roi &&
 			en->network->input_layer == op_index)
 			goto exit;
-		ret = dla_get_dma_address(en->driver_context,
+		ret = dla_get_dma_cube_address(en->driver_context,
 						en->task->task_data,
 						data->address,
+						data->offset,
 						(void *)address,
 						DESTINATION_DMA);
 		goto exit;

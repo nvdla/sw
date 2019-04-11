@@ -275,9 +275,10 @@ processor_conv_program(struct dla_processor_group *group)
 		ASSERT_GOTO((weight_compress_support), ret, ERR(INVALID_INPUT), exit);
 		ASSERT_GOTO((conv_surface->wmb_data.address != -1),
 			ret, ERR(INVALID_INPUT), exit);
-		dla_get_dma_address(engine->driver_context,
+		dla_get_dma_cube_address(engine->driver_context,
 					engine->task->task_data,
 					conv_surface->wmb_data.address,
+					conv_surface->wmb_data.offset,
 					(void *)&wmb_address,
 					DESTINATION_DMA);
 		CHECK_ALIGN(wmb_address, atom_size);
@@ -285,9 +286,10 @@ processor_conv_program(struct dla_processor_group *group)
 
 		ASSERT_GOTO((conv_surface->wgs_data.address != -1),
 			ret, ERR(INVALID_INPUT), exit);
-		dla_get_dma_address(engine->driver_context,
+		dla_get_dma_cube_address(engine->driver_context,
 					engine->task->task_data,
 					conv_surface->wgs_data.address,
+					conv_surface->wgs_data.offset,
 					(void *)&wgs_address,
 					DESTINATION_DMA);
 		CHECK_ALIGN(wgs_address, atom_size);
@@ -295,9 +297,10 @@ processor_conv_program(struct dla_processor_group *group)
 	}
 
 	if (conv_surface->weight_data.address != -1) {
-		dla_get_dma_address(engine->driver_context,
+		dla_get_dma_cube_address(engine->driver_context,
 					engine->task->task_data,
 					conv_surface->weight_data.address,
+					conv_surface->weight_data.offset,
 					(void *)&weight_address,
 					DESTINATION_DMA);
 		CHECK_ALIGN(weight_address, atom_size);
@@ -305,9 +308,10 @@ processor_conv_program(struct dla_processor_group *group)
 	}
 
 	if (conv_surface->dst_data.address != -1) {
-		dla_get_dma_address(engine->driver_context,
+		dla_get_dma_cube_address(engine->driver_context,
 					engine->task->task_data,
 					conv_surface->dst_data.address,
+					conv_surface->dst_data.offset,
 					(void *)&output_address,
 					DESTINATION_DMA);
 		CHECK_ALIGN(output_address, atom_size);

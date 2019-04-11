@@ -325,6 +325,7 @@ struct dla_data_cube {
 	uint16_t type; /* dla_mem_type */
 	int16_t address; /* offset to the actual IOVA in task.address_list */
 
+	uint32_t offset; /* offset within address */
 	uint32_t size;
 
 	/* cube dimensions */

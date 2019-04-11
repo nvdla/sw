@@ -152,6 +152,13 @@ int
 utils_get_free_group(struct dla_processor *processor,
 			uint8_t *group_id,
 			uint8_t *rdma_id);
+int32_t
+dla_get_dma_cube_address(void *driver_context,
+						void *task_data,
+						int16_t index,
+						uint32_t offset,
+						void *dst_ptr,
+						uint32_t destination);
 int
 dla_read_input_address(struct dla_data_cube *data,
 		       uint64_t *address,
