@@ -58,7 +58,7 @@ NvDlaError DlaBuffer2DIMG(void** pBuffer, NvDlaImage* image)
     return NvDlaSuccess;
 }
 
-NvDlaError Tensor2DIMG(const nvdla::IRuntime::NvDlaTensor* tensor, NvDlaImage* image)
+NvDlaError Tensor2DIMG(const TestAppArgs* appArgs, const nvdla::IRuntime::NvDlaTensor* tensor, NvDlaImage* image)
 {
     if (!tensor || !image)
         ORIGINATE_ERROR(NvDlaError_BadParameter);
@@ -75,6 +75,19 @@ NvDlaError Tensor2DIMG(const nvdla::IRuntime::NvDlaTensor* tensor, NvDlaImage* i
                 surfaceFormat = NvDlaImage::D_F16_CxHWx_x16_I;
             } else if (tensor->dataType == TENSOR_DATA_TYPE_INT8) {
                 surfaceFormat = NvDlaImage::D_F8_CxHWx_x32_I;
+            } else {
+                ORIGINATE_ERROR(NvDlaError_NotSupported);
+            }
+        }
+        break;
+        case TENSOR_PIXEL_FORMAT_FEATURE_X8:
+        {
+            if (tensor->dataType == TENSOR_DATA_TYPE_HALF) {
+                surfaceFormat = NvDlaImage::D_F16_CxHWx_x16_F;
+            } else if (tensor->dataType == TENSOR_DATA_TYPE_INT16) {
+                surfaceFormat = NvDlaImage::D_F16_CxHWx_x16_I;
+            } else if (tensor->dataType == TENSOR_DATA_TYPE_INT8) {
+                surfaceFormat = NvDlaImage::D_F8_CxHWx_x8_I;
             } else {
                 ORIGINATE_ERROR(NvDlaError_NotSupported);
             }
@@ -130,32 +143,90 @@ static int roundUp(int num, int mul)
     return num + mul - rem;
 }
 
-// This format conversion can be generalized and moved to DlaImageUtils
-NvDlaError createFF16ImageCopy(const TestAppArgs* appArgs, NvDlaImage* in, NvDlaImage* out)
+NvDlaError createImageCopy(const TestAppArgs* appArgs, const NvDlaImage* in, const nvdla::IRuntime::NvDlaTensor* outTensorDesc, NvDlaImage* out)
 {
-    out->m_meta.surfaceFormat = NvDlaImage::D_F16_CxHWx_x16_F;
-    out->m_meta.width = in->m_meta.width;
-    out->m_meta.height = in->m_meta.height;
-    out->m_meta.channel = in->m_meta.channel;
+    NvU8* ibuf = 0;
+    NvU8* obuf = 0;
 
-    NvS8 bpe = out->getBpe();
-    if (bpe <= 0)
+    out->m_meta.width = outTensorDesc->dims.w;
+    out->m_meta.height = outTensorDesc->dims.h;
+    out->m_meta.channel = outTensorDesc->dims.c;
+
+    if (in->m_meta.width != out->m_meta.width )
+        ORIGINATE_ERROR(NvDlaError_BadParameter, "Mismatched width: %u != %u", in->m_meta.width, out->m_meta.width);
+    if (in->m_meta.height != out->m_meta.height )
+        ORIGINATE_ERROR(NvDlaError_BadParameter, "Mismatched height: %u != %u", in->m_meta.height, out->m_meta.height);
+    if (in->m_meta.channel != out->m_meta.channel )
+        REPORT_ERROR(NvDlaError_BadParameter, "Mismatched channel: %u != %u", in->m_meta.channel, out->m_meta.channel);
+
+    switch(outTensorDesc->pixelFormat)
+    {
+    case NVDLA_PIXEL_FORMAT_R8:
+        out->m_meta.surfaceFormat = NvDlaImage::T_R8;
+        out->m_meta.lineStride    = outTensorDesc->stride[1];
+        out->m_meta.surfaceStride = 0;
+        out->m_meta.size          = outTensorDesc->bufferSize;
+        break;
+
+    case NVDLA_PIXEL_FORMAT_FEATURE:
+        if (outTensorDesc->dataType == NVDLA_DATA_TYPE_HALF)
+            out->m_meta.surfaceFormat = NvDlaImage::D_F16_CxHWx_x16_F;
+        else if (outTensorDesc->dataType == NVDLA_DATA_TYPE_INT8)
+        {
+            out->m_meta.surfaceFormat = NvDlaImage::D_F8_CxHWx_x32_I;
+        }
+        else
+            ORIGINATE_ERROR(NvDlaError_NotSupported, "Unsupported (pixel, data) combination: (%u, %u)", outTensorDesc->pixelFormat, outTensorDesc->dataType);
+
+        out->m_meta.lineStride    = outTensorDesc->stride[1];
+        out->m_meta.surfaceStride = outTensorDesc->stride[2];
+        out->m_meta.size          = outTensorDesc->bufferSize;
+        break;
+
+    case NVDLA_PIXEL_FORMAT_FEATURE_X8:
+        if (outTensorDesc->dataType == NVDLA_DATA_TYPE_INT8)
+            out->m_meta.surfaceFormat = NvDlaImage::D_F8_CxHWx_x8_I;
+        else
+            ORIGINATE_ERROR(NvDlaError_NotSupported, "Unsupported (pixel, data) combination: (%u, %u)", outTensorDesc->pixelFormat, outTensorDesc->dataType);
+
+        out->m_meta.lineStride    = outTensorDesc->stride[1];
+        out->m_meta.surfaceStride = outTensorDesc->stride[2];
+        out->m_meta.size          = outTensorDesc->bufferSize;
+        break;
+
+    case NVDLA_PIXEL_FORMAT_A16B16G16R16_F:
+        out->m_meta.surfaceFormat = NvDlaImage::T_A16B16G16R16_F;
+        out->m_meta.lineStride    = outTensorDesc->stride[1];
+        out->m_meta.surfaceStride = 0;
+        out->m_meta.size          = outTensorDesc->bufferSize;
+        break;
+
+    case NVDLA_PIXEL_FORMAT_A8B8G8R8:
+        out->m_meta.surfaceFormat = NvDlaImage::T_A8B8G8R8;
+        out->m_meta.lineStride    = outTensorDesc->stride[1];
+        out->m_meta.surfaceStride = 0;
+        out->m_meta.size          = outTensorDesc->bufferSize;
+        break;
+    default:
+        ORIGINATE_ERROR(NvDlaError_NotSupported, "Unsupported pixel format: %u", outTensorDesc->pixelFormat);
+    }
+
+    if (out->getBpe() <= 0)
         ORIGINATE_ERROR(NvDlaError_BadParameter);
 
-    // Enforce stride and size alignment of 32B
-    NvU32 strideAlign = 32;
-    NvU32 sizeAlign = 32;
     // These calculations work for channels <= 16
     if (out->m_meta.channel > 16)
         ORIGINATE_ERROR(NvDlaError_BadParameter);
 
     // Number of input channels should be <= 4
     if (in->m_meta.channel > 4)
-        ORIGINATE_ERROR(NvDlaError_BadParameter);
+        ORIGINATE_ERROR(NvDlaError_BadParameter, "Input channel should not be greater than 4");
 
-    out->m_meta.lineStride = roundUp(out->m_meta.width * roundUp(out->m_meta.channel * bpe, strideAlign), strideAlign);
-    out->m_meta.surfaceStride = roundUp(out->m_meta.lineStride * out->m_meta.height, strideAlign);
-    out->m_meta.size = roundUp(out->m_meta.surfaceStride, sizeAlign);
+    if ( 0 )
+    {
+        NvDlaDebugPrintf("Dims: %d x %d x %d: ", out->m_meta.height, out->m_meta.width, out->m_meta.channel);
+        NvDlaDebugPrintf("LS: %d SS: %d Size: %d\n", out->m_meta.lineStride, out->m_meta.surfaceStride, out->m_meta.size);
+    }
 
     // Allocate the buffer
     out->m_pData = NvDlaAlloc(out->m_meta.size);
@@ -163,8 +234,8 @@ NvDlaError createFF16ImageCopy(const TestAppArgs* appArgs, NvDlaImage* in, NvDla
     // Copy the data
     memset(out->m_pData, 0, out->m_meta.size);
 
-    NvU8* ibuf = static_cast<NvU8*>(in->m_pData);
-    NvU8* obuf = static_cast<NvU8*>(out->m_pData);
+    ibuf = static_cast<NvU8*>(in->m_pData);
+    obuf = static_cast<NvU8*>(out->m_pData);
 
     for (NvU32 y=0; y < in->m_meta.height; y++)
     {
@@ -181,8 +252,19 @@ NvDlaError createFF16ImageCopy(const TestAppArgs* appArgs, NvDlaImage* in, NvDla
                     ORIGINATE_ERROR(NvDlaError_BadParameter);
 
                 NvU8* inp = ibuf + ioffset;
-                half_float::half* outp = reinterpret_cast<half_float::half*>(obuf + ooffset);
-                *outp = half_float::half((float(*inp) - float(appArgs->mean[z]))/appArgs->normalize_value);
+
+                if (outTensorDesc->dataType == NVDLA_DATA_TYPE_HALF)
+                {
+                    half_float::half* outp = reinterpret_cast<half_float::half*>(obuf + ooffset);
+                    *outp = static_cast<half_float::half>((float(*inp) - float(appArgs->mean[z]))/appArgs->normalize_value);
+                }
+                else if (outTensorDesc->dataType == NVDLA_DATA_TYPE_INT8)
+                {
+                    char* outp = reinterpret_cast<char*>(obuf + ooffset);
+                    //*outp = char(*inp); // no normalization happens
+                    // compress the image from [0-255] to [0-127]
+                    *outp = static_cast<NvS8>(std::floor((*inp * 127.0/255.0) + 0.5f));
+                }
             }
         }
     }

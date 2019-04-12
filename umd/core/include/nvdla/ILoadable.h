@@ -111,6 +111,7 @@ public:
         MemoryFlags_SET    = NVDLA_LOADABLE_MEMORY_FLAGS_SET,
         MemoryFlags_INPUT  = NVDLA_LOADABLE_MEMORY_FLAGS_INPUT,
         MemoryFlags_OUTPUT = NVDLA_LOADABLE_MEMORY_FLAGS_OUTPUT,
+        MemoryFlags_DEBUG  = NVDLA_LOADABLE_MEMORY_FLAGS_DEBUG
     };
 
     enum EventOp {
@@ -147,7 +148,8 @@ public:
         static inline NvU8  flags_set()    { return MemoryFlags_SET;    }
         static inline NvU8  flags_input()  { return MemoryFlags_INPUT;  }
         static inline NvU8  flags_output() { return MemoryFlags_OUTPUT; }
-        NvU16 bind_id;  // valid iff flag_{input|output}()  is set
+        static inline NvU8  flags_debug()  { return MemoryFlags_DEBUG;  }
+        NvU16 bind_id;  // valid iff flag_{input|output|debug}()  is set
         NvU16 tensor_desc_id; // valid iff bind_id is valid ( != -1 )
         std::vector<std::string> contents;  // symbolic reference to content blob
         std::vector<uint64_t>    offsets;   // associated offset for contents
@@ -159,6 +161,15 @@ public:
                                                     tensor_desc_id(o.tensor_desc_id),
                                                     contents(o.contents),
                                                     offsets(o.offsets) { }
+        MemoryListEntry(NvU16 i, NvU64 s, NvU32 a, NvU8 d, NvU8 f, std::string sym = std::string(), uint64_t o = 0) :
+            id(i), size(s), alignment(a), domain(d), flags(f), bind_id(0), tensor_desc_id(0)
+        {
+            if ( sym.size() )
+            {
+                contents.push_back(sym);
+                offsets.push_back(o);
+            }
+        }
     };
 
     struct EventListEntry
@@ -192,6 +203,20 @@ public:
         std::vector<NvU16> preactions;   // [event id]...
         std::vector<NvU16> postactions;  // [event id]...
         std::vector<NvU16> address_list; // [addr list id]...[addr list id]
+        TaskListEntry(const TaskListEntry &o) :
+            id(o.id),
+            interface(o.interface),
+            instance(o.instance),
+            preactions(o.preactions),
+            postactions(o.postactions),
+            address_list(o.address_list) { }
+
+        TaskListEntry() : id(0),
+                          interface(Interface_NONE),
+                          instance(-1),
+                          preactions(),
+                          postactions(),
+                          address_list() { }
     };
 
     struct SubmitListEntry
@@ -207,6 +232,8 @@ public:
         NvU64 size;   // assert size <= memory[mem_id].size
         NvU64 offset; // assert (offset + size) <= memory[mem_id].size
         AddressListEntry() : id(0), mem_id(0), size(0), offset(0) { }
+        AddressListEntry(NvU16 i, NvU16 m, NvU64 s, NvU64 o = 0) : id(i), mem_id(m), size(s), offset(o) { }
+        AddressListEntry(const AddressListEntry &o) : id(o.id), mem_id(o.mem_id), size(o.size), offset(o.offset) { }
         void toC(NvDlaLoadableAddressListEntry &c) const {
             c.id = id;
             c.memId = mem_id;
@@ -228,7 +255,7 @@ public:
         NvU8 dataCategory;
         NvU8 pixelFormat;
         NvU8 pixelMapping;
-        NvU32 stride[NVDLA_RUNTIME_TENSOR_DESC_NUM_STRIDES];
+        NvU32 stride[NVDLA_LOADABLE_TENSOR_DESC_NUM_STRIDES];
     };
 
     struct RelocEntry
@@ -272,6 +299,18 @@ public:
         Interface interface;
         NvU32 subInterface;
         Version version;
+
+        Blob() :
+            size(0),
+            interface(Interface_NONE),
+            subInterface(0) { }
+
+        Blob(const std::string &n, NvU64 s, Interface i, NvU32 si, Version v) :
+            name(n),
+            size(s),
+            interface(i),
+            subInterface(si),
+            version(v) { }
     };
 
     virtual std::string getName() const = 0;

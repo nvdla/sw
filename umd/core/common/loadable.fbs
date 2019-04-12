@@ -231,7 +231,8 @@ enum PixelFormat : ubyte {
     Y12_V12U12_N444 = 33,
     Y16_U16V16_N444 = 34,
     Y16_V16U16_N444 = 35,
-    FEATURE = 36
+    FEATURE = 36,
+    FEATURE_X8 = 37
 }
 
 //

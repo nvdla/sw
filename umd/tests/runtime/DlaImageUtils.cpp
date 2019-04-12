@@ -55,7 +55,7 @@ static int roundUp(int numToRound, int multiple)
     return numToRound + multiple - remainder;
 }
 
-NvDlaError PGM2DIMG(std::string inputfilename, NvDlaImage* output)
+NvDlaError PGM2DIMG(std::string inputfilename, NvDlaImage* output, nvdla::IRuntime::NvDlaTensor *tensorDesc)
 {
     std::ifstream hFile(inputfilename.c_str());
     NvS8 bpe = -1;
@@ -70,12 +70,9 @@ NvDlaError PGM2DIMG(std::string inputfilename, NvDlaImage* output)
     if (bpe <= 0)
         ORIGINATE_ERROR(NvDlaError_BadParameter);
 
-    // Enforce stride and size alignment of 32B
-    NvU32 strideAlign = 32;
-    NvU32 sizeAlign = 32;
-    output->m_meta.lineStride = roundUp(output->m_meta.width * output->m_meta.channel * bpe, strideAlign);
-    output->m_meta.surfaceStride = roundUp(output->m_meta.lineStride * output->m_meta.height, strideAlign);
-    output->m_meta.size = roundUp(output->m_meta.surfaceStride, sizeAlign);
+    output->m_meta.lineStride = tensorDesc->stride[1];
+    output->m_meta.surfaceStride = tensorDesc->stride[2];;
+    output->m_meta.size = tensorDesc->bufferSize;
 
     NvDlaDebugPrintf("pgm2dimg %d %d %d %d %d %d %d\n",
                     output->m_meta.channel,
@@ -99,9 +96,88 @@ NvDlaError PGM2DIMG(std::string inputfilename, NvDlaImage* output)
     return NvDlaSuccess;
 }
 
-NvDlaError JPEG2DIMG(std::string inputFileName, NvDlaImage* output)
+static NvDlaError parsePGMInfo(std::ifstream& hFile, NvDlaImage* image)
+{
+    NvU32 width;
+    NvU32 height;
+    NvU32 maxVal;
+    std::istringstream iss;
+    std::string header[3];
+    NvU32 ii = 0;
+
+    // Parse header, read 3 real ASCII lines
+    while (ii < 3)
+    {
+        std::getline(hFile, header[ii]);
+
+        // Pass over comments
+        if (header[ii][0] == '#')
+            continue;
+
+        ii = ii + 1;
+    }
+
+    // Parse the magic word
+    if (header[0].compare("P5") != 0)
+        ORIGINATE_ERROR(NvDlaError_BadValue, "Unexpected PGM value: %s", header[0].c_str());
+
+    // Gather the width and height parameters
+    iss.str(header[1]);
+    if (!(iss >> width >> height))
+        ORIGINATE_ERROR(NvDlaError_BadValue, "Unexpected PGM value: %s", header[1].c_str());
+    iss.clear();
+
+    // Gather the max value
+    iss.str(header[2]);
+    if (!(iss >> maxVal))
+        ORIGINATE_ERROR(NvDlaError_BadValue, "Unexpected PGM value: %s", header[2].c_str());
+    iss.clear();
+
+    // We only support .pgm's with maxVal == 255
+    if (maxVal != 255)
+        ORIGINATE_ERROR(NvDlaError_BadValue, "Unexpected PGM value: %s", header[2].c_str());
+
+    // Transfer information
+    image->m_meta.surfaceFormat = NvDlaImage::T_R8;
+    image->m_meta.width = width;
+    image->m_meta.height = height;
+    image->m_meta.channel = 1;
+
+#if 0
+    NvDlaDebugPrintf("ppgminfo %d %d %d\n",
+                    image->m_meta.channel,
+                    image->m_meta.height,
+                    image->m_meta.width);
+#endif
+
+
+    return NvDlaSuccess;
+}
+
+static NvDlaError parsePGMData(std::ifstream& hFile, NvDlaImage* image)
+{
+    void* buf = image->m_pData;
+
+    // Clear contents
+    memset(buf, 0, image->m_meta.size);
+
+    // Copy contents
+    for (NvU32 y=0; y<image->m_meta.height; y++)
+    {
+        char* linebuf = reinterpret_cast<char*>(buf) + (y * image->m_meta.lineStride);
+        hFile.read(linebuf, image->m_meta.width);
+
+        if (hFile.fail())
+             ORIGINATE_ERROR(NvDlaError_FileOperationFailed, "File operation failed");
+    }
+
+    return NvDlaSuccess;
+}
+
+NvDlaError JPEG2DIMG(std::string inputFileName, NvDlaImage* output, nvdla::IRuntime::NvDlaTensor *tensorDesc)
 {
     NvDlaError e = NvDlaSuccess;
+
     NvU8* rowPtr[1];
     struct jpeg_decompress_struct info;
     struct jpeg_error_mgr err;
@@ -117,7 +193,7 @@ NvDlaError JPEG2DIMG(std::string inputFileName, NvDlaImage* output)
     jpeg_create_decompress(&info);
 
     jpeg_stdio_src(&info, fp);
-    jpeg_read_header(&info, TRUE);
+    jpeg_read_header(&info, true);
 
     // FIXME: right now assuming 8-bit jpegs
     switch(info.jpeg_color_space) {
@@ -174,16 +250,15 @@ NvDlaError JPEG2DIMG(std::string inputFileName, NvDlaImage* output)
         default: ORIGINATE_ERROR_FAIL(NvDlaError_NotSupported, "JPEG color space %d not supported", info.jpeg_color_space);
     }
 
-    NvDlaDebugPrintf("surface format: %d\n", (int)output->m_meta.surfaceFormat);
 
     jpeg_start_decompress(&info);
 
     // Read image size
     output->m_meta.height = info.image_height;
     output->m_meta.width = info.image_width;
-    output->m_meta.lineStride = roundUp(output->m_meta.width * output->m_meta.channel * output->getBpe(), 32);
+    output->m_meta.lineStride = tensorDesc->stride[1];
     output->m_meta.surfaceStride = 0;
-    output->m_meta.size = output->m_meta.lineStride * output->m_meta.height;
+    output->m_meta.size = tensorDesc->bufferSize;
 
     NvDlaDebugPrintf("dlaimg height: %d x %d x %d: ", output->m_meta.height, output->m_meta.width, output->m_meta.channel);
     NvDlaDebugPrintf("LS: %d SS: %d Size: %d\n", output->m_meta.lineStride, output->m_meta.surfaceStride, output->m_meta.size);
@@ -207,81 +282,6 @@ fail:
     jpeg_finish_decompress(&info);
     fclose(fp);
     return e;
-}
-
-static NvDlaError parsePGMInfo(std::ifstream& hFile, NvDlaImage* image)
-{
-    NvU32 width;
-    NvU32 height;
-    NvU32 maxVal;
-    std::istringstream iss;
-    std::string header[3];
-    NvU32 ii = 0;
-
-    // Parse header, read 3 real ASCII lines
-    while (ii < 3)
-    {
-        std::getline(hFile, header[ii]);
-
-        // Pass over comments
-        if (header[ii][0] == '#')
-            continue;
-
-        ii = ii + 1;
-    }
-
-    // Parse the magic word
-    if (header[0].compare("P5") != 0)
-        ORIGINATE_ERROR(NvDlaError_BadValue, "Unexpected PGM value: %s", header[0].c_str());
-
-    // Gather the width and height parameters
-    iss.str(header[1]);
-    if (!(iss >> width >> height))
-        ORIGINATE_ERROR(NvDlaError_BadValue, "Unexpected PGM value: %s", header[1].c_str());
-    iss.clear();
-
-    // Gather the max value
-    iss.str(header[2]);
-    if (!(iss >> maxVal))
-        ORIGINATE_ERROR(NvDlaError_BadValue, "Unexpected PGM value: %s", header[2].c_str());
-    iss.clear();
-
-    // We only support .pgm's with maxVal == 255
-    if (maxVal != 255)
-        ORIGINATE_ERROR(NvDlaError_BadValue, "Unexpected PGM value: %s", header[2].c_str());
-
-    // Transfer information
-    image->m_meta.surfaceFormat = NvDlaImage::T_R8;
-    image->m_meta.width = width;
-    image->m_meta.height = height;
-    image->m_meta.channel = 1;
-
-    NvDlaDebugPrintf("ppgminfo %d %d %d\n",
-                    image->m_meta.channel,
-                    image->m_meta.height,
-                    image->m_meta.width);
-
-    return NvDlaSuccess;
-}
-
-static NvDlaError parsePGMData(std::ifstream& hFile, NvDlaImage* image)
-{
-    void* buf = image->m_pData;
-
-    // Clear contents
-    memset(buf, 0, image->m_meta.size);
-
-    // Copy contents
-    for (NvU32 y=0; y<image->m_meta.height; y++)
-    {
-        char* linebuf = reinterpret_cast<char*>(buf) + (y * image->m_meta.lineStride);
-        hFile.read(linebuf, image->m_meta.width);
-
-        if (hFile.fail())
-             ORIGINATE_ERROR(NvDlaError_FileOperationFailed, "File operation failed");
-    }
-
-    return NvDlaSuccess;
 }
 
 NvDlaError DIMG2DIMGFile(const NvDlaImage* input, std::string outputfilename, bool stableHash, bool rawDump)

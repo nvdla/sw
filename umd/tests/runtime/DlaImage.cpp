@@ -26,6 +26,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <math.h>
+
 #include "DlaImage.h"
 #include "ErrorMacros.h"
 #include "nvdla_os_inf.h"
@@ -55,8 +57,10 @@ NvS8 NvDlaImage::getBpe() const
     case T_R8G8B8X8:
     case D_F8_CHW_I:
     case D_F8_CxHWx_x32_I:
+    case D_F8_CxHWx_x8_I:
         bpe = 1;
         break;
+    case T_A16B16G16R16_F:
     case D_F16_CHW_I:
     case D_F16_CHW_F:
     case D_F16_CxHWx_x16_I:
@@ -121,6 +125,7 @@ NvDlaImage::PixelFormatType NvDlaImage::getPixelFormatType() const
     case D_F8_CHW_I:
     case D_F16_CHW_I:
     case D_F8_CxHWx_x32_I:
+    case D_F8_CxHWx_x8_I:
     case D_F16_CxHWx_x16_I:
         type = INT;
         break;
@@ -174,9 +179,24 @@ NvS32 NvDlaImage::getAddrOffset(NvU32 w, NvU32 h, NvU32 c) const
     {
         offset = (h * m_meta.lineStride) + (w * m_meta.channel) + c;
     }
+    else if (m_meta.surfaceFormat == T_A8B8G8R8 || m_meta.surfaceFormat == T_A16B16G16R16_F)
+    {
+        NvU32 x = 4;
+        NvU32 xStride = x * bpe;
+        offset = (h * m_meta.lineStride) + (w * xStride) + (c * bpe);
+    }
     else if (m_meta.surfaceFormat == D_F8_CxHWx_x32_I)
     {
         NvU32 x = 32;
+        NvU32 xStride = x * bpe;
+        NvU32 cquotient = c / x;
+        NvU32 cremainder = c % x;
+
+        offset = (cquotient * m_meta.surfaceStride) + (h * m_meta.lineStride) + (w * xStride) + (cremainder * bpe);
+    }
+    else if (m_meta.surfaceFormat == D_F8_CxHWx_x8_I)
+    {
+        NvU32 x = 8;
         NvU32 xStride = x * bpe;
         NvU32 cquotient = c / x;
         NvU32 cremainder = c % x;
@@ -513,21 +533,38 @@ NvDlaError NvDlaImage::printBuffer(bool showBorders) const
 
                         NvDlaDebugPrintf("%s", str);
                     }
-		    else {
+                    else {
                         ORIGINATE_ERROR(NvDlaError_NotSupported);
                     }
                 }
-                else if (pftype == UINT || pftype == INT)
+                else if (pftype == INT)
                 {
                     if (bpe == 1)
                     {
-                        // U8 / S8
-                        NvDlaDebugPrintf("%02x", *reinterpret_cast<NvU8*>(buf + offset));
+                        // S8
+                        NvDlaDebugPrintf("%4d ", *reinterpret_cast<NvS8*>(buf + offset));
                     }
                     else if (bpe == 2)
                     {
-                        // U16 / S16
-                        NvDlaDebugPrintf("%04x", *reinterpret_cast<NvU16*>(buf + offset));
+                        // S16
+                        NvDlaDebugPrintf("%4d", *reinterpret_cast<NvS16*>(buf + offset));
+                    }
+                    else
+                    {
+                        ORIGINATE_ERROR(NvDlaError_NotSupported);
+                    }
+                }
+                else if (pftype == UINT)
+                {
+                    if (bpe == 1)
+                    {
+                        // U8
+                        NvDlaDebugPrintf("%4d", *reinterpret_cast<NvU8*>(buf + offset));
+                    }
+                    else if (bpe == 2)
+                    {
+                        // U16
+                        NvDlaDebugPrintf("%4d", *reinterpret_cast<NvU16*>(buf + offset));
                     }
                     else
                     {

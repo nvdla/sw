@@ -88,7 +88,8 @@ size_t EMUCommonOpDescAccessor::struct_size()  const { return _n.struct_size(); 
 size_t EMUCommonOpDescAccessor::struct_align() const { return _n.struct_align(); }
 
 NvU8 * EMUCommonOpDescAccessor::op_type()   const { return _n.op_type(_base); }
-
+NvF32 * EMUCommonOpDescAccessor::input_scale_factor() const { return _n.input_scale_factor(_base); }
+NvF32 * EMUCommonOpDescAccessor::output_scale_factor() const { return _n.output_scale_factor(_base); }
 
 //
 // emu_power_op_desc
@@ -141,8 +142,15 @@ size_t EMUBufferDescAccessor::struct_size()  const { return _n.struct_size();  }
 size_t EMUBufferDescAccessor::struct_align() const { return _n.struct_align(); }
 
 NvS16 * EMUBufferDescAccessor::addressIndex()    const { return _n.addressIndex(_base); }
+NvU32 * EMUBufferDescAccessor::addressIndexOffset()    const { return _n.addressIndexOffset(_base); }
 NvU32 * EMUBufferDescAccessor::size()       const { return _n.size(_base); }
 NvU16 * EMUBufferDescAccessor::format()     const { return _n.format(_base); }
+NvU16   EMUBufferDescAccessor::format_FF16()    const { return _n.format_FF16(); }
+NvU16   EMUBufferDescAccessor::format_INT8()    const { return _n.format_INT8(); }
+NvU16   EMUBufferDescAccessor::format_INT8_8()  const { return _n.format_INT8_8(); }
+NvU16   EMUBufferDescAccessor::format_UINT8()   const { return _n.format_UINT8(); }
+NvU16   EMUBufferDescAccessor::format_INT16()   const { return _n.format_INT16(); }
+NvU16   EMUBufferDescAccessor::format_UINT16()  const { return _n.format_UINT16(); }
 NvU16 * EMUBufferDescAccessor::width()      const { return _n.width(_base); }
 NvU16 * EMUBufferDescAccessor::height()     const { return _n.height(_base); }
 NvU16 * EMUBufferDescAccessor::channel()    const { return _n.channel(_base); }
@@ -195,6 +203,7 @@ EMUSoftmaxBufferDescsAccessor EMUOperationBufferContainerAccessor::softmaxBuffer
 EMUTaskDescAccessor     EMUInterface::taskDescAccessor(NvU8 *base)     const { return EMUTaskDescAccessor(base, taskDesc()); }
 EMUNetworkDescAccessor  EMUInterface::networkDescAccessor(NvU8 *base)  const { return EMUNetworkDescAccessor(base, networkDesc()); }
 EMUOperationContainerAccessor EMUInterface::operationContainerAccessor(NvU8 *base) const { return EMUOperationContainerAccessor(base, operationContainer()); }
+EMUBufferDescAccessor EMUInterface::bufferDescAccessor(NvU8 *base) const { return EMUBufferDescAccessor(base, bufferDesc()); }
 EMUOperationBufferContainerAccessor   EMUInterface::operationBufferContainerAccessor(NvU8 *base)   const { return EMUOperationBufferContainerAccessor(base, operationBufferContainer()); }
 
 } // nvdla::priv

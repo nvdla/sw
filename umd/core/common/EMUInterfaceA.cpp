@@ -114,6 +114,8 @@ public:
     virtual size_t struct_align() const { return 0; }
 
     virtual NvU8 * op_type(NvU8 *base) const { return &ric(base)->op_type; }
+    virtual NvF32 * input_scale_factor(NvU8 *base) const { return &ric(base)->input_scale_factor; }
+    virtual NvF32 * output_scale_factor(NvU8 *base) const { return &ric(base)->output_scale_factor; }
 
 protected:
     static inline emu_common_op_desc *ric(NvU8 *base) { return reinterpret_cast<emu_common_op_desc *>(base); }
@@ -200,8 +202,15 @@ public:
     virtual size_t struct_align() const { return 256; }
 
     virtual NvS16 * addressIndex(NvU8 *base)    const { return &ric(base)->addressIndex; }
+    virtual NvU32 * addressIndexOffset(NvU8 *base)    const { return &ric(base)->addressIndexOffset; }
     virtual NvU32 * size(NvU8 *base)       const { return &ric(base)->size; }
     virtual NvU16 * format(NvU8 *base)     const { return &ric(base)->format; }
+    virtual NvU16   format_FF16()          const { return EMU_FORMAT_FF16; }
+    virtual NvU16   format_INT8()          const { return EMU_FORMAT_INT8; }
+    virtual NvU16   format_INT8_8()        const { return EMU_FORMAT_INT8_8; }
+    virtual NvU16   format_UINT8()         const { return EMU_FORMAT_UINT8; }
+    virtual NvU16   format_INT16()         const { return EMU_FORMAT_INT16; }
+    virtual NvU16   format_UINT16()        const { return EMU_FORMAT_UINT16; }
     virtual NvU16 * width(NvU8 *base)      const { return &ric(base)->width; }
     virtual NvU16 * height(NvU8 *base)     const { return &ric(base)->height; }
     virtual NvU16 * channel(NvU8 *base)    const { return &ric(base)->channel; }
@@ -212,6 +221,7 @@ protected:
     static inline emu_buffer_desc *ric(NvU8 *base)       { return reinterpret_cast<emu_buffer_desc *>(base); }
 };
 static EMUBufferDescA g_emu_buffer_desc;
+const EMUBufferDesc & EMUInterfaceA::bufferDesc() const { return g_emu_buffer_desc; }
 
 
 //

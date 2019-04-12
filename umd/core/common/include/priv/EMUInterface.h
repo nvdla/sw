@@ -37,6 +37,13 @@
 #include "dlaerror.h"
 #include "dlatypes.h"
 
+#define EMU_FORMAT_INT8     0
+#define EMU_FORMAT_INT8_8   1
+#define EMU_FORMAT_INT16    2
+#define EMU_FORMAT_FF16     3
+#define EMU_FORMAT_UINT8    4
+#define EMU_FORMAT_UINT16   5
+
 namespace nvdla
 {
 
@@ -160,6 +167,8 @@ public:
     virtual size_t struct_align() const = 0;
 
     virtual NvU8 * op_type(NvU8 *base) const = 0;
+    virtual NvF32 * input_scale_factor(NvU8 *base) const = 0;
+    virtual NvF32 * output_scale_factor(NvU8 *base) const = 0;
 
 protected:
     EMUCommonOpDesc()          { }
@@ -174,6 +183,8 @@ public:
     size_t struct_align() const;
 
     NvU8 * op_type() const;
+    NvF32 * input_scale_factor() const;
+    NvF32 * output_scale_factor() const;
 
     EMUCommonOpDescAccessor(NvU8 *base, const EMUCommonOpDesc &);
 
@@ -302,8 +313,15 @@ public:
     virtual size_t struct_align() const = 0;
 
     virtual NvS16 * addressIndex(NvU8 *base)   const = 0;
+    virtual NvU32 * addressIndexOffset(NvU8 *base)   const = 0;
     virtual NvU32 * size(NvU8 *base)       const = 0;
     virtual NvU16 * format(NvU8 *base)     const = 0;
+    virtual NvU16   format_FF16()          const = 0;
+    virtual NvU16   format_INT8()          const = 0;
+    virtual NvU16   format_INT8_8()        const = 0;
+    virtual NvU16   format_UINT8()         const = 0;
+    virtual NvU16   format_INT16()         const = 0;
+    virtual NvU16   format_UINT16()        const = 0;
     virtual NvU16 * width(NvU8 *base)      const = 0;
     virtual NvU16 * height(NvU8 *base)     const = 0;
     virtual NvU16 * channel(NvU8 *base)    const = 0;
@@ -322,9 +340,16 @@ public:
     size_t struct_size()  const;
     size_t struct_align() const;
 
-    NvS16 * addressIndex()    const;
-    NvU32 * size()       const;
-    NvU16 * format()     const;
+    NvS16 * addressIndex()  const;
+    NvU32 * addressIndexOffset() const;
+    NvU32 * size()          const;
+    NvU16 * format()        const;
+    NvU16   format_FF16()   const;
+    NvU16   format_INT8()   const;
+    NvU16   format_INT8_8() const;
+    NvU16   format_UINT8()  const;
+    NvU16   format_INT16()  const;
+    NvU16   format_UINT16() const;
     NvU16 * width()      const;
     NvU16 * height()     const;
     NvU16 * channel()    const;
@@ -467,12 +492,14 @@ public:
     EMUTaskDescAccessor      taskDescAccessor(NvU8 *base)  const;
     EMUNetworkDescAccessor   networkDescAccessor(NvU8 *base)  const;
     EMUOperationContainerAccessor operationContainerAccessor(NvU8 *base)  const;
+    EMUBufferDescAccessor bufferDescAccessor(NvU8 *base)  const;
     EMUOperationBufferContainerAccessor operationBufferContainerAccessor(NvU8 *base)  const;
 
 protected:
     virtual const EMUTaskDesc     & taskDesc()  const = 0;
     virtual const EMUNetworkDesc  & networkDesc()  const = 0;
     virtual const EMUOperationContainer & operationContainer()  const = 0;
+    virtual const EMUBufferDesc & bufferDesc()  const = 0;
     virtual const EMUOperationBufferContainer & operationBufferContainer()  const = 0;
 };
 
@@ -501,6 +528,7 @@ protected:
     const EMUTaskDesc     & taskDesc()  const;
     const EMUNetworkDesc  & networkDesc()  const;
     const EMUOperationContainer & operationContainer()  const;
+    const EMUBufferDesc & bufferDesc()  const;
     const EMUOperationBufferContainer & operationBufferContainer()  const;
     const EMUAddress & address()  const;
 };

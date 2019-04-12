@@ -341,8 +341,9 @@ enum PixelFormat {
   PixelFormat_Y16_U16V16_N444 = 34,
   PixelFormat_Y16_V16U16_N444 = 35,
   PixelFormat_FEATURE = 36,
+  PixelFormat_FEATURE_X8 = 37,
   PixelFormat_MIN = PixelFormat_R8,
-  PixelFormat_MAX = PixelFormat_FEATURE
+  PixelFormat_MAX = PixelFormat_FEATURE_X8
 };
 
 inline const char **EnumNamesPixelFormat() {
@@ -384,6 +385,7 @@ inline const char **EnumNamesPixelFormat() {
     "Y16_U16V16_N444",
     "Y16_V16U16_N444",
     "FEATURE",
+    "FEATURE_X8",
     nullptr
   };
   return names;

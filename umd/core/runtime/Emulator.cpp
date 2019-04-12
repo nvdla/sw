@@ -173,67 +173,121 @@ bool Emulator::run()
     return ok;
 }
 
-bool Emulator::processTask(NvU8* task_mem, std::vector<NvU8*> addressList)
+NvDlaError Emulator::processTask(NvU8* task_mem, std::vector<NvU8*> addressList)
 {
+    NvDlaError e = NvDlaSuccess;
     EMUInterface* emu_if = new EMUInterfaceA();
     EMUTaskDescAccessor task_desc = emu_if->taskDescAccessor(task_mem);
     NVDLA_UNUSED(task_desc);
 
     // 0 - network descriptor
     EMUNetworkDescAccessor network_desc = emu_if->networkDescAccessor(addressList[0]);
+    NvU16 numOperations                 = *network_desc.numOperations();
 
-    EMUOperationContainerAccessor operation_container_0 = emu_if->operationContainerAccessor(addressList[*network_desc.operationDescIndex()]);
-    EMUOperationBufferContainerAccessor operation_buffer_container_0 = emu_if->operationBufferContainerAccessor(addressList[*network_desc.operationBufferDescIndex()]);
-    EMUCommonOpDescAccessor common_op_desc_0 = operation_container_0.softmaxOpDescAccessor(0).commonOpDescAccessor();
+    NvU8*  operation_container_0        = addressList[*network_desc.operationDescIndex()];
+    NvU8*  operation_buffer_container_0 = addressList[*network_desc.operationBufferDescIndex()];
 
-    if (*common_op_desc_0.op_type() == 0 /* POWER */)
+    for ( NvU16 op = 0; op < numOperations; ++op)
     {
-        EMUPowerOpDescAccessor power_op_desc = operation_container_0.powerOpDescAccessor(0);
-        EMUPowerBufferDescsAccessor power_op_buffer_descs = operation_buffer_container_0.powerBufferDescsAccessor(0);
+        // follow the same technique to obtain op_container and buffer_container accessors for each op as the compiler side
+        // this short-cut assumes that the op and buffer containers for all batches were placed contiguous in memory
 
-        executePower(power_op_desc, power_op_buffer_descs, addressList);
+        EMUOperationContainerAccessor operation_container              = emu_if->operationContainerAccessor(operation_container_0);
+        EMUOperationBufferContainerAccessor operation_buffer_container = emu_if->operationBufferContainerAccessor(operation_buffer_container_0);
 
-    } else if (*common_op_desc_0.op_type() == 1 /* SOFTMAX */) {
-        EMUSoftmaxOpDescAccessor softmax_op_desc = operation_container_0.softmaxOpDescAccessor(0);
-        EMUSoftmaxBufferDescsAccessor softmax_op_buffer_descs = operation_buffer_container_0.softmaxBufferDescsAccessor(0);
+        // HACK: Borrow softmax's accessor to get at the common descriptor
+        EMUCommonOpDescAccessor common_op_desc = operation_container.softmaxOpDescAccessor(op).commonOpDescAccessor();
 
-        executeSoftmax(softmax_op_desc, softmax_op_buffer_descs, addressList);
+        if (*common_op_desc.op_type() == 0 /* POWER */)
+        {
+            EMUPowerOpDescAccessor power_op_desc = operation_container.powerOpDescAccessor(op);
+            EMUPowerBufferDescsAccessor power_op_buffer_descs = operation_buffer_container.powerBufferDescsAccessor(op);
 
-    } else {
-        NvDlaDebugPrintf("Unknown op type %u\n", *common_op_desc_0.op_type());
+            PROPAGATE_ERROR_FAIL(executePower(power_op_desc, common_op_desc, power_op_buffer_descs, addressList));
+
+        } else if (*common_op_desc.op_type() == 1 /* SOFTMAX */) {
+            EMUSoftmaxOpDescAccessor softmax_op_desc = operation_container.softmaxOpDescAccessor(op);
+            EMUSoftmaxBufferDescsAccessor softmax_op_buffer_descs = operation_buffer_container.softmaxBufferDescsAccessor(op);
+
+            PROPAGATE_ERROR_FAIL(executeSoftmax(softmax_op_desc, common_op_desc, softmax_op_buffer_descs, addressList));
+
+        } else {
+            NvDlaDebugPrintf("Unknown op type %u\n", *common_op_desc.op_type());
+        }
     }
+fail:
+    return e;
+}
 
-    delete emu_if;
-
-    return true;
+NvS8 Emulator::getBpe(EMUBufferDescAccessor buffer)
+{
+    NvS8 bpe = -1;
+    switch(*buffer.format())
+    {
+        case EMU_FORMAT_FF16:
+        case EMU_FORMAT_INT16:
+        case EMU_FORMAT_UINT16:
+            bpe = 2; break;
+        case EMU_FORMAT_INT8:
+        case EMU_FORMAT_INT8_8:
+        case EMU_FORMAT_UINT8:
+            bpe = 1; break;
+        default:
+            bpe = -1;
+    }
+    return bpe;
 }
 
 NvDlaError Emulator::getAddrOffset(EMUBufferDescAccessor in, NvU32 w, NvU32 h, NvU32 c, NvU32* offset)
 {
     NvDlaError e = NvDlaSuccess;
 
-    if ((*in.format()) == 2/*NVDLA_FF16_F_FORMAT*/)
-    {
-        NvU8 bpe = 2;
-        NvU32 x = 16;
-        NvU32 xStride = x * bpe;
-        NvU32 cquotient = c / x;
-        NvU32 cremainder = c % x;
+    NvU32 x = 0;
+    NvU32 xStride = 0;
+    NvU32 cquotient = 0;
+    NvU32 cremainder = 0;
 
-        *offset = (cquotient * (*in.surfStride())) + (h * (*in.lineStride())) + (w * xStride) + (cremainder * bpe);
-    } else {
+    NvS8 bpe = getBpe(in);
+    if (bpe < 0)
+    {
         ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter);
     }
 
-    return NvDlaSuccess;
+    switch(*in.format())
+    {
+        case EMU_FORMAT_FF16:
+        case EMU_FORMAT_INT8:
+            x = 32 / bpe;
+            xStride = x * bpe;
+            cquotient = c / x;
+            cremainder = c % x;
+            *offset = (cquotient * (*in.surfStride())) + (h * (*in.lineStride())) + (w * xStride) + (cremainder * bpe);
+            break;
+        case EMU_FORMAT_INT8_8:
+            x = 8 / bpe;
+            xStride = x * bpe;
+            cquotient = c / x;
+            cremainder = c % x;
+            *offset = (cquotient * (*in.surfStride())) + (h * (*in.lineStride())) + (w * xStride) + (cremainder * bpe);
+            break;
+        default:
+            *offset = 0;
+            ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "Unsupported input format: %d\n", *in.format());
+    }
 
 fail:
     return e;
 }
 
-bool Emulator::executePower(EMUPowerOpDescAccessor opDesc, EMUPowerBufferDescsAccessor bufDescs, std::vector<NvU8*> addressList)
+NvDlaError Emulator::executePower
+(
+    EMUPowerOpDescAccessor opDesc,
+    EMUCommonOpDescAccessor commonOpDesc,
+    EMUPowerBufferDescsAccessor bufDescs,
+    std::vector<NvU8*> addressList
+)
 {
-
+    NvDlaError e = NvDlaSuccess;
     EMUBufferDescAccessor src = bufDescs.srcDataAccessor();
     EMUBufferDescAccessor dst = bufDescs.dstDataAccessor();
 
@@ -241,47 +295,95 @@ bool Emulator::executePower(EMUPowerOpDescAccessor opDesc, EMUPowerBufferDescsAc
     {
         NvDlaDebugPrintf("Processing power [power=%f scale=%f shift=%f]\n", *opDesc.power(), *opDesc.scale(), *opDesc.shift());
         NvDlaDebugPrintf("src format %u\n", *src.format());
-        NvDlaDebugPrintf("\taddress[%u] 0x%llx (%ux%ux%u) %uB\n", *src.addressIndex(), addressList[*src.addressIndex()], *src.width(), *src.height(), *src.channel(), *src.size());
+        NvDlaDebugPrintf("\taddress[%u][%u] 0x%llx (%ux%ux%u) %uB\n", *src.addressIndex(), *src.addressIndexOffset(),
+                addressList[*src.addressIndex()], *src.width(), *src.height(), *src.channel(), *src.size());
         NvDlaDebugPrintf("\tline_stride %uB surface_stride %uB\n", *src.lineStride(), *src.surfStride());
+        NvDlaDebugPrintf("\tinput scale factor: %f, output scale factor: %f\n", *commonOpDesc.input_scale_factor(), *commonOpDesc.output_scale_factor());
 
         NvDlaDebugPrintf("dst format %u\n", *dst.format());
-        NvDlaDebugPrintf("\taddress[%u] 0x%llx (%ux%ux%u) %uB\n", *dst.addressIndex(), addressList[*dst.addressIndex()], *dst.width(), *dst.height(), *dst.channel(), *dst.size());
+        NvDlaDebugPrintf("\taddress[%u][%u] 0x%llx (%ux%ux%u) %uB\n", *dst.addressIndex(), *dst.addressIndexOffset(),
+                addressList[*dst.addressIndex()], *dst.width(), *dst.height(), *dst.channel(), *dst.size());
         NvDlaDebugPrintf("\tline_stride %uB surface_stride %uB\n", *dst.lineStride(), *dst.surfStride());
     }
-    NvU8* pSrc = addressList[*src.addressIndex()];
-    NvU8* pDst = addressList[*dst.addressIndex()];
+
+    if ( *src.format() != *dst.format() )
+    {
+        ORIGINATE_ERROR_FAIL(NvDlaError_NotSupported, "Don't support EMU Scale operation with different "
+            " src (%d) and dst (%d) formats\n", static_cast<NvU32>(*src.format()),
+            static_cast<NvU32>(*dst.format()));
+    }
 
     // Execute
-    for (NvU32 channel=0; channel<*src.channel(); channel++)
     {
-        for (NvU32 height=0; height<*src.height(); height++)
+        NvU8* pSrc = addressList[*src.addressIndex()] + *src.addressIndexOffset();
+        NvU8* pDst = addressList[*dst.addressIndex()] + *dst.addressIndexOffset();
+
+        NvU32 srcoffset = 0;
+        NvU32 dstoffset = 0;
+
+        for (NvU32 channel=0; channel<*src.channel(); channel++)
         {
-            for (NvU32 width=0; width<*src.width(); width++)
+            for (NvU32 height=0; height<*src.height(); height++)
             {
-                NvU32 srcoffset = 0;
-                NvU32 dstoffset = 0;
-                if (getAddrOffset(src, width, height, channel, &srcoffset) != NvDlaSuccess)
-                    return false;
-                if (getAddrOffset(dst, width, height, channel, &dstoffset) != NvDlaSuccess)
-                    return false;
+                for (NvU32 width=0; width<*src.width(); width++)
+                {
+                    PROPAGATE_ERROR_FAIL(getAddrOffset(src, width, height, channel, &srcoffset));
+                    PROPAGATE_ERROR_FAIL(getAddrOffset(dst, width, height, channel, &dstoffset));
 
-                half_float::half* srchalfp = reinterpret_cast<half_float::half*>(pSrc + srcoffset);
-                half_float::half* dsthalfp = reinterpret_cast<half_float::half*>(pDst + dstoffset);
+                    if (*src.format() == EMU_FORMAT_FF16)
+                    {
+                        NvF32 x = 0;
+                        NvF32 y = 0;
 
-                NvF32 x = float(*srchalfp);
-                NvF32 y = powf((*opDesc.shift() + (*opDesc.scale() * x)), *opDesc.power());
-                *dsthalfp = half(y);
+                        half_float::half* srchalfp = reinterpret_cast<half_float::half*>(pSrc + srcoffset);
+                        half_float::half* dsthalfp = reinterpret_cast<half_float::half*>(pDst + dstoffset);
+
+                        x = float(*srchalfp);
+                        y = powf((*opDesc.shift() + (*opDesc.scale() * x)), *opDesc.power());
+                        *dsthalfp = half(y);
+                    }
+                    else if ((*src.format() == EMU_FORMAT_INT8) || (*src.format() == EMU_FORMAT_INT8_8))
+                    {
+                        NvF32 x = 0;
+                        NvF32 y = 0;
+
+                        NvS8* srcint8p = reinterpret_cast<NvS8*>(pSrc + srcoffset);
+                        NvS8* dstint8p = reinterpret_cast<NvS8*>(pDst + dstoffset);
+
+                        x = static_cast<NvF32>(*srcint8p);
+                        // scale input for executing in FLOAT land
+                        x *= *commonOpDesc.input_scale_factor();
+                        y = powf((*opDesc.shift() + (*opDesc.scale() * x)), *opDesc.power());
+                        // rescale output to write out in INT8 land
+                        y /= *commonOpDesc.output_scale_factor();
+
+                        *dstint8p = saturate<NvF32, NvS8>(y);
+                    }
+                    else
+                    {
+                        ORIGINATE_ERROR_FAIL(NvDlaError_NotSupported, "Don't support EMU scale operation for format: %d\n",
+                            static_cast<NvU32>(*src.format()));
+                    }
+                }
             }
         }
     }
 
-
-    return true;
+fail:
+    return e;
 }
 
 
-bool Emulator::executeSoftmax(EMUSoftmaxOpDescAccessor opDesc, EMUSoftmaxBufferDescsAccessor bufDescs, std::vector<NvU8*> addressList)
+NvDlaError Emulator::executeSoftmax
+(
+    EMUSoftmaxOpDescAccessor opDesc,
+    EMUCommonOpDescAccessor commonOpDesc,
+    EMUSoftmaxBufferDescsAccessor bufDescs,
+    std::vector<NvU8*> addressList
+)
 {
+    NvDlaError e = NvDlaSuccess;
+
     EMUBufferDescAccessor src = bufDescs.srcDataAccessor();
     EMUBufferDescAccessor dst = bufDescs.dstDataAccessor();
 
@@ -289,36 +391,119 @@ bool Emulator::executeSoftmax(EMUSoftmaxOpDescAccessor opDesc, EMUSoftmaxBufferD
     {
         NvDlaDebugPrintf("Processing softmax [axis=%u]\n", *opDesc.axis());
         NvDlaDebugPrintf("src format %u\n", *src.format());
-        NvDlaDebugPrintf("\taddress[%u] 0x%llx (%ux%ux%u) %uB\n", *src.addressIndex(), addressList[*src.addressIndex()], *src.width(), *src.height(), *src.channel(), *src.size());
+        NvDlaDebugPrintf("\taddress[%u][%u] 0x%llx (%ux%ux%u) %uB\n", *src.addressIndex(), *src.addressIndexOffset(),
+                addressList[*src.addressIndex()], *src.width(), *src.height(), *src.channel(), *src.size());
         NvDlaDebugPrintf("\tline_stride %uB surface_stride %uB\n", *src.lineStride(), *src.surfStride());
+        NvDlaDebugPrintf("\tinput scale factor: %f, output scale factor: %f\n", *commonOpDesc.input_scale_factor(), *commonOpDesc.output_scale_factor());
 
         NvDlaDebugPrintf("dst format %u\n", *dst.format());
-        NvDlaDebugPrintf("\taddress[%u] 0x%llx (%ux%ux%u) %uB\n", *dst.addressIndex(), addressList[*dst.addressIndex()], *dst.width(), *dst.height(), *dst.channel(), *dst.size());
+        NvDlaDebugPrintf("\taddress[%u][%u] 0x%llx (%ux%ux%u) %uB\n", *dst.addressIndex(),  *dst.addressIndexOffset(),
+                addressList[*dst.addressIndex()], *dst.width(), *dst.height(), *dst.channel(), *dst.size());
         NvDlaDebugPrintf("\tline_stride %uB surface_stride %uB\n", *dst.lineStride(), *dst.surfStride());
     }
 
-    half* pSrc = reinterpret_cast<half*>(addressList[*src.addressIndex()]);
-    half* pDst = reinterpret_cast<half*>(addressList[*dst.addressIndex()]);
-
-    NvF32 maxval = -INFINITY;
-    for (NvU32 ii=0; ii<*src.channel(); ii++)
+    if ( *src.format() != *dst.format() )
     {
-        if (float(pSrc[ii]) > maxval)
+        ORIGINATE_ERROR_FAIL(NvDlaError_NotSupported, "Don't support EMU Scale operation with different "
+            " src (%d) and dst (%d) formats\n", static_cast<NvU32>(*src.format()),
+            static_cast<NvU32>(*dst.format()));
+    }
+
+    // Execute
+    if (*src.format() == EMU_FORMAT_FF16)
+    {
+        half* pSrc = reinterpret_cast<half*>( addressList[*src.addressIndex()] + *src.addressIndexOffset());
+        half* pDst = reinterpret_cast<half*>( addressList[*dst.addressIndex()] + *dst.addressIndexOffset());
+
+        NvF32 maxval = -INFINITY;
+        for (NvU32 ii=0; ii<*src.channel(); ii++)
         {
-            maxval = float(pSrc[ii]);
+            if (float(pSrc[ii]) > maxval)
+            {
+                maxval = float(pSrc[ii]);
+            }
+        }
+        NvF32 sumexp = 0.0f;
+        for (NvU32 ii=0; ii<*src.channel(); ii++)
+        {
+            sumexp += expf(float(pSrc[ii])-maxval);
+        }
+        for (NvU32 ii=0; ii<*src.channel(); ii++)
+        {
+            pDst[ii] = expf(float(pSrc[ii])-maxval) / sumexp;
         }
     }
-    NvF32 sumexp = 0.0f;
-    for (NvU32 ii=0; ii<*src.channel(); ii++)
+    else if ((*src.format() == EMU_FORMAT_INT8) || (*src.format() == EMU_FORMAT_INT8_8))
     {
-        sumexp += expf(float(pSrc[ii])-maxval);
+        NvS8* pSrc = reinterpret_cast<NvS8*>( addressList[*src.addressIndex()] + *src.addressIndexOffset() );
+        NvS8* pDst = reinterpret_cast<NvS8*>( addressList[*dst.addressIndex()] + *dst.addressIndexOffset() );
+
+        half* pHalfSrc = reinterpret_cast<half*>(malloc(*src.channel() * sizeof(half)));
+        half* pHalfDst = reinterpret_cast<half*>(malloc(*dst.channel() * sizeof(half)));
+
+        // scale input for processing in FLOAT land
+        for (NvU32 ii = 0; ii < *src.channel(); ii++)
+        {
+            pHalfSrc[ii] = pSrc[ii] * (*commonOpDesc.input_scale_factor());
+        }
+
+        NvF32 maxval = -INFINITY;
+        for (NvU32 ii=0; ii<*src.channel(); ii++)
+        {
+            if (float(pHalfSrc[ii]) > maxval)
+            {
+                maxval = float(pHalfSrc[ii]);
+            }
+        }
+
+        NvF32 sumexp = 0.0f;
+        for (NvU32 ii=0; ii<*src.channel(); ii++)
+        {
+            sumexp += expf(float(pHalfSrc[ii])-maxval);
+        }
+        for (NvU32 ii=0; ii<*src.channel(); ii++)
+        {
+            pHalfDst[ii] = static_cast<half>(expf(float(pHalfSrc[ii])-maxval) / sumexp);
+        }
+
+        // rescale output to write out in INT8 land
+        for (NvU32 ii = 0; ii < *dst.channel(); ii++)
+        {
+            pDst[ii] = saturate<NvF32, NvS8>(pHalfDst[ii] / (*commonOpDesc.output_scale_factor()));
+        }
+
+        if (debugPrint())
+        {
+            NvF32 maxHalfDst = -INFINITY;
+            NvU32 maxHalfIndex = -1;
+            NvF32 maxIntDst = std::numeric_limits<NvS8>::lowest();
+            NvU32 maxIntIndex = -1;
+
+            for (NvU32 ii = 0; ii < *dst.channel(); ii++) {
+                if (pHalfDst[ii] > maxHalfDst) {
+                    maxHalfDst = pHalfDst[ii];
+                    maxHalfIndex = ii;
+                }
+                if (pDst[ii] > maxIntDst) {
+                    maxIntDst = pDst[ii];
+                    maxIntIndex = ii;
+                }
+            }
+
+            NvDlaDebugPrintf("Post-softmax max value: (half) %f, (int) %f\n", maxHalfDst, maxIntDst);
+            NvDlaDebugPrintf("at indices (half) %d, (int) %d\n", maxHalfIndex, maxIntIndex);
+        }
+
+
     }
-    for (NvU32 ii=0; ii<*src.channel(); ii++)
+    else
     {
-        pDst[ii] = expf(float(pSrc[ii])-maxval) / sumexp;
+        ORIGINATE_ERROR_FAIL(NvDlaError_NotSupported, "Don't support EMU softmax operation for format: %d\n",
+            static_cast<NvU32>(*src.format()));
     }
 
-    return true;
+fail:
+    return e;
 }
 
 

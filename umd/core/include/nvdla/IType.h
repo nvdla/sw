@@ -65,10 +65,11 @@ public:
         UNKNOWN = NVDLA_DATA_FORMAT_UNKNOWN,
         NCHW    = NVDLA_DATA_FORMAT_NCHW,
         NHWC    = NVDLA_DATA_FORMAT_NHWC,
+        NCxHWx  = NVDLA_DATA_FORMAT_NCxHWx,
     };
-    static inline UnderlyingType max() { return 2U; }
+    static inline UnderlyingType max() { return 3U; }
     const char* c_str() const {
-        const char * names[3] = { "UNKNOWN", "NCHW", "NHWC" };
+        const char * names[4] = { "UNKNOWN", "NCHW", "NHWC", "NCxHWx" };
         return names[m_v];
     }
 
@@ -83,20 +84,22 @@ public:
     typedef NvU8 UnderlyingType;
     enum Enum {
         UNKNOWN = NVDLA_DATA_TYPE_UNKNOWN,
-        FLOAT   = NVDLA_DATA_TYPE_FLOAT, //!< FP32 format
-        HALF    = NVDLA_DATA_TYPE_HALF,  //!< FP16 format
-        INT16   = NVDLA_DATA_TYPE_INT16, //!< INT16 format
-        INT8    = NVDLA_DATA_TYPE_INT8,  //!< INT8 format
+        FLOAT   = NVDLA_DATA_TYPE_FLOAT,  //!< FP32 format
+        HALF    = NVDLA_DATA_TYPE_HALF,   //!< FP16 format
+        INT16   = NVDLA_DATA_TYPE_INT16,  //!< INT16 format
+        INT8    = NVDLA_DATA_TYPE_INT8,   //!< INT8 format
+        UINT8   = NVDLA_DATA_TYPE_UINT8,  //!< UINT8 format
+        UINT16  = NVDLA_DATA_TYPE_UINT16, //!< UINT16 format
     };
-    static inline UnderlyingType max() { return 4U; }
+    static inline UnderlyingType max() { return 6U; }
     const char* c_str() const {
-        const char * names[5] = { "UNKNOWN", "FLOAT", "HALF", "INT16", "INT8" };
+        const char * names[7] = { "UNKNOWN", "FLOAT", "HALF", "INT16", "INT8", "UINT8", "UINT16" };
         return names[m_v];
     }
     static UnderlyingType getEnum(std::string find)
     {
         NvU8 i = 0;
-        const char * names[5] = { "UNKNOWN", "FLOAT", "HALF", "INT16", "INT8" };
+        const char * names[7] = { "UNKNOWN", "FLOAT", "HALF", "INT16", "INT8", "UINT8", "UINT16" };
         NvU8 match = UNKNOWN;
         for (; i <= max(); ++i) {
             if (names[i] == find) {
@@ -110,6 +113,67 @@ public:
 };
 template<> inline int EnumMax<DataType>() { return DataType::max() + 1; } // used by checkers
 
+class TensorScalingMode
+{
+public:
+    typedef NvU8 UnderlyingType;
+    enum Enum {
+        NONE        = NVDLA_TENSOR_SCALING_MODE_NONE,
+        PER_TENSOR  = NVDLA_TENSOR_SCALING_MODE_PER_TENSOR,
+        PER_CHANNEL = NVDLA_TENSOR_SCALING_MODE_PER_CHANNEL,
+    };
+    static inline UnderlyingType max() { return 2U; }
+    const char* c_str() const {
+        const char * names[3] = { "NONE", "PER_TENSOR", "PER_CHANNEL"};
+        return names[m_v];
+    }
+    static UnderlyingType getEnum(std::string find)
+    {
+        NvU8 i = 0;
+        const char * names[3] = { "NONE", "PER_TENSOR", "PER_CHANNEL"};
+        NvU8 match = NONE;
+        for (; i <= max(); ++i) {
+            if (names[i] == find) {
+                match = i;
+                break;
+            }
+        }
+        return match;
+    }
+    ENUM_CLASS_MEMBERS(TensorScalingMode);
+};
+template<> inline int EnumMax<TensorScalingMode>() { return TensorScalingMode::max() + 1; } // used by checkers
+
+class QuantizationMode
+{
+public:
+    typedef NvU8 UnderlyingType;
+    enum Enum {
+        NONE        = NVDLA_TENSOR_QUANTIZATION_MODE_NONE,
+        PER_KERNEL  = NVDLA_TENSOR_QUANTIZATION_MODE_PER_KERNEL,   // per KCRS
+        PER_FILTER  = NVDLA_TENSOR_QUANTIZATION_MODE_PER_FILTER,   // per CRS
+    };
+    static inline UnderlyingType max() { return 2U; }
+    const char* c_str() const {
+        const char * names[3] = { "NONE", "PER_KERNEL", "PER_FILTER"};
+        return names[m_v];
+    }
+    static UnderlyingType getEnum(std::string find)
+    {
+        NvU8 i = 0;
+        const char * names[3] = { "NONE", "PER_KERNEL", "PER_FILTER"};
+        NvU8 match = NONE;
+        for (; i <= max(); ++i) {
+            if (names[i] == find) {
+                match = i;
+                break;
+            }
+        }
+        return match;
+    }
+    ENUM_CLASS_MEMBERS(QuantizationMode);
+};
+template<> inline int EnumMax<QuantizationMode>() { return QuantizationMode::max() + 1; } // used by checkers
 
 class DataCategory
 {
@@ -147,9 +211,9 @@ enum TensorType
     kBATCH_NORM= 6,   /* mean/variance data */
     kSCALE     = 7,   /* scaling data */
     kSTREAM    = 8,   /* tensors on wire */
-    kDEBUG     = 9,   /* debug tensors */
+    kDEBUG     = 9,   /* debug output tensors */
 };
-template<> inline int EnumMax<TensorType>() {  return 7; }
+template<> inline int EnumMax<TensorType>() {  return 10; }
 
 class Dims2
 {
@@ -197,11 +261,16 @@ public:
         type(DataType::UNKNOWN),
         values(NULL),
         count(0)
-        {};
+    {};
     Weights(DataType type, const void* values, NvS64 count) :
         type(type),
         values(values),
         count(count)
+    {};
+    Weights(const Weights& other) :
+        type(other.type),
+        values(other.values),
+        count(other.count)
     {};
 
     DataType type;      //!< the type of the weights
@@ -228,18 +297,18 @@ public:
         kSLICE = NVDLA_LAYER_TYPE_SLICE,                        //!< Slice layer
         lt_kUNKNOWN = NVDLA_LAYER_TYPE_UNKNOWN,
     };
-    static inline UnderlyingType max() { return 11U; }
+    static inline UnderlyingType max() { return 12U; }
     const char* c_str() const {
-        const char * names[12] = { "CONVOLUTION", "FULLY_CONNECTED", "ACTIVATION",
-                                    "POOLING", "LRN", "SCALE", "SOFTMAX",
+        const char * names[13] = { "CONVOLUTION", "FULLY_CONNECTED", "ACTIVATION",
+                                    "POOLING", "LRN", "SCALE", "BATCHNORM", "SOFTMAX",
                                     "DECONVOLUTION", "CONCATENATION", "ELEMENTWISE", "SLICE", "UNKNOWN"};
         return names[m_v];
     }
     static UnderlyingType getEnum(std::string find)
     {
         NvU8 i = 0;
-        const char * names[12] = { "CONVOLUTION", "FULLY_CONNECTED", "ACTIVATION",
-                                    "POOLING", "LRN", "SCALE", "SOFTMAX",
+        const char * names[13] = { "CONVOLUTION", "FULLY_CONNECTED", "ACTIVATION",
+                                    "POOLING", "LRN", "SCALE", "BATCHNORM", "SOFTMAX",
                                     "DECONVOLUTION", "CONCATENATION", "ELEMENTWISE", "SLICE", "UNKNOWN"};
         NvU8 match = lt_kUNKNOWN;
         for (; i <= max(); ++i) {
@@ -253,7 +322,7 @@ public:
 
     ENUM_CLASS_MEMBERS(LayerType);
 };
-template<> inline int EnumMax<LayerType>() { return 13; } // used by checkers
+template<> inline int EnumMax<LayerType>() { return LayerType::max() + 1; } // used by checkers
 
 
 enum ActivationType
@@ -293,7 +362,7 @@ public:
     }
     ENUM_CLASS_MEMBERS(PoolingType);
 };
-template<> inline int EnumMax<PoolingType>() { return 2; } // used by checkers
+template<> inline int EnumMax<PoolingType>() { return PoolingType::max() + 1; } // used by checkers
 
 enum BiasMode
 {
@@ -302,15 +371,16 @@ enum BiasMode
     bCHANNEL = NVDLA_BIAS_MODE_CHANNEL,       //!< per-channel coefficients
     bm_ELEMENTWISE = NVDLA_BIAS_MODE_ELEMENTWISE //!< elementwise coefficients
 };
-template<> inline int EnumMax<BiasMode>() { return 3; } // used by checkers
+template<> inline int EnumMax<BiasMode>() { return 4; } // used by checkers
 
 enum ScaleMode
 {
+    sUNKNOWN = NVDLA_SCALE_MODE_UNKNOWN,       //!< unknown scale mode
     sUNIFORM = NVDLA_SCALE_MODE_UNIFORM,       //!< identical coefficients across all elements of the tensor
     sCHANNEL = NVDLA_SCALE_MODE_CHANNEL,       //!< per-channel coefficients
     sm_ELEMENTWISE = NVDLA_SCALE_MODE_ELEMENTWISE //!< elementwise coefficients
 };
-template<> inline int EnumMax<ScaleMode>() { return 3; } // used by checkers
+template<> inline int EnumMax<ScaleMode>() { return 4; } // used by checkers
 
 enum BatchNormMode
 {
@@ -382,6 +452,7 @@ public:
         Y16___U16V16_N444 = NVDLA_PIXEL_FORMAT_Y16___U16V16_N444,
         Y16___V16U16_N444 = NVDLA_PIXEL_FORMAT_Y16___V16U16_N444,
         FEATURE  = NVDLA_PIXEL_FORMAT_FEATURE,
+        FEATURE_X8  = NVDLA_PIXEL_FORMAT_FEATURE_X8,
         UNKNOWN  = NVDLA_PIXEL_FORMAT_UNKNOWN,
 
         // Y16___U8V8_N444 = NVDLA_PIXEL_FORMAT_UNSUPPORTED,
@@ -394,21 +465,21 @@ public:
 
     };
     typedef NvU8 UnderlyingType;
-    static inline UnderlyingType max() { return 37U; }
+    static inline UnderlyingType max() { return 38U; }
     const char* c_str() const {
-        const char * names[38] = { "R8", "R10", "R12", "R16", "R16_I", "R16_F", "A16B16G16R16", "X16B16G16R16", "A16B16G16R16_F", "A16Y16U16V16", "V16U16Y16A16", "A16Y16U16V16_F",
+        const char * names[39] = { "R8", "R10", "R12", "R16", "R16_I", "R16_F", "A16B16G16R16", "X16B16G16R16", "A16B16G16R16_F", "A16Y16U16V16", "V16U16Y16A16", "A16Y16U16V16_F",
                             "A8B8G8R8", "A8R8G8B8", "B8G8R8A8", "R8G8B8A8", "X8B8G8R8", "X8R8G8B8", "B8G8R8X8", "R8G8B8X8", "A2B10G10R10", "A2R10G10B10", "B10G10R10A2", "R10G10B10A2",
                             "A2Y10U10V10", "V10U10Y10A2", "A8Y8U8V8", "V8U8Y8A8", "Y8___U8V8_N444", "Y8___V8U8_N444", "Y10___U10V10_N444", "Y10___V10U10_N444", "Y12___U12V12_N444",
-                            "Y12___V12U12_N444", "Y16___U16V16_N444", "Y16___V16U16_N444", "FEATURE", "UNKNOWN"};
+                            "Y12___V12U12_N444", "Y16___U16V16_N444", "Y16___V16U16_N444", "FEATURE", "FEATURE_X8", "UNKNOWN"};
         return names[m_v];
     }
     static UnderlyingType getEnum(std::string find)
     {
         NvU8 i = 0;
-        const char * names[38] = { "R8", "R10", "R12", "R16", "R16_I", "R16_F", "A16B16G16R16", "X16B16G16R16", "A16B16G16R16_F", "A16Y16U16V16", "V16U16Y16A16", "A16Y16U16V16_F",
+        const char * names[39] = { "R8", "R10", "R12", "R16", "R16_I", "R16_F", "A16B16G16R16", "X16B16G16R16", "A16B16G16R16_F", "A16Y16U16V16", "V16U16Y16A16", "A16Y16U16V16_F",
                             "A8B8G8R8", "A8R8G8B8", "B8G8R8A8", "R8G8B8A8", "X8B8G8R8", "X8R8G8B8", "B8G8R8X8", "R8G8B8X8", "A2B10G10R10", "A2R10G10B10", "B10G10R10A2", "R10G10B10A2",
                             "A2Y10U10V10", "V10U10Y10A2", "A8Y8U8V8", "V8U8Y8A8", "Y8___U8V8_N444", "Y8___V8U8_N444", "Y10___U10V10_N444", "Y10___V10U10_N444", "Y12___U12V12_N444",
-                            "Y12___V12U12_N444", "Y16___U16V16_N444", "Y16___V16U16_N444", "FEATURE", "UNKNOWN"};
+                            "Y12___V12U12_N444", "Y16___U16V16_N444", "Y16___V16U16_N444", "FEATURE", "FEATURE_X8", "UNKNOWN"};
         NvU8 match = UNKNOWN;
         for (; i <= max(); ++i) {
             if (names[i] == find) {

@@ -66,24 +66,25 @@ static NvDlaError copyImageToInputTensor
 (
     const TestAppArgs* appArgs,
     TestInfo* i,
-    void** pImgBuffer
+    void** pImgBuffer,
+    nvdla::IRuntime::NvDlaTensor *tensorDesc
 )
 {
     NvDlaError e = NvDlaSuccess;
 
     std::string imgPath = /*i->inputImagesPath + */appArgs->inputName;
     NvDlaImage* R8Image = new NvDlaImage();
-    NvDlaImage* FF16Image = NULL;
+    NvDlaImage* tensorImage = NULL;
     TestImageTypes imageType = getImageType(imgPath);
     if (!R8Image)
         ORIGINATE_ERROR(NvDlaError_InsufficientMemory);
 
     switch(imageType) {
         case IMAGE_TYPE_PGM:
-            PROPAGATE_ERROR(PGM2DIMG(imgPath, R8Image));
+            PROPAGATE_ERROR(PGM2DIMG(imgPath, R8Image, tensorDesc));
             break;
         case IMAGE_TYPE_JPG:
-            PROPAGATE_ERROR(JPEG2DIMG(imgPath, R8Image));
+            PROPAGATE_ERROR(JPEG2DIMG(imgPath, R8Image, tensorDesc));
             break;
         default:
             //TODO Fix this error condition
@@ -92,11 +93,15 @@ static NvDlaError copyImageToInputTensor
             goto fail;
     }
 
-    FF16Image = i->inputImage;
-    if (FF16Image == NULL)
+    tensorImage = i->inputImage;
+    if (tensorImage == NULL)
         ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "NULL input Image");
-    PROPAGATE_ERROR(createFF16ImageCopy(appArgs, R8Image, FF16Image));
-    PROPAGATE_ERROR(DIMG2DlaBuffer(FF16Image, pImgBuffer));
+
+    PROPAGATE_ERROR(createImageCopy(appArgs, R8Image, tensorDesc, tensorImage));
+
+    //tensorImage->printBuffer(true);  /* Print the input Buffer */ 
+
+    PROPAGATE_ERROR(DIMG2DlaBuffer(tensorImage, pImgBuffer));
 
 fail:
     if (R8Image != NULL && R8Image->m_pData != NULL)
@@ -110,12 +115,13 @@ static NvDlaError prepareOutputTensor
 (
     nvdla::IRuntime::NvDlaTensor* pTDesc,
     NvDlaImage* pOutImage,
-    void** pOutBuffer
+    void** pOutBuffer,
+    const TestAppArgs* appArgs
 )
 {
     NvDlaError e = NvDlaSuccess;
 
-    PROPAGATE_ERROR_FAIL(Tensor2DIMG(pTDesc, pOutImage));
+    PROPAGATE_ERROR_FAIL(Tensor2DIMG(appArgs, pTDesc, pOutImage));
     PROPAGATE_ERROR_FAIL(DIMG2DlaBuffer(pOutImage, pOutBuffer));
 
 fail:
@@ -150,7 +156,7 @@ NvDlaError setupInputBuffer
 
     PROPAGATE_ERROR_FAIL(runtime->allocateSystemMemory(&hMem, tDesc.bufferSize, pInputBuffer));
     i->inputHandle = (NvU8 *)hMem;
-    PROPAGATE_ERROR_FAIL(copyImageToInputTensor(appArgs, i, pInputBuffer));
+    PROPAGATE_ERROR_FAIL(copyImageToInputTensor(appArgs, i, pInputBuffer, &tDesc));
 
     if (!runtime->bindInputTensor(0, hMem))
         ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "runtime->bindInputTensor() failed");
@@ -228,7 +234,7 @@ NvDlaError setupOutputBuffer
     pOutputImage = i->outputImage;
     if (i->outputImage == NULL)
         ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "NULL Output image");
-    PROPAGATE_ERROR_FAIL(prepareOutputTensor(&tDesc, pOutputImage, pOutputBuffer));
+    PROPAGATE_ERROR_FAIL(prepareOutputTensor(&tDesc, pOutputImage, pOutputBuffer, appArgs));
 
     if (!runtime->bindOutputTensor(0, hMem))
         ORIGINATE_ERROR_FAIL(NvDlaError_BadParameter, "runtime->bindOutputTensor() failed");
@@ -378,6 +384,8 @@ NvDlaError runTest(const TestAppArgs* appArgs, TestInfo* i)
         ORIGINATE_ERROR(NvDlaError_BadParameter, "runtime->submit() failed");
 
     PROPAGATE_ERROR_FAIL(DlaBuffer2DIMG(&pOutputBuffer, i->outputImage));
+
+    //i->outputImage->printBuffer(true);   /* Print the output buffer */
 
     /* Dump output dimg to a file */
     PROPAGATE_ERROR_FAIL(DIMG2DIMGFile(i->outputImage,

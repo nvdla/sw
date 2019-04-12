@@ -58,10 +58,12 @@
 #define NVDLA_LOADABLE_MEMORY_FLAGS_SET     2U
 #define NVDLA_LOADABLE_MEMORY_FLAGS_INPUT   4U
 #define NVDLA_LOADABLE_MEMORY_FLAGS_OUTPUT  8U
+#define NVDLA_LOADABLE_MEMORY_FLAGS_DEBUG  16U
 
 #define NVDLA_LOADABLE_EVENT_OP_WAIT   0U
 #define NVDLA_LOADABLE_EVENT_OP_SIGNAL 1U
 
+#define NVDLA_LOADABLE_TENSOR_DESC_NUM_STRIDES 8U    /* a little room to grow */
 
 struct NvDlaLoadableI;
 typedef struct NvDlaLoadable
@@ -119,27 +121,7 @@ typedef struct NvDlaLoadableAddressListEntry
     NvU64 size;
     NvU64 offset;
 } NvDlaLoadableAddressListEntry;
-#if 0
-typedef struct NvDlaLoadableTensorDescListEntry
-{
-    NvU16 id;
-    NvU16 mem_id;
-    NvU64 size;
-    NvU64 offset;
 
-    NvDlaDims4 dims;
-    NvU8 dataFormat;
-    NvU8 dataType;
-    NvU8 dataCategory;
-    NvU8 pixelFormat;
-    NvU8 pixelMapping;
-
-    NvU32 lineStride;
-    NvU32 surfStride;
-    NvU32 planeStride;
-
-} NvDlaLoadableTensorDescListEntry;
-#endif
 typedef struct NvDlaLoadableBlob
 {
     char *name;

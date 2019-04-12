@@ -83,14 +83,15 @@ public:
         D_F16_CHW_F = 39,
 
         D_F8_CxHWx_x32_I =  40,
-        D_F16_CxHWx_x16_I = 41,
-        D_F16_CxHWx_x16_F = 42,
+        D_F8_CxHWx_x8_I =  41,
+        D_F16_CxHWx_x16_I = 42,
+        D_F16_CxHWx_x16_F = 43,
 
-        D_F32_CHW_F = 43,
-        D_F32_CxHWx_x8_F = 44,
+        D_F32_CHW_F = 44,
+        D_F32_CxHWx_x8_F = 45,
 
-        T_R8G8B8 = 45,
-        T_B8G8R8 = 46,
+        T_R8G8B8 = 46,
+        T_B8G8R8 = 47,
     } PixelFormat;
 
     typedef enum _PixelFormatType
