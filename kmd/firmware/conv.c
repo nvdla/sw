@@ -626,9 +626,7 @@ processor_conv_program(struct dla_processor_group *group)
 		<< SHIFT(CDMA_D_BATCH_NUMBER_0, BATCHES));
 	cdma_reg_write(D_BATCH_NUMBER, reg);
 
-	reg = (conv_op->batch_stride
-		<< SHIFT(CDMA_D_BATCH_STRIDE_0, BATCH_STRIDE));
-	cdma_reg_write(D_BATCH_STRIDE, reg);
+	cdma_reg_write(D_BATCH_STRIDE, conv_op->batch_stride);
 
 	reg = ((conv_op->entry_per_slice - 1)
 		<< SHIFT(CDMA_D_ENTRY_PER_SLICE_0, ENTRIES));
