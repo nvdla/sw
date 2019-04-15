@@ -390,8 +390,6 @@ enable_op:
 	if (ret)
 		goto exit;
 
-	processor->last_group = group->id;
-
 	ret = dla_op_enabled(group);
 exit:
 	dla_debug("Exit: %s status=%d\n", __func__, ret);
@@ -658,6 +656,7 @@ dla_op_completion(struct dla_processor *processor,
 	}
 	group->active = 0;
 	group->lut_index = -1;
+	processor->last_group = group->id;
 
 	/**
 	 * Switch consumer pointer to next group
