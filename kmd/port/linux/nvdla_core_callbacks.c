@@ -70,6 +70,14 @@ static struct nvdla_config nvdla_config_small = {
 	.weight_compress_support = false,
 };
 
+static struct nvdla_config nvdla_config_large = {
+	.atom_size = 32,
+	.bdma_enable = false,
+	.rubik_enable = false,
+	.weight_compress_support = false,
+};
+
+
 void dla_debug(const char *str, ...)
 {
 	va_list args;
@@ -342,8 +350,12 @@ static const struct of_device_id nvdla_of_match[] = {
 		.data = &nvdla_config_os_initial,
 	},
 	{
-		.compatible = "nvidia,nvdla_2",
+		.compatible = "nvidia,nvdla_2", "nvidia,nv_small",
 		.data = &nvdla_config_small,
+	},
+	{
+		.compatible = "nvidia,nvdla_2", "nvidia,nv_large",
+		.data = &nvdla_config_large,
 	},
 	{ },
 };
