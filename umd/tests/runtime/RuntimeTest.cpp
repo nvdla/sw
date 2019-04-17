@@ -99,7 +99,10 @@ static NvDlaError copyImageToInputTensor
 
     PROPAGATE_ERROR(createImageCopy(appArgs, R8Image, tensorDesc, tensorImage));
 
-    //tensorImage->printBuffer(true);  /* Print the input Buffer */ 
+    if (0)
+    {
+        tensorImage->printBuffer(true);  /* Print the input Buffer */
+    }
 
     PROPAGATE_ERROR(DIMG2DlaBuffer(tensorImage, pImgBuffer));
 
@@ -385,7 +388,10 @@ NvDlaError runTest(const TestAppArgs* appArgs, TestInfo* i)
 
     PROPAGATE_ERROR_FAIL(DlaBuffer2DIMG(&pOutputBuffer, i->outputImage));
 
-    //i->outputImage->printBuffer(true);   /* Print the output buffer */
+    if (0)
+    {
+        i->outputImage->printBuffer(true);
+    }
 
     /* Dump output dimg to a file */
     PROPAGATE_ERROR_FAIL(DIMG2DIMGFile(i->outputImage,

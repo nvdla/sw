@@ -174,12 +174,12 @@ table SubmitListEntry {
 //
 // lines up with DataFormat enum in IType.h in UMD
 //
-enum DataFormat : ubyte  { UNKNOWN = 0, NCHW = 1, NHWC = 2 }
+enum DataFormat : ubyte  { UNKNOWN = 0, NCHW = 1, NHWC = 2, NCxHWx = 3 }
 
 //
 // lines up with DataType enum in IType.h in UMD
 //
-enum DataType : ubyte  { UNKNOWN = 0, FLOAT = 1, HALF = 2, INT16 = 3, INT8 = 4 }
+enum DataType : ubyte  { UNKNOWN = 0, FLOAT = 1, HALF = 2, INT16 = 3, INT8 = 4, UINT8 = 5, UINT16 = 6 }
 
 //
 // lines up with DataCategory enum in IType.h in UMD
