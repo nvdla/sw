@@ -1,0 +1,107 @@
+################################### tell Emacs this is a -*- makefile-gmake -*-
+#
+# Copyright (c) 2017 NVIDIA CORPORATION.  All Rights Reserved.
+#
+# NVIDIA CORPORATION and its licensors retain all intellectual property
+# and proprietary rights in and to this software, related documentation
+# and any modifications thereto.  Any use, reproduction, disclosure or
+# distribution of this software and related documentation without an express
+# license agreement from NVIDIA CORPORATION is strictly prohibited.
+#
+# tmake for SW Mobile component makefile
+#
+# libnvdla_protobuf-cpp-full static library component makefile
+#
+###############################################################################
+
+ifeq ($(NV_BUILD_CONFIGURATION_EXPOSING_T19X), 1)
+
+ifdef NV_COMPONENT_FLAG_STATIC_LIBRARY_SECTION
+include $(NV_BUILD_START_COMPONENT)
+
+NV_COMPONENT_NAME              := nvdla_protobuf-cpp-full
+NV_COMPONENT_OWN_INTERFACE_DIR := .
+
+CC_INCLUDES          := \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src \
+    $(NV_SOURCE)/3rdparty/google/protobuf/android
+
+CC_LITE_SOURCES           := \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/stubs/atomicops_internals_x86_gcc.cc \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/stubs/atomicops_internals_x86_msvc.cc \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/stubs/common.cc \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/stubs/once.cc \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/stubs/hash.h \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/stubs/map-util.h \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/stubs/shared_ptr.h \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/stubs/stringprintf.cc \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/stubs/stringprintf.h \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/extension_set.cc \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/generated_message_util.cc \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/message_lite.cc \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/repeated_field.cc \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/wire_format_lite.cc \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/io/coded_stream.cc \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/io/coded_stream_inl.h \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/io/zero_copy_stream.cc \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/io/zero_copy_stream_impl_lite.cc
+
+CC_FULL_SOURCES := \
+    $(CC_LITE_SOURCES)                                                                                     \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/stubs/strutil.cc                             \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/stubs/substitute.cc                          \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/stubs/structurally_valid.cc                  \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/descriptor.cc                                \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/descriptor.pb.cc                             \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/descriptor_database.cc                       \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/dynamic_message.cc                           \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/extension_set_heavy.cc                       \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/generated_message_reflection.cc              \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/message.cc                                   \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/reflection_ops.cc                            \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/service.cc                                   \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/text_format.cc                               \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/unknown_field_set.cc                         \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/wire_format.cc                               \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/io/gzip_stream.cc                            \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/io/printer.cc                                \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/io/strtod.cc                                 \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/io/tokenizer.cc                              \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/io/zero_copy_stream_impl.cc                  \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/compiler/importer.cc                         \
+    $(NV_SOURCE)/3rdparty/google/protobuf/src/google/protobuf/compiler/parser.cc
+
+
+NVDLA_CPP_COMPONENT_CODE_GENERATION := c++11
+
+NV_COMPONENT_INCLUDES          := \
+    $(CC_INCLUDES)
+
+NV_COMPONENT_SOURCES           := \
+    $(CC_FULL_SOURCES)
+
+NV_COMPONENT_CFLAGS := \
+    -DGOOGLE_PROTOBUF_NO_RTTI
+
+# Bring out the big hammer for protobuf
+_NV_TOOLCHAIN_CFLAGS            += \
+    -Wno-sign-compare \
+    -Wno-unused-parameter \
+    -Wno-return-type \
+    -Wno-ignored-qualifiers \
+    -Wno-uninitialized \
+    -Wno-maybe-uninitialized \
+    -Wno-missing-declarations
+
+ifeq ($(NV_BUILD_CONFIGURATION_OS_IS_QNX), 1)
+_NV_TOOLCHAIN_CFLAGS            += \
+    -Wno-unused-local-typedefs
+endif
+
+NV_COMPONENT_NEEDED_HEADER_INTERFACE_DIRS := \
+    $(NV_SOURCE)/core-private/utils/libz
+
+include $(NV_BUILD_STATIC_LIBRARY)
+endif
+
+endif
