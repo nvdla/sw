@@ -1,0 +1,230 @@
+TRT-5101-EntropyCalibration2
+data: 3f9839e4
+(Unnamed Layer* 0) [Convolution]_output: 40d0f64f
+(Unnamed Layer* 1) [Scale]_output: 3dcff4cf
+(Unnamed Layer* 2) [Scale]_output: 3db68545
+conv1: 3db68545
+pool1: 3db68545
+(Unnamed Layer* 5) [Convolution]_output: 3e262ac9
+(Unnamed Layer* 6) [Scale]_output: 3d860997
+res2a_branch1: 3df4d4a8
+(Unnamed Layer* 8) [Convolution]_output: 3e190ed1
+(Unnamed Layer* 9) [Scale]_output: 3db248b2
+(Unnamed Layer* 10) [Scale]_output: 3dfc9fce
+res2a_branch2a: 3d8ac3a1
+(Unnamed Layer* 12) [Convolution]_output: 3dc7de31
+(Unnamed Layer* 13) [Scale]_output: 3d9ceef1
+(Unnamed Layer* 14) [Scale]_output: 3dc50ee9
+res2a_branch2b: 3dc63782
+(Unnamed Layer* 16) [Convolution]_output: 3d2fb869
+(Unnamed Layer* 17) [Scale]_output: 3d7eea34
+res2a_branch2c: 3d94a3aa
+(Unnamed Layer* 19) [ElementWise]_output: 3e047a42
+res2a: 3dc9acf7
+(Unnamed Layer* 21) [Convolution]_output: 3da1a6b5
+(Unnamed Layer* 22) [Scale]_output: 3d85e41f
+(Unnamed Layer* 23) [Scale]_output: 3dc7ac1f
+res2b_branch2a: 3d97570d
+(Unnamed Layer* 25) [Convolution]_output: 3d5c08b7
+(Unnamed Layer* 26) [Scale]_output: 3d86d1d0
+(Unnamed Layer* 27) [Scale]_output: 3d985f46
+res2b_branch2b: 3d910be4
+(Unnamed Layer* 29) [Convolution]_output: 3ca4d22b
+(Unnamed Layer* 30) [Scale]_output: 3daa0b0d
+res2b_branch2c: 3d67a442
+(Unnamed Layer* 32) [ElementWise]_output: 3db4f594
+res2b: 3dc8e452
+(Unnamed Layer* 34) [Convolution]_output: 3d9c4599
+(Unnamed Layer* 35) [Scale]_output: 3d6acc4f
+(Unnamed Layer* 36) [Scale]_output: 3da9cdf2
+res2c_branch2a: 3d81b52a
+(Unnamed Layer* 38) [Convolution]_output: 3d427b30
+(Unnamed Layer* 39) [Scale]_output: 3d775a4b
+(Unnamed Layer* 40) [Scale]_output: 3db6dc54
+res2c_branch2b: 3db6dc54
+(Unnamed Layer* 42) [Convolution]_output: 3cd29571
+(Unnamed Layer* 43) [Scale]_output: 3d838eb0
+res2c_branch2c: 3d467355
+(Unnamed Layer* 45) [ElementWise]_output: 3dc595fa
+res2c: 3dc635eb
+(Unnamed Layer* 47) [Convolution]_output: 3d7a4cc1
+(Unnamed Layer* 48) [Scale]_output: 3d696fc3
+res3a_branch1: 3dbc23ef
+(Unnamed Layer* 50) [Convolution]_output: 3d8ddda8
+(Unnamed Layer* 51) [Scale]_output: 3d8022c5
+(Unnamed Layer* 52) [Scale]_output: 3d979475
+res3a_branch2a: 3d8d18c1
+(Unnamed Layer* 54) [Convolution]_output: 3d964723
+(Unnamed Layer* 55) [Scale]_output: 3d6c6d5b
+(Unnamed Layer* 56) [Scale]_output: 3da5144f
+res3a_branch2b: 3d7258a4
+(Unnamed Layer* 58) [Convolution]_output: 3cbff3eb
+(Unnamed Layer* 59) [Scale]_output: 3d653cdf
+res3a_branch2c: 3dc9afc9
+(Unnamed Layer* 61) [ElementWise]_output: 3dfbcc56
+res3a: 3de57a66
+(Unnamed Layer* 63) [Convolution]_output: 3d832987
+(Unnamed Layer* 64) [Scale]_output: 3d6ba6a3
+(Unnamed Layer* 65) [Scale]_output: 3d754e6c
+res3b_branch2a: 3d63cb7d
+(Unnamed Layer* 67) [Convolution]_output: 3d189967
+(Unnamed Layer* 68) [Scale]_output: 3d60e57f
+(Unnamed Layer* 69) [Scale]_output: 3da3100b
+res3b_branch2b: 3d8c0bf2
+(Unnamed Layer* 71) [Convolution]_output: 3c60e382
+(Unnamed Layer* 72) [Scale]_output: 3d51b0c3
+res3b_branch2c: 3d4d1630
+(Unnamed Layer* 74) [ElementWise]_output: 3daf2484
+res3b: 3daf2484
+(Unnamed Layer* 76) [Convolution]_output: 3db29003
+(Unnamed Layer* 77) [Scale]_output: 3d80e5dd
+(Unnamed Layer* 78) [Scale]_output: 3d971ffd
+res3c_branch2a: 3daf39d7
+(Unnamed Layer* 80) [Convolution]_output: 3d829cea
+(Unnamed Layer* 81) [Scale]_output: 3d8cf77a
+(Unnamed Layer* 82) [Scale]_output: 3db7b628
+res3c_branch2b: 3d816c10
+(Unnamed Layer* 84) [Convolution]_output: 3cb37946
+(Unnamed Layer* 85) [Scale]_output: 3e34e6cf
+res3c_branch2c: 3de3879c
+(Unnamed Layer* 87) [ElementWise]_output: 3df85e53
+res3c: 3dae6b87
+(Unnamed Layer* 89) [Convolution]_output: 3d9dd0b2
+(Unnamed Layer* 90) [Scale]_output: 3d8b4586
+(Unnamed Layer* 91) [Scale]_output: 3dd6bd96
+res3d_branch2a: 3dbd052d
+(Unnamed Layer* 93) [Convolution]_output: 3d6f7bdc
+(Unnamed Layer* 94) [Scale]_output: 3d8bb0fd
+(Unnamed Layer* 95) [Scale]_output: 3db05a25
+res3d_branch2b: 3db7b413
+(Unnamed Layer* 97) [Convolution]_output: 3cb02a30
+(Unnamed Layer* 98) [Scale]_output: 3da1d24c
+res3d_branch2c: 3d580df9
+(Unnamed Layer* 100) [ElementWise]_output: 3df2990e
+res3d: 3dfa742a
+(Unnamed Layer* 102) [Convolution]_output: 3d7f808b
+(Unnamed Layer* 103) [Scale]_output: 3d6d56a2
+res4a_branch1: 3dd4b089
+(Unnamed Layer* 105) [Convolution]_output: 3d7fa7a6
+(Unnamed Layer* 106) [Scale]_output: 3d85c800
+(Unnamed Layer* 107) [Scale]_output: 3d988280
+res4a_branch2a: 3d988280
+(Unnamed Layer* 109) [Convolution]_output: 3dcf25de
+(Unnamed Layer* 110) [Scale]_output: 3d42cf61
+(Unnamed Layer* 111) [Scale]_output: 3d96948b
+res4a_branch2b: 3d6adff0
+(Unnamed Layer* 113) [Convolution]_output: 3c9e3431
+(Unnamed Layer* 114) [Scale]_output: 3d80e0b1
+res4a_branch2c: 3da0caf2
+(Unnamed Layer* 116) [ElementWise]_output: 3df61d15
+res4a: 3dede457
+(Unnamed Layer* 118) [Convolution]_output: 3dd106ba
+(Unnamed Layer* 119) [Scale]_output: 3d737913
+(Unnamed Layer* 120) [Scale]_output: 3d87d0dd
+res4b_branch2a: 3d890705
+(Unnamed Layer* 122) [Convolution]_output: 3d2e70c6
+(Unnamed Layer* 123) [Scale]_output: 3d695f2a
+(Unnamed Layer* 124) [Scale]_output: 3d94aae4
+res4b_branch2b: 3d4991eb
+(Unnamed Layer* 126) [Convolution]_output: 3c7bd1db
+(Unnamed Layer* 127) [Scale]_output: 3dd0f873
+res4b_branch2c: 3d9a115b
+(Unnamed Layer* 129) [ElementWise]_output: 3dc51b22
+res4b: 3dc6abec
+(Unnamed Layer* 131) [Convolution]_output: 3d8cb4f4
+(Unnamed Layer* 132) [Scale]_output: 3d71092c
+(Unnamed Layer* 133) [Scale]_output: 3d831924
+res4c_branch2a: 3d8cda2a
+(Unnamed Layer* 135) [Convolution]_output: 3d09cbf5
+(Unnamed Layer* 136) [Scale]_output: 3d6f98fe
+(Unnamed Layer* 137) [Scale]_output: 3d7c7352
+res4c_branch2b: 3d5b788f
+(Unnamed Layer* 139) [Convolution]_output: 3c5e2e47
+(Unnamed Layer* 140) [Scale]_output: 3da354b7
+res4c_branch2c: 3d77e8df
+(Unnamed Layer* 142) [ElementWise]_output: 3dc81f79
+res4c: 3dcea4c5
+(Unnamed Layer* 144) [Convolution]_output: 3d867093
+(Unnamed Layer* 145) [Scale]_output: 3d712a8e
+(Unnamed Layer* 146) [Scale]_output: 3d8f5f32
+res4d_branch2a: 3d857279
+(Unnamed Layer* 148) [Convolution]_output: 3d222b17
+(Unnamed Layer* 149) [Scale]_output: 3d75ad99
+(Unnamed Layer* 150) [Scale]_output: 3d91f8f6
+res4d_branch2b: 3d917153
+(Unnamed Layer* 152) [Convolution]_output: 3cf5e77f
+(Unnamed Layer* 153) [Scale]_output: 3e3904d9
+res4d_branch2c: 3e00155a
+(Unnamed Layer* 155) [ElementWise]_output: 3e0b8aae
+res4d: 3dba1dbc
+(Unnamed Layer* 157) [Convolution]_output: 3d8eea78
+(Unnamed Layer* 158) [Scale]_output: 3d8b40d2
+(Unnamed Layer* 159) [Scale]_output: 3d95ea6d
+res4e_branch2a: 3d9ad2c6
+(Unnamed Layer* 161) [Convolution]_output: 3cf4f5bc
+(Unnamed Layer* 162) [Scale]_output: 3d9112c2
+(Unnamed Layer* 163) [Scale]_output: 3da89425
+res4e_branch2b: 3d9f576d
+(Unnamed Layer* 165) [Convolution]_output: 3d1d5813
+(Unnamed Layer* 166) [Scale]_output: 3e2b5754
+res4e_branch2c: 3e0019c5
+(Unnamed Layer* 168) [ElementWise]_output: 3e003047
+res4e: 3dc42a7a
+(Unnamed Layer* 170) [Convolution]_output: 3d8a1905
+(Unnamed Layer* 171) [Scale]_output: 3d891850
+(Unnamed Layer* 172) [Scale]_output: 3d9c47a9
+res4f_branch2a: 3d9ce61b
+(Unnamed Layer* 174) [Convolution]_output: 3d322aae
+(Unnamed Layer* 175) [Scale]_output: 3da98724
+(Unnamed Layer* 176) [Scale]_output: 3dd25db7
+res4f_branch2b: 3df34f93
+(Unnamed Layer* 178) [Convolution]_output: 3d033f70
+(Unnamed Layer* 179) [Scale]_output: 3dd130de
+res4f_branch2c: 3d974b3e
+(Unnamed Layer* 181) [ElementWise]_output: 3df449f8
+res4f: 3df53ba9
+(Unnamed Layer* 183) [Convolution]_output: 3d210ec9
+(Unnamed Layer* 184) [Scale]_output: 3d862894
+res5a_branch1: 3e2bca4f
+(Unnamed Layer* 186) [Convolution]_output: 3d627f80
+(Unnamed Layer* 187) [Scale]_output: 3d72320d
+(Unnamed Layer* 188) [Scale]_output: 3d82c449
+res5a_branch2a: 3d75c207
+(Unnamed Layer* 190) [Convolution]_output: 3d2db942
+(Unnamed Layer* 191) [Scale]_output: 3d530c45
+(Unnamed Layer* 192) [Scale]_output: 3d906581
+res5a_branch2b: 3d4b961d
+(Unnamed Layer* 194) [Convolution]_output: 3c3b6645
+(Unnamed Layer* 195) [Scale]_output: 3d69f534
+res5a_branch2c: 3de21e77
+(Unnamed Layer* 197) [ElementWise]_output: 3e64a9d6
+res5a: 3e735e04
+(Unnamed Layer* 199) [Convolution]_output: 3e08a14e
+(Unnamed Layer* 200) [Scale]_output: 3d69e6ba
+(Unnamed Layer* 201) [Scale]_output: 3d8a6a43
+res5b_branch2a: 3d4466cf
+(Unnamed Layer* 203) [Convolution]_output: 3cf9f7db
+(Unnamed Layer* 204) [Scale]_output: 3d715fc6
+(Unnamed Layer* 205) [Scale]_output: 3d93b2c7
+res5b_branch2b: 3d4390f2
+(Unnamed Layer* 207) [Convolution]_output: 3c1de367
+(Unnamed Layer* 208) [Scale]_output: 3d8df553
+res5b_branch2c: 3dd0b2fb
+(Unnamed Layer* 210) [ElementWise]_output: 3e564f88
+res5b: 3e75ac58
+(Unnamed Layer* 212) [Convolution]_output: 3e1802c2
+(Unnamed Layer* 213) [Scale]_output: 3d7b2163
+(Unnamed Layer* 214) [Scale]_output: 3d81d752
+res5c_branch2a: 3d59abac
+(Unnamed Layer* 216) [Convolution]_output: 3cc5e08c
+(Unnamed Layer* 217) [Scale]_output: 3d885d84
+(Unnamed Layer* 218) [Scale]_output: 3d9550ee
+res5c_branch2b: 3d8051e6
+(Unnamed Layer* 220) [Convolution]_output: 3c2cb802
+(Unnamed Layer* 221) [Scale]_output: 3dcb1144
+res5c_branch2c: 3e169405
+(Unnamed Layer* 223) [ElementWise]_output: 3e7f4820
+res5c: 3eaf6308
+pool5: 3eaf6308
+fc1000: 3e7362c4
+prob: 3a7366ce

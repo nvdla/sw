@@ -1,0 +1,290 @@
+//
+// Copyright (c) 2017-2019, NVIDIA CORPORATION. All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+//  * Redistributions of source code must retain the above copyright
+//    notice, this list of conditions and the following disclaimer.
+//  * Redistributions in binary form must reproduce the above copyright
+//    notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+//  * Neither the name of NVIDIA CORPORATION nor the names of its
+//    contributors may be used to endorse or promote products derived
+//    from this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
+// EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+// PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+// EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+// PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
+// OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+
+namespace nvdla.loadable;
+
+// note: by def'n
+// byte, ubyte, bool   : 8b
+// short, ushort       : 16b
+// int, uint, float    : 32b
+// long, ulong, double : 64b
+
+//
+// think of : class #s
+// 'NONE' can be used for raw data (images, weights, etc)
+//
+enum Interface : uint { NONE = 0, DLA1 = 1, EMU1 = 2 }
+
+//
+// fits DLA firmware interface version, but intent is to be generic
+//
+struct Version {
+    major     : ubyte;
+    minor     : ubyte;
+    sub_minor : ubyte;
+}
+
+enum LoadableVersionMajor    : ubyte { VAL = 0 }
+enum LoadableVersionMinor    : ubyte { VAL = 7 }
+enum LoadableVersionSubMinor : ubyte { VAL = 0 }
+
+//
+// blobs typically are signed with info re: their use.
+// e.g.: a blob which contains firmware binary code
+// should set 'interface' to 'DLA_IF' and 'version'
+// should be set to the DLA firmware version being
+// targetted.
+//
+table Blob {
+    name        : string;
+    size        : ulong;
+    interface   : Interface;   // e.g.: dla1 (firmware)
+    sub_interface: uint;       // e.g.: dla1-op-desc, dla1-surf-desc
+    version     : Version;     // e.g.: firmware version
+    data        : [ubyte];
+}
+
+//
+// SYSTEM := aka 'DRAM'
+// SRAM := DLA Internal SRAM if present
+//
+enum MemoryDomain  : ubyte  { SYSTEM = 0, SRAM = 1 }
+
+//
+// ALLOC := allocate the region
+// SET   := after alloc, set content from 'content_name'
+// INPUT := entry is a re-bindable top-level input
+// OUTPUT := entry is a re-bindable top-level output
+//
+enum MemoryFlags : ushort { NONE = 0, ALLOC = 1, SET = 2, INPUT = 4, OUTPUT = 8 }
+
+//
+// id             := referenced by address list entries below
+// domain         := location/type
+// flags          := see above, below
+// size           := bytes
+// alignment      := 0 if n/a, # of bytes otherwise.
+// contents       := if 'SET' is specified, the names used to lookup data to fill the region
+// offsets        := if 'SET' is specified, the associated offsets to place content within the region
+// bind_id        := iff (input|output|debug) specified, the associated bind api id
+// tensor_desc_id := iff (input|output|debug) specified, the tensor desc id
+//
+table MemoryListEntry {
+    id       : ushort;
+    domain   : MemoryDomain;
+    flags    : MemoryFlags;
+    size     : ulong;
+    alignment : uint;
+    contents : [string];
+    offsets : [ulong];
+    bind_id : ushort;
+    tensor_desc_id : ushort;
+}
+
+
+enum EventType  : ubyte  { EVENTTYPE0 = 0, EVENTTYPE1 = 1, EVENTTYPE2 = 2 }
+
+enum EventOp    : ubyte  { WAIT = 0, SIGNAL = 1 }
+
+//
+// id     := referenced in pre_action and post_action lists
+// type   := hint for type of event is preferred to instance the event chain.
+// target := unique id per event chain
+// val    := (relative) value to either wait for or to set
+// op     := wait or signal
+//
+
+table EventListEntry {
+      id    : ushort;
+      type  : EventType;
+      target: ushort;
+      val   : uint;
+      op    : EventOp;
+}
+
+//
+// id        := 0..n-1
+// interface := the interface to use (dla)
+// instance  := -1 (unspecified), 0, 1, ... for which available interface instance to use
+// address_list := array of AddressListEntry ids -> ... -> memory ids which must be present
+// pre_actions  := array of EventListEntry ids
+// post_actions := array of EventLIstEntry ids
+//
+table TaskListEntry {
+    id           : ushort;
+    interface    : Interface;
+    instance     : short;
+    address_list : [ushort];
+    pre_actions  : [ushort];
+    post_actions : [ushort];
+}
+
+//
+// id := 0..n-1
+// mem_id := MemoryListEntry id
+// offset := offset from beginning of associated memory object
+// size   := size beginning from offset (clipped to associated memory object)
+//
+table AddressListEntry {
+    id     : ushort;
+    mem_id : ushort;
+    offset : ulong;
+    size   : ulong;
+}
+
+//
+// id       := 0..n-1
+// task_set := set of tasks scheduled concurrently
+//
+// sched list entries are submitted serially, in id order.
+// each sched list entry can contain more than one task id.
+// the task ids associated with a single sched list entry
+// can be submitted concurrently.
+//
+table SubmitListEntry {
+    id      : ushort;
+    task_id : [ushort];
+}
+
+//
+// lines up with DataFormat enum in IType.h in UMD
+//
+enum DataFormat : ubyte  { UNKNOWN = 0, NCHW = 1, NHWC = 2 }
+
+//
+// lines up with DataType enum in IType.h in UMD
+//
+enum DataType : ubyte  { UNKNOWN = 0, FLOAT = 1, HALF = 2, INT16 = 3, INT8 = 4 }
+
+//
+// lines up with DataCategory enum in IType.h in UMD
+//
+enum DataCategory : ubyte { IMAGE = 0, WEIGHT = 1, FEATURE = 2, PLANAR = 3, BIAS = 4 }
+
+//
+// lines up with PixelMapping enum in IType.h in UMD
+//
+enum PixelMapping : ubyte { PITCH_LINEAR = 0, INVALID_PIXEL_MAP = 1 }
+
+//
+// lines up with PixelFormat enum in IType.h in UMD
+//
+enum PixelFormat : ubyte {
+    R8 = 0,
+    R10 = 1,
+    R12 = 2,
+    R16 = 3,
+    R16_I = 4,
+    R16_F = 5,
+    A16B16G16R16 = 6,
+    X16B16G16R16 = 7,
+    A16B16G16R16_F = 8,
+    A16Y16U16V16 = 9,
+    V16U16Y16A16 = 10,
+    A16Y16U16V16_F = 11,
+    A8B8G8R8 = 12,
+    A8R8G8B8 = 13,
+    B8G8R8A8 = 14,
+    R8G8B8A8 = 15,
+    X8B8G8R8 = 16,
+    X8R8G8B8 = 17,
+    B8G8R8X8 = 18,
+    R8G8B8X8 = 19,
+    A2B10G10R10 = 20,
+    A2R10G10B10 = 21,
+    B10G10R10A2 = 22,
+    R10G10B10A2 = 23,
+    A2Y10U10V10 = 24,
+    V10U10Y10A2 = 25,
+    A8Y8U8V8    = 26,
+    V8U8Y8A8    = 27,
+    Y8_U8V8_N444 = 28,
+    Y8_V8U8_N444 = 29,
+    Y10_U10V10_N444 = 30,
+    Y10_V10U10_N444 = 31,
+    Y12_U12V12_N444 = 32,
+    Y12_V12U12_N444 = 33,
+    Y16_U16V16_N444 = 34,
+    Y16_V16U16_N444 = 35,
+    FEATURE = 36,
+    FEATURE_X8 = 37
+}
+
+//
+// id := 0..n-1, referenced by address list or memory list entries
+//
+table TensorDescListEntry {
+    name : string;
+    id : ushort;
+    mem_id : ushort;
+    size   : ulong;
+    offset : ulong;
+    data_format  : DataFormat;
+    data_type    : DataType;
+    data_category: DataCategory;
+    pixel_format : PixelFormat;
+    pixel_mapping : PixelMapping;
+
+    n : int;
+    c : int;
+    h : int;
+    w : int;
+
+    stride_0 : uint;
+    stride_1 : uint;
+    stride_2 : uint;
+    stride_3 : uint;
+    stride_4 : uint;
+    stride_5 : uint;
+    stride_6 : uint;
+    stride_7 : uint;
+}
+
+table RelocListEntry {
+    address_id : ushort;
+    write_id : ushort;
+    offset : ulong;
+    interface: uint;
+    sub_interface: uint;
+    reloc_type: ubyte;
+}
+
+
+table Loadable {
+      version      : Version ( required );
+      task_list    : [TaskListEntry];
+      memory_list  : [MemoryListEntry];
+      address_list : [AddressListEntry];
+      event_list   : [EventListEntry];
+      blobs        : [Blob];
+      tensor_desc_list : [TensorDescListEntry];
+      reloc_list   : [RelocListEntry];
+      submit_list  : [SubmitListEntry];
+}
+
+root_type Loadable;

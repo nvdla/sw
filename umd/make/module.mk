@@ -27,12 +27,12 @@
 MODULE_SRCDIR := $(MODULE)
 
 # build with default toolchain/arch, unless module has overridden it
-ifeq ($(MODULE_CC),)
-MODULE_CC := $(TOOLCHAIN_PREFIX)gcc
-endif
-ifeq ($(MODULE_LD),)
-MODULE_LD := $(TOOLCHAIN_PREFIX)ld
-endif
+#ifeq ($(MODULE_CC),)
+#MODULE_CC := $(TOOLCHAIN_PREFIX)gcc
+#endif
+#ifeq ($(MODULE_LD),)
+#MODULE_LD := $(TOOLCHAIN_PREFIX)ld
+#endif
 
 $(info MODULE_CC $(MODULE_CC))
 

@@ -222,6 +222,14 @@ public:
     Dims2(NvS32 h, NvS32 w) : h(h), w(w) {};
     NvS32 h;
     NvS32 w;
+    inline bool operator==(const Dims2& other) const
+    {
+        return (h == other.h && w == other.w);
+    }
+    inline bool operator!=(const Dims2& other) const
+    {
+        return !(h == other.h && w == other.w);
+    }
 };
 
 class Dims3
@@ -391,9 +399,10 @@ template<> inline int EnumMax<BatchNormMode>() { return 2; } // used by checkers
 
 enum ElementWiseOperation
 {
-    kSUM = NVDLA_ELEMENTWISE_OPERATION_SUM,   //!< sum of the two elements
+    kSUM = NVDLA_ELEMENTWISE_OPERATION_SUM,    //!< sum of the two elements
     kPROD = NVDLA_ELEMENTWISE_OPERATION_PROD,  //!< product of the two elements
-    ew_kMAX = NVDLA_ELEMENTWISE_OPERATION_MAX //!< maximum of the two elements
+    kMIN = NVDLA_ELEMENTWISE_OPERATION_MIN,    //!< minimum of the two elements
+    ew_kMAX = NVDLA_ELEMENTWISE_OPERATION_MAX  //!< maximum of the two elements
 };
 template<> inline int EnumMax<ElementWiseOperation>() { return 3; } // used by checkers
 

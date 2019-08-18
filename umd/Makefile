@@ -1,4 +1,4 @@
-# Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
+# Copyright (c) 2017-2019, NVIDIA CORPORATION. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -25,11 +25,19 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-SUBDIRS = core/runtime \
-	  tests/runtime
+COMPILER_SUBDIRS = core/src/compiler \
+	apps/compiler
 
-subdirs:
-	for dir in $(SUBDIRS); do \
+RUNTIME_SUBDIRS = core/src/runtime \
+	apps/runtime
+
+compiler:
+	for dir in $(COMPILER_SUBDIRS); do \
+		$(MAKE) -C $$dir; \
+	done
+
+runtime:
+	for dir in $(RUNTIME_SUBDIRS); do \
 		$(MAKE) -C $$dir; \
 	done
 

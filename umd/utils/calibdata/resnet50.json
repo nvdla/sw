@@ -1,0 +1,1376 @@
+{
+    "data": {
+        "scale": 1.1892666816711426, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 0) [Convolution]_output": {
+        "scale": 6.530066967010498, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 1) [Scale]_output": {
+        "scale": 0.10154115408658981, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 2) [Scale]_output": {
+        "scale": 0.08912137895822525, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "conv1": {
+        "scale": 0.08912137895822525, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "pool1": {
+        "scale": 0.08912137895822525, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 5) [Convolution]_output": {
+        "scale": 0.1622725874185562, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 6) [Scale]_output": {
+        "scale": 0.06544797867536545, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res2a_branch1": {
+        "scale": 0.11954623460769653, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 8) [Convolution]_output": {
+        "scale": 0.14947058260440826, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 9) [Scale]_output": {
+        "scale": 0.08705271780490875, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 10) [Scale]_output": {
+        "scale": 0.12335167825222015, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res2a_branch2a": {
+        "scale": 0.06775594502687454, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 12) [Convolution]_output": {
+        "scale": 0.09759176522493362, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 13) [Scale]_output": {
+        "scale": 0.07662761956453323, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 14) [Scale]_output": {
+        "scale": 0.09621984511613846, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res2a_branch2b": {
+        "scale": 0.09678556025028229, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 16) [Convolution]_output": {
+        "scale": 0.04290047660470009, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 17) [Scale]_output": {
+        "scale": 0.06223507225513458, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res2a_branch2c": {
+        "scale": 0.07257778942584991, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 19) [ElementWise]_output": {
+        "scale": 0.12937262654304504, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res2a": {
+        "scale": 0.09847443550825119, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 21) [Convolution]_output": {
+        "scale": 0.07893124967813492, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 22) [Scale]_output": {
+        "scale": 0.06537651270627975, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 23) [Scale]_output": {
+        "scale": 0.09749626368284225, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res2b_branch2a": {
+        "scale": 0.07389650493860245, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 25) [Convolution]_output": {
+        "scale": 0.05371924862265587, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 26) [Scale]_output": {
+        "scale": 0.06582987308502197, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 27) [Scale]_output": {
+        "scale": 0.07440046966075897, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res2b_branch2b": {
+        "scale": 0.07082346081733704, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 29) [Convolution]_output": {
+        "scale": 0.020119747146964073, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 30) [Scale]_output": {
+        "scale": 0.0830288901925087, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res2b_branch2c": {
+        "scale": 0.056553132832050323, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 32) [ElementWise]_output": {
+        "scale": 0.08835902810096741, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res2b": {
+        "scale": 0.0980917364358902, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 34) [Convolution]_output": {
+        "scale": 0.07630462199449539, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 35) [Scale]_output": {
+        "scale": 0.057323750108480453, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 36) [Scale]_output": {
+        "scale": 0.08291234076023102, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res2c_branch2a": {
+        "scale": 0.06333382427692413, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 38) [Convolution]_output": {
+        "scale": 0.047480762004852295, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 39) [Scale]_output": {
+        "scale": 0.06038884446024895, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 40) [Scale]_output": {
+        "scale": 0.08928743004798889, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res2c_branch2b": {
+        "scale": 0.08928743004798889, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 42) [Convolution]_output": {
+        "scale": 0.02570602484047413, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 43) [Scale]_output": {
+        "scale": 0.06423699855804443, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res2c_branch2c": {
+        "scale": 0.04844983294606209, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 45) [ElementWise]_output": {
+        "scale": 0.0964774638414383, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res2c": {
+        "scale": 0.09678252786397934, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 47) [Convolution]_output": {
+        "scale": 0.06110835447907448, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 48) [Scale]_output": {
+        "scale": 0.056991349905729294, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res3a_branch1": {
+        "scale": 0.0918654128909111, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 50) [Convolution]_output": {
+        "scale": 0.06927043199539185, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 51) [Scale]_output": {
+        "scale": 0.06256631761789322, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 52) [Scale]_output": {
+        "scale": 0.07401362806558609, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res3a_branch2a": {
+        "scale": 0.0688948705792427, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 54) [Convolution]_output": {
+        "scale": 0.07337787002325058, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 55) [Scale]_output": {
+        "scale": 0.05772147700190544, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 56) [Scale]_output": {
+        "scale": 0.08060514181852341, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res3a_branch2b": {
+        "scale": 0.0591665655374527, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 58) [Convolution]_output": {
+        "scale": 0.02343173883855343, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 59) [Scale]_output": {
+        "scale": 0.05596625432372093, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res3a_branch2c": {
+        "scale": 0.09847981482744217, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 61) [ElementWise]_output": {
+        "scale": 0.12294833362102509, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res3a": {
+        "scale": 0.11204986274242401, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 63) [Convolution]_output": {
+        "scale": 0.0640440508723259, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 64) [Scale]_output": {
+        "scale": 0.05753196403384209, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 65) [Scale]_output": {
+        "scale": 0.05988924205303192, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res3b_branch2a": {
+        "scale": 0.055613983422517776, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 67) [Convolution]_output": {
+        "scale": 0.0372556708753109, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 68) [Scale]_output": {
+        "scale": 0.054906364530324936, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 69) [Scale]_output": {
+        "scale": 0.07962044328451157, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res3b_branch2b": {
+        "scale": 0.0683821588754654, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 71) [Convolution]_output": {
+        "scale": 0.013726117089390755, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 72) [Scale]_output": {
+        "scale": 0.0511939637362957, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res3b_branch2c": {
+        "scale": 0.050069987773895264, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 74) [ElementWise]_output": {
+        "scale": 0.08551886677742004, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res3b": {
+        "scale": 0.08551886677742004, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 76) [Convolution]_output": {
+        "scale": 0.08718874305486679, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 77) [Scale]_output": {
+        "scale": 0.06293842941522598, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 78) [Scale]_output": {
+        "scale": 0.07379148155450821, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res3c_branch2a": {
+        "scale": 0.08555953949689865, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 80) [Convolution]_output": {
+        "scale": 0.06377585232257843, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 81) [Scale]_output": {
+        "scale": 0.06883139908313751, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 82) [Scale]_output": {
+        "scale": 0.08970290422439575, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res3c_branch2b": {
+        "scale": 0.0631943941116333, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 84) [Convolution]_output": {
+        "scale": 0.021908413618803024, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 85) [Scale]_output": {
+        "scale": 0.17666171491146088, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res3c_branch2c": {
+        "scale": 0.11109849810600281, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 87) [ElementWise]_output": {
+        "scale": 0.12127365916967392, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res3c": {
+        "scale": 0.08516602963209152, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 89) [Convolution]_output": {
+        "scale": 0.07705821096897125, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 90) [Scale]_output": {
+        "scale": 0.06800369918346405, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 91) [Scale]_output": {
+        "scale": 0.1048537939786911, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res3d_branch2a": {
+        "scale": 0.09229502826929092, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 93) [Convolution]_output": {
+        "scale": 0.05846773087978363, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 94) [Scale]_output": {
+        "scale": 0.06820867210626602, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 95) [Scale]_output": {
+        "scale": 0.08610943704843521, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res3d_branch2b": {
+        "scale": 0.08969893306493759, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 97) [Convolution]_output": {
+        "scale": 0.021504491567611694, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 98) [Scale]_output": {
+        "scale": 0.07901439070701599, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res3d_branch2c": {
+        "scale": 0.0527477003633976, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 100) [ElementWise]_output": {
+        "scale": 0.11845599114894867, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res3d": {
+        "scale": 0.12229187786579132, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 102) [Convolution]_output": {
+        "scale": 0.062378447502851486, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 103) [Scale]_output": {
+        "scale": 0.05794394761323929, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4a_branch1": {
+        "scale": 0.10385233908891678, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 105) [Convolution]_output": {
+        "scale": 0.06241574138402939, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 106) [Scale]_output": {
+        "scale": 0.0653228759765625, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 107) [Scale]_output": {
+        "scale": 0.07446765899658203, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4a_branch2a": {
+        "scale": 0.07446765899658203, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 109) [Convolution]_output": {
+        "scale": 0.10114644467830658, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 110) [Scale]_output": {
+        "scale": 0.047561053186655045, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 111) [Scale]_output": {
+        "scale": 0.07352551072835922, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4a_branch2b": {
+        "scale": 0.057342469692230225, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 113) [Convolution]_output": {
+        "scale": 0.019311996176838875, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 114) [Scale]_output": {
+        "scale": 0.06292856484651566, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4a_branch2c": {
+        "scale": 0.07851208746433258, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 116) [ElementWise]_output": {
+        "scale": 0.1201726570725441, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4a": {
+        "scale": 0.11615817993879318, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 118) [Convolution]_output": {
+        "scale": 0.1020636111497879, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 119) [Scale]_output": {
+        "scale": 0.05944163724780083, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 120) [Scale]_output": {
+        "scale": 0.06631634384393692, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4b_branch2a": {
+        "scale": 0.06690791994333267, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 122) [Convolution]_output": {
+        "scale": 0.042588017880916595, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 123) [Scale]_output": {
+        "scale": 0.05697552114725113, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 124) [Scale]_output": {
+        "scale": 0.07259157299995422, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4b_branch2b": {
+        "scale": 0.049211423844099045, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 126) [Convolution]_output": {
+        "scale": 0.015369857661426067, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 127) [Scale]_output": {
+        "scale": 0.10203637927770615, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4b_branch2c": {
+        "scale": 0.07522841542959213, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 129) [ElementWise]_output": {
+        "scale": 0.09624315798282623, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4b": {
+        "scale": 0.09700760245323181, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 131) [Convolution]_output": {
+        "scale": 0.0687045156955719, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 132) [Scale]_output": {
+        "scale": 0.05884663760662079, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 133) [Scale]_output": {
+        "scale": 0.0640127956867218, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4c_branch2a": {
+        "scale": 0.0687754899263382, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 135) [Convolution]_output": {
+        "scale": 0.03364177420735359, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 136) [Scale]_output": {
+        "scale": 0.05849551409482956, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 137) [Scale]_output": {
+        "scale": 0.06163341552019119, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4c_branch2b": {
+        "scale": 0.05358177050948143, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 139) [Convolution]_output": {
+        "scale": 0.01356083806604147, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 140) [Scale]_output": {
+        "scale": 0.07975142449140549, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4c_branch2c": {
+        "scale": 0.06052481755614281, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 142) [ElementWise]_output": {
+        "scale": 0.09771627932786942, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4c": {
+        "scale": 0.10090021044015884, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 144) [Convolution]_output": {
+        "scale": 0.06564440578222275, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 145) [Scale]_output": {
+        "scale": 0.058878473937511444, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 146) [Scale]_output": {
+        "scale": 0.07000578939914703, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4d_branch2a": {
+        "scale": 0.06515974551439285, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 148) [Convolution]_output": {
+        "scale": 0.03959187492728233, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 149) [Scale]_output": {
+        "scale": 0.059980008751153946, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 150) [Scale]_output": {
+        "scale": 0.07127563655376434, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4d_branch2b": {
+        "scale": 0.07101693004369736, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 152) [Convolution]_output": {
+        "scale": 0.030017612501978874, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 153) [Scale]_output": {
+        "scale": 0.18068255484104156, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4d_branch2c": {
+        "scale": 0.12508144974708557, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 155) [ElementWise]_output": {
+        "scale": 0.13627120852470398, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4d": {
+        "scale": 0.09087702631950378, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 157) [Convolution]_output": {
+        "scale": 0.06978315114974976, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 158) [Scale]_output": {
+        "scale": 0.06799472868442535, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 159) [Scale]_output": {
+        "scale": 0.07320103794336319, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4e_branch2a": {
+        "scale": 0.07559733092784882, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 161) [Convolution]_output": {
+        "scale": 0.02990233153104782, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 162) [Scale]_output": {
+        "scale": 0.07083655893802643, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 163) [Scale]_output": {
+        "scale": 0.08231381326913834, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4e_branch2b": {
+        "scale": 0.07780347019433975, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 165) [Convolution]_output": {
+        "scale": 0.03841407224535942, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 166) [Scale]_output": {
+        "scale": 0.16732531785964966, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4e_branch2c": {
+        "scale": 0.1250983029603958, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 168) [ElementWise]_output": {
+        "scale": 0.12518416345119476, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4e": {
+        "scale": 0.09578414261341095, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 170) [Convolution]_output": {
+        "scale": 0.0674305334687233, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 171) [Scale]_output": {
+        "scale": 0.06694090366363525, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 172) [Scale]_output": {
+        "scale": 0.07630855590105057, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4f_branch2a": {
+        "scale": 0.07661076635122299, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 174) [Convolution]_output": {
+        "scale": 0.043497733771800995, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 175) [Scale]_output": {
+        "scale": 0.08277729153633118, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 176) [Scale]_output": {
+        "scale": 0.1027178093791008, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4f_branch2b": {
+        "scale": 0.11880411952733994, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 178) [Convolution]_output": {
+        "scale": 0.03204292058944702, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 179) [Scale]_output": {
+        "scale": 0.10214398801326752, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4f_branch2c": {
+        "scale": 0.07387398183345795, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 181) [ElementWise]_output": {
+        "scale": 0.11928170919418335, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res4f": {
+        "scale": 0.11974269896745682, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 183) [Convolution]_output": {
+        "scale": 0.03932074084877968, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 184) [Scale]_output": {
+        "scale": 0.06550708413124084, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res5a_branch1": {
+        "scale": 0.16776393353939056, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 186) [Convolution]_output": {
+        "scale": 0.0552973747253418, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 187) [Scale]_output": {
+        "scale": 0.05912976339459419, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 188) [Scale]_output": {
+        "scale": 0.06385094672441483, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res5a_branch2a": {
+        "scale": 0.0599994920194149, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 190) [Convolution]_output": {
+        "scale": 0.042413003742694855, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 191) [Scale]_output": {
+        "scale": 0.05152537301182747, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 192) [Scale]_output": {
+        "scale": 0.07050610333681107, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res5a_branch2b": {
+        "scale": 0.04970370605587959, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 194) [Convolution]_output": {
+        "scale": 0.011437957175076008, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 195) [Scale]_output": {
+        "scale": 0.05711860954761505, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res5a_branch2c": {
+        "scale": 0.11040966957807541, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 197) [ElementWise]_output": {
+        "scale": 0.2233041226863861, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res5a": {
+        "scale": 0.23766332864761353, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 199) [Convolution]_output": {
+        "scale": 0.13342782855033875, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 200) [Scale]_output": {
+        "scale": 0.05710480362176895, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 201) [Scale]_output": {
+        "scale": 0.06758549064397812, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res5b_branch2a": {
+        "scale": 0.04794960841536522, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 203) [Convolution]_output": {
+        "scale": 0.030513694509863853, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 204) [Scale]_output": {
+        "scale": 0.05892922729253769, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 205) [Scale]_output": {
+        "scale": 0.07211833447217941, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res5b_branch2b": {
+        "scale": 0.04774565249681473, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 207) [Convolution]_output": {
+        "scale": 0.00963673647493124, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 208) [Scale]_output": {
+        "scale": 0.06931557506322861, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res5b_branch2c": {
+        "scale": 0.10190387815237045, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 210) [ElementWise]_output": {
+        "scale": 0.20928776264190674, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res5b": {
+        "scale": 0.23991525173187256, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 212) [Convolution]_output": {
+        "scale": 0.14844802021980286, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 213) [Scale]_output": {
+        "scale": 0.061311136931180954, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 214) [Scale]_output": {
+        "scale": 0.06339897215366364, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res5c_branch2a": {
+        "scale": 0.053142234683036804, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 216) [Convolution]_output": {
+        "scale": 0.024154923856258392, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 217) [Scale]_output": {
+        "scale": 0.06658461689949036, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 218) [Scale]_output": {
+        "scale": 0.07290826737880707, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res5c_branch2b": {
+        "scale": 0.0626562088727951, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 220) [Convolution]_output": {
+        "scale": 0.010541917756199837, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 221) [Scale]_output": {
+        "scale": 0.0991540253162384, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res5c_branch2c": {
+        "scale": 0.14704902470111847, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "(Unnamed Layer* 223) [ElementWise]_output": {
+        "scale": 0.2492985725402832, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "res5c": {
+        "scale": 0.34255242347717285, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "pool5": {
+        "scale": 0.34255242347717285, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "fc1000": {
+        "scale": 0.23768144845962524, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }, 
+    "prob": {
+        "scale": 0.0009285033447667956, 
+        "min": 0, 
+        "max": 0, 
+        "offset": 0
+    }
+}
