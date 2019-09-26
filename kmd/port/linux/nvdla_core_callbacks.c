@@ -350,11 +350,11 @@ static const struct of_device_id nvdla_of_match[] = {
 		.data = &nvdla_config_os_initial,
 	},
 	{
-		.compatible = "nvidia,nvdla_2", "nvidia,nv_small",
+		.compatible = "nvidia,nv_small",
 		.data = &nvdla_config_small,
 	},
 	{
-		.compatible = "nvidia,nvdla_2", "nvidia,nv_large",
+		.compatible = "nvidia,nv_large",
 		.data = &nvdla_config_large,
 	},
 	{ },
@@ -376,6 +376,8 @@ static int32_t nvdla_probe(struct platform_device *pdev)
 		pr_err("Missing DT entry!\n");
 		return -EINVAL;
 	}
+
+	pr_err("Probe NVDLA config %s\n", match->compatible);
 
 	nvdla_dev = devm_kzalloc(dev, sizeof(*nvdla_dev), GFP_KERNEL);
 	if (!nvdla_dev)
