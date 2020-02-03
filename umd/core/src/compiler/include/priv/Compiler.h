@@ -206,7 +206,7 @@ protected:
      * @Purpose:->
      *      Some engines dont have memory out port (conv). Operations of such
      *      an engine should be fused with those of an engine which have a write
-     *      out potr (sdp). Besides, operations can be fused together if they
+     *      out port (sdp). Besides, operations can be fused together if they
      *      are connected over wire in order to save the memory pass latency (sdp+pdp)
      */
     engine_ast::Graph *fuseOnTheFlyNodes(engine_ast::Graph *);
