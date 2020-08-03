@@ -60,13 +60,16 @@ bool Emulator::ping()
 
 NvDlaError Emulator::submit(NvU8* task_mem, bool blocking)
 {
-    m_taskQueue.push(task_mem);
+    {
+        std::lock_guard<std::mutex> lk(m_mtx); 
+        m_taskQueue.push(task_mem);
+    }
 
+    m_cv.notify_all(); 
     if (blocking) {
-        // wait until queue becomes empty
-        while (!m_taskQueue.empty()) {
-            NvDlaThreadYield();
-        }
+        // wait until queue becomes empty  
+        std::unique_lock<std::mutex> lk(m_mtx);
+        m_cv.wait(lk, [&]{return !(!m_taskQueue.empty() || m_signalShutdown);});       
     }
 
     return NvDlaSuccess;
@@ -97,6 +100,7 @@ bool Emulator::stop()
     if (m_thread)
     {
         m_signalShutdown = true;
+        m_cv.notify_all();          
         NvDlaThreadJoin(m_thread);
         m_thread = NULL;
     }
@@ -115,7 +119,14 @@ bool Emulator::run()
 
     while (true)
     {
-        if (!m_taskQueue.empty())
+        std::unique_lock<std::mutex> lk(m_mtx);
+        m_cv.wait(lk, [&]{return (!m_taskQueue.empty() || m_signalShutdown);});
+
+        if (m_signalShutdown) 
+        {
+            break; 
+        }
+        else if (!m_taskQueue.empty())
         {
             NvU8* task_mem = m_taskQueue.front();
             NvDlaDebugPrintf("Work Found!\n");
@@ -145,25 +156,18 @@ bool Emulator::run()
             NvDlaDebugPrintf("Work Done\n");
 
             m_taskQueue.pop();
-            continue;
+            m_cv.notify_one();
         }
+    } 
 
-        if (m_signalShutdown)
-        {
-            NvDlaDebugPrintf("Shutdown signal received, exiting\n");
-            break;
-        }
-
-        if (m_taskQueue.empty())
-        {
-            NvDlaSleepMS(500);
-        }
-    }
 
     // Cleanup
-    while (!m_taskQueue.empty())
     {
-        m_taskQueue.pop();
+        std::lock_guard<std::mutex> lk(m_mtx);
+        while (!m_taskQueue.empty())
+        {
+            m_taskQueue.pop();
+        }
     }
 
     delete emu_if;

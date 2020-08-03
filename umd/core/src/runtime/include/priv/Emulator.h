@@ -30,6 +30,8 @@
 #define NVDLA_PRIV_EMULATOR_H
 
 #include <queue>
+#include <mutex>
+#include <condition_variable>
 
 #include "priv/EMUInterface.h"
 
@@ -78,6 +80,9 @@ private:
     bool m_threadActive;
 
     bool m_signalShutdown;
+
+    std::mutex m_mtx;
+    std::condition_variable m_cv;
 };
 
 } // nvdla::priv
