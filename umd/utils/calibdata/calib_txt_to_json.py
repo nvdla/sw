@@ -54,7 +54,7 @@ def dump_json(json_root, json_file):
     logging.info("calibration output json: %s" % (json_file,))
     json_str = json.dumps(json_root, indent=4)
     with open(json_file, 'w') as fp:
-        fp.write(json_str);
+        fp.write(json_str)
         logging.debug(json_str)
 
 if __name__ == "__main__":
@@ -63,8 +63,8 @@ if __name__ == "__main__":
                 level=logging.INFO)
                 #level=logging.DEBUG)
     if len(sys.argv) != 3:
-        print "usage: calib_txt_to_json.py input_calib_txt output_calib_json"
-        exit(1);
+        print("usage: calib_txt_to_json.py input_calib_txt output_calib_json")
+        exit(1)
     calib_file = sys.argv[1]
     json_file = sys.argv[2]
     json_data = read_calibtable_txt2json(calib_file)
